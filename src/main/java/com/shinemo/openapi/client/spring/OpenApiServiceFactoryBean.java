@@ -20,6 +20,7 @@
 package com.shinemo.openapi.client.spring;
 
 import com.shinemo.openapi.client.OpenApiClient;
+import com.shinemo.openapi.client.OpenApiServiceFactory;
 import com.shinemo.openapi.client.common.OpenApiException;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -31,18 +32,18 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public final class OpenApiServiceFactoryBean<T> implements FactoryBean<T>, InitializingBean {
 
-    private OpenApiClient client;
+    private OpenApiServiceFactory apiServiceFactory;
 
     private Class<T> interfaceClass;
 
     private T apiService;
 
-    public OpenApiClient getClient() {
-        return client;
+    public OpenApiServiceFactory getApiServiceFactory() {
+        return apiServiceFactory;
     }
 
-    public void setClient(OpenApiClient client) {
-        this.client = client;
+    public void setApiServiceFactory(OpenApiServiceFactory apiServiceFactory) {
+        this.apiServiceFactory = apiServiceFactory;
     }
 
     public Class<T> getInterfaceName() {
@@ -71,7 +72,7 @@ public final class OpenApiServiceFactoryBean<T> implements FactoryBean<T>, Initi
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (client == null) {
+        if (apiServiceFactory == null) {
             throw new OpenApiException("dependency open api client can not be null.");
         }
 
@@ -79,6 +80,6 @@ public final class OpenApiServiceFactoryBean<T> implements FactoryBean<T>, Initi
             throw new OpenApiException("open api service interfaceName can not be null.");
         }
 
-        apiService = client.createApiService(getObjectType());
+        apiService = apiServiceFactory.createApiService(getObjectType());
     }
 }

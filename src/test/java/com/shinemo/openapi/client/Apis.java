@@ -46,7 +46,7 @@ public final class Apis {
 
     public static <T> T createApiService(Class<T> apiClass) throws Exception {
         OpenApiServiceFactoryBean<T> factoryBean = new OpenApiServiceFactoryBean<T>();
-        factoryBean.setClient(createClient());
+        factoryBean.setApiServiceFactory(createClient());
         factoryBean.setInterfaceName(apiClass);
         return factoryBean.getObject();
     }

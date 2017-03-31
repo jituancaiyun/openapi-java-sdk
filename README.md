@@ -4,9 +4,9 @@
 
 ```xml
 <dependency>
-    <groupId>com.shinemo.openapi</groupId>
+    <groupId>com.jituancaiyun.openapi</groupId>
     <artifactId>openapi-client</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 

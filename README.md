@@ -34,10 +34,23 @@
         <property name="configuration" ref="openApiConfiguration"/>
     </bean>
 
+
     <!--通讯录接口服务-->
     <bean id="contactApiService" class="com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean">
         <property name="apiServiceFactory" ref="openApiClient"/>
         <property name="interfaceName" value="com.shinemo.openapi.client.service.ContactApiService"/>
+    </bean>
+
+    <!--消息推送接口服务-->
+    <bean id="messageApiService" class="com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean">
+        <property name="apiServiceFactory" ref="openApiClient"/>
+        <property name="interfaceName" value="com.shinemo.openapi.client.service.MessageApiService"/>
+    </bean>
+
+    <!--会议邀请接口服务-->
+    <bean id="meetingApiService" class="com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean">
+        <property name="apiServiceFactory" ref="openApiClient"/>
+        <property name="interfaceName" value="com.shinemo.openapi.client.service.MeetingApiService"/>
     </bean>
 </beans>
 ```

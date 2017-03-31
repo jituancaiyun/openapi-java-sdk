@@ -10,7 +10,7 @@
 
     <groupId>com.jituancaiyun.openapi</groupId>
     <artifactId>openapi-client</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>openapi-java-sdk</name>
     <description>讯盟开发平台java sdk</description>
     <url>http://shinemo.com</url>

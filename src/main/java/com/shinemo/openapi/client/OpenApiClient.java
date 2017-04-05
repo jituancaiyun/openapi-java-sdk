@@ -44,4 +44,12 @@ public interface OpenApiClient extends OpenApiServiceFactory {
      * @return UserInfoDTO 用户基本信息
      */
     OpenApiResult<UserInfoDTO> login(String loginToken);
+
+
+    /**
+     * 创建OpenApiClient的配置项
+     *
+     * @return OpenApiConfiguration
+     */
+    OpenApiConfiguration config();
 }

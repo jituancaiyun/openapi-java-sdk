@@ -41,6 +41,7 @@ public final class Apis {
     public static OpenApiClient createClient() throws Exception {
         OpenApiClientFactoryBean factoryBean = new OpenApiClientFactoryBean();
         factoryBean.setConfiguration(createConfig());
+        factoryBean.afterPropertiesSet();
         return factoryBean.getObject();
     }
 
@@ -48,6 +49,7 @@ public final class Apis {
         OpenApiServiceFactoryBean<T> factoryBean = new OpenApiServiceFactoryBean<T>();
         factoryBean.setApiServiceFactory(createClient());
         factoryBean.setInterfaceName(apiClass);
+        factoryBean.afterPropertiesSet();
         return factoryBean.getObject();
     }
 }

@@ -22,6 +22,8 @@ package com.shinemo.openapi.client.common;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.charset.Charset;
+
 /**
  * Created by ohun on 2017/3/24.
  *
@@ -32,5 +34,7 @@ public interface Const {
 
     String USER_AGENT_HEADER = "user-agent:open-api-sdk(1.0)";
     String CONTENT_TYPE_HEADER = "content-type:text/plain; charset=utf-8";
+
+    Charset UTF_8 = Charset.forName("UTF-8");
 
 }

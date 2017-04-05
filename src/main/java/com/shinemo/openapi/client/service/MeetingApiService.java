@@ -19,6 +19,8 @@
 
 package com.shinemo.openapi.client.service;
 
+import com.shinemo.openapi.client.api.MeetingApi;
+import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.MeetingIdDTO;
 import com.shinemo.openapi.client.dto.MeetingInviteDTO;
@@ -28,6 +30,7 @@ import com.shinemo.openapi.client.dto.MeetingInviteDTO;
  *
  * @author ohun@live.cn (夜色)
  */
+@Api(MeetingApi.class)
 public interface MeetingApiService {
 
     /**

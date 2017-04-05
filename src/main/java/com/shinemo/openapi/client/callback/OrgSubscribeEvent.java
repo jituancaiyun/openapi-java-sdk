@@ -17,34 +17,30 @@
  *     ohun@live.cn (夜色)
  */
 
-package com.shinemo.openapi.client.service;
-
-import com.shinemo.openapi.client.api.MessageApi;
-import com.shinemo.openapi.client.common.Api;
-import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.AppMessageDTO;
-import retrofit2.Call;
-import retrofit2.http.*;
+package com.shinemo.openapi.client.callback;
 
 import java.util.List;
 
-import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
-
 /**
- * Created by ohun on 2017/3/30.
+ * Created by ohun on 2017/4/1.
  *
  * @author ohun@live.cn (夜色)
  */
-@Api(MessageApi.class)
-public interface MessageApiService {
+public final class OrgSubscribeEvent {
+    private List<Long> orgId;
 
-    /**
-     * 推送应用消息
-     *
-     * @param orgId      要访问的企业ID
-     * @param messageDTO 消息详情
-     * @return illegalUsers非法用户列表
-     */
-    Call<OpenApiResult<List<String>>> sendAppMsg(long orgId, AppMessageDTO messageDTO);
+    public List<Long> getOrgId() {
+        return orgId;
+    }
 
+    public void setOrgId(List<Long> orgId) {
+        this.orgId = orgId;
+    }
+
+    @Override
+    public String toString() {
+        return "OrgSubscribeEvent{" +
+                "orgId=" + orgId +
+                '}';
+    }
 }

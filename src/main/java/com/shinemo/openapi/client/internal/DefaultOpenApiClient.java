@@ -130,6 +130,11 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         });
     }
 
+    @Override
+    public OpenApiConfiguration config() {
+        return conf;
+    }
+
     public <T> T createApi(Class<T> apiClass) {
         return retrofit.create(apiClass);
     }

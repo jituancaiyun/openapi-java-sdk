@@ -19,6 +19,9 @@
 
 package com.shinemo.openapi.client.common;
 
+import java.io.Closeable;
+import java.io.IOException;
+
 /**
  * Created by ohun on 2017/3/25.
  *
@@ -26,8 +29,33 @@ package com.shinemo.openapi.client.common;
  */
 public final class OpenUtils {
 
-    public static String sign4Js(String jsapiTicket, String urlWithQuery, long timestamp) {
+    public static String sign4js(String jsapiTicket, String urlWithQuery, long timestamp) {
         return null;
+    }
+
+    public static String sign4callback(String token, String data, long timestamp) {
+        return null;
+    }
+
+
+    public static byte[] decryptCallbackEvent(String eventData) {
+        if (eventData == null || eventData.isEmpty()) {
+            return new byte[0];
+        }
+        //base64 decode
+        //AES128 decrypt
+
+        return new byte[0];
+    }
+
+
+    public static void silentClose(Closeable resource) {
+        if (resource != null) {
+            try {
+                resource.close();
+            } catch (IOException e) {
+            }
+        }
     }
 
 }

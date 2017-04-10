@@ -19,6 +19,8 @@
 
 package com.shinemo.openapi.client.common;
 
+import com.sun.xml.internal.rngom.parse.host.Base;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.security.MessageDigest;
@@ -76,14 +78,15 @@ public final class OpenUtils {
     }
 
 
-    public static byte[] decryptCallbackEvent(String eventData) {
+    public static String decryptCallbackEvent(String key, String eventData) {
         if (eventData == null || eventData.isEmpty()) {
-            return new byte[0];
+            return "";
         }
-        //base64 decode
-        //AES128 decrypt
-
-        return new byte[0];
+        byte[] data = AES128Util.decrypt(Base64.getUrlDecoder().decode(eventData), key);
+        if (data != null && data.length > 0) {
+            return new String(data, Const.UTF_8);
+        }
+        return "";
     }
 
 

@@ -27,20 +27,20 @@ import java.util.List;
  * @author ohun@live.cn (夜色)
  */
 public final class OrgSubscribeEvent {
-    private List<Long> orgId;
+    private List<String> orgIds;
 
-    public List<Long> getOrgId() {
-        return orgId;
+    public List<String> getOrgIds() {
+        return orgIds;
     }
 
-    public void setOrgId(List<Long> orgId) {
-        this.orgId = orgId;
+    public void setOrgIds(List<String> orgIds) {
+        this.orgIds = orgIds;
     }
 
     @Override
     public String toString() {
         return "OrgSubscribeEvent{" +
-                "orgId=" + orgId +
+                "orgIds=" + orgIds +
                 '}';
     }
 }

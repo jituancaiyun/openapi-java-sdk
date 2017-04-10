@@ -21,6 +21,7 @@ package com.shinemo.openapi.client.callback;
 
 import com.google.gson.Gson;
 import com.shinemo.openapi.client.OpenApiClient;
+import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.common.OpenUtils;
 
@@ -42,7 +43,13 @@ public abstract class CallbackEventReceiver {
 
     private OpenApiClient openApiClient;
 
+    protected abstract int on(OrgSubscribeEvent event);
+
     public final void receiver(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (openApiClient == null) {
+            throw new OpenApiException("please init OpenApiClient and set to this bean");
+        }
+
         String eventData = getEventData(request);
         if (eventData == null || eventData.isEmpty()) {
             sendResult(response, 400, "event data is empty");
@@ -56,27 +63,23 @@ public abstract class CallbackEventReceiver {
             return;
         }
 
-        byte[] data = OpenUtils.decryptCallbackEvent(event.getEncryptData());
-        if (data == null || data.length == 0) {
+        String eventBody = OpenUtils.decryptCallbackEvent(openApiClient.config().getAppSecret(), event.getEncryptData());
+        if (eventBody == null || eventBody.isEmpty()) {
             sendResult(response, 400, "event data decrypt failure");
             return;
         }
 
-        String eventBody = new String(data, UTF_8);
-
-        int ret = 0;
-        if (event.getEventType().equals("1")) {
-            ret = on(gson.fromJson(eventBody, OrgSubscribeEvent.class));
-        }
-
+        int ret = onEvent(event.getEventType(), eventBody);
         sendResult(response, ret, "success");
     }
 
-
-    protected int on(OrgSubscribeEvent event) {
-        return 0;
+    protected int onEvent(String eventType, String eventBody) {
+        Gson gson = openApiClient.config().getGson();
+        if ("org_subscribe".equals(eventType)) {
+            return on(gson.fromJson(eventBody, OrgSubscribeEvent.class));
+        }
+        return -1;
     }
-
 
     private void sendResult(HttpServletResponse response, int status, String message) throws IOException {
         response.setContentType("application/json; charset=utf-8");
@@ -113,5 +116,9 @@ public abstract class CallbackEventReceiver {
         } finally {
             OpenUtils.silentClose(in);
         }
+    }
+
+    public void setOpenApiClient(OpenApiClient openApiClient) {
+        this.openApiClient = openApiClient;
     }
 }

@@ -43,7 +43,7 @@ public interface MeetingApi {
      */
     @POST("workbench/meetinginvite/create")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<MeetingIdDTO>> createMeeting(@Header("orgId") long orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<MeetingIdDTO>> createMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
 
 
     /**
@@ -55,7 +55,7 @@ public interface MeetingApi {
      */
     @POST("workbench/meetinginvite/cancel")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> cancelMeeting(@Header("orgId") long orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> cancelMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
 
 
     /**
@@ -67,7 +67,7 @@ public interface MeetingApi {
      */
     @POST("workbench/meetinginvite/delete")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> deleteMeeting(@Header("orgId") long orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> deleteMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
 
 
     /**
@@ -79,7 +79,7 @@ public interface MeetingApi {
      */
     @POST("workbench/meetinginvite/update")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> updateMeeting(@Header("orgId") long orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> updateMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
 
 
     /**
@@ -91,6 +91,6 @@ public interface MeetingApi {
      */
     @GET("workbench/meetinginvite/detail")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> getMeeting(@Header("orgId") long orgId, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> getMeeting(@Header("orgId") String orgId, @Query("accessToken") String accessToken);
 
 }

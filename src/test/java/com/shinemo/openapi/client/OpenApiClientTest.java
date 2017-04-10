@@ -29,8 +29,11 @@ public class OpenApiClientTest {
     public void login() throws Exception {
         String loginToken = "ODQwNjk3fDgwZTg3YzM5YmNiYTc0Mjc1ZTcwNDg1ZjM2NzU1OWVifDE0ODk5Nzk0NzYwMDA=";
 
-        OpenApiResult<UserInfoDTO> result = client.login(loginToken);
-        System.out.println(result);
+        for (int i = 0; i < 10; i++) {
+
+            OpenApiResult<UserInfoDTO> result = client.login(loginToken);
+            System.out.println(result);
+        }
     }
 
 }

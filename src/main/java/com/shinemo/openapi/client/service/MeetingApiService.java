@@ -40,7 +40,7 @@ public interface MeetingApiService {
      * @param meetingDTO 会议实体
      * @return MeetingIdDTO 会议ID
      */
-    OpenApiResult<MeetingIdDTO> createMeeting(long orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<MeetingIdDTO> createMeeting(String orgId, MeetingInviteDTO meetingDTO);
 
     /**
      * 取消会议邀请
@@ -49,7 +49,7 @@ public interface MeetingApiService {
      * @param meetingDTO 会议实体
      * @return result code
      */
-    OpenApiResult<Long> cancelMeeting(long orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<Long> cancelMeeting(String orgId, MeetingInviteDTO meetingDTO);
 
 
     /**
@@ -59,7 +59,7 @@ public interface MeetingApiService {
      * @param meetingDTO 会议实体
      * @return result code
      */
-    OpenApiResult<Long> deleteMeeting(long orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<Long> deleteMeeting(String orgId, MeetingInviteDTO meetingDTO);
 
     /**
      * 修改会议邀请
@@ -68,7 +68,7 @@ public interface MeetingApiService {
      * @param meetingDTO 会议实体
      * @return result code
      */
-    OpenApiResult<Long> updateMeeting(long orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<Long> updateMeeting(String orgId, MeetingInviteDTO meetingDTO);
 
     /**
      * 修改会议邀请
@@ -76,5 +76,5 @@ public interface MeetingApiService {
      * @param orgId 要访问的企业ID
      * @return result code
      */
-    OpenApiResult<Long> getMeeting(long orgId);
+    OpenApiResult<Long> getMeeting(String orgId);
 }

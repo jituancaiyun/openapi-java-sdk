@@ -21,6 +21,9 @@ package com.shinemo.openapi.client.common;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.util.Formatter;
+import java.util.UUID;
 
 /**
  * Created by ohun on 2017/3/25.
@@ -29,12 +32,47 @@ import java.io.IOException;
  */
 public final class OpenUtils {
 
-    public static String sign4js(String jsapiTicket, String urlWithQuery, long timestamp) {
-        return null;
+    public static String createNonceStr() {
+        return UUID.randomUUID().toString();
     }
 
-    public static String sign4callback(String token, String data, long timestamp) {
-        return null;
+    public static String createTimestamp() {
+        return Long.toString(System.currentTimeMillis() / 1000);
+    }
+
+    public static boolean validate(String sign4check, String jsapiTicket, String url, String nonceStr, String timestamp) {
+        if (sign4check == null
+                || jsapiTicket == null
+                || url == null
+                || nonceStr == null
+                || timestamp == null) {
+            throw new OpenApiException("参数错误");
+        }
+        String signature = sign(jsapiTicket, url, nonceStr, timestamp);
+        return signature.equals(sign4check);
+    }
+
+    public static String sign(String jsapiTicket, String url, String nonceStr, String timestamp) {
+        //注意这里参数名必须全部小写，且必须有序
+        String str = jsapiTicket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + url;
+        try {
+            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            crypt.reset();
+            crypt.update(str.getBytes("UTF-8"));
+            return byteToHex(crypt.digest());
+        } catch (Exception e) {
+            throw new RuntimeException("sign error:", e);
+        }
+    }
+
+    private static String byteToHex(final byte[] hash) {
+        Formatter formatter = new Formatter();
+        for (byte b : hash) {
+            formatter.format("%02x", b);
+        }
+        String result = formatter.toString();
+        formatter.close();
+        return result;
     }
 
 

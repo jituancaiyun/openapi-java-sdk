@@ -242,6 +242,8 @@ import static com.shinemo.openapi.client.common.Const.LOG;
                     return call(call.clone(), retryNum + 1);
                 }
             }
+        } catch (Exception e) {
+            LOG.error("call open api exception, request={}", call.request(), e);
         }
         return OpenApiResult.failure();
     }

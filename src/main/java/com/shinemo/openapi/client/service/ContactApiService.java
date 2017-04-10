@@ -39,7 +39,7 @@ public interface ContactApiService {
      * @param deptId 部门ID
      * @return ContactDTO
      */
-    OpenApiResult<ContactDTO> listUsers(long orgId, long deptId);
+    OpenApiResult<ContactDTO> listUsers(String orgId, long deptId);
 
     /**
      * 创建用户
@@ -48,7 +48,7 @@ public interface ContactApiService {
      * @param userDTO 要创建的用户
      * @return UidDTO
      */
-    OpenApiResult<UidDTO> createUser(long orgId, ContactUserDTO userDTO);
+    OpenApiResult<UidDTO> createUser(String orgId, ContactUserDTO userDTO);
 
     /**
      * 修改用户
@@ -57,7 +57,7 @@ public interface ContactApiService {
      * @param userDTO 要修改的用户
      * @return UidDTO
      */
-    OpenApiResult<UidDTO> updateUser(long orgId, ContactUserDTO userDTO);
+    OpenApiResult<UidDTO> updateUser(String orgId, ContactUserDTO userDTO);
 
     /**
      * 删除用户
@@ -66,7 +66,7 @@ public interface ContactApiService {
      * @param userDTO 要删除的用户
      * @return 0表示操作成功
      */
-    OpenApiResult<Long> deleteUser(long orgId, ContactUserDTO userDTO);
+    OpenApiResult<Long> deleteUser(String orgId, ContactUserDTO userDTO);
 
     /**
      * 获取某个部门下的用户列表
@@ -75,7 +75,7 @@ public interface ContactApiService {
      * @param deptId 部门ID
      * @return ContactDTO
      */
-    OpenApiResult<ContactDTO> listDepts(long orgId, long deptId);
+    OpenApiResult<ContactDTO> listDepts(String orgId, long deptId);
 
     /**
      * 创建用户
@@ -84,7 +84,7 @@ public interface ContactApiService {
      * @param deptDTO 要创建的部门
      * @return UidDTO
      */
-    OpenApiResult<DeptIdDTO> createDept(long orgId, ContactDeptDTO deptDTO);
+    OpenApiResult<DeptIdDTO> createDept(String orgId, ContactDeptDTO deptDTO);
 
     /**
      * 修改用户
@@ -93,7 +93,7 @@ public interface ContactApiService {
      * @param deptDTO 要修改的部门
      * @return UidDTO
      */
-    OpenApiResult<DeptIdDTO> updateDept(long orgId, ContactDeptDTO deptDTO);
+    OpenApiResult<DeptIdDTO> updateDept(String orgId, ContactDeptDTO deptDTO);
 
     /**
      * 删除用户
@@ -102,6 +102,6 @@ public interface ContactApiService {
      * @param deptDTO 要删除的部门
      * @return 0表示操作成功
      */
-    OpenApiResult<Long> deleteDept(long orgId, ContactDeptDTO deptDTO);
+    OpenApiResult<Long> deleteDept(String orgId, ContactDeptDTO deptDTO);
 
 }

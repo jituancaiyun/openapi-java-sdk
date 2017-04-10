@@ -45,6 +45,6 @@ public interface MessageApiService {
      * @param messageDTO 消息详情
      * @return illegalUsers非法用户列表
      */
-    Call<OpenApiResult<List<String>>> sendAppMsg(long orgId, AppMessageDTO messageDTO);
+    Call<OpenApiResult<List<String>>> sendAppMsg(String orgId, AppMessageDTO messageDTO);
 
 }

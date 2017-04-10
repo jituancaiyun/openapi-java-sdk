@@ -44,6 +44,6 @@ public interface MessageApi {
      */
     @POST("openaccount/sendmsg")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<List<String>>> sendAppMsg(@Header("orgId") long orgId, @Body AppMessageDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<List<String>>> sendAppMsg(@Header("orgId") String orgId, @Body AppMessageDTO body, @Query("accessToken") String accessToken);
 
 }

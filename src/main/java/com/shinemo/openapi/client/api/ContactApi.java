@@ -44,7 +44,7 @@ public interface ContactApi {
      */
     @GET("user/list")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<ContactDTO>> listUsers(@Header("orgId") long orgId, @Query("deptId") long deptId, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<ContactDTO>> listUsers(@Header("orgId") String orgId, @Query("deptId") long deptId, @Query("accessToken") String accessToken);
 
     /**
      * 创建用户
@@ -56,7 +56,7 @@ public interface ContactApi {
      */
     @POST("user/create")
     @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<UidDTO>> createUser(@Header("orgId") long orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<UidDTO>> createUser(@Header("orgId") String orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
 
     /**
      * 修改用户
@@ -68,7 +68,7 @@ public interface ContactApi {
      */
     @POST("user/update")
     @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<UidDTO>> updateUser(@Header("orgId") long orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<UidDTO>> updateUser(@Header("orgId") String orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
 
     /**
      * 删除用户
@@ -80,7 +80,7 @@ public interface ContactApi {
      */
     @POST("user/delete")
     @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<Long>> deleteUser(@Header("orgId") long orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> deleteUser(@Header("orgId") String orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
 
 
     /**
@@ -93,7 +93,7 @@ public interface ContactApi {
      */
     @GET("department/list")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<ContactDTO>> listDepts(@Header("orgId") long orgId, @Query("deptId") long deptId, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<ContactDTO>> listDepts(@Header("orgId") String orgId, @Query("deptId") long deptId, @Query("accessToken") String accessToken);
 
     /**
      * 创建用户
@@ -105,7 +105,7 @@ public interface ContactApi {
      */
     @POST("department/create")
     @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<DeptIdDTO>> createDept(@Header("orgId") long orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<DeptIdDTO>> createDept(@Header("orgId") String orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
 
     /**
      * 修改用户
@@ -117,7 +117,7 @@ public interface ContactApi {
      */
     @POST("department/update")
     @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<DeptIdDTO>> updateDept(@Header("orgId") long orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<DeptIdDTO>> updateDept(@Header("orgId") String orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
 
     /**
      * 删除用户
@@ -129,6 +129,6 @@ public interface ContactApi {
      */
     @POST("department/delete")
     @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<Long>> deleteDept(@Header("orgId") long orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> deleteDept(@Header("orgId") String orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
 
 }

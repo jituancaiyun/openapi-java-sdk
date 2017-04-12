@@ -19,7 +19,6 @@
 
 package com.shinemo.openapi.client.spring;
 
-import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.OpenApiServiceFactory;
 import com.shinemo.openapi.client.common.OpenApiException;
 import org.springframework.beans.factory.FactoryBean;

@@ -1,10 +1,10 @@
 package com.shinemo.openapi.client;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.service.ContactApiService;
 import com.shinemo.openapi.client.dto.ContactDTO;
 import com.shinemo.openapi.client.dto.ContactUserDTO;
 import com.shinemo.openapi.client.dto.UidDTO;
+import com.shinemo.openapi.client.service.ContactApiService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class ContactApiTest {
 
     @Test
     public void getDeptUsers() throws Exception {
-        OpenApiResult<ContactDTO> result = contactApiService.listUsers(0, 1);
+        OpenApiResult<ContactDTO> result = contactApiService.listUsers("0", 1);
         System.out.println(result);
     }
 
@@ -35,7 +35,7 @@ public class ContactApiTest {
         userDTO.setDeptId(1L);
         userDTO.setMobile("13600530623");
 
-        OpenApiResult<UidDTO> result = contactApiService.createUser(0, userDTO);
+        OpenApiResult<UidDTO> result = contactApiService.createUser("0", userDTO);
         System.out.println(result);
     }
 }

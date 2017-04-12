@@ -21,6 +21,7 @@ package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.AppMessageDTO;
+import com.shinemo.openapi.client.dto.PushMessageDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -42,8 +43,8 @@ public interface MessageApi {
      * @param accessToken 通过getAccessToken方法获取的token
      * @return illegalUsers非法用户列表
      */
-    @POST("openaccount/sendmsg")
+    @POST("message/push")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<List<String>>> sendAppMsg(@Header("orgId") String orgId, @Body AppMessageDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<List<String>>> sendPushMessage(@Header("orgId") String orgId, @Body PushMessageDTO body, @Query("accessToken") String accessToken);
 
 }

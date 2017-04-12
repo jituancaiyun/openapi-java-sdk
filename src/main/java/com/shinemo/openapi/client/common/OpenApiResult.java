@@ -35,6 +35,14 @@ public final class OpenApiResult<T> {
 
     private boolean success;
 
+    public OpenApiResult() {
+    }
+
+    public OpenApiResult(int status, String message) {
+        this.status = status;
+        this.message = message;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -70,6 +78,10 @@ public final class OpenApiResult<T> {
     @SuppressWarnings("unchecked")
     public static <T> OpenApiResult<T> failure() {
         return (OpenApiResult<T>) FAIL;
+    }
+
+    public static <T> OpenApiResult<T> failure(String errorMsg) {
+        return new OpenApiResult<T>(400, errorMsg);
     }
 
     @Override

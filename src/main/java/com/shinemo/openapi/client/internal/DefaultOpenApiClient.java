@@ -27,6 +27,7 @@ import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.AccessTokenDTO;
 import com.shinemo.openapi.client.dto.UserInfoDTO;
+import com.shinemo.openapi.client.service.MessageApiService;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -49,6 +49,6 @@ public final class SpringTest {
     public void getService() throws Exception {
         ContactApiService contactApiService = (ContactApiService) context.getBean("contactApiService");
         System.out.println(contactApiService.toString());
-        System.out.println(contactApiService.listUsers(0, 1));
+        System.out.println(contactApiService.listUsers("0", 1));
     }
 }

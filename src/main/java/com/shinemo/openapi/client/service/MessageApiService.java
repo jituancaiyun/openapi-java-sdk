@@ -23,6 +23,7 @@ import com.shinemo.openapi.client.api.MessageApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.AppMessageDTO;
+import com.shinemo.openapi.client.dto.PushMessageDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -45,6 +46,6 @@ public interface MessageApiService {
      * @param messageDTO 消息详情
      * @return illegalUsers非法用户列表
      */
-    Call<OpenApiResult<List<String>>> sendAppMsg(String orgId, AppMessageDTO messageDTO);
+    OpenApiResult<List<String>> sendPushMessage(String orgId, PushMessageDTO messageDTO);
 
 }

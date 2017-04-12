@@ -37,9 +37,11 @@ import java.util.List;
 public class MessageApiTest {
     private SecurityMessageApiService messageApiService;
 
+    private OpenApiClient client;
+
     @Before
     public void setUp() throws Exception {
-        OpenApiClient client = Apis.createClient();
+        client = Apis.createClient();
         messageApiService = new SecurityMessageApiService();
         messageApiService.setOpenApiClient(client);
         messageApiService.init();
@@ -49,10 +51,21 @@ public class MessageApiTest {
     public void sendTextMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
                 .createTextMessage("我是一条纯文本消息")
-                .setReceivers(Arrays.asList("1", "2"))
+                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("1", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        System.out.println(result);
+    }
+
+    @Test
+    public void sendImageMessage() throws Exception {
+        PushMessageDTO messageDTO = IMessage
+                .createImageMessage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
+                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .build();
+
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
         System.out.println(result);
     }
 
@@ -60,13 +73,13 @@ public class MessageApiTest {
     public void sendAppMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
                 .createAppMessage("我是一条应用消息")
-                .setContent("我是Content")
-                .setTitle("我是Title")
-                .setUrl("https://jituancaiyun.com")
-                .setReceivers(Arrays.asList("1", "2"))
+                .setContent("我是一条应用消息Content")
+                .setTitle("我是一条应用消息Title")
+                .setUrlAction(client.config().getAppId(), "https://jituancaiyun.com", "")
+                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("1", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
         System.out.println(result);
     }
 
@@ -74,15 +87,47 @@ public class MessageApiTest {
     public void sendTextImageMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
                 .createTextImageMessage("我是一条图文消息")
-                .setContent("我是Content")
-                .setTitle("我是Title")
-                .setImage("https://jituancaiyun.com")
+                .setContent("我是一条图文消息Content")
+                .setTitle("我是一条图文消息Title")
+                .setImage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
                 .setUrl("https://jituancaiyun.com")
-                .setReceivers(Arrays.asList("1", "2"))
+                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("1", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
         System.out.println(result);
     }
+
+    @Test
+    public void sendTextLinkMessage() throws Exception {
+        PushMessageDTO messageDTO = IMessage
+                .createTextLinkMessage("我是一条链接消息")
+                .setContent("我是一条链接消息Content")
+                .setTitle("我是一条链接消息Title")
+                .setImage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
+                .setUrl("https://jituancaiyun.com")
+                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .build();
+
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        System.out.println(result);
+    }
+
+
+    @Test
+    public void sendSystemMessage() throws Exception {
+        PushMessageDTO messageDTO = IMessage
+                .createSystemMessage("我是一条系统消息")
+                .setContent("我是一条系统消息Content")
+                .setTitle("我是一条系统消息Title")
+                .setDesc("我是一条系统消息Desc1", "我是一条系统消息Desc2")
+                .setAction("https://jituancaiyun.com")
+                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .build();
+
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        System.out.println(result);
+    }
+
 
 }

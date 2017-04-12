@@ -26,7 +26,6 @@ package com.shinemo.openapi.client.dto.message;
  */
 public final class AppMessage extends IMessage<AppMessage> {
     private String content;
-    private String url;
     private String from;
     private String fromIcon;
     private Byte isShare;
@@ -55,15 +54,6 @@ public final class AppMessage extends IMessage<AppMessage> {
 
     public AppMessage setContent(String content) {
         this.content = content;
-        return this;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public AppMessage setUrl(String url) {
-        this.url = url;
         return this;
     }
 
@@ -98,9 +88,14 @@ public final class AppMessage extends IMessage<AppMessage> {
         return action;
     }
 
-    public AppMessage setAction(String action) {
-        this.action = action;
+    public AppMessage setAction(Action action) {
+        this.action = action.toAction();
         return this;
+    }
+
+    public AppMessage setUrlAction(int appId, String url, String param) {
+        ActionData actionData = new OpenUrlActionData(url, param, appId);
+        return this.setAction(new Action("native", "openurl", actionData));
     }
 
     public String getTitle() {
@@ -136,7 +131,129 @@ public final class AppMessage extends IMessage<AppMessage> {
     }
 
 
-    public static class ActionParam {
+    public static class Action {
+        private String scheme;
+        private String action;
+        private ActionData data;
 
+        public Action() {
+        }
+
+        public Action(String scheme, String action, ActionData data) {
+            this.scheme = scheme;
+            this.action = action;
+            this.data = data;
+        }
+
+
+        public String getScheme() {
+            return scheme;
+        }
+
+        public void setScheme(String scheme) {
+            this.scheme = scheme;
+        }
+
+        public String getAction() {
+            return action;
+        }
+
+        public void setAction(String action) {
+            this.action = action;
+        }
+
+        public ActionData getData() {
+            return data;
+        }
+
+        public void setData(ActionData data) {
+            this.data = data;
+        }
+
+
+        public String toAction() {
+            return scheme + "://" + action + "?data=" + data.toJson();
+        }
+    }
+
+    public static abstract class ActionData {
+        public abstract String toJson();
+    }
+
+    public static class OpenUrlActionData extends ActionData {
+        private String url;
+        private String param;
+        private int appid;
+        private int token = 1;
+        private int cookie = 1;
+        private int noDefaultMenu = 0;
+
+        public OpenUrlActionData() {
+        }
+
+        public OpenUrlActionData(String url, String param, int appid) {
+            this.url = url;
+            this.param = param;
+            this.appid = appid;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getParam() {
+            return param;
+        }
+
+        public void setParam(String param) {
+            this.param = param;
+        }
+
+        public int getAppid() {
+            return appid;
+        }
+
+        public void setAppid(int appid) {
+            this.appid = appid;
+        }
+
+        public int getToken() {
+            return token;
+        }
+
+        public void setToken(int token) {
+            this.token = token;
+        }
+
+        public int getCookie() {
+            return cookie;
+        }
+
+        public void setCookie(int cookie) {
+            this.cookie = cookie;
+        }
+
+        public int getNoDefaultMenu() {
+            return noDefaultMenu;
+        }
+
+        public void setNoDefaultMenu(int noDefaultMenu) {
+            this.noDefaultMenu = noDefaultMenu;
+        }
+
+        @Override
+        public String toJson() {
+            return "{\"url\":\"" + url
+                    + "\",\"param\":\"" + param
+                    + "\",\"appid\":" + appid
+                    + ",\"token\":" + token
+                    + ",\"cookie\":" + cookie
+                    + ",\"noDefaultMenu\":" + noDefaultMenu
+                    + "}";
+        }
     }
 }

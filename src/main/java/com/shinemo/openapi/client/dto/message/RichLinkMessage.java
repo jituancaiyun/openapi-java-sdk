@@ -34,6 +34,13 @@ public final class RichLinkMessage extends BaseRichMessage<RichLinkMessage> {
     }
 
     @Override
+    public String validate() {
+        if (getContent() == null) return "RichLinkMessage.content 不能为空";
+        if (getUrl() == null) return "RichLinkMessage.url 不能为空";
+        return null;
+    }
+
+    @Override
     public byte type() {
         return 10;
     }

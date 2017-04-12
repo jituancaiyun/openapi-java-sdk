@@ -46,7 +46,7 @@ public interface BaseApi {
      */
     @GET("token/get")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<AccessTokenDTO>> getAccessToken(@Query("appId") String appId, @Query("appSecret") String appSecret, @Query("flags") int flags);
+    Call<OpenApiResult<AccessTokenDTO>> getAccessToken(@Query("appId") int appId, @Query("appSecret") String appSecret, @Query("flags") int flags);
 
     /**
      * 免登接口

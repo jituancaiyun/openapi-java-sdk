@@ -132,12 +132,25 @@ public abstract class IMessage<T extends IMessage> {
         return new ArticleMessage(title);
     }
 
+    /**
+     * 创建多图文消息
+     *
+     * @param title
+     * @return
+     */
+    public static SystemMessage createSystemMessage(String title) {
+        return new SystemMessage(title).setTitle(title);
+    }
+
+
     public PushMessageDTO build() {
         PushMessageDTO messageDTO = new PushMessageDTO();
         messageDTO.setMessage(message());
         messageDTO.setExtraData(extraData());
         messageDTO.setMsgType(type());
         messageDTO.setFlags(needEncrypt ? 1 : 0);
+        messageDTO.setReceivers(receivers);
+        messageDTO.setPushTips(pushTips);
         return messageDTO;
     }
 

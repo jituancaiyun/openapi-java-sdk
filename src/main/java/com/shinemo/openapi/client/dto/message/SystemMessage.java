@@ -26,8 +26,8 @@ package com.shinemo.openapi.client.dto.message;
  */
 public final class SystemMessage extends IMessage<SystemMessage> {
     private String title;
-    private String desc;
     private String content;
+    private String[] desc;
     private String action;
     private String color;
 
@@ -41,7 +41,7 @@ public final class SystemMessage extends IMessage<SystemMessage> {
     @Override
     public String validate() {
         if (title == null) return "SystemMessage.title 不能为空";
-        if (desc == null) return "SystemMessage.desc 不能为空";
+        //if (desc == null) return "SystemMessage.desc 不能为空";
         if (content == null) return "SystemMessage.content 不能为空";
         return null;
     }
@@ -55,11 +55,11 @@ public final class SystemMessage extends IMessage<SystemMessage> {
         return this;
     }
 
-    public String getDesc() {
+    public String[] getDesc() {
         return desc;
     }
 
-    public SystemMessage setDesc(String desc) {
+    public SystemMessage setDesc(String... desc) {
         this.desc = desc;
         return this;
     }

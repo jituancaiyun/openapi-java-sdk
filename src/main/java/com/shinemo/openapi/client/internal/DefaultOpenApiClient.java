@@ -68,7 +68,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
             throw new OpenApiException("baseUrl can not be null.");
         }
 
-        if (conf.getAppId() == null) {
+        if (conf.getAppId() <= 0) {
             throw new OpenApiException("appId can not be null.");
         }
 

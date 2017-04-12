@@ -48,7 +48,7 @@ public final class OpenApiConfiguration {
     /**
      * 应用ID
      */
-    private String appId;
+    private int appId;
 
     /**
      * 应用密钥
@@ -103,11 +103,11 @@ public final class OpenApiConfiguration {
         this.baseUrl = baseUrl;
     }
 
-    public String getAppId() {
+    public int getAppId() {
         return appId;
     }
 
-    public void setAppId(String appId) {
+    public void setAppId(int appId) {
         this.appId = appId;
     }
 

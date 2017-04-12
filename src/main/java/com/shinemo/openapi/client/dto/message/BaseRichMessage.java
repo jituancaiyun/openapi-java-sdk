@@ -39,13 +39,6 @@ public abstract class BaseRichMessage<T extends BaseRichMessage> extends IMessag
         super(message);
     }
 
-    @Override
-    public String validate() {
-        if (content == null) return "RichMessage.content 不能为空";
-        if (url == null && image == null) return "RichMessage.url或RichMessage.image 不能为空";
-        return null;
-    }
-
     public String getContent() {
         return content;
     }

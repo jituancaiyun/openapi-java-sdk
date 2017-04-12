@@ -25,8 +25,19 @@ package com.shinemo.openapi.client.dto.message;
  * @author ohun@live.cn (夜色)
  */
 public final class RichImageMessage extends BaseRichMessage<RichImageMessage> {
+
+    public RichImageMessage() {
+    }
+
     public RichImageMessage(String message) {
         super(message);
+    }
+
+    @Override
+    public String validate() {
+        if (getContent() == null) return "RichImageMessage.content 不能为空";
+        if (getImage() == null) return "RichImageMessage.image 不能为空";
+        return null;
     }
 
     @Override

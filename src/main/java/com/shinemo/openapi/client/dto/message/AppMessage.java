@@ -19,6 +19,9 @@
 
 package com.shinemo.openapi.client.dto.message;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by ohun on 2017/4/11.
  *
@@ -247,13 +250,18 @@ public final class AppMessage extends IMessage<AppMessage> {
 
         @Override
         public String toJson() {
-            return "{\"url\":\"" + url
+            String json = "{\"url\":\"" + url
                     + "\",\"param\":\"" + param
                     + "\",\"appid\":" + appid
                     + ",\"token\":" + token
                     + ",\"cookie\":" + cookie
                     + ",\"noDefaultMenu\":" + noDefaultMenu
                     + "}";
+            try {
+                return URLEncoder.encode(json, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+            }
+            return json;
         }
     }
 }

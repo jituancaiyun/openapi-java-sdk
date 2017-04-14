@@ -24,6 +24,7 @@ import com.shinemo.openapi.client.dto.AccessTokenDTO;
 import com.shinemo.openapi.client.dto.UserInfoDTO;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Query;
 
@@ -46,7 +47,7 @@ public interface BaseApi {
      */
     @GET("token/get")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<AccessTokenDTO>> getAccessToken(@Query("appId") int appId, @Query("appSecret") String appSecret, @Query("flags") int flags);
+    Call<OpenApiResult<AccessTokenDTO>> getAccessToken(@Header("appId") int appId, @Header("appSecret") String appSecret, @Query("flags") int flags);
 
     /**
      * 免登接口
@@ -57,6 +58,21 @@ public interface BaseApi {
      */
     @GET("auth/getUserInfoByToken")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<UserInfoDTO>> login(@Query("token") String authToken, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<UserInfoDTO>> login(@Header("token") String authToken, @Header("accessToken") String accessToken);
+
+    /**
+     * 免登接口
+     *
+     * @param token   客户端透传下来的授权token
+     * @param accessToken 通过getAccessToken方法获取的token
+     * @return UserInfoDTO
+     */
+    @GET("auth/checkHttpToken")
+    @Headers(USER_AGENT_HEADER)
+    Call<OpenApiResult<Void>> checkHttpToken(@Header("httpToken") String token,
+                                             @Header("timestamp") long timestamp,
+                                             @Header("uid") String uid,
+                                             @Header("orgId") String orgId,
+                                             @Header("accessToken") String accessToken);
 
 }

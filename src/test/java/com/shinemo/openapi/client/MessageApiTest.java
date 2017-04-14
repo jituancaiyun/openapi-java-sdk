@@ -90,7 +90,7 @@ public class MessageApiTest {
                 .setContent("我是一条图文消息Content")
                 .setTitle("我是一条图文消息Title")
                 .setImage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
-                .setUrl("https://jituancaiyun.com")
+                .setUrl("https://baidu.com")
                 .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 

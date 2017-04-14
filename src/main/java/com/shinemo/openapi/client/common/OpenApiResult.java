@@ -84,6 +84,10 @@ public final class OpenApiResult<T> {
         return new OpenApiResult<T>(400, errorMsg);
     }
 
+    public static <T> OpenApiResult<T> failure(int errorCode, String errorMsg) {
+        return new OpenApiResult<T>(errorCode, errorMsg);
+    }
+
     @Override
     public String toString() {
         return "OpenApiResult{" +

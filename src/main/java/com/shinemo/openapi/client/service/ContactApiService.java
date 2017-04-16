@@ -19,6 +19,7 @@
 
 package com.shinemo.openapi.client.service;
 
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.api.ContactApi;
 import com.shinemo.openapi.client.dto.*;
@@ -35,73 +36,73 @@ public interface ContactApiService {
     /**
      * 获取某个部门下的用户列表
      *
-     * @param orgId  要访问的企业ID
-     * @param deptId 部门ID
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param deptId     部门ID
      * @return ContactDTO
      */
-    OpenApiResult<ContactDTO> listUsers(String orgId, long deptId);
+    OpenApiResult<ContactDTO> listUsers(ApiContext apiContext, long deptId);
 
     /**
      * 创建用户
      *
-     * @param orgId   要访问的企业ID
-     * @param userDTO 要创建的用户
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param userDTO    要创建的用户
      * @return UidDTO
      */
-    OpenApiResult<UidDTO> createUser(String orgId, ContactUserDTO userDTO);
+    OpenApiResult<UidDTO> createUser(ApiContext apiContext, ContactUserDTO userDTO);
 
     /**
      * 修改用户
      *
-     * @param orgId   要访问的企业ID
-     * @param userDTO 要修改的用户
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param userDTO    要修改的用户
      * @return UidDTO
      */
-    OpenApiResult<UidDTO> updateUser(String orgId, ContactUserDTO userDTO);
+    OpenApiResult<UidDTO> updateUser(ApiContext apiContext, ContactUserDTO userDTO);
 
     /**
      * 删除用户
      *
-     * @param orgId   要访问的企业ID
-     * @param userDTO 要删除的用户
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param userDTO    要删除的用户
      * @return 0表示操作成功
      */
-    OpenApiResult<Long> deleteUser(String orgId, ContactUserDTO userDTO);
+    OpenApiResult<Long> deleteUser(ApiContext apiContext, ContactUserDTO userDTO);
 
     /**
      * 获取某个部门下的用户列表
      *
-     * @param orgId  要访问的企业ID
-     * @param deptId 部门ID
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param deptId     部门ID
      * @return ContactDTO
      */
-    OpenApiResult<ContactDTO> listDepts(String orgId, long deptId);
+    OpenApiResult<ContactDTO> listDepts(ApiContext apiContext, long deptId);
 
     /**
      * 创建用户
      *
-     * @param orgId   要访问的企业ID
-     * @param deptDTO 要创建的部门
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param deptDTO    要创建的部门
      * @return UidDTO
      */
-    OpenApiResult<DeptIdDTO> createDept(String orgId, ContactDeptDTO deptDTO);
+    OpenApiResult<DeptIdDTO> createDept(ApiContext apiContext, ContactDeptDTO deptDTO);
 
     /**
      * 修改用户
      *
-     * @param orgId   要访问的企业ID
-     * @param deptDTO 要修改的部门
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param deptDTO    要修改的部门
      * @return UidDTO
      */
-    OpenApiResult<DeptIdDTO> updateDept(String orgId, ContactDeptDTO deptDTO);
+    OpenApiResult<DeptIdDTO> updateDept(ApiContext apiContext, ContactDeptDTO deptDTO);
 
     /**
      * 删除用户
      *
-     * @param orgId   要访问的企业ID
-     * @param deptDTO 要删除的部门
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param deptDTO    要删除的部门
      * @return 0表示操作成功
      */
-    OpenApiResult<Long> deleteDept(String orgId, ContactDeptDTO deptDTO);
+    OpenApiResult<Long> deleteDept(ApiContext apiContext, ContactDeptDTO deptDTO);
 
 }

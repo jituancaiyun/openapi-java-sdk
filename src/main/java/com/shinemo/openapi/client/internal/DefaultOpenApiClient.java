@@ -20,6 +20,7 @@
 package com.shinemo.openapi.client.internal;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.stream.MalformedJsonException;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.OpenApiConfiguration;
 import com.shinemo.openapi.client.api.BaseApi;
@@ -122,16 +123,6 @@ import static com.shinemo.openapi.client.common.Const.LOG;
     }
 
     @Override
-    public OpenApiResult<UserInfoDTO> login(final String loginToken) {
-        return callApi(new ApiCallable<UserInfoDTO>() {
-            @Override
-            public Call<OpenApiResult<UserInfoDTO>> call(String accessToken) {
-                return baseApi.login(loginToken, accessToken);
-            }
-        });
-    }
-
-    @Override
     public OpenApiConfiguration config() {
         return conf;
     }
@@ -144,7 +135,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         if (checkAccessToken()) {
             return call(apiCallable.call(accessToken.getAccessToken()));
         }
-        return OpenApiResult.failure();
+        return OpenApiResult.failure(400, "获取accessToken失败");
     }
 
     private boolean checkAccessToken() {
@@ -223,10 +214,10 @@ import static com.shinemo.openapi.client.common.Const.LOG;
                 }
                 switch (result.getStatus()) {//accessToken过期, 要同步刷新下accessToken再重试
                     case 4002://accessToken 错误
-                    case 4003://accessToken超时
-                    case 4005://accessToken错误(可能是由于系统原因),请重新获取
+                    case 4003://accessToken 过期
+                    case 4005://accessToken 错误(可能是由于系统原因),请重新获取
                         if (syncRefreshAccessToken()) {
-                            if (retryNum < conf.getMaxRetry() + 1) {
+                            if (retryNum < conf.getMaxRetry() + 1) {//由token失效引起的错误可以多重试一次
                                 return call(call.clone(), retryNum + 1);
                             }
                         }
@@ -234,12 +225,19 @@ import static com.shinemo.openapi.client.common.Const.LOG;
                 return result;
             }
             LOG.warn("call open api failure, api={}, body={}", response, response.body());
+
+            return OpenApiResult.failure(response.code(), response.message());
         } catch (SocketTimeoutException e) {
-            LOG.error("call open api exception, request={}", call.request(), e);
+            LOG.error("call open api timeout exception, request={}", call.request(), e);
+            return OpenApiResult.failure(408, "请求超时");
+        } catch (MalformedJsonException e) {
+            LOG.error("call open api timeout exception, request={}", call.request(), e);
+            return OpenApiResult.failure(400, "json解析失败");
         } catch (IOException e) {
             LOG.error("call open api exception, request={}", call.request(), e);
             if (retryNum < conf.getMaxRetry()) {
                 if (checkAccessToken()) {//重试前, 检查下accessToken
+                    LOG.warn("call open api fail, retryNum={}, request={}", retryNum + 1, call.request());
                     return call(call.clone(), retryNum + 1);
                 }
             }

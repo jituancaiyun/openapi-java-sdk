@@ -25,7 +25,7 @@ package com.shinemo.openapi.client.common;
  * @author ohun@live.cn (夜色)
  */
 public final class OpenApiResult<T> {
-    private static final OpenApiResult<Void> FAIL = new OpenApiResult<Void>();
+    private static final OpenApiResult<Void> FAIL = new OpenApiResult<Void>(400, "请求错误");
 
     private int status;
 

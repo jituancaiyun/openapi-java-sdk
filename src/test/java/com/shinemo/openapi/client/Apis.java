@@ -35,6 +35,7 @@ public final class Apis {
         configuration.setAppId(94181123);
         configuration.setAppSecret("6fe73d451cd37f8a");
         configuration.setConnectTimeoutMillis(1000);
+        configuration.setMaxRetry(1);
         return configuration;
     }
 

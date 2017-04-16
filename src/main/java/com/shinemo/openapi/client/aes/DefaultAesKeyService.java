@@ -24,6 +24,7 @@ import com.shinemo.openapi.client.aes.cache.AesKeyCache;
 import com.shinemo.openapi.client.aes.cache.HashMapAesKeyCache;
 import com.shinemo.openapi.client.aes.db.AesKeyDao;
 import com.shinemo.openapi.client.aes.db.MysqlAesKeyDao;
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.service.AuthApiService;
@@ -78,17 +79,16 @@ public final class DefaultAesKeyService implements AesKeyService {
     }
 
     @Override
-    public AesKey getAesKeyBySDK(String orgId) {
+    public AesKey getLatestAesKeyBySDK(String orgId) {
         return null;
     }
 
     @Override
     public OpenApiResult<List<AesKey>> getAesKeyByClient(String token, String uid, long timestamp, String orgId, String keyIds) {
-        OpenApiResult<Void> result = authApiService.checkHttpToken(token, timestamp, uid, orgId);
+        OpenApiResult<Void> result = authApiService.checkHttpToken(ApiContext.ctx(orgId, uid), token, timestamp);
         if (!result.isSuccess()) {
             return OpenApiResult.failure(403, "权限校验失败");
         }
-
 
         return null;
     }

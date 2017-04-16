@@ -17,8 +17,11 @@
  *     ohun@live.cn (夜色)
  */
 
-package com.shinemo.openapi.client;
+package com.shinemo.openapi.client.service;
 
+import com.shinemo.openapi.client.Apis;
+import com.shinemo.openapi.client.OpenApiClient;
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.IMessage;
@@ -34,7 +37,7 @@ import java.util.List;
  *
  * @author ohun@live.cn (夜色)
  */
-public class MessageApiTest {
+public class MessageApiServiceTest {
     private SecurityMessageApiService messageApiService;
 
     private OpenApiClient client;
@@ -54,7 +57,7 @@ public class MessageApiTest {
                 .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
         System.out.println(result);
     }
 
@@ -65,7 +68,7 @@ public class MessageApiTest {
                 .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
         System.out.println(result);
     }
 
@@ -79,7 +82,7 @@ public class MessageApiTest {
                 .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
         System.out.println(result);
     }
 
@@ -94,7 +97,7 @@ public class MessageApiTest {
                 .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
         System.out.println(result);
     }
 
@@ -109,7 +112,7 @@ public class MessageApiTest {
                 .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
         System.out.println(result);
     }
 
@@ -125,7 +128,7 @@ public class MessageApiTest {
                 .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage("57171554250", messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
         System.out.println(result);
     }
 

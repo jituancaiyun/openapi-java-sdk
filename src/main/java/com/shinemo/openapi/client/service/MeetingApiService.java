@@ -21,6 +21,7 @@ package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.api.MeetingApi;
 import com.shinemo.openapi.client.common.Api;
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.MeetingIdDTO;
 import com.shinemo.openapi.client.dto.MeetingInviteDTO;
@@ -36,39 +37,39 @@ public interface MeetingApiService {
     /**
      * 发起会议邀请
      *
-     * @param orgId      要访问的企业ID
+     * @param apiContext 基础header参数, accessToken, orgId, uid
      * @param meetingDTO 会议实体
      * @return MeetingIdDTO 会议ID
      */
-    OpenApiResult<MeetingIdDTO> createMeeting(String orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<MeetingIdDTO> createMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
 
     /**
      * 取消会议邀请
      *
-     * @param orgId      要访问的企业ID
+     * @param apiContext 基础header参数, accessToken, orgId, uid
      * @param meetingDTO 会议实体
      * @return result code
      */
-    OpenApiResult<Long> cancelMeeting(String orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<Long> cancelMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
 
 
     /**
      * 删除会议邀请
      *
-     * @param orgId      要访问的企业ID
+     * @param apiContext 基础header参数, accessToken, orgId, uid
      * @param meetingDTO 会议实体
      * @return result code
      */
-    OpenApiResult<Long> deleteMeeting(String orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<Long> deleteMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
 
     /**
      * 修改会议邀请
      *
-     * @param orgId      要访问的企业ID
+     * @param apiContext 基础header参数, accessToken, orgId, uid
      * @param meetingDTO 会议实体
      * @return result code
      */
-    OpenApiResult<Long> updateMeeting(String orgId, MeetingInviteDTO meetingDTO);
+    OpenApiResult<Long> updateMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
 
     /**
      * 修改会议邀请

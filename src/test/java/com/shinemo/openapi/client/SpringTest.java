@@ -19,6 +19,7 @@
 
 package com.shinemo.openapi.client;
 
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.service.ContactApiService;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,6 +50,6 @@ public final class SpringTest {
     public void getService() throws Exception {
         ContactApiService contactApiService = (ContactApiService) context.getBean("contactApiService");
         System.out.println(contactApiService.toString());
-        System.out.println(contactApiService.listUsers("0", 1));
+        System.out.println(contactApiService.listUsers(ApiContext.ctx(), 1));
     }
 }

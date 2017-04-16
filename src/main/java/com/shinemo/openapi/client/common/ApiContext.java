@@ -19,68 +19,75 @@
 
 package com.shinemo.openapi.client.common;
 
+import java.util.HashMap;
+
 /**
  * Created by ohun on 2017/4/14.
  *
  * @author ohun@live.cn (夜色)
  */
-public class ApiContext {
-    private String accessToken;
-    private String orgId;
-    private String uid;
-    private String name;
+public class ApiContext extends HashMap<String, String> {
 
     public ApiContext() {
     }
 
     public ApiContext(String orgId) {
-        this.orgId = orgId;
+        this.setOrgId(orgId);
     }
 
     public ApiContext(String orgId, String uid) {
-        this.orgId = orgId;
-        this.uid = uid;
+        this.setOrgId(orgId);
+        this.setUid(uid);
     }
 
     public ApiContext(String orgId, String uid, String name) {
-        this.orgId = orgId;
-        this.uid = uid;
-        this.name = name;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
+        this.setOrgId(orgId);
+        this.setUid(uid);
+        this.setName(name);
     }
 
     public ApiContext setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+        this.put("accessToken", accessToken);
+        return this;
+    }
+
+    public ApiContext setOrgId(String orgId) {
+        this.put("orgId", orgId);
+        return this;
+    }
+
+    public ApiContext setUid(String uid) {
+        this.put("uid", uid);
+        return this;
+    }
+
+    public ApiContext setName(String name) {
+        this.put("name", name);
+        return this;
+    }
+
+    public ApiContext putHeader(String name, String value) {
+        this.put(name, value);
         return this;
     }
 
     public String getOrgId() {
-        return orgId;
+        return get("orgId");
     }
 
-    public ApiContext setOrgId(String orgId) {
-        this.orgId = orgId;
-        return this;
+    public static ApiContext ctx() {
+        return new ApiContext();
     }
 
-    public String getUid() {
-        return uid;
+    public static ApiContext ctx(String orgId) {
+        return new ApiContext(orgId);
     }
 
-    public ApiContext setUid(String uid) {
-        this.uid = uid;
-        return this;
+    public static ApiContext ctx(String orgId, String uid) {
+        return new ApiContext(orgId, uid);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public ApiContext setName(String name) {
-        this.name = name;
-        return this;
+    public static ApiContext ctx(String orgId, String uid, String name) {
+        return new ApiContext(orgId, uid, name);
     }
 }

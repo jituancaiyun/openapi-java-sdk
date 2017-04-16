@@ -30,7 +30,7 @@ import java.util.List;
  */
 public interface AesKeyService {
 
-    AesKey getAesKeyBySDK(String orgId);
+    AesKey getLatestAesKeyBySDK(String orgId);
 
     OpenApiResult<List<AesKey>> getAesKeyByClient(String token, String uid, long timestamp, String orgId, String keyIds);
 

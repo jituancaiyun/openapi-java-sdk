@@ -21,6 +21,7 @@ package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.AES128Util;
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.Const;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
@@ -47,7 +48,7 @@ public final class SecurityMessageApiService implements MessageApiService {
     }
 
     @Override
-    public OpenApiResult<List<String>> sendPushMessage(String orgId, PushMessageDTO messageDTO) {
+    public OpenApiResult<List<String>> sendPushMessage(ApiContext apiContext, PushMessageDTO messageDTO) {
         if (messageDTO == null) {
             return OpenApiResult.failure("消息不能为空");
         }
@@ -79,7 +80,7 @@ public final class SecurityMessageApiService implements MessageApiService {
                 return OpenApiResult.failure("请初始化AesKeyManager");
             }
 
-            AesKeyManager.AesKey aesKey = aesKeyManager.getAesKey(orgId);
+            AesKeyManager.AesKey aesKey = aesKeyManager.getAesKey(apiContext.getOrgId());
 
             if (aesKey == null) {
                 return OpenApiResult.failure("消息加密失败, 无法获取密钥");
@@ -98,7 +99,7 @@ public final class SecurityMessageApiService implements MessageApiService {
             messageDTO.setKeyId(aesKey.id());
         }
 
-        return proxy.sendPushMessage(orgId, messageDTO);
+        return proxy.sendPushMessage(apiContext, messageDTO);
     }
 
     public void setOpenApiClient(OpenApiClient openApiClient) {

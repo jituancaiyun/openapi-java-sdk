@@ -25,7 +25,7 @@ import com.shinemo.openapi.client.dto.MeetingInviteDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
-import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
+import java.util.Map;
 
 /**
  * Created by ohun on 2017/3/30.
@@ -37,60 +37,55 @@ public interface MeetingApi {
     /**
      * 发起会议邀请
      *
-     * @param orgId       要访问的企业ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    业务数据
      * @return MeetingIdDTO 会议ID
      */
     @POST("workbench/meetinginvite/create")
-    @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<MeetingIdDTO>> createMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<MeetingIdDTO>> createMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
 
 
     /**
      * 取消会议邀请
      *
-     * @param orgId       要访问的企业ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    业务数据
      * @return ContactDTO
      */
     @POST("workbench/meetinginvite/cancel")
-    @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> cancelMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> cancelMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
 
 
     /**
      * 删除会议邀请
      *
-     * @param orgId       要访问的企业ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    业务数据
      * @return ContactDTO
      */
     @POST("workbench/meetinginvite/delete")
-    @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> deleteMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> deleteMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
 
 
     /**
      * 修改会议邀请
      *
-     * @param orgId       要访问的企业ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    业务数据
      * @return ContactDTO
      */
     @POST("workbench/meetinginvite/update")
-    @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> updateMeeting(@Header("orgId") String orgId, @Body MeetingInviteDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> updateMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
 
 
     /**
      * 修改会议邀请
      *
-     * @param orgId       要访问的企业ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    业务数据
      * @return ContactDTO
      */
     @GET("workbench/meetinginvite/detail")
-    @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<Long>> getMeeting(@Header("orgId") String orgId, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> getMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
 
 }

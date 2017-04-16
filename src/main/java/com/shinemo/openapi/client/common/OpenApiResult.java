@@ -88,6 +88,13 @@ public final class OpenApiResult<T> {
         return new OpenApiResult<T>(errorCode, errorMsg);
     }
 
+    public static <T> OpenApiResult<T> success(T data) {
+        OpenApiResult openApiResult = new OpenApiResult();
+        openApiResult.data = data;
+        openApiResult.status = 200;
+        return openApiResult;
+    }
+
     @Override
     public String toString() {
         return "OpenApiResult{" +

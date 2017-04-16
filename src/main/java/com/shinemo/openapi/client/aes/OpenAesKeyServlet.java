@@ -20,6 +20,8 @@
 package com.shinemo.openapi.client.aes;
 
 import com.google.gson.Gson;
+import com.shinemo.openapi.client.aes.domain.AesKeyDTO;
+import com.shinemo.openapi.client.aes.domain.ResultMsg;
 import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import org.springframework.web.context.WebApplicationContext;
@@ -81,15 +83,15 @@ public final class OpenAesKeyServlet extends HttpServlet {
         String ids = req.getParameter("ids");
 
         try {
-            OpenApiResult<List<AesKey>> result = aesKeyService.getAesKeyByClient(token, uid, Long.parseLong(timestamp), orgId, ids);
+            ResultMsg<Map<String,List<AesKeyDTO>>>  result = aesKeyService.getAesKeyByClient(token, uid, Long.parseLong(timestamp),Long.parseLong(orgId), ids);
             writeResult(resp, result);
         } catch (Exception e) {
-            writeResult(resp, OpenApiResult.failure(500, "服务器内部错误"));
+            writeResult(resp, ResultMsg.error(500, "服务器内部错误"));
             LOG.error("get aes key error, ids={}, orgId={}, uid={}, token={}, timestamp={}", ids, orgId, uid, token, timestamp);
         }
     }
 
-    private void writeResult(HttpServletResponse response, OpenApiResult<?> result) throws IOException {
+    private void writeResult(HttpServletResponse response, ResultMsg<?> result) throws IOException {
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("utf-8");
 

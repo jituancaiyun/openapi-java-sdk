@@ -31,7 +31,7 @@ import java.util.Map;
  *
  * @author ohun@live.cn (夜色)
  */
-public final class HashMapAesKeyCache implements AesKeyCache {
+public final class HashMapAesKeyCache/* implements AesKeyCache */{
     private Map<Integer, AesKey> cache = new HashMap<Integer, AesKey>();
 
     private AesKeyDao aesKeyDao;
@@ -44,18 +44,18 @@ public final class HashMapAesKeyCache implements AesKeyCache {
         this.aesKeyDao = aesKeyDao;
     }
 
-    @Override
-    public List<AesKey> getListByIds(List<Integer> ids) {
-        return null;
-    }
-
-    @Override
-    public AesKey getById(int id) {
-        return null;
-    }
-
-    @Override
-    public List<AesKey> getLatest(String orgId, int limit) {
-        return null;
-    }
+//    @Override
+//    public List<AesKey> getListByIds(List<Integer> ids) {
+//        return null;
+//    }
+//
+//    @Override
+//    public AesKey getById(int id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<AesKey> getLatest(String orgId, int limit) {
+//        return null;
+//    }
 }

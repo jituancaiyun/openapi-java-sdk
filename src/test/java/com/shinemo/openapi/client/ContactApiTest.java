@@ -19,6 +19,7 @@ public class ContactApiTest {
 
     @Before
     public void setUp() throws Exception {
+        System.out.println("==============");
         contactApiService = Apis.createApiService(ContactApiService.class);
     }
 

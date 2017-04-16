@@ -19,8 +19,6 @@
 
 package com.shinemo.openapi.client.common;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
-
 import java.io.Closeable;
 import java.io.IOException;
 import java.security.MessageDigest;

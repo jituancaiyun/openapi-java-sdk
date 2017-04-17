@@ -106,8 +106,14 @@ public final class DefaultAesKeyService implements AesKeyService {
         }
         if (list.isEmpty() || !isToday(list.get(0).getGmtCreate())) {
             AesKeyEntity newKey = createNewKey(orgId);
-            list.set(0, newKey);
-            aesKeyCache.addAesKey(orgId, newKey);
+            if (newKey == null) {
+                if (list.isEmpty()) {
+                    throw new OpenApiException("生成新的的密钥失败");
+                }
+            } else {
+                list.set(0, newKey);
+                aesKeyCache.addAesKey(orgId, newKey);
+            }
         }
         return list;
     }

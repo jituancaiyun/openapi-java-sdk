@@ -119,7 +119,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
 
     @Override
     public OpenApiResult<AccessTokenDTO> getAccessToken() {
-        return call(baseApi.getAccessToken(conf.getAppId(), conf.getAppSecret(), 0));
+        return callWithLog(baseApi.getAccessToken(conf.getAppId(), conf.getAppSecret(), 0), Integer.MAX_VALUE);
     }
 
     @Override
@@ -133,7 +133,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
 
     public <T> OpenApiResult<T> callApi(ApiCallable<T> apiCallable) {
         if (checkAccessToken()) {
-            return call(apiCallable.call(accessToken.getAccessToken()));
+            return callWithLog(apiCallable.call(accessToken.getAccessToken()), 0);
         }
         return OpenApiResult.failure(400, "获取accessToken失败");
     }
@@ -188,11 +188,11 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         return false;
     }
 
-    private <T> OpenApiResult<T> call(Call<OpenApiResult<T>> call) {
+    private <T> OpenApiResult<T> callWithLog(Call<OpenApiResult<T>> call, int retryNum) {
         long start = System.nanoTime();
         OpenApiResult<T> result = OpenApiResult.failure();
         try {
-            return result = call(call, 0);
+            return result = callWithRetry(call, retryNum);
         } finally {
             if (result.isSuccess()) {
                 LOG.info("[{}] call open api {} success. result={}"
@@ -204,7 +204,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         }
     }
 
-    private <T> OpenApiResult<T> call(Call<OpenApiResult<T>> call, int retryNum) {
+    private <T> OpenApiResult<T> callWithRetry(Call<OpenApiResult<T>> call, int retryNum) {
         try {
             Response<OpenApiResult<T>> response = call.execute();
             if (response.isSuccessful()) {
@@ -218,14 +218,14 @@ import static com.shinemo.openapi.client.common.Const.LOG;
                     case 4005://accessToken 错误(可能是由于系统原因),请重新获取
                         if (syncRefreshAccessToken()) {
                             if (retryNum < conf.getMaxRetry() + 1) {//由token失效引起的错误可以多重试一次
-                                return call(call.clone(), retryNum + 1);
+                                return callWithRetry(call.clone(), retryNum + 1);
                             }
                         }
                 }
                 return result;
             }
-            LOG.warn("call open api failure, api={}, body={}", response, response.body());
 
+            LOG.warn("call open api failure, api={}, body={}", response, response.body());
             return OpenApiResult.failure(response.code(), response.message());
         } catch (SocketTimeoutException e) {
             LOG.error("call open api timeout exception, request={}", call.request(), e);
@@ -238,7 +238,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
             if (retryNum < conf.getMaxRetry()) {
                 if (checkAccessToken()) {//重试前, 检查下accessToken
                     LOG.warn("call open api fail, retryNum={}, request={}", retryNum + 1, call.request());
-                    return call(call.clone(), retryNum + 1);
+                    return callWithRetry(call.clone(), retryNum + 1);
                 }
             }
         } catch (Exception e) {

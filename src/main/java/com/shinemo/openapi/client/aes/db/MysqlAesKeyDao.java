@@ -19,18 +19,16 @@
 
 package com.shinemo.openapi.client.aes.db;
 
-import com.shinemo.openapi.client.aes.cache.AesKeyCache;
-import com.shinemo.openapi.client.aes.domain.AesKeyDTO;
 import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
-import com.shinemo.openapi.client.aes.util.AesKeyProduce;
 import com.shinemo.openapi.client.common.OpenApiException;
+import com.shinemo.openapi.client.common.OpenUtils;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.*;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.shinemo.openapi.client.common.Const.LOG;
 
 /**
  * Created by ohun on 2017/4/14.
@@ -39,13 +37,7 @@ import java.util.*;
  */
 public final class MysqlAesKeyDao implements AesKeyDao {
 
-    private PreparedStatement pstm = null;
-    private Connection conn = null;
-    private ResultSet rs = null;
-
     private DataSource dataSource;
-
-//    private AesKeyCache aesKeyCache;
 
     public void init() {
         if (dataSource == null) {
@@ -54,139 +46,133 @@ public final class MysqlAesKeyDao implements AesKeyDao {
     }
 
     @Override
-    public boolean insert(AesKeyEntity aesKey) throws Exception {
-        if (dataSource == null) {
-            throw new OpenApiException("dataSource不能为空，请先设置dataSource");
-        }
-        String sql = "INSERT INTO t_openapi_aeskey (org_id,aes_key,gmt_create,gmt_modified) VALUES (?,?,?,?)";
-        conn = dataSource.getConnection();
-        pstm = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        pstm.setLong(1, aesKey.getOrgId());
-        pstm.setString(2, aesKey.getKey());
-        pstm.setDate(3, aesKey.getGmtCreate());
-        pstm.setDate(4, aesKey.getGmtCreate());
-        if (pstm.executeUpdate() > 0) {
-            rs = pstm.getGeneratedKeys();
-            if (rs.next()) {
-                aesKey.setId(rs.getInt(1));
-                return true;
+    public boolean insert(AesKeyEntity aesKey) {
+        String sql = "INSERT INTO t_openapi_aeskey (org_id, aes_key, gmt_create, gmt_modified) VALUES (?,?,?,?)";
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstm.setString(1, aesKey.getOrgId());
+            pstm.setString(2, aesKey.getKey());
+            pstm.setDate(3, aesKey.getGmtCreate());
+            pstm.setDate(4, aesKey.getGmtCreate());
+            if (pstm.executeUpdate() > 0) {
+                ResultSet rs = pstm.getGeneratedKeys();
+                if (rs.next()) {
+                    aesKey.setId(rs.getInt(1));
+                    return true;
+                } else {
+                    throw new OpenApiException("无法获取主键。");
+                }
             } else {
-                throw new OpenApiException("无法获取主键。");
+                throw new OpenApiException("数据存储出错。");
             }
-        } else {
-            throw new OpenApiException("数据存储出错。");
+        } catch (SQLException e) {
+            LOG.error("MysqlAesKeyDao.insert error, entity={}, sql={}", aesKey, sql);
+            throw new OpenApiException("MysqlAesKeyDao.insert error", e);
+        } finally {
+            OpenUtils.silentClose(connection);
         }
     }
 
+
     @Override
-    public AesKeyDTO selectKeyOfTodayByOrgId(AesKeyEntity aesKeyEntity) throws Exception {
-        if (dataSource == null) {
-            throw new OpenApiException("dataSource不能为空，请先设置dataSource");
-        }
-        AesKeyDTO aesKeyDTO = new AesKeyDTO();
-        String sql = "SELECT id,aes_key FROM t_openapi_aeskey WHERE org_id=? AND gmt_create=? limit 1";
-        conn = dataSource.getConnection();
-        pstm = conn.prepareStatement(sql);
-        pstm.setLong(1, aesKeyEntity.getOrgId());
-        pstm.setDate(2, aesKeyEntity.getGmtCreate());
-        rs = pstm.executeQuery();
-        if (rs.next()) {
-            aesKeyDTO.setId(rs.getInt("id"));
-            aesKeyDTO.setKey(rs.getString("aes_key"));
-            return aesKeyDTO;
+    public AesKeyEntity getById(int id) {
+        String sql = "SELECT id, aes_key, gmt_create FROM t_openapi_aeskey WHERE id=?";
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                AesKeyEntity aesKeyEntity = new AesKeyEntity();
+                aesKeyEntity.setId(resultSet.getInt("id"));
+                aesKeyEntity.setKey(resultSet.getString("aes_key"));
+                aesKeyEntity.setGmtCreate(resultSet.getDate("gmt_create"));
+                return aesKeyEntity;
+            }
+        } catch (SQLException e) {
+            LOG.error("MysqlAesKeyDao.getById error, id={}, sql={}", id, sql);
+            throw new OpenApiException("MysqlAesKeyDao.getById error", e);
+        } finally {
+            OpenUtils.silentClose(connection);
         }
         return null;
     }
 
     @Override
-    public Map<Long, Map<String, String>> selectKeyByOrgIdLimit(int days) throws Exception {
-        if(dataSource == null){
-            throw new OpenApiException("dataSource不能为空，请先设置dataSource");
-        }
-        Map<Long,Map<String,String>> map = new HashMap<Long,Map<String,String>>();
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH,-days);
-        String sql = "SELECT org_id,id,gmt_create FROM t_openapi_aeskey WHERE gmt_create > ? ORDER BY gmt_create DESC";
-        conn = dataSource.getConnection();
-        pstm = conn.prepareStatement(sql);
-        pstm.setDate(1,new java.sql.Date(calendar.getTime().getTime()));
-        rs = pstm.executeQuery();
-        while (rs.next()) {
-            Map<String, String> mapTemp = map.get(rs.getLong("org_id"));
-            if(mapTemp == null){
-                mapTemp = new HashMap<String, String>();
-                mapTemp.put(rs.getDate("gmt_create").toString(),AesKeyProduce.idKeyProduce(rs.getLong("org_id"),rs.getInt("id")));
-                map.put(rs.getLong("org_id"),mapTemp);
-            }else{
-                mapTemp.put(rs.getDate("gmt_create").toString(),AesKeyProduce.idKeyProduce(rs.getLong("org_id"),rs.getInt("id")));
-                map.put(rs.getLong("org_id"),mapTemp);
+    public List<AesKeyEntity> selectListByOrgId(String orgId, int limit) {
+        String sql = "SELECT id, aes_key, gmt_create FROM t_openapi_aeskey WHERE org_id=? ORDER BY gmt_create DESC LIMIT ?";
+
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, orgId);
+            preparedStatement.setInt(2, limit);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<AesKeyEntity> list = new ArrayList<AesKeyEntity>();
+            while (resultSet.next()) {
+                AesKeyEntity aesKeyEntity = new AesKeyEntity();
+                aesKeyEntity.setId(resultSet.getInt("id"));
+                aesKeyEntity.setKey(resultSet.getString("aes_key"));
+                aesKeyEntity.setGmtCreate(resultSet.getDate("gmt_create"));
+                list.add(aesKeyEntity);
             }
+            return list;
+        } catch (SQLException e) {
+            LOG.error("MysqlAesKeyDao.selectListByOrgId error, orgId={}, sql={}", orgId, sql);
+            throw new OpenApiException("MysqlAesKeyDao.selectListByOrgId error", e);
+        } finally {
+            OpenUtils.silentClose(connection);
         }
-        return map;
     }
 
     @Override
-    public Map<String, AesKeyDTO> selectKeyByKeyIds(List<Integer> ids, Long orgId) throws Exception {
-        if(dataSource == null){
-            throw new OpenApiException("dataSource不能为空，请先设置dataSource。");
-        }/*
-        if(orgId == null){
-            throw new OpenApiException("orgId不能为空，请设置orgId。");
-        }*/
-        Map<String, AesKeyDTO> map = new HashMap<String, AesKeyDTO>();
-        StringBuffer sqlBuf = new StringBuffer("select id,aes_key,gmt_create,org_id from t_openapi_aeskey where org_id=? and id in (");
-        for (int i=0;i<ids.size();i++) {
-            sqlBuf.append("?,");
+    public List<AesKeyEntity> selectListByKeyIds(List<Integer> ids) {
+        StringBuilder sqlBuf = new StringBuilder("SELECT id, aes_key, gmt_create, org_id FROM t_openapi_aeskey WHERE id in (");
+
+        int L = ids.size();
+        for (int i = 0; i < L; i++) {
+            if (i != 0) {
+                sqlBuf.append(',');
+            }
+            sqlBuf.append('?');
         }
-        String sql = sqlBuf.substring(0, sqlBuf.length() - 1);
-        sql = sql + ") limit " + ids.size();
-        conn = dataSource.getConnection();
-        pstm = conn.prepareStatement(sql);
-        pstm.setLong(1,orgId);
-        for (int i = 0; i < ids.size(); i++) {
-            pstm.setInt(i + 2, ids.get(i));
+        sqlBuf.append(')');
+        String sql = sqlBuf.toString();
+
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            for (int i = 0; i < L; i++) {
+                statement.setInt(i + 1, ids.get(i));
+            }
+
+            ResultSet resultSet = statement.executeQuery();
+            List<AesKeyEntity> list = new ArrayList<AesKeyEntity>();
+            while (resultSet.next()) {
+                AesKeyEntity aesKeyEntity = new AesKeyEntity();
+                aesKeyEntity.setId(resultSet.getInt("id"));
+                aesKeyEntity.setKey(resultSet.getString("aes_key"));
+                list.add(aesKeyEntity);
+            }
+            return list;
+        } catch (SQLException e) {
+            LOG.error("MysqlAesKeyDao.selectListByKeyIds error, ids={}, sql={}", ids, sql);
+            throw new OpenApiException("MysqlAesKeyDao.selectListByKeyIds error", e);
+        } finally {
+            OpenUtils.silentClose(connection);
         }
-        rs = pstm.executeQuery();
-        while (rs.next()) {
-            AesKeyDTO aesKeyDTO = new AesKeyDTO();
-            aesKeyDTO.setId(rs.getInt("id"));
-            aesKeyDTO.setKey(rs.getString("aes_key"));
-            map.put(AesKeyProduce.idKeyProduce(rs.getLong("org_id"),aesKeyDTO.getId()), aesKeyDTO);
-        }
-        return map;
     }
 
-    @Override
-    public Map<String, AesKeyDTO> getLatestThreeHundredAesKey() throws Exception {
-        if (dataSource == null) {
-            throw new OpenApiException("dataSource不能为空，请先设置dataSource");
-        }
-        Map<String, AesKeyDTO> map = new HashMap<String, AesKeyDTO>();
-        String sql = "select id,aes_key,org_id from t_openapi_aeskey order by id desc limit 300";
-        conn = dataSource.getConnection();
-        pstm = conn.prepareStatement(sql);
-        rs = pstm.executeQuery();
-        while (rs.next()) {
-            AesKeyDTO aesKeyDTO = new AesKeyDTO();
-            aesKeyDTO.setId(rs.getInt("id"));
-            aesKeyDTO.setKey(rs.getString("aes_key"));
-            map.put(AesKeyProduce.idKeyProduce(rs.getLong("org_id"), aesKeyDTO.getId()), aesKeyDTO);
-        }
-        return map;
-    }
-
-//    @Override
-//    public AesKeyEntity getById(String orgId, int id) {
-//        return null;
-//    }
-
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
-//    @Override
-//    public void setAesKeyCache(AesKeyCache aesKeyCache) {
-//        this.aesKeyCache = aesKeyCache;
-//    }
 }

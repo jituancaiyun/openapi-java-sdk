@@ -20,13 +20,11 @@
 package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.OpenApiClient;
-import com.shinemo.openapi.client.common.AES128Util;
-import com.shinemo.openapi.client.common.ApiContext;
-import com.shinemo.openapi.client.common.Const;
-import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.aes.AesKey;
+import com.shinemo.openapi.client.aes.AesKeyService;
+import com.shinemo.openapi.client.common.*;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.IMessage;
-import com.shinemo.openapi.client.internal.AesKeyManager;
 
 import java.util.List;
 
@@ -41,9 +39,13 @@ public final class SecurityMessageApiService implements MessageApiService {
 
     private OpenApiClient openApiClient;
 
-    private AesKeyManager aesKeyManager;
+    private AesKeyService aesKeyService;
 
     public void init() {
+        if (aesKeyService == null) {
+            throw new OpenApiException("请初始化AesKeyManager");
+        }
+
         proxy = openApiClient.createApiService(MessageApiService.class);
     }
 
@@ -76,27 +78,23 @@ public final class SecurityMessageApiService implements MessageApiService {
         //处理加密消息
         if ((messageDTO.getFlags() & IMessage.FLAG_ENCRYPT) != 0) {
 
-            if (aesKeyManager == null) {
-                return OpenApiResult.failure("请初始化AesKeyManager");
-            }
-
-            AesKeyManager.AesKey aesKey = aesKeyManager.getAesKey(apiContext.getOrgId());
+            AesKey aesKey = aesKeyService.getAesKeyBySDK(apiContext.getOrgId());
 
             if (aesKey == null) {
                 return OpenApiResult.failure("消息加密失败, 无法获取密钥");
             }
 
             if (messageDTO.getMessage() != null) {
-                byte[] encryptMessage = AES128Util.encrypt(messageDTO.getMessage().getBytes(Const.UTF_8), aesKey.key());
+                byte[] encryptMessage = AES128Util.encrypt(messageDTO.getMessage().getBytes(Const.UTF_8), aesKey.getKey());
                 messageDTO.setMessage(AES128Util.bytes2HexStr(encryptMessage));
             }
 
             if (messageDTO.getExtraData() != null) {
-                byte[] encryptExtraData = AES128Util.encrypt(messageDTO.getExtraData().toString().getBytes(Const.UTF_8), aesKey.key());
+                byte[] encryptExtraData = AES128Util.encrypt(messageDTO.getExtraData().toString().getBytes(Const.UTF_8), aesKey.getKey());
                 messageDTO.setExtraData(AES128Util.bytes2HexStr(encryptExtraData));
             }
 
-            messageDTO.setKeyId(aesKey.id());
+            messageDTO.setKeyId(aesKey.getId());
         }
 
         return proxy.sendPushMessage(apiContext, messageDTO);
@@ -106,7 +104,7 @@ public final class SecurityMessageApiService implements MessageApiService {
         this.openApiClient = openApiClient;
     }
 
-    public void setAesKeyManager(AesKeyManager aesKeyManager) {
-        this.aesKeyManager = aesKeyManager;
+    public void setAesKeyService(AesKeyService aesKeyService) {
+        this.aesKeyService = aesKeyService;
     }
 }

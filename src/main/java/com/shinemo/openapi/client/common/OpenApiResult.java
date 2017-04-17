@@ -33,8 +33,6 @@ public final class OpenApiResult<T> {
 
     private T data;
 
-    private boolean success;
-
     public OpenApiResult() {
     }
 
@@ -68,11 +66,7 @@ public final class OpenApiResult<T> {
     }
 
     public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
+        return status == 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -89,10 +83,10 @@ public final class OpenApiResult<T> {
     }
 
     public static <T> OpenApiResult<T> success(T data) {
-        OpenApiResult openApiResult = new OpenApiResult();
-        openApiResult.data = data;
-        openApiResult.status = 200;
-        return openApiResult;
+        OpenApiResult<T> result = new OpenApiResult<T>();
+        result.data = data;
+        result.status = 0;
+        return result;
     }
 
     @Override
@@ -101,7 +95,6 @@ public final class OpenApiResult<T> {
                 "status=" + status +
                 ", message='" + message + '\'' +
                 ", data=" + data +
-                ", success=" + success +
                 '}';
     }
 }

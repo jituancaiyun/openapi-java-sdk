@@ -19,16 +19,10 @@
 
 package com.shinemo.openapi.client.aes;
 
-import com.shinemo.openapi.client.OpenApiClient;
-import com.shinemo.openapi.client.aes.cache.AesKeyCache;
-import com.shinemo.openapi.client.aes.db.AesKeyDao;
-import com.shinemo.openapi.client.aes.domain.AesKeyDTO;
-import com.shinemo.openapi.client.aes.domain.ResultMsg;
+import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.service.AuthApiService;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ohun on 2017/4/14.
@@ -37,22 +31,8 @@ import java.util.Map;
  */
 public interface AesKeyService {
 
-    AesKey getAesKeyOfTodayBySDK(long orgId) throws Exception;
+    AesKey getAesKeyBySDK(String orgId);
 
-    ResultMsg<Map<String,List<AesKeyDTO>>> getAesKeyByClient(String token, String uid, long timestamp, long orgId, String keyIds) throws Exception;
-
-    void setOpenApiClient(OpenApiClient openApiClient) ;
-
-    void setAuthApiService(AuthApiService authApiService);
-
-    void setAesKeyDao(AesKeyDao aesKeyDao);
-
-    void setAesKeyCacheId(AesKeyCache<String,AesKeyDTO> aesKeyCache);
-
-    void setAesKeyCacheOrgId(AesKeyCache<Long,Map<String,String>> aesKeyCacheOrgId);
-
-    void setCacheDays(Integer cacheDays);
-
-    void init();
+    OpenApiResult<List<AesKeyEntity>> getAesKeyByClient(String orgId, String uid, String token, long timestamp, String keyIds);
 
 }

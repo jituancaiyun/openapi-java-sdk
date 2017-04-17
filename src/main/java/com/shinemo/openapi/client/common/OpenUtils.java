@@ -19,9 +19,13 @@
 
 package com.shinemo.openapi.client.common;
 
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Formatter;
 import java.util.UUID;
 
@@ -95,6 +99,24 @@ public final class OpenUtils {
             } catch (IOException e) {
             }
         }
+    }
+
+    public static void silentClose(Connection resource) {
+        if (resource != null) {
+            try {
+                resource.close();
+            } catch (SQLException e) {
+            }
+        }
+    }
+
+    /**
+     * 生成一个秘钥并返回
+     *
+     * @return
+     */
+    public static String randomAesKey() {
+        return Base64.getUrlEncoder().encodeToString(SecureRandom.getSeed(16));
     }
 
 }

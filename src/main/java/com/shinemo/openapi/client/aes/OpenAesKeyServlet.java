@@ -20,14 +20,10 @@
 package com.shinemo.openapi.client.aes;
 
 import com.google.gson.Gson;
-import com.shinemo.openapi.client.aes.domain.AesKeyDTO;
-import com.shinemo.openapi.client.aes.domain.ResultMsg;
-import com.shinemo.openapi.client.common.OpenApiException;
+import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.servlet.ServletConfig;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +31,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 
 import static com.shinemo.openapi.client.common.Const.LOG;
 
@@ -44,30 +39,12 @@ import static com.shinemo.openapi.client.common.Const.LOG;
  *
  * @author ohun@live.cn (夜色)
  */
-public final class OpenAesKeyServlet extends HttpServlet {
+public class OpenAesKeyServlet extends HttpServlet {
 
-    private AesKeyService aesKeyService;
+    private final Gson gson = new Gson();
 
-    private Gson gson = new Gson();
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(config.getServletContext());
-        if (applicationContext == null) {
-            throw new OpenApiException("can not find spring application context");
-        }
-        Map beans = applicationContext.getBeansOfType(AesKeyService.class);
-        if (beans == null || beans.isEmpty()) {
-            throw new OpenApiException("can not find CallbackEventReceiver form spring application context");
-        }
-        aesKeyService = (AesKeyService) beans.entrySet().iterator().next();
-    }
-
-    @Override
-    public void destroy() {
-        super.destroy();
-    }
+    @Resource
+    protected AesKeyService aesKeyService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -83,20 +60,24 @@ public final class OpenAesKeyServlet extends HttpServlet {
         String ids = req.getParameter("ids");
 
         try {
-            ResultMsg<Map<String,List<AesKeyDTO>>>  result = aesKeyService.getAesKeyByClient(token, uid, Long.parseLong(timestamp),Long.parseLong(orgId), ids);
+            OpenApiResult<List<AesKeyEntity>> result = aesKeyService.getAesKeyByClient(orgId, uid, token, Long.parseLong(timestamp), ids);
             writeResult(resp, result);
         } catch (Exception e) {
-            writeResult(resp, ResultMsg.error(500, "服务器内部错误"));
+            writeResult(resp, OpenApiResult.failure(500, "服务器内部错误"));
             LOG.error("get aes key error, ids={}, orgId={}, uid={}, token={}, timestamp={}", ids, orgId, uid, token, timestamp);
         }
     }
 
-    private void writeResult(HttpServletResponse response, ResultMsg<?> result) throws IOException {
+    private void writeResult(HttpServletResponse response, OpenApiResult<?> result) throws IOException {
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("utf-8");
 
         PrintWriter writer = response.getWriter();
         gson.toJson(result, writer);
         writer.close();
+    }
+
+    public void setAesKeyService(AesKeyService aesKeyService) {
+        this.aesKeyService = aesKeyService;
     }
 }

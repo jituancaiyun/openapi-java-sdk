@@ -19,24 +19,26 @@
 
 package com.shinemo.openapi.client.aes.cache;
 
-import com.shinemo.openapi.client.aes.AesKey;
 import com.shinemo.openapi.client.aes.db.AesKeyDao;
+import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by ohun on 2017/4/14.
  *
  * @author ohun@live.cn (夜色)
  */
-public final class HashMapAesKeyCache/* implements AesKeyCache */{
-    private Map<Integer, AesKey> cache = new HashMap<Integer, AesKey>();
+public final class HashMapAesKeyCache implements AesKeyCache {
+    private final Map<Integer, AesKeyEntity> idCache = new ConcurrentHashMap<Integer, AesKeyEntity>();
+    private final Map<String, List<AesKeyEntity>> orgCache = new ConcurrentHashMap<String, List<AesKeyEntity>>();
 
     private AesKeyDao aesKeyDao;
 
-    public void init(){
+    public void init() {
 
     }
 
@@ -44,18 +46,69 @@ public final class HashMapAesKeyCache/* implements AesKeyCache */{
         this.aesKeyDao = aesKeyDao;
     }
 
-//    @Override
-//    public List<AesKey> getListByIds(List<Integer> ids) {
-//        return null;
-//    }
-//
-//    @Override
-//    public AesKey getById(int id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<AesKey> getLatest(String orgId, int limit) {
-//        return null;
-//    }
+    @Override
+    public void addAesKey(String orgId, AesKeyEntity entity) {
+        List<AesKeyEntity> list = orgCache.get(orgId);
+        if (list == null) {
+            list = new ArrayList<AesKeyEntity>();
+            orgCache.put(orgId, list);
+        }
+        list.set(0, entity);
+    }
+
+    @Override
+    public AesKeyEntity getById(int id) {
+        AesKeyEntity aesKeyInCache = idCache.get(id);
+        if (aesKeyInCache != null) {
+            return aesKeyInCache;
+        }
+
+        AesKeyEntity aesKeyInDB = aesKeyDao.getById(id);
+
+        if (aesKeyInDB != null) {
+            idCache.put(aesKeyInDB.getId(), aesKeyInDB);
+        }
+
+        return aesKeyInDB;
+    }
+
+
+    @Override
+    public List<AesKeyEntity> getListByKeyIds(String orgId, List<Integer> ids) {
+
+        List<AesKeyEntity> result = new ArrayList<AesKeyEntity>(ids.size());
+        List<Integer> notInCacheIds = new ArrayList<Integer>();
+
+        for (Integer id : ids) {
+            AesKeyEntity aesKeyEntity = idCache.get(id);
+            if (aesKeyEntity != null) {
+                result.add(aesKeyEntity);
+            } else {
+                notInCacheIds.add(id);
+            }
+        }
+
+        List<AesKeyEntity> keyListInDB = aesKeyDao.selectListByKeyIds(notInCacheIds);
+
+        if (keyListInDB != null && keyListInDB.size() > 0) {
+            for (AesKeyEntity entity : keyListInDB) {
+                result.add(entity);
+                idCache.put(entity.getId(), entity);
+            }
+        }
+        return result;
+    }
+
+
+    @Override
+    public List<AesKeyEntity> getLatestByOrgId(String orgId, int limit) {
+        List<AesKeyEntity> list = orgCache.get(orgId);
+        if (list == null || list.size() < limit) {
+            list = aesKeyDao.selectListByOrgId(orgId, limit);
+            if (list != null) {
+                orgCache.put(orgId, list);
+            }
+        }
+        return list;
+    }
 }

@@ -19,53 +19,23 @@
 
 package com.shinemo.openapi.client.aes.cache;
 
-import com.shinemo.openapi.client.aes.AesKey;
+import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by ohun on 2017/4/14.
  *
  * @author ohun@live.cn (夜色)
  */
-public interface AesKeyCache<K,V> {
+public interface AesKeyCache {
 
-//    List<AesKey> getListByIds(List<Integer> ids);
-//
-//    AesKey getById(int id);
-//
-//    List<AesKey> getLatest(String orgId, int limit);
+    void addAesKey(String orgId, AesKeyEntity entity);
 
-    /**
-     * 设置缓存
-     *
-     * @param key
-     * @param value
-     */
-    void put(K key, V value);
+    AesKeyEntity getById(int id);
 
-    /**
-     * 一次设置多个缓存
-     *
-     * @param map
-     */
-    void putAll(Map<K, V> map);
+    List<AesKeyEntity> getListByKeyIds(String orgId, List<Integer> ids);
 
-    /**
-     * 根据key的list数组批量获取缓存数据
-     *
-     * @param list
-     * @return
-     */
-    Map<K,V> getAll(List<K> list);
-
-    /**
-     * 获取单个缓存数据
-     *
-     * @param key
-     * @return
-     */
-    V get(K key);
+    List<AesKeyEntity> getLatestByOrgId(String orgId, int limit);
 
 }

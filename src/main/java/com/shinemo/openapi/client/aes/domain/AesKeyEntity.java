@@ -29,21 +29,20 @@ import java.sql.Date;
  * @author ohun@live.cn (夜色)
  */
 public final class AesKeyEntity implements AesKey {
-
-    private Integer id;  //主键
-    private Long orgId; //组织id
-    private String key; //秘钥
-    private Date gmtCreate;  //创建时间
+    private Integer id;
+    private String key;
+    private transient String orgId; //组织id
+    private transient Date gmtCreate;  //创建时间
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getOrgId() {
+    public String getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(Long orgId) {
+    public void setOrgId(String orgId) {
         this.orgId = orgId;
     }
 
@@ -67,5 +66,30 @@ public final class AesKeyEntity implements AesKey {
     @Override
     public String getKey() {
         return this.key;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AesKeyEntity that = (AesKeyEntity) o;
+
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "AesKeyEntity{" +
+                "id=" + id +
+                ", key='" + key + '\'' +
+                ", orgId='" + orgId + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                '}';
     }
 }

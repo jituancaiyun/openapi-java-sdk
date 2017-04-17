@@ -19,52 +19,34 @@
 
 package com.shinemo.openapi.client.callback;
 
-import com.shinemo.openapi.client.common.OpenApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.servlet.ServletConfig;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by ohun on 2017/4/1.
  *
  * @author ohun@live.cn (夜色)
  */
-public final class OpenApiCallbackServlet extends HttpServlet {
+public class OpenApiCallbackServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(OpenApiCallbackServlet.class);
 
-    private CallbackEventReceiver callbackEventReceiver;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        WebApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(config.getServletContext());
-        if (applicationContext == null) {
-            throw new OpenApiException("can not find spring application context");
-        }
-        Map beans = applicationContext.getBeansOfType(CallbackEventReceiver.class);
-        if (beans == null || beans.isEmpty()) {
-            throw new OpenApiException("can not find CallbackEventReceiver form spring application context");
-        }
-        callbackEventReceiver = (CallbackEventReceiver) beans.entrySet().iterator().next();
-        logger.debug("init open api callback servlet success.");
-    }
+    @Resource
+    protected CallbackEventReceiver callbackEventReceiver;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         callbackEventReceiver.receiver(req, resp);
     }
 
-    @Override
-    public void destroy() {
-        super.destroy();
+
+    public void setCallbackEventReceiver(CallbackEventReceiver callbackEventReceiver) {
+        this.callbackEventReceiver = callbackEventReceiver;
     }
 }

@@ -23,7 +23,6 @@ public class AesKeyServiceTest {
     AesKeyDao aesKeyDao = new MysqlAesKeyDao();
     @Test
     public void testByIds() throws Exception {
-//        AesKeyCache guavaCache = new GuavaAesKeyCache();
 
         initAesKeyService();
 

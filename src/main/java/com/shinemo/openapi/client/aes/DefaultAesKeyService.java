@@ -167,20 +167,15 @@ public final class DefaultAesKeyService implements AesKeyService {
         aesKeyEntity.setGmtCreate(new java.sql.Date(new Date().getTime()));
         aesKeyDTO = aesKeyDao.selectKeyOfTodayByOrgId(aesKeyEntity);
         //当数据库中读取aesKey不为null时，缓存并返回， 为null时生成aesKey，并缓存
-        if (aesKeyDTO != null) {
+        if (aesKeyDTO == null) {
             //设置缓存
-            this.aesKeyCacheId.put(AesKeyProduce.idKeyProduce(orgId, aesKeyDTO.getId()), aesKeyDTO);
-            mapId.put(dateToday, AesKeyProduce.idKeyProduce(orgId, aesKeyDTO.getId()));
-            cacheOrgId(orgId, mapId);
-            return aesKeyDTO;
+            aesKeyDTO = new AesKeyDTO();
+            aesKeyEntity.setKey(AesKeyProduce.aeskeyProduce());
+            if (!aesKeyDao.insert(aesKeyEntity)) {
+                throw new OpenApiException("producing a new key error.");
+            }
+            aesKeyDTO.setId(aesKeyEntity.getId()).setKey(aesKeyEntity.getKey());
         }
-        aesKeyDTO = new AesKeyDTO();
-
-        aesKeyEntity.setKey(AesKeyProduce.aeskeyProduce());
-        if (!aesKeyDao.insert(aesKeyEntity)) {
-            throw new OpenApiException("producing a new key error.");
-        }
-        aesKeyDTO.setId(aesKeyEntity.getId()).setKey(aesKeyEntity.getKey());
         this.aesKeyCacheId.put(AesKeyProduce.idKeyProduce(orgId, aesKeyEntity.getId()), aesKeyDTO);
         mapId.put(dateToday, AesKeyProduce.idKeyProduce(orgId, aesKeyDTO.getId()));
         cacheOrgId(orgId, mapId);
@@ -259,7 +254,7 @@ public final class DefaultAesKeyService implements AesKeyService {
     }
 
     /**
-     * 根据id串获取asekey，多个id时中间用,隔开
+     * 根据id串获取aeskey，多个id时中间用,隔开
      *
      * @param ids   id串
      * @param orgId 组织id
@@ -298,8 +293,8 @@ public final class DefaultAesKeyService implements AesKeyService {
     /**
      * 根据orgId缓存数据，保证每个orgId缓存的数据不超过10个
      *
-     * @param orgId
-     * @param idMap
+     * @param orgId 组织id
+     * @param idMap  aesKey的id的Map集合
      */
     private void cacheOrgId(Long orgId, Map<String, String> idMap) {
         if (idMap.size() < this.cacheDays) {

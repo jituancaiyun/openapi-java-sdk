@@ -14,40 +14,52 @@
         <property name="maxRetry" value="1"/><!--最大失败重试次数, 默认不重试-->
     </bean>
 
-    <bean name="dataSource">
-
-
-    </bean>
-
     <!--open api client-->
     <bean id="openApiClient" class="com.shinemo.openapi.client.spring.OpenApiClientFactoryBean">
         <property name="configuration" ref="openApiConfiguration"/>
     </bean>
 
-    <!--open api client-->
-    <bean id="aesKeyService" class="com.shinemo.openapi.client.spring.OpenApiClientFactoryBean">
-        <property name="configuration" ref="openApiConfiguration"/>
-        <property name="dataSource"/>
-        <property name="authService"/>
+    <!--免等接口服务-->
+    <bean id="authApiService" class="com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean">
+        <property name="apiServiceFactory" ref="openApiClient"/>
+        <property name="interfaceName" value="com.shinemo.openapi.client.service.AuthApiService"/>
     </bean>
-
 
     <!--通讯录接口服务-->
     <bean id="contactApiService" class="com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean">
         <property name="apiServiceFactory" ref="openApiClient"/>
         <property name="interfaceName" value="com.shinemo.openapi.client.service.ContactApiService"/>
-        <property name="aesKeyManager"/>
-    </bean>
-
-    <!--消息推送接口服务-->
-    <bean id="messageApiService" class="com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean">
-        <property name="apiServiceFactory" ref="openApiClient"/>
-        <property name="interfaceName" value="com.shinemo.openapi.client.service.MessageApiService"/>
     </bean>
 
     <!--会议邀请接口服务-->
     <bean id="meetingApiService" class="com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean">
         <property name="apiServiceFactory" ref="openApiClient"/>
         <property name="interfaceName" value="com.shinemo.openapi.client.service.MeetingApiService"/>
+    </bean>
+
+    <!--密钥服务数据源-->
+    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://10.0.10.41:3306/shinemo_openapi"/>
+        <property name="username" value="root"/>
+        <property name="password" value="shinemo123"/>
+    </bean>
+
+    <!--密钥服务数据查询对象-->
+    <bean id="aesKeyDao" class="com.shinemo.openapi.client.aes.db.MysqlAesKeyDao" init-method="init">
+        <property name="dataSource" value="dateSource"/>
+    </bean>
+
+    <!--密钥服务-->
+    <bean id="aesKeyService" class="com.shinemo.openapi.client.aes.DefaultAesKeyService" init-method="init">
+        <property name="authApiService" ref="authApiService"/>
+        <property name="aesKeyDao" value="aesKeyDao"/>
+        <property name="limit" value="10"/>
+    </bean>
+
+    <!--消息推送接口服务-->
+    <bean id="messageApiService" class="com.shinemo.openapi.client.service.SecurityMessageApiService">
+        <property name="openApiClient" ref="openApiClient"/>
+        <property name="aesKeyService" value="aesKeyService"/>
     </bean>
 </beans>

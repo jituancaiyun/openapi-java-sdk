@@ -31,8 +31,24 @@ import java.util.List;
  */
 public interface AesKeyService {
 
+    /**
+     * sdk 内部使用, 不需要权限校验
+     *
+     * @param orgId 组织ID
+     * @return 结果
+     */
     AesKey getAesKeyBySDK(String orgId);
 
+    /**
+     * 给客户端调用, 需要检查参数和权限
+     *
+     * @param orgId     客户传入
+     * @param uid       客户传入
+     * @param token     客户传入
+     * @param timestamp 客户传入
+     * @param keyIds    客户传入
+     * @return 结果
+     */
     OpenApiResult<List<AesKeyEntity>> getAesKeyByClient(String orgId, String uid, String token, long timestamp, String keyIds);
 
 }

@@ -53,7 +53,7 @@ public final class HashMapAesKeyCache implements AesKeyCache {
             list = new ArrayList<AesKeyEntity>();
             orgCache.put(orgId, list);
         }
-        list.set(0, entity);
+        list.set(0, entity);//插到最前面, 防止列表增长
     }
 
     @Override

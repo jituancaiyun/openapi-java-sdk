@@ -104,15 +104,17 @@ public final class DefaultAesKeyService implements AesKeyService {
         if (list == null) {
             list = new ArrayList<AesKeyEntity>();
         }
-        if (list.isEmpty() || !isToday(list.get(0).getGmtCreate())) {
+
+        //一个没有或者今天没有没有生成
+        if (list.isEmpty() || isNotToday(list.get(0).getGmtCreate())) {
             AesKeyEntity newKey = createNewKey(orgId);
             if (newKey == null) {
                 if (list.isEmpty()) {
                     throw new OpenApiException("生成新的的密钥失败");
                 }
             } else {
-                list.set(0, newKey);
-                aesKeyCache.addAesKey(orgId, newKey);
+                list.set(0, newKey);//插到最前面, 防止超过limit
+                aesKeyCache.addAesKey(orgId, newKey);//更新到缓存
             }
         }
         return list;
@@ -127,14 +129,14 @@ public final class DefaultAesKeyService implements AesKeyService {
         return success ? aesKeyEntity : null;
     }
 
-    private boolean isToday(Date date) {
+    private boolean isNotToday(Date date) {
         if (date == null) return false;
         Calendar now = Calendar.getInstance();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
 
-        return now.get(Calendar.YEAR) == cal.get(Calendar.YEAR)
-                && now.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR);
+        return now.get(Calendar.YEAR) != cal.get(Calendar.YEAR)
+                || now.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR);
     }
 
     public void setAuthApiService(AuthApiService authApiService) {

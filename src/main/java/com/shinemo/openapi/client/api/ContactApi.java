@@ -24,7 +24,8 @@ import com.shinemo.openapi.client.dto.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 
-import static com.shinemo.openapi.client.common.Const.CONTENT_TYPE_HEADER;
+import java.util.Map;
+
 import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
 
 /**
@@ -37,98 +38,83 @@ public interface ContactApi {
     /**
      * 获取某个部门下的用户列表
      *
-     * @param orgId       要访问的企业ID
-     * @param deptId      部门ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param deptId 部门ID
      * @return ContactDTO
      */
     @GET("user/list")
-    @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<ContactDTO>> listUsers(@Header("orgId") String orgId, @Query("deptId") long deptId, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<ContactDTO>> listUsers(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
 
     /**
      * 创建用户
      *
-     * @param orgId       要访问的企业ID
-     * @param userDTO     要创建的用户
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param userDTO 要创建的用户
      * @return UidDTO
      */
     @POST("user/create")
-    @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<UidDTO>> createUser(@Header("orgId") String orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<UidDTO>> createUser(@HeaderMap Map<String, String> headers, @Body ContactUserDTO userDTO);
 
     /**
      * 修改用户
      *
-     * @param orgId       要访问的企业ID
-     * @param userDTO     要修改的用户
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param userDTO 要修改的用户
      * @return UidDTO
      */
     @POST("user/update")
-    @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<UidDTO>> updateUser(@Header("orgId") String orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<UidDTO>> updateUser(@HeaderMap Map<String, String> headers, @Body ContactUserDTO userDTO);
 
     /**
      * 删除用户
      *
-     * @param orgId       要访问的企业ID
-     * @param userDTO     要删除的用户
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param userDTO 要删除的用户
      * @return 0表示操作成功
      */
     @POST("user/delete")
-    @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<Long>> deleteUser(@Header("orgId") String orgId, @Body ContactUserDTO userDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> deleteUser(@HeaderMap Map<String, String> headers, @Body ContactUserDTO userDTO);
 
 
     /**
      * 获取某个部门下的用户列表
      *
-     * @param orgId       要访问的企业ID
-     * @param deptId      部门ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param deptId 部门ID
      * @return ContactDTO
      */
     @GET("department/list")
     @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<ContactDTO>> listDepts(@Header("orgId") String orgId, @Query("deptId") long deptId, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<ContactDTO>> listDepts(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
 
     /**
      * 创建用户
      *
-     * @param orgId       要访问的企业ID
-     * @param deptDTO     要创建的部门
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param deptDTO 要创建的部门
      * @return UidDTO
      */
     @POST("department/create")
-    @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<DeptIdDTO>> createDept(@Header("orgId") String orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<DeptIdDTO>> createDept(@HeaderMap Map<String, String> headers, @Body ContactDeptDTO deptDTO);
 
     /**
      * 修改用户
      *
-     * @param orgId       要访问的企业ID
-     * @param deptDTO     要修改的部门
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param deptDTO 要修改的部门
      * @return UidDTO
      */
     @POST("department/update")
-    @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<DeptIdDTO>> updateDept(@Header("orgId") String orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<DeptIdDTO>> updateDept(@HeaderMap Map<String, String> headers, @Body ContactDeptDTO deptDTO);
 
     /**
      * 删除用户
      *
-     * @param orgId       要访问的企业ID
-     * @param deptDTO     要删除的部门
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param deptDTO 要删除的部门
      * @return 0表示操作成功
      */
     @POST("department/delete")
-    @Headers({USER_AGENT_HEADER, CONTENT_TYPE_HEADER})
-    Call<OpenApiResult<Long>> deleteDept(@Header("orgId") String orgId, @Body ContactDeptDTO deptDTO, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<Long>> deleteDept(@HeaderMap Map<String, String> headers, @Body ContactDeptDTO deptDTO);
 
 }

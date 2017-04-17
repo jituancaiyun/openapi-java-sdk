@@ -38,15 +38,6 @@ public interface OpenApiClient extends OpenApiServiceFactory {
     OpenApiResult<AccessTokenDTO> getAccessToken();
 
     /**
-     * 免登接口, 返回用户基本信息
-     *
-     * @param loginToken 客户端透传下来的token
-     * @return UserInfoDTO 用户基本信息
-     */
-    OpenApiResult<UserInfoDTO> login(String loginToken);
-
-
-    /**
      * 创建OpenApiClient的配置项
      *
      * @return OpenApiConfiguration

@@ -185,6 +185,15 @@ public final class DefaultAesKeyService implements AesKeyService {
     @Override
     public ResultMsg<Map<String,List<AesKeyDTO>>> getAesKeyByClient(String token, String uid, long timestamp, long orgId, String keyIds) throws Exception {
         /*OpenApiResult<Void> result = authApiService.checkHttpToken(token, timestamp, uid, orgId);
+=======
+    public AesKey getLatestAesKeyBySDK(String orgId) {
+        return null;
+    }
+
+    @Override
+    public OpenApiResult<List<AesKey>> getAesKeyByClient(String token, String uid, long timestamp, String orgId, String keyIds) {
+        OpenApiResult<Void> result = authApiService.checkHttpToken(ApiContext.ctx(orgId, uid), token, timestamp);
+>>>>>>> d935f22491174324ca4c9b99804d9fac1b131966
         if (!result.isSuccess()) {
             return OpenApiResult.failure(403, "权限校验失败");
         }*/

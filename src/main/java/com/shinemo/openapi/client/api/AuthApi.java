@@ -17,38 +17,46 @@
  *     ohun@live.cn (夜色)
  */
 
-package com.shinemo.openapi.client.service;
+package com.shinemo.openapi.client.api;
 
-import com.shinemo.openapi.client.api.AuthApi;
-import com.shinemo.openapi.client.common.Api;
-import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.UserInfoDTO;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.Headers;
+
+import java.util.Map;
+
+import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
 
 /**
  * Created by ohun on 2017/4/14.
  *
  * @author ohun@live.cn (夜色)
  */
-@Api(AuthApi.class)
-public interface AuthApiService {
+public interface AuthApi {
 
     /**
      * 免登接口
      *
+     * @param headers   基础header参数, accessToken, orgId, uid
      * @param authToken 客户端透传下来的授权token
      * @return UserInfoDTO
      */
-    OpenApiResult<UserInfoDTO> login(String authToken);
+    @GET("auth/getUserInfoByToken")
+    @Headers(USER_AGENT_HEADER)
+    Call<OpenApiResult<UserInfoDTO>> login(@HeaderMap Map<String, String> headers, @Header("token") String authToken);
 
     /**
      * 用户身份校验接口, 校验用户是否当前企业的合法用户
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
-     * @param httpToken  用户身份token由客户端生成
-     * @param timestamp  时间戳由客户端生成
+     * @param headers 基础header参数, accessToken, orgId, uid
      * @return void
      */
-    OpenApiResult<Void> checkHttpToken(ApiContext apiContext, String httpToken, long timestamp);
+    @GET("auth/checkHttpToken")
+    @Headers(USER_AGENT_HEADER)
+    Call<OpenApiResult<Void>> checkHttpToken(@HeaderMap Map<String, String> headers, @Header("token") String httpToken, @Header("timestamp") long timestamp);
 
 }

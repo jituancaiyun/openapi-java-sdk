@@ -21,6 +21,7 @@ package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.api.MessageApi;
 import com.shinemo.openapi.client.common.Api;
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
@@ -42,10 +43,10 @@ public interface MessageApiService {
     /**
      * 推送应用消息
      *
-     * @param orgId      要访问的企业ID
+     * @param apiContext 基础header参数, accessToken, orgId, uid
      * @param messageDTO 消息详情
      * @return illegalUsers非法用户列表
      */
-    OpenApiResult<List<String>> sendPushMessage(String orgId, PushMessageDTO messageDTO);
+    OpenApiResult<List<String>> sendPushMessage(ApiContext apiContext, PushMessageDTO messageDTO);
 
 }

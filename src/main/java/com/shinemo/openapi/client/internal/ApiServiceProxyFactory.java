@@ -19,9 +19,7 @@
 
 package com.shinemo.openapi.client.internal;
 
-import com.shinemo.openapi.client.common.OpenApiException;
-import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.common.Api;
+import com.shinemo.openapi.client.common.*;
 import retrofit2.Call;
 
 import java.lang.reflect.InvocationHandler;
@@ -105,8 +103,7 @@ import java.util.Map;
         return client.callApi(new ApiCallable<Object>() {
             @Override
             public Call<OpenApiResult<Object>> call(String accessToken) {
-                Object[] args_1 = Arrays.copyOf(args, args.length + 1, Object[].class);
-                args_1[args.length] = accessToken;
+                Object[] args_1 = getArgs(args, accessToken);
                 try {
                     return (Call<OpenApiResult<Object>>) apiMethod.invoke(apiObj, args_1);
                 } catch (Exception e) {
@@ -114,6 +111,26 @@ import java.util.Map;
                 }
             }
         });
+    }
+
+
+    private Object[] getArgs(Object[] args, String accessToken) {
+        ApiContext apiContext;
+        Object[] args_1;
+
+        if (args[0] instanceof ApiContext) {
+            apiContext = ((ApiContext) args[0]);
+            args_1 = args;
+        } else {
+            apiContext = new ApiContext();
+            args_1 = new Object[args.length + 1];
+            args_1[0] = apiContext;
+            System.arraycopy(args, 0, args_1, 1, args.length);
+        }
+
+        apiContext.setAccessToken(accessToken);
+        apiContext.putHeader(Const.USER_AGENT_HEADER_NAME, Const.USER_AGENT_HEADER_VALUE);
+        return args_1;
     }
 
     private static class ApiProxyBean {

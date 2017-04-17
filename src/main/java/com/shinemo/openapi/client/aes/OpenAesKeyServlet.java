@@ -76,10 +76,10 @@ public final class OpenAesKeyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String token = req.getParameter("token");
-        String uid = req.getParameter("uid");
-        String orgId = req.getParameter("orgId");
-        String timestamp = req.getParameter("timestamp");
+        String token = req.getHeader("token");
+        String uid = req.getHeader("uid");
+        String orgId = req.getHeader("orgId");
+        String timestamp = req.getHeader("timestamp");
         String ids = req.getParameter("ids");
 
         try {

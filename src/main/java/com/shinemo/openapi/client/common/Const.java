@@ -32,7 +32,9 @@ import java.nio.charset.Charset;
 public interface Const {
     Logger LOG = LoggerFactory.getLogger("com.shinemo.openapi.client");
 
-    String USER_AGENT_HEADER = "user-agent:open-api-sdk(1.0)";
+    String USER_AGENT_HEADER_NAME = "user-agent";
+    String USER_AGENT_HEADER_VALUE = "open-api-sdk(1.0)";
+    String USER_AGENT_HEADER = USER_AGENT_HEADER_NAME + ':' + USER_AGENT_HEADER_VALUE;
     String CONTENT_TYPE_HEADER = "content-type:text/plain; charset=utf-8";
 
     Charset UTF_8 = Charset.forName("UTF-8");

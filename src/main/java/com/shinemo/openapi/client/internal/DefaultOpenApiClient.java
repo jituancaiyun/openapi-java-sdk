@@ -20,6 +20,7 @@
 package com.shinemo.openapi.client.internal;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.stream.MalformedJsonException;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.OpenApiConfiguration;
 import com.shinemo.openapi.client.api.BaseApi;
@@ -118,17 +119,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
 
     @Override
     public OpenApiResult<AccessTokenDTO> getAccessToken() {
-        return call(baseApi.getAccessToken(conf.getAppId(), conf.getAppSecret(), 0));
-    }
-
-    @Override
-    public OpenApiResult<UserInfoDTO> login(final String loginToken) {
-        return callApi(new ApiCallable<UserInfoDTO>() {
-            @Override
-            public Call<OpenApiResult<UserInfoDTO>> call(String accessToken) {
-                return baseApi.login(loginToken, accessToken);
-            }
-        });
+        return callWithLog(baseApi.getAccessToken(conf.getAppId(), conf.getAppSecret(), 0), Integer.MAX_VALUE);
     }
 
     @Override
@@ -142,9 +133,9 @@ import static com.shinemo.openapi.client.common.Const.LOG;
 
     public <T> OpenApiResult<T> callApi(ApiCallable<T> apiCallable) {
         if (checkAccessToken()) {
-            return call(apiCallable.call(accessToken.getAccessToken()));
+            return callWithLog(apiCallable.call(accessToken.getAccessToken()), 0);
         }
-        return OpenApiResult.failure();
+        return OpenApiResult.failure(400, "获取accessToken失败");
     }
 
     private boolean checkAccessToken() {
@@ -197,11 +188,11 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         return false;
     }
 
-    private <T> OpenApiResult<T> call(Call<OpenApiResult<T>> call) {
+    private <T> OpenApiResult<T> callWithLog(Call<OpenApiResult<T>> call, int retryNum) {
         long start = System.nanoTime();
         OpenApiResult<T> result = OpenApiResult.failure();
         try {
-            return result = call(call, 0);
+            return result = callWithRetry(call, retryNum);
         } finally {
             if (result.isSuccess()) {
                 LOG.info("[{}] call open api {} success. result={}"
@@ -213,7 +204,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         }
     }
 
-    private <T> OpenApiResult<T> call(Call<OpenApiResult<T>> call, int retryNum) {
+    private <T> OpenApiResult<T> callWithRetry(Call<OpenApiResult<T>> call, int retryNum) {
         try {
             Response<OpenApiResult<T>> response = call.execute();
             if (response.isSuccessful()) {
@@ -223,24 +214,31 @@ import static com.shinemo.openapi.client.common.Const.LOG;
                 }
                 switch (result.getStatus()) {//accessToken过期, 要同步刷新下accessToken再重试
                     case 4002://accessToken 错误
-                    case 4003://accessToken超时
-                    case 4005://accessToken错误(可能是由于系统原因),请重新获取
+                    case 4003://accessToken 过期
+                    case 4005://accessToken 错误(可能是由于系统原因),请重新获取
                         if (syncRefreshAccessToken()) {
-                            if (retryNum < conf.getMaxRetry() + 1) {
-                                return call(call.clone(), retryNum + 1);
+                            if (retryNum < conf.getMaxRetry() + 1) {//由token失效引起的错误可以多重试一次
+                                return callWithRetry(call.clone(), retryNum + 1);
                             }
                         }
                 }
                 return result;
             }
+
             LOG.warn("call open api failure, api={}, body={}", response, response.body());
+            return OpenApiResult.failure(response.code(), response.message());
         } catch (SocketTimeoutException e) {
-            LOG.error("call open api exception, request={}", call.request(), e);
+            LOG.error("call open api timeout exception, request={}", call.request(), e);
+            return OpenApiResult.failure(408, "请求超时");
+        } catch (MalformedJsonException e) {
+            LOG.error("call open api timeout exception, request={}", call.request(), e);
+            return OpenApiResult.failure(400, "json解析失败");
         } catch (IOException e) {
             LOG.error("call open api exception, request={}", call.request(), e);
             if (retryNum < conf.getMaxRetry()) {
                 if (checkAccessToken()) {//重试前, 检查下accessToken
-                    return call(call.clone(), retryNum + 1);
+                    LOG.warn("call open api fail, retryNum={}, request={}", retryNum + 1, call.request());
+                    return callWithRetry(call.clone(), retryNum + 1);
                 }
             }
         } catch (Exception e) {

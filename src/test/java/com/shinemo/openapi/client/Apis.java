@@ -31,10 +31,11 @@ public final class Apis {
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
-        configuration.setBaseUrl("http://127.0.0.1:8080/openapi/");
+        configuration.setBaseUrl("http://10.0.10.49:8081/openapi/");
         configuration.setAppId(94181123);
         configuration.setAppSecret("6fe73d451cd37f8a");
         configuration.setConnectTimeoutMillis(1000);
+        configuration.setMaxRetry(1);
         return configuration;
     }
 

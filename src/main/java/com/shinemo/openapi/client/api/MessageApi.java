@@ -20,14 +20,14 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import retrofit2.Call;
-import retrofit2.http.*;
+import retrofit2.http.Body;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.POST;
 
 import java.util.List;
-
-import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
+import java.util.Map;
 
 /**
  * Created by ohun on 2017/3/30.
@@ -39,12 +39,11 @@ public interface MessageApi {
     /**
      * 推送应用消息
      *
-     * @param orgId       要访问的企业ID
-     * @param accessToken 通过getAccessToken方法获取的token
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    推送消息
      * @return illegalUsers非法用户列表
      */
     @POST("message/push")
-    @Headers(USER_AGENT_HEADER)
-    Call<OpenApiResult<List<String>>> sendPushMessage(@Header("orgId") String orgId, @Body PushMessageDTO body, @Query("accessToken") String accessToken);
+    Call<OpenApiResult<List<String>>> sendPushMessage(@HeaderMap Map<String, String> headers, @Body PushMessageDTO body);
 
 }

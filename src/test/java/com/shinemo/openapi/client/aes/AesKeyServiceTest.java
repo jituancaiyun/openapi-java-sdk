@@ -30,7 +30,6 @@ public class AesKeyServiceTest {
 
         DefaultAesKeyService defaultAesKeyService = new DefaultAesKeyService();
         defaultAesKeyService.setAesKeyDao(aesKeyDao);
-        defaultAesKeyService.setOpenApiClient(apiClient);
         defaultAesKeyService.setAuthApiService(authApiService);
         defaultAesKeyService.init();
 

@@ -38,5 +38,6 @@ public interface Const {
     String CONTENT_TYPE_HEADER = "content-type:text/plain; charset=utf-8";
 
     Charset UTF_8 = Charset.forName("UTF-8");
+    Charset ISO8859_1 = Charset.forName("ISO8859-1");
 
 }

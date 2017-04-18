@@ -80,21 +80,24 @@ public final class SecurityMessageApiService implements MessageApiService {
 
             AesKey aesKey = aesKeyService.getAesKeyBySDK(apiContext.getOrgId());
 
-            if (aesKey == null) {
+            if (aesKey == null || aesKey.getId() == null || aesKey.getKey() == null) {
                 return OpenApiResult.failure("消息加密失败, 无法获取密钥");
             }
 
+            int keyId = aesKey.getId();
+            byte[] keyValue = Base64.getUrlDecoder().decode(aesKey.getKey());
+
             if (messageDTO.getMessage() != null) {
-                byte[] encryptMessage = AES128Util.encrypt(messageDTO.getMessage().getBytes(Const.UTF_8), aesKey.getKey());
-                messageDTO.setMessage(AES128Util.bytes2HexStr(encryptMessage));
+                byte[] encryptMessage = AESUtils.encrypt(messageDTO.getMessage().getBytes(Const.UTF_8), keyValue);
+                messageDTO.setMessage(new String(encryptMessage, Const.ISO8859_1));
             }
 
             if (messageDTO.getExtraData() != null) {
-                byte[] encryptExtraData = AES128Util.encrypt(messageDTO.getExtraData().toString().getBytes(Const.UTF_8), aesKey.getKey());
-                messageDTO.setExtraData(AES128Util.bytes2HexStr(encryptExtraData));
+                byte[] encryptExtraData = AESUtils.encrypt(messageDTO.getExtraData().toString().getBytes(Const.UTF_8), keyValue);
+                messageDTO.setExtraData(new String(encryptExtraData, Const.ISO8859_1));
             }
 
-            messageDTO.setKeyId(aesKey.getId());
+            messageDTO.setKeyId(keyId);
         }
 
         return proxy.sendPushMessage(apiContext, messageDTO);

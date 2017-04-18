@@ -84,7 +84,7 @@ public final class OpenUtils {
         if (eventData == null || eventData.isEmpty()) {
             return "";
         }
-        byte[] data = AES128Util.decrypt(Base64.getUrlDecoder().decode(eventData), key);
+        byte[] data = AESUtils.decrypt(eventData.getBytes(Const.ISO8859_1), AESUtils.getSecretKey(key.getBytes(Const.ISO8859_1)));
         if (data != null && data.length > 0) {
             return new String(data, Const.UTF_8);
         }

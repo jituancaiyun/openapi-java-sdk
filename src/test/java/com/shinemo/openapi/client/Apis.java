@@ -19,10 +19,9 @@
 
 package com.shinemo.openapi.client;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.spring.OpenApiClientFactoryBean;
 import com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
@@ -60,18 +59,11 @@ public final class Apis {
 
 
     public static DataSource createDataSource() {
-        ComboPooledDataSource ds = new ComboPooledDataSource();
-        try {
-            ds.setDriverClass("com.mysql.jdbc.Driver");
-            ds.setJdbcUrl("jdbc:mysql://10.0.10.41:3306/shinemo_openapi");
-            ds.setUser("root");
-            ds.setPassword("shinemo123");
-            ds.setMaxPoolSize(20);
-            ds.setInitialPoolSize(10);
-            ds.setMaxIdleTime(2000);
-        } catch (Exception e) {
-            throw new OpenApiException("数据源报错");
-        }
-        return ds;
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://10.0.10.41:3306/shinemo_openapi");
+        dataSource.setUsername("root");
+        dataSource.setPassword("shinemo123");
+        return dataSource;
     }
 }

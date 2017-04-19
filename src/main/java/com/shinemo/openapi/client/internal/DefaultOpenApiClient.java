@@ -231,7 +231,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
             LOG.error("call open api timeout exception, request={}", call.request(), e);
             return OpenApiResult.failure(408, "请求超时");
         } catch (MalformedJsonException e) {
-            LOG.error("call open api timeout exception, request={}", call.request(), e);
+            LOG.error("call open api parse result exception, request={}", call.request(), e);
             return OpenApiResult.failure(400, "json解析失败");
         } catch (IOException e) {
             LOG.error("call open api exception, request={}", call.request(), e);

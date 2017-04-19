@@ -19,28 +19,17 @@
 
 package com.shinemo.openapi.client.callback;
 
-import java.util.List;
-
 /**
- * Created by ohun on 2017/4/1.
+ * Created by ohun on 2017/4/19.
  *
  * @author ohun@live.cn (夜色)
  */
-public final class OrgSubscribeEvent implements CallbackEvent {
-    private List<String> orgIds;
+public enum CallbackEventType {
+    OrgSubscribe("1");
 
-    public List<String> getOrgIds() {
-        return orgIds;
+    CallbackEventType(String type) {
+        this.type = type;
     }
 
-    public void setOrgIds(List<String> orgIds) {
-        this.orgIds = orgIds;
-    }
-
-    @Override
-    public String toString() {
-        return "OrgSubscribeEvent{" +
-                "orgIds=" + orgIds +
-                '}';
-    }
+    public final String type;
 }

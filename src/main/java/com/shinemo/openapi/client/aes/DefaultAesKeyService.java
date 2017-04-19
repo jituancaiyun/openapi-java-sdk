@@ -25,7 +25,7 @@ import com.shinemo.openapi.client.aes.db.AesKeyDao;
 import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
 import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.common.OpenUtils;
+import com.shinemo.openapi.client.common.OpenApiUtils;
 import com.shinemo.openapi.client.service.AuthApiService;
 
 import java.util.ArrayList;
@@ -123,7 +123,7 @@ public final class DefaultAesKeyService implements AesKeyService {
     private AesKeyEntity createNewKey(String orgId) {
         AesKeyEntity aesKeyEntity = new AesKeyEntity();
         aesKeyEntity.setOrgId(orgId);
-        aesKeyEntity.setKey(OpenUtils.randomAesKey());
+        aesKeyEntity.setKey(OpenApiUtils.randomAesKey());
         aesKeyEntity.setGmtCreate(new java.sql.Date(System.currentTimeMillis()));
         boolean success = aesKeyDao.insert(aesKeyEntity);
         return success ? aesKeyEntity : null;

@@ -17,9 +17,10 @@
  *     ohun@live.cn (夜色)
  */
 
-package com.shinemo.openapi.client.aes;
+package com.shinemo.openapi.client.web;
 
-import com.google.gson.Gson;
+import com.shinemo.openapi.client.OpenApiClient;
+import com.shinemo.openapi.client.aes.AesKeyService;
 import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
 import com.shinemo.openapi.client.common.OpenApiResult;
 
@@ -39,45 +40,52 @@ import static com.shinemo.openapi.client.common.Const.LOG;
  *
  * @author ohun@live.cn (夜色)
  */
-public class OpenAesKeyServlet extends HttpServlet {
-
-    private final Gson gson = new Gson();
+public class OpenApiAesKeyServlet extends HttpServlet {
 
     @Resource
-    protected AesKeyService aesKeyService;
+    private AesKeyService aesKeyService;
 
-    @Override
+    @Resource
+    private OpenApiClient openApiClient;
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
     }
 
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String token = req.getHeader("token");
         String uid = req.getHeader("uid");
         String orgId = req.getHeader("orgId");
         String timestamp = req.getHeader("timestamp");
-        String ids = req.getParameter("ids");
+        String ids = req.getParameter("keyIds");
+
+        if (token == null || uid == null || orgId == null || timestamp == null) {
+            this.writeResult(resp, OpenApiResult.failure(400, "参数错误"));
+            return;
+        }
 
         try {
-            OpenApiResult<List<AesKeyEntity>> result = aesKeyService.getAesKeyByClient(orgId, uid, token, Long.parseLong(timestamp), ids);
-            writeResult(resp, result);
+            OpenApiResult<List<AesKeyEntity>> result = this.aesKeyService.getAesKeyByClient(orgId, uid, token, Long.parseLong(timestamp), ids);
+            this.writeResult(resp, result);
         } catch (Exception e) {
-            writeResult(resp, OpenApiResult.failure(500, "服务器内部错误"));
-            LOG.error("get aes key error, ids={}, orgId={}, uid={}, token={}, timestamp={}", ids, orgId, uid, token, timestamp);
+            this.writeResult(resp, OpenApiResult.failure(500, "服务器内部错误"));
+            LOG.error("get aes key error, ids={}, orgId={}, uid={}, token={}, timestamp={}", ids, orgId, uid, token, timestamp, e);
         }
     }
 
     private void writeResult(HttpServletResponse response, OpenApiResult<?> result) throws IOException {
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("utf-8");
-
         PrintWriter writer = response.getWriter();
-        gson.toJson(result, writer);
+        openApiClient.config().getGson().toJson(result, writer);
         writer.close();
     }
 
     public void setAesKeyService(AesKeyService aesKeyService) {
         this.aesKeyService = aesKeyService;
+    }
+
+    public void setOpenApiClient(OpenApiClient openApiClient) {
+        this.openApiClient = openApiClient;
     }
 }

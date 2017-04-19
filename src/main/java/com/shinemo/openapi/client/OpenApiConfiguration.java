@@ -56,6 +56,11 @@ public final class OpenApiConfiguration {
     private String appSecret;
 
     /**
+     * 应用token
+     */
+    private String appToken;
+
+    /**
      * 重试次数, 小于0表示不重试
      */
     private int maxRetry;
@@ -117,6 +122,14 @@ public final class OpenApiConfiguration {
 
     public void setAppSecret(String appSecret) {
         this.appSecret = appSecret;
+    }
+
+    public String getAppToken() {
+        return appToken;
+    }
+
+    public void setAppToken(String appToken) {
+        this.appToken = appToken;
     }
 
     public int getMaxRetry() {

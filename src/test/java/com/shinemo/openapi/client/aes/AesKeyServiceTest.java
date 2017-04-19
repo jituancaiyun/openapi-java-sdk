@@ -10,7 +10,6 @@ import com.shinemo.openapi.client.service.AuthApiService;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

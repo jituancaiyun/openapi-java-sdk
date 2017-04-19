@@ -51,12 +51,12 @@ public final class AESUtils {
      * @return 128位随机数
      */
     public static byte[] getSecretKey(byte[] seed) {
-        KeyGenerator keygen;
+        KeyGenerator keyGenerator;
         SecureRandom secureRandom;
         try {
-            //1.构造密钥生成器，指定为AES算法,不区分大小写
-            keygen = KeyGenerator.getInstance(KEY_ALGORITHM);
-            //2.初始化密钥生成器
+            //1.构造密钥生成器，指定为AES算法, 不区分大小写
+            keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM);
+            //2.初始化密钥生成器, 指定SHA1PRNG算法
             secureRandom = SecureRandom.getInstance(RNG_ALGORITHM);
         } catch (NoSuchAlgorithmException e) {
             throw new OpenApiException(e);
@@ -64,12 +64,11 @@ public final class AESUtils {
         //设置种子
         secureRandom.setSeed(seed);
         //生成一个128位的随机源,根据传入的字节数组
-        keygen.init(128, secureRandom);
+        keyGenerator.init(128, secureRandom);
         //3.产生原始对称密钥
-        SecretKey original_key = keygen.generateKey();
+        SecretKey secretKey = keyGenerator.generateKey();
         //4.获得原始对称密钥的字节数组
-        byte[] raw = original_key.getEncoded();
-        return raw;
+        return secretKey.getEncoded();
     }
 
     public static byte[] encrypt(byte[] data, byte[] encryptKey) {

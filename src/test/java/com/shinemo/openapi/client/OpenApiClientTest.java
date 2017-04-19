@@ -28,7 +28,7 @@ public class OpenApiClientTest {
     }
 
     public static void main(String[] args) throws Exception {
-        byte[] key = "1234".getBytes();
+       /* byte[] key = "1234".getBytes();
         byte[] keys = AESUtils.getSecretKey(key);
 
         System.out.println(Arrays.toString(keys));
@@ -54,7 +54,10 @@ public class OpenApiClientTest {
         System.out.println("encrypt_text=" + encrypt_text.length());
         System.out.println("encrypt_bytes2=" + Arrays.toString(encrypt_bytes2));
         System.out.println("decrypt_bytes=" + Arrays.toString(decrypt_bytes));
-        System.out.println("decrypt_text=" + decrypt_text);
+        System.out.println("decrypt_text=" + decrypt_text);*/
+
+       String s = "1111111111aaasdfwerwe";
+        System.out.println(new String(s.getBytes("iso8859-1"), "utf-8"));
     }
 
 }

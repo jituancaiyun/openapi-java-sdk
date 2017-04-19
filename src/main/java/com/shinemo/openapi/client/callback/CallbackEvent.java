@@ -20,45 +20,10 @@
 package com.shinemo.openapi.client.callback;
 
 /**
- * Created by ohun on 2017/4/1.
+ * Created by ohun on 2017/4/19.
  *
  * @author ohun@live.cn (夜色)
  */
-public final class CallbackEvent {
-    private String signature;
-    private long timestamp;
-    private String encryptData;
-    private String eventType;
+public interface CallbackEvent {
 
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String getEncryptData() {
-        return encryptData;
-    }
-
-    public void setEncryptData(String encryptData) {
-        this.encryptData = encryptData;
-    }
-
-    public String getEventType() {
-        return eventType;
-    }
-
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
 }

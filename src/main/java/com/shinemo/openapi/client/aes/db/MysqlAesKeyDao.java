@@ -21,7 +21,7 @@ package com.shinemo.openapi.client.aes.db;
 
 import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
 import com.shinemo.openapi.client.common.OpenApiException;
-import com.shinemo.openapi.client.common.OpenUtils;
+import com.shinemo.openapi.client.common.OpenApiUtils;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -71,7 +71,7 @@ public final class MysqlAesKeyDao implements AesKeyDao {
             LOG.error("MysqlAesKeyDao.insert error, entity={}, sql={}", aesKey, sql);
             throw new OpenApiException("MysqlAesKeyDao.insert error", e);
         } finally {
-            OpenUtils.silentClose(connection);
+            OpenApiUtils.silentClose(connection);
         }
     }
 
@@ -97,7 +97,7 @@ public final class MysqlAesKeyDao implements AesKeyDao {
             LOG.error("MysqlAesKeyDao.getById error, id={}, sql={}", id, sql);
             throw new OpenApiException("MysqlAesKeyDao.getById error", e);
         } finally {
-            OpenUtils.silentClose(connection);
+            OpenApiUtils.silentClose(connection);
         }
         return null;
     }
@@ -127,7 +127,7 @@ public final class MysqlAesKeyDao implements AesKeyDao {
             LOG.error("MysqlAesKeyDao.selectListByOrgId error, orgId={}, sql={}", orgId, sql);
             throw new OpenApiException("MysqlAesKeyDao.selectListByOrgId error", e);
         } finally {
-            OpenUtils.silentClose(connection);
+            OpenApiUtils.silentClose(connection);
         }
     }
 
@@ -168,7 +168,7 @@ public final class MysqlAesKeyDao implements AesKeyDao {
             LOG.error("MysqlAesKeyDao.selectListByKeyIds error, ids={}, sql={}", ids, sql);
             throw new OpenApiException("MysqlAesKeyDao.selectListByKeyIds error", e);
         } finally {
-            OpenUtils.silentClose(connection);
+            OpenApiUtils.silentClose(connection);
         }
     }
 

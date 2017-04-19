@@ -21,10 +21,9 @@ package com.shinemo.openapi.client.callback;
 
 import com.google.gson.Gson;
 import com.shinemo.openapi.client.OpenApiClient;
-import com.shinemo.openapi.client.common.OpenApiException;
-import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.common.OpenUtils;
+import com.shinemo.openapi.client.common.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +31,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 
+import static com.shinemo.openapi.client.callback.CallbackEventType.OrgSubscribe;
+import static com.shinemo.openapi.client.common.Const.LOG;
 import static com.shinemo.openapi.client.common.Const.UTF_8;
+import static com.shinemo.openapi.client.common.OpenApiUtils.validateCallbackSignature;
 
 /**
  * Created by ohun on 2017/4/1.
@@ -41,9 +43,10 @@ import static com.shinemo.openapi.client.common.Const.UTF_8;
  */
 public abstract class CallbackEventReceiver {
 
+    @Resource
     private OpenApiClient openApiClient;
 
-    protected abstract int on(OrgSubscribeEvent event);
+    protected abstract int on(CallbackEvent event);
 
     public final void receiver(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (openApiClient == null) {
@@ -57,28 +60,51 @@ public abstract class CallbackEventReceiver {
         }
 
         Gson gson = openApiClient.config().getGson();
-        CallbackEvent event = gson.fromJson(eventData, CallbackEvent.class);
+        CallbackEventBody event = gson.fromJson(eventData, CallbackEventBody.class);
         if (event == null || event.getEventType() == null || event.getEncryptData() == null) {
             sendResult(response, 400, "event data is invalid");
             return;
         }
 
-        String eventBody = OpenUtils.decryptCallbackEvent(openApiClient.config().getAppSecret(), event.getEncryptData());
+        String appSecret = openApiClient.config().getAppSecret();
+        String appToken = openApiClient.config().getAppToken();
+        String encryptData = event.getEncryptData();
+        String signature = event.getSignature();
+        String nonce = event.getNonce();
+        long timestamp = event.getTimestamp();
+
+        if (!validateCallbackSignature(signature, appToken, nonce, timestamp, encryptData)) {
+            sendResult(response, 400, "validate signature failure");
+            return;
+        }
+
+        String eventBody = OpenApiUtils.decryptCallbackEvent(appSecret, encryptData);
         if (eventBody == null || eventBody.isEmpty()) {
             sendResult(response, 400, "event data decrypt failure");
             return;
         }
 
-        int ret = onEvent(event.getEventType(), eventBody);
-        sendResult(response, ret, "success");
+        try {
+            int ret = onEvent(event.getEventType(), eventBody);
+            sendResult(response, ret, "success");
+        } catch (Exception e) {
+            LOG.error("CallbackEventReceiver.onEvent error, event={}", event, e);
+            sendResult(response, 500, "onEvent error, errorMsg=" + e.getMessage());
+        }
     }
 
-    protected int onEvent(String eventType, String eventBody) {
-        Gson gson = openApiClient.config().getGson();
-        if ("org_subscribe".equals(eventType)) {
-            return on(gson.fromJson(eventBody, OrgSubscribeEvent.class));
+    protected abstract int onEvent(String eventType, String eventBody) throws Exception;
+
+    protected <T extends CallbackEvent> T parseEvent(String eventJson, Class<T> eventClass) {
+        return openApiClient.config().getGson().fromJson(eventJson, eventClass);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <T extends CallbackEvent> T parseEvent(String eventType, String eventBody) {
+        if (OrgSubscribe.type.equals(eventType)) {
+            return (T) parseEvent(eventBody, OrgSubscribeEvent.class);
         }
-        return -1;
+        throw new OpenApiException("sdk unsupported event");
     }
 
     private void sendResult(HttpServletResponse response, int status, String message) throws IOException {
@@ -114,7 +140,7 @@ public abstract class CallbackEventReceiver {
             }
             return new String(out.toByteArray(), UTF_8);
         } finally {
-            OpenUtils.silentClose(in);
+            OpenApiUtils.silentClose(in);
         }
     }
 

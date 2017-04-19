@@ -34,9 +34,9 @@ import java.util.UUID;
  *
  * @author ohun@live.cn (夜色)
  */
-public final class OpenUtils {
+public final class OpenApiUtils {
 
-    public static String createNonceStr() {
+    public static String createNonce() {
         return UUID.randomUUID().toString();
     }
 
@@ -44,32 +44,62 @@ public final class OpenUtils {
         return Long.toString(System.currentTimeMillis() / 1000);
     }
 
-    public static boolean validate(String sign4check, String jsapiTicket, String url, String nonceStr, String timestamp) {
-        if (sign4check == null
+    public static boolean validateJsapiSignature(String signature4check, String jsapiTicket, String nonce, long timestamp, String url) {
+        if (signature4check == null
                 || jsapiTicket == null
                 || url == null
-                || nonceStr == null
-                || timestamp == null) {
+                || nonce == null
+                || timestamp == 0) {
             throw new OpenApiException("参数错误");
         }
-        String signature = sign(jsapiTicket, url, nonceStr, timestamp);
-        return signature.equals(sign4check);
+        String signature = genJsapiSignature(jsapiTicket, nonce, timestamp, url);
+        return signature.equals(signature4check);
     }
 
-    public static String sign(String jsapiTicket, String url, String nonceStr, String timestamp) {
+    public static String genJsapiSignature(String ticket, String nonce, long timestamp, String url) {
         //注意这里参数名必须全部小写，且必须有序
-        String str = jsapiTicket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + url;
+        String str = "nonce=" + nonce + "&ticket=" + ticket + "&timestamp=" + timestamp + "&url=" + url;
+        return sha1(str);
+    }
+
+    public static boolean validateCallbackSignature(String signature4check, String token, String nonce, long timestamp, String encrypt) {
+        if (signature4check == null
+                || token == null
+                || encrypt == null
+                || nonce == null
+                || timestamp == 0) {
+            throw new OpenApiException("参数错误");
+        }
+        String signature = genCallbackSignature(token, nonce, timestamp, encrypt);
+        return signature.equals(signature4check);
+    }
+
+    public static String genCallbackSignature(String token, String nonce, long timestamp, String encrypt) {
+        //注意这里参数名必须全部小写，且必须有序
+        String str = "encrypt=" + encrypt + "&nonce=" + nonce + "&timestamp=" + timestamp + "&token=" + token;
+        return sha1(str);
+    }
+
+    public static String decryptCallbackEvent(String key, String encryptData) {
+        byte[] data = AESUtils.decrypt(encryptData.getBytes(Const.ISO8859_1), AESUtils.getSecretKey(key.getBytes(Const.ISO8859_1)));
+        if (data != null && data.length > 0) {
+            return new String(data, Const.UTF_8);
+        }
+        return null;
+    }
+
+    public static String sha1(String srcText) {
         try {
             MessageDigest crypt = MessageDigest.getInstance("SHA-1");
             crypt.reset();
-            crypt.update(str.getBytes("UTF-8"));
+            crypt.update(srcText.getBytes(Const.UTF_8));
             return byteToHex(crypt.digest());
         } catch (Exception e) {
-            throw new RuntimeException("sign error:", e);
+            throw new RuntimeException("signature error:", e);
         }
     }
 
-    private static String byteToHex(final byte[] hash) {
+    public static String byteToHex(final byte[] hash) {
         Formatter formatter = new Formatter();
         for (byte b : hash) {
             formatter.format("%02x", b);
@@ -77,18 +107,6 @@ public final class OpenUtils {
         String result = formatter.toString();
         formatter.close();
         return result;
-    }
-
-
-    public static String decryptCallbackEvent(String key, String eventData) {
-        if (eventData == null || eventData.isEmpty()) {
-            return "";
-        }
-        byte[] data = AESUtils.decrypt(eventData.getBytes(Const.ISO8859_1), AESUtils.getSecretKey(key.getBytes(Const.ISO8859_1)));
-        if (data != null && data.length > 0) {
-            return new String(data, Const.UTF_8);
-        }
-        return "";
     }
 
 

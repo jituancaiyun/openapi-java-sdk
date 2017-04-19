@@ -17,10 +17,9 @@
  *     ohun@live.cn (夜色)
  */
 
-package com.shinemo.openapi.client.callback;
+package com.shinemo.openapi.client.web;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.shinemo.openapi.client.callback.CallbackEventReceiver;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -35,7 +34,6 @@ import java.io.IOException;
  * @author ohun@live.cn (夜色)
  */
 public class OpenApiCallbackServlet extends HttpServlet {
-    private final Logger logger = LoggerFactory.getLogger(OpenApiCallbackServlet.class);
 
     @Resource
     protected CallbackEventReceiver callbackEventReceiver;
@@ -44,7 +42,6 @@ public class OpenApiCallbackServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         callbackEventReceiver.receiver(req, resp);
     }
-
 
     public void setCallbackEventReceiver(CallbackEventReceiver callbackEventReceiver) {
         this.callbackEventReceiver = callbackEventReceiver;

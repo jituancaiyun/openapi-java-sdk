@@ -23,6 +23,7 @@ import com.shinemo.openapi.client.aes.cache.AesKeyCache;
 import com.shinemo.openapi.client.aes.cache.HashMapAesKeyCache;
 import com.shinemo.openapi.client.aes.db.AesKeyDao;
 import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
+import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.common.OpenApiUtils;
@@ -78,10 +79,10 @@ public final class DefaultAesKeyService implements AesKeyService {
             return OpenApiResult.failure(400, "参数错误");
         }
 
-        /*OpenApiResult<Void> result = authApiService.checkHttpToken(ApiContext.ctx(orgId, uid), token, timestamp);
+        OpenApiResult<Void> result = authApiService.checkHttpToken(ApiContext.ctx(orgId, uid), token, timestamp);
         if (!result.isSuccess()) {
             return OpenApiResult.failure(403, "权限校验失败");
-        }*/
+        }
 
         //如果keyIds为空, 查询最近的n条
         if (keyIds == null || keyIds.isEmpty()) {
@@ -92,7 +93,7 @@ public final class DefaultAesKeyService implements AesKeyService {
     }
 
     private List<AesKeyEntity> getByIds(String orgId, String[] keyIdArray) {
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<Integer>(keyIdArray.length);
         for (String id : keyIdArray) {
             list.add(Integer.parseInt(id));
         }
@@ -100,43 +101,7 @@ public final class DefaultAesKeyService implements AesKeyService {
     }
 
     private List<AesKeyEntity> getLatest(String orgId, int limit) {
-        List<AesKeyEntity> list = aesKeyCache.getLatestByOrgId(orgId, limit);
-        if (list == null) {
-            list = new ArrayList<AesKeyEntity>();
-        }
-
-        //一个没有或者今天没有没有生成
-        if (list.isEmpty() || isNotToday(list.get(0).getGmtCreate())) {
-            AesKeyEntity newKey = createNewKey(orgId);
-            if (newKey == null) {
-                if (list.isEmpty()) {
-                    throw new OpenApiException("生成新的的密钥失败");
-                }
-            } else {
-                list.set(0, newKey);//插到最前面, 防止超过limit
-                aesKeyCache.addAesKey(orgId, newKey);//更新到缓存
-            }
-        }
-        return list;
-    }
-
-    private AesKeyEntity createNewKey(String orgId) {
-        AesKeyEntity aesKeyEntity = new AesKeyEntity();
-        aesKeyEntity.setOrgId(orgId);
-        aesKeyEntity.setKey(OpenApiUtils.randomAesKey());
-        aesKeyEntity.setGmtCreate(new java.sql.Date(System.currentTimeMillis()));
-        boolean success = aesKeyDao.insert(aesKeyEntity);
-        return success ? aesKeyEntity : null;
-    }
-
-    private boolean isNotToday(Date date) {
-        if (date == null) return false;
-        Calendar now = Calendar.getInstance();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-
-        return now.get(Calendar.YEAR) != cal.get(Calendar.YEAR)
-                || now.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR);
+        return aesKeyCache.getLatestByOrgId(orgId, limit);
     }
 
     public void setAuthApiService(AuthApiService authApiService) {

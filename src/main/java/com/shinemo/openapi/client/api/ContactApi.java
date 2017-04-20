@@ -26,8 +26,6 @@ import retrofit2.http.*;
 
 import java.util.Map;
 
-import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
-
 /**
  * Created by ohun on 2017/3/24.
  *
@@ -84,7 +82,6 @@ public interface ContactApi {
      * @return ContactDTO
      */
     @GET("department/list")
-    @Headers(USER_AGENT_HEADER)
     Call<OpenApiResult<ContactDTO>> listDepts(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
 
     /**

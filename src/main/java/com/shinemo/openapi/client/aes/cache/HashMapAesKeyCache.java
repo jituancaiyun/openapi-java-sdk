@@ -21,10 +21,9 @@ package com.shinemo.openapi.client.aes.cache;
 
 import com.shinemo.openapi.client.aes.db.AesKeyDao;
 import com.shinemo.openapi.client.aes.domain.AesKeyEntity;
+import com.shinemo.openapi.client.common.OpenApiUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -34,6 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class HashMapAesKeyCache implements AesKeyCache {
     private final Map<Integer, AesKeyEntity> idCache = new ConcurrentHashMap<Integer, AesKeyEntity>();
+    //Value 是个ArrayList要防止多线程问题
     private final Map<String, List<AesKeyEntity>> orgCache = new ConcurrentHashMap<String, List<AesKeyEntity>>();
 
     private AesKeyDao aesKeyDao;
@@ -44,16 +44,6 @@ public final class HashMapAesKeyCache implements AesKeyCache {
 
     public void setAesKeyDao(AesKeyDao aesKeyDao) {
         this.aesKeyDao = aesKeyDao;
-    }
-
-    @Override
-    public void addAesKey(String orgId, AesKeyEntity entity) {
-        List<AesKeyEntity> list = orgCache.get(orgId);
-        if (list == null) {
-            list = new ArrayList<AesKeyEntity>();
-            orgCache.put(orgId, list);
-        }
-        list.set(0, entity);//插到最前面, 防止列表增长
     }
 
     @Override
@@ -88,12 +78,14 @@ public final class HashMapAesKeyCache implements AesKeyCache {
             }
         }
 
-        List<AesKeyEntity> keyListInDB = aesKeyDao.selectListByKeyIds(notInCacheIds);
+        if (notInCacheIds.size() > 0) {
+            List<AesKeyEntity> keyListInDB = aesKeyDao.selectListByKeyIds(notInCacheIds);
 
-        if (keyListInDB != null && keyListInDB.size() > 0) {
-            for (AesKeyEntity entity : keyListInDB) {
-                result.add(entity);
-                idCache.put(entity.getId(), entity);
+            if (keyListInDB != null && keyListInDB.size() > 0) {
+                for (AesKeyEntity entity : keyListInDB) {
+                    result.add(entity);
+                    idCache.put(entity.getId(), entity);
+                }
             }
         }
         return result;
@@ -102,13 +94,54 @@ public final class HashMapAesKeyCache implements AesKeyCache {
 
     @Override
     public List<AesKeyEntity> getLatestByOrgId(String orgId, int limit) {
-        List<AesKeyEntity> list = orgCache.get(orgId);
-        if (list == null || list.size() < limit) {
-            list = aesKeyDao.selectListByOrgId(orgId, limit);
-            if (list != null) {
-                orgCache.put(orgId, list);
+        //1.查询缓存中的数据
+        List<AesKeyEntity> keysInCache = orgCache.get(orgId);
+        //2.判断缓存中的第一个key是不是今天生成的
+        if (keysInCache == null || keysInCache.isEmpty() || isNotToday(keysInCache.get(0).getGmtCreate())) {
+            synchronized (this) {
+                //创建一份新的缓存, (keysInCache不能进行写操作[unmodifiableList])
+                List<AesKeyEntity> newCacheList = new ArrayList<AesKeyEntity>(limit + 1);
+
+                //3.查询DB中是否有今天生成的key, 查一次DB是因为分布式部署下, 别的机器可能已经处理了
+                List<AesKeyEntity> keysInDB = aesKeyDao.selectListByOrgId(orgId, limit);
+
+                //4.判断db中的第一个key是不是今天生成的, 即别的机器有没有创建新key, 没有就创建一个新的
+                if (keysInDB == null || keysInDB.isEmpty() || isNotToday(keysInDB.get(0).getGmtCreate())) {
+                    //5.创建新key, 并加入到新的的cache list
+                    AesKeyEntity newKey = createNewKey(orgId);
+                    newCacheList.add(newKey);
+                }
+
+                //6. 把db中最新的key,加入到缓存
+                if (keysInDB != null) {
+                    newCacheList.addAll(keysInDB);
+                }
+
+                //7. 更新缓存, 并且禁止修改缓存内容, 防止多线程出错
+                keysInCache = Collections.unmodifiableList(newCacheList);
+                orgCache.put(orgId, keysInCache);
             }
         }
-        return list;
+        //不要直接返回list, 要复制一份数据防止线程安全问题
+        return keysInCache;
+    }
+
+    private AesKeyEntity createNewKey(String orgId) {
+        AesKeyEntity aesKeyEntity = new AesKeyEntity();
+        aesKeyEntity.setOrgId(orgId);
+        aesKeyEntity.setKey(OpenApiUtils.randomAesKey());
+        aesKeyEntity.setGmtCreate(new java.sql.Date(System.currentTimeMillis()));
+        boolean success = aesKeyDao.insert(aesKeyEntity);
+        return success ? aesKeyEntity : null;
+    }
+
+    private boolean isNotToday(Date date) {
+        if (date == null) return false;
+        Calendar now = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        return now.get(Calendar.YEAR) != cal.get(Calendar.YEAR)
+                || now.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR);
     }
 }

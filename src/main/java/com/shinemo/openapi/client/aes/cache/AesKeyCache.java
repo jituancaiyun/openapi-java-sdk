@@ -30,8 +30,6 @@ import java.util.List;
  */
 public interface AesKeyCache {
 
-    void addAesKey(String orgId, AesKeyEntity entity);
-
     AesKeyEntity getById(int id);
 
     List<AesKeyEntity> getListByKeyIds(String orgId, List<Integer> ids);

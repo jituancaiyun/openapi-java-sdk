@@ -25,11 +25,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.HeaderMap;
-import retrofit2.http.Headers;
 
 import java.util.Map;
-
-import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
 
 /**
  * Created by ohun on 2017/4/14.
@@ -46,7 +43,6 @@ public interface AuthApi {
      * @return UserInfoDTO
      */
     @GET("auth/getUserInfoByToken")
-    @Headers(USER_AGENT_HEADER)
     Call<OpenApiResult<UserInfoDTO>> login(@HeaderMap Map<String, String> headers, @Header("token") String authToken);
 
     /**
@@ -56,7 +52,6 @@ public interface AuthApi {
      * @return void
      */
     @GET("auth/checkHttpToken")
-    @Headers(USER_AGENT_HEADER)
     Call<OpenApiResult<Void>> checkHttpToken(@HeaderMap Map<String, String> headers, @Header("token") String httpToken, @Header("timestamp") long timestamp);
 
 }

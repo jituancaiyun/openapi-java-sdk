@@ -74,7 +74,7 @@ public final class ArticleMessage extends IMessage<ArticleMessage> {
 
     @Override
     public byte type() {
-        return 20;
+        return 19;
     }
 
 

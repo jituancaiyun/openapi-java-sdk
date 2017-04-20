@@ -81,7 +81,7 @@ public final class OpenApiUtils {
     }
 
     public static String decryptCallbackEvent(String key, String encryptData) {
-        byte[] data = AESUtils.decrypt(encryptData.getBytes(Const.ISO8859_1), AESUtils.getSecretKey(key.getBytes(Const.ISO8859_1)));
+        byte[] data = AESUtils.decrypt(encryptData.getBytes(Const.ISO_8859_1), AESUtils.getSecretKey(key.getBytes(Const.ISO_8859_1)));
         if (data != null && data.length > 0) {
             return new String(data, Const.UTF_8);
         }

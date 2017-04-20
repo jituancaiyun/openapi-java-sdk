@@ -42,10 +42,6 @@ public final class SecurityMessageApiService implements MessageApiService {
     private AesKeyService aesKeyService;
 
     public void init() {
-        if (aesKeyService == null) {
-            throw new OpenApiException("请初始化AesKeyManager");
-        }
-
         proxy = openApiClient.createApiService(MessageApiService.class);
     }
 
@@ -77,6 +73,9 @@ public final class SecurityMessageApiService implements MessageApiService {
 
         //处理加密消息
         if ((messageDTO.getFlags() & IMessage.FLAG_ENCRYPT) != 0) {
+            if (aesKeyService == null) {
+                throw new OpenApiException("请初始化AesKeyManager");
+            }
 
             AesKey aesKey = aesKeyService.getAesKeyBySDK(apiContext.getOrgId());
 
@@ -89,12 +88,12 @@ public final class SecurityMessageApiService implements MessageApiService {
 
             if (messageDTO.getMessage() != null) {
                 byte[] encryptMessage = AESUtils.encrypt(messageDTO.getMessage().getBytes(Const.UTF_8), keyValue);
-                messageDTO.setMessage(new String(encryptMessage, Const.ISO8859_1));
+                messageDTO.setMessage(new String(encryptMessage, Const.ISO_8859_1));
             }
 
             if (messageDTO.getExtraData() != null) {
                 byte[] encryptExtraData = AESUtils.encrypt(messageDTO.getExtraData().toString().getBytes(Const.UTF_8), keyValue);
-                messageDTO.setExtraData(new String(encryptExtraData, Const.ISO8859_1));
+                messageDTO.setExtraData(new String(encryptExtraData, Const.ISO_8859_1));
             }
 
             messageDTO.setKeyId(keyId);

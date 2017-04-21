@@ -17,35 +17,28 @@
  *     ohun@live.cn (夜色)
  */
 
-package com.shinemo.openapi.client.dto.message;
+package com.shinemo.openapi.client.common;
+
+import com.google.gson.Gson;
 
 /**
- * Created by ohun on 2017/4/11.
+ * Created by ohun on 2017/4/21.
  *
  * @author ohun@live.cn (夜色)
  */
-public final class TextMessage extends IMessage<TextMessage> {
+public final class Jsons {
 
-    public TextMessage() {
+    private static final Gson gson = new Gson();
+
+    public static Gson gson() {
+        return gson;
     }
 
-    public TextMessage(String message) {
-        super(message);
+    public static <T> T fromJson(String json, Class<T> tClass) {
+        return gson.fromJson(json, tClass);
     }
 
-    @Override
-    public String validate() {
-        if (message == null) return "TextMessage.message 不能为空";
-        return null;
-    }
-
-    @Override
-    public String extraData() {
-        return null;
-    }
-
-    @Override
-    public byte type() {
-        return 1;
+    public static String toJson(Object src) {
+        return gson.toJson(src);
     }
 }

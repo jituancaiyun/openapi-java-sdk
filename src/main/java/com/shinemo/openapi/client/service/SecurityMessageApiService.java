@@ -19,7 +19,6 @@
 
 package com.shinemo.openapi.client.service;
 
-import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.aes.AesKey;
 import com.shinemo.openapi.client.aes.AesKeyService;
 import com.shinemo.openapi.client.common.*;
@@ -35,40 +34,20 @@ import java.util.List;
  */
 public final class SecurityMessageApiService implements MessageApiService {
 
-    private MessageApiService proxy;
-
-    private OpenApiClient openApiClient;
+    private MessageApiService messageApiService;
 
     private AesKeyService aesKeyService;
 
     public void init() {
-        proxy = openApiClient.createApiService(MessageApiService.class);
+        if (messageApiService == null) {
+            throw new OpenApiException("请初始化MessageApiService");
+        }
     }
 
     @Override
     public OpenApiResult<List<String>> sendPushMessage(ApiContext apiContext, PushMessageDTO messageDTO) {
         if (messageDTO == null) {
             return OpenApiResult.failure("消息不能为空");
-        }
-
-        if (messageDTO.getMsgType() <= 0) {
-            return OpenApiResult.failure("消息类型错误");
-        }
-
-        if (messageDTO.getMessage() == null) {
-            return OpenApiResult.failure("消息标题不能为空");
-        }
-
-        if (messageDTO.getExtraData() != null) {
-            if (!(messageDTO.getExtraData() instanceof IMessage)) {
-                return OpenApiResult.failure("消息格式错误");
-            }
-            IMessage<?> message = (IMessage<?>) messageDTO.getExtraData();
-            String errorMsg = message.validate();
-            if (errorMsg != null) {
-                return OpenApiResult.failure(errorMsg);
-            }
-            messageDTO.setExtraData(openApiClient.config().getGson().toJson(message));
         }
 
         //处理加密消息
@@ -92,18 +71,18 @@ public final class SecurityMessageApiService implements MessageApiService {
             }
 
             if (messageDTO.getExtraData() != null) {
-                byte[] encryptExtraData = AESUtils.encrypt(messageDTO.getExtraData().toString().getBytes(Const.UTF_8), keyValue);
+                byte[] encryptExtraData = AESUtils.encrypt(messageDTO.getExtraData().getBytes(Const.UTF_8), keyValue);
                 messageDTO.setExtraData(new String(encryptExtraData, Const.ISO_8859_1));
             }
 
             messageDTO.setKeyId(keyId);
         }
 
-        return proxy.sendPushMessage(apiContext, messageDTO);
+        return messageApiService.sendPushMessage(apiContext, messageDTO);
     }
 
-    public void setOpenApiClient(OpenApiClient openApiClient) {
-        this.openApiClient = openApiClient;
+    public void setMessageApiService(MessageApiService messageApiService) {
+        this.messageApiService = messageApiService;
     }
 
     public void setAesKeyService(AesKeyService aesKeyService) {

@@ -44,9 +44,9 @@ public final class PushMessageDTO {
     private String message;
 
     /**
-     * 消息扩展数据
+     * 消息扩展数据Json
      */
-    private Object extraData;
+    private String extraData;
 
     /**
      * 接收人Uid列表
@@ -87,11 +87,11 @@ public final class PushMessageDTO {
         this.message = message;
     }
 
-    public Object getExtraData() {
+    public String getExtraData() {
         return extraData;
     }
 
-    public void setExtraData(Object extraData) {
+    public void setExtraData(String extraData) {
         this.extraData = extraData;
     }
 

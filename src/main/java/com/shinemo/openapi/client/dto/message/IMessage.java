@@ -20,6 +20,8 @@
 package com.shinemo.openapi.client.dto.message;
 
 
+import com.shinemo.openapi.client.common.Jsons;
+import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 
 import java.util.Collection;
@@ -33,12 +35,14 @@ import java.util.Collection;
 public abstract class IMessage<T extends IMessage> {
     public static final int FLAG_NOT_SHARE = 0;//不可分享
     public static final int FLAG_CAN_SHARE = 1;//可分享
-    public static final int FLAG_ENCRYPT = 1;
+
+    public static final int FLAG_ENCRYPT = 1;//加密
+    public static final int FLAG_SMS = 2;//必达
 
     /**
      * 是否需要加密消息
      */
-    private transient boolean needEncrypt;
+    private transient int flags;
 
     /**
      * 接收人Uid列表
@@ -144,11 +148,24 @@ public abstract class IMessage<T extends IMessage> {
 
 
     public PushMessageDTO build() {
+        String errorMsg = validate();
+        if (errorMsg != null) {
+            throw new OpenApiException(errorMsg);
+        }
+
+        if (message() == null) {
+            throw new OpenApiException("消息标题不能为空");
+        }
+
+        if ((flags & FLAG_SMS) != 0 && type() != 1) {
+            throw new OpenApiException("只有文本消息支持必达特性");
+        }
+
         PushMessageDTO messageDTO = new PushMessageDTO();
         messageDTO.setMessage(message());
         messageDTO.setExtraData(extraData());
         messageDTO.setMsgType(type());
-        messageDTO.setFlags(needEncrypt ? 1 : 0);
+        messageDTO.setFlags(flags);
         messageDTO.setReceivers(receivers);
         messageDTO.setPushTips(pushTips);
         return messageDTO;
@@ -160,13 +177,13 @@ public abstract class IMessage<T extends IMessage> {
     }
 
     /**
-     * 设置消息是否需要加密,默认false
+     * 设置消息特性, 是否必答消息, 是否需要加密
      *
-     * @param needEncrypt 是否需要加密,默认false
+     * @param flag 是否必答消息, 是否需要加密
      * @return
      */
-    public T setNeedEncrypt(boolean needEncrypt) {
-        this.needEncrypt = needEncrypt;
+    public T addFlag(int flag) {
+        this.flags |= flag;
         return (T) this;
     }
 
@@ -200,8 +217,7 @@ public abstract class IMessage<T extends IMessage> {
 
     public abstract String validate();
 
-    protected Object extraData() {
-        return this;
+    protected String extraData() {
+        return Jsons.toJson(message);
     }
-
 }

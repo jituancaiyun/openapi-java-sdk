@@ -19,16 +19,14 @@
 
 package com.shinemo.openapi.client.internal;
 
-import com.google.gson.GsonBuilder;
 import com.google.gson.stream.MalformedJsonException;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.OpenApiConfiguration;
 import com.shinemo.openapi.client.api.BaseApi;
+import com.shinemo.openapi.client.common.Jsons;
 import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.AccessTokenDTO;
-import com.shinemo.openapi.client.dto.UserInfoDTO;
-import com.shinemo.openapi.client.service.MessageApiService;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,9 +82,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         apiServiceProxyFactory = new ApiServiceProxyFactory(this);
 
         if (conf.getGson() == null) {
-            conf.setGson(
-                    new GsonBuilder().create()
-            );
+            conf.setGson(Jsons.gson());
         }
 
         if (conf.getOkHttpClient() == null) {
@@ -119,7 +115,10 @@ import static com.shinemo.openapi.client.common.Const.LOG;
 
     @Override
     public OpenApiResult<AccessTokenDTO> getAccessToken() {
-        return callWithLog(baseApi.getAccessToken(conf.getAppId(), conf.getAppSecret(), 0), Integer.MAX_VALUE);
+        if (checkAccessToken()) {
+            return OpenApiResult.success(accessToken);
+        }
+        return OpenApiResult.failure(400, "获取accessToken失败");
     }
 
     @Override
@@ -180,7 +179,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
     }
 
     private boolean syncRefreshAccessToken() {
-        OpenApiResult<AccessTokenDTO> result = getAccessToken();
+        OpenApiResult<AccessTokenDTO> result = callWithLog(baseApi.getAccessToken(conf.getAppId(), conf.getAppSecret(), 0), Integer.MAX_VALUE);
         if (result.isSuccess()) {
             this.accessToken = result.getData();
             return true;

@@ -46,7 +46,7 @@ public class MessageApiServiceTest {
     public void setUp() throws Exception {
         client = Apis.createClient();
         messageApiService = new SecurityMessageApiService();
-        messageApiService.setOpenApiClient(client);
+        messageApiService.setMessageApiService(client.createApiService(MessageApiService.class));
         messageApiService.init();
     }
 

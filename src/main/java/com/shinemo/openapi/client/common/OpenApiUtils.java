@@ -29,6 +29,9 @@ import java.sql.SQLException;
 import java.util.Formatter;
 import java.util.UUID;
 
+import static com.shinemo.openapi.client.common.Const.ISO_8859_1;
+import static com.shinemo.openapi.client.common.Const.UTF_8;
+
 /**
  * Created by ohun on 2017/3/25.
  *
@@ -44,6 +47,12 @@ public final class OpenApiUtils {
         return Long.toString(System.currentTimeMillis() / 1000);
     }
 
+    public static String genJsapiSignature(String ticket, String nonce, long timestamp, String url) {
+        //注意这里参数名必须全部小写，且必须有序
+        String str = "nonce=" + nonce + "&ticket=" + ticket + "&timestamp=" + timestamp + "&url=" + url;
+        return sha1(str);
+    }
+
     public static boolean validateJsapiSignature(String signature4check, String jsapiTicket, String nonce, long timestamp, String url) {
         if (signature4check == null
                 || jsapiTicket == null
@@ -56,9 +65,9 @@ public final class OpenApiUtils {
         return signature.equals(signature4check);
     }
 
-    public static String genJsapiSignature(String ticket, String nonce, long timestamp, String url) {
+    public static String genCallbackSignature(String token, String nonce, long timestamp, String encrypt) {
         //注意这里参数名必须全部小写，且必须有序
-        String str = "nonce=" + nonce + "&ticket=" + ticket + "&timestamp=" + timestamp + "&url=" + url;
+        String str = "encrypt=" + encrypt + "&nonce=" + nonce + "&timestamp=" + timestamp + "&token=" + token;
         return sha1(str);
     }
 
@@ -74,16 +83,18 @@ public final class OpenApiUtils {
         return signature.equals(signature4check);
     }
 
-    public static String genCallbackSignature(String token, String nonce, long timestamp, String encrypt) {
-        //注意这里参数名必须全部小写，且必须有序
-        String str = "encrypt=" + encrypt + "&nonce=" + nonce + "&timestamp=" + timestamp + "&token=" + token;
-        return sha1(str);
+    public static String encryptCallbackEvent(String key, String eventData) {
+        byte[] data = AESUtils.encrypt(eventData.getBytes(UTF_8), AESUtils.getSecretKey(key.getBytes(ISO_8859_1)));
+        if (data != null && data.length > 0) {
+            return new String(data, ISO_8859_1);
+        }
+        return null;
     }
 
     public static String decryptCallbackEvent(String key, String encryptData) {
-        byte[] data = AESUtils.decrypt(encryptData.getBytes(Const.ISO_8859_1), AESUtils.getSecretKey(key.getBytes(Const.ISO_8859_1)));
+        byte[] data = AESUtils.decrypt(encryptData.getBytes(ISO_8859_1), AESUtils.getSecretKey(key.getBytes(ISO_8859_1)));
         if (data != null && data.length > 0) {
-            return new String(data, Const.UTF_8);
+            return new String(data, UTF_8);
         }
         return null;
     }
@@ -92,7 +103,7 @@ public final class OpenApiUtils {
         try {
             MessageDigest crypt = MessageDigest.getInstance("SHA-1");
             crypt.reset();
-            crypt.update(srcText.getBytes(Const.UTF_8));
+            crypt.update(srcText.getBytes(UTF_8));
             return byteToHex(crypt.digest());
         } catch (Exception e) {
             throw new RuntimeException("signature error:", e);

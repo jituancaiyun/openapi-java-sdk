@@ -1,6 +1,5 @@
 package com.shinemo.openapi.client.aes;
 
-import com.google.gson.Gson;
 import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.aes.db.MysqlAesKeyDao;
@@ -38,7 +37,7 @@ public class AesKeyServiceTest {
     @Test
     public void testByClient() throws Exception {
         OpenApiResult<List<AesKeyEntity>> result = aesKeyService.getAesKeyByClient("1", "1", "token", 123123, "");
-        System.out.println(new Gson().toJson(result));
+        System.out.println(result);
     }
 
     @Test

@@ -19,9 +19,11 @@
 
 package com.shinemo.openapi.client.callback;
 
-import com.google.gson.Gson;
 import com.shinemo.openapi.client.OpenApiClient;
-import com.shinemo.openapi.client.common.*;
+import com.shinemo.openapi.client.common.Jsons;
+import com.shinemo.openapi.client.common.OpenApiException;
+import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.common.OpenApiUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -59,8 +61,7 @@ public abstract class CallbackEventReceiver {
             return;
         }
 
-        Gson gson = openApiClient.config().getGson();
-        CallbackEventBody event = gson.fromJson(eventData, CallbackEventBody.class);
+        CallbackEventBody event = Jsons.fromJson(eventData, CallbackEventBody.class);
         if (event == null || event.getEventType() == null || event.getEncryptData() == null) {
             sendResult(response, 400, "event data is invalid");
             return;

@@ -25,7 +25,6 @@ import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.IMessage;
-import com.shinemo.openapi.client.service.SecurityMessageApiService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,16 +37,14 @@ import java.util.List;
  * @author ohun@live.cn (夜色)
  */
 public class MessageApiServiceTest {
-    private SecurityMessageApiService messageApiService;
 
+    private MessageApiService messageApiService;
     private OpenApiClient client;
 
     @Before
     public void setUp() throws Exception {
         client = Apis.createClient();
-        messageApiService = new SecurityMessageApiService();
-        messageApiService.setMessageApiService(client.createApiService(MessageApiService.class));
-        messageApiService.init();
+        messageApiService = client.createApiService(MessageApiService.class);
     }
 
     @Test
@@ -131,6 +128,4 @@ public class MessageApiServiceTest {
         OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
         System.out.println(result);
     }
-
-
 }

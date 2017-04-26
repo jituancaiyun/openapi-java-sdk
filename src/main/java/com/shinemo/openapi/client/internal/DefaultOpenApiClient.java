@@ -115,10 +115,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
 
     @Override
     public OpenApiResult<AccessTokenDTO> getAccessToken() {
-        if (checkAccessToken()) {
-            return OpenApiResult.success(accessToken);
-        }
-        return OpenApiResult.failure(400, "获取accessToken失败");
+        return checkAccessToken();
     }
 
     @Override
@@ -130,28 +127,30 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         return retrofit.create(apiClass);
     }
 
+    @SuppressWarnings("unchecked")
     public <T> OpenApiResult<T> callApi(ApiCallable<T> apiCallable) {
-        if (checkAccessToken()) {
+        OpenApiResult<AccessTokenDTO> result = checkAccessToken();
+        if (result.isSuccess()) {
             return callWithLog(apiCallable.call(accessToken.getAccessToken()), 0);
         }
-        return OpenApiResult.failure(400, "获取accessToken失败");
+        return (OpenApiResult<T>) result;
     }
 
-    private boolean checkAccessToken() {
-        if (accessToken == null) {//第一次同步获取
+    private OpenApiResult<AccessTokenDTO> checkAccessToken() {
+        if (accessToken == null) {//第一次, 同步获取
             return syncRefreshAccessToken();
         }
 
         long timeout = accessToken.getExpireTime() - System.currentTimeMillis();
 
         if (timeout > 60 * 1000) {//超时时间大于1分钟
-            return true;
+            return OpenApiResult.success(accessToken);
         } else {//超时时间少于1分钟
             if (timeout < 1000) {//超时时间少于1秒, 同步刷新
                 return syncRefreshAccessToken();
             } else {
                 asyncRefreshAccessToken();//超时时间少于1分钟大于1秒钟, 异步刷新
-                return true;
+                return OpenApiResult.success(accessToken);
             }
         }
     }
@@ -178,13 +177,12 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         });
     }
 
-    private boolean syncRefreshAccessToken() {
+    private OpenApiResult<AccessTokenDTO> syncRefreshAccessToken() {
         OpenApiResult<AccessTokenDTO> result = callWithLog(baseApi.getAccessToken(conf.getAppId(), conf.getAppSecret(), 0), Integer.MAX_VALUE);
         if (result.isSuccess()) {
             this.accessToken = result.getData();
-            return true;
         }
-        return false;
+        return result;
     }
 
     private <T> OpenApiResult<T> callWithLog(Call<OpenApiResult<T>> call, int retryNum) {
@@ -212,10 +210,11 @@ import static com.shinemo.openapi.client.common.Const.LOG;
                     return result;
                 }
                 switch (result.getStatus()) {//accessToken过期, 要同步刷新下accessToken再重试
-                    case 4002://accessToken 错误
-                    case 4003://accessToken 过期
-                    case 4005://accessToken 错误(可能是由于系统原因),请重新获取
-                        if (syncRefreshAccessToken()) {
+                    case 4001://accessToken解码错误, 请重新获取
+                    case 4002://accessToken不合法, 请重新获取
+                    case 4003://accessToken过期, 请重新获取
+                    case 4004://accessToken校验不通过, 请重新获取
+                        if (syncRefreshAccessToken().isSuccess()) {
                             if (retryNum < conf.getMaxRetry() + 1) {//由token失效引起的错误可以多重试一次
                                 return callWithRetry(call.clone(), retryNum + 1);
                             }
@@ -235,7 +234,7 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         } catch (IOException e) {
             LOG.error("call open api exception, request={}", call.request(), e);
             if (retryNum < conf.getMaxRetry()) {
-                if (checkAccessToken()) {//重试前, 检查下accessToken
+                if (checkAccessToken().isSuccess()) {//重试前, 检查下accessToken
                     LOG.warn("call open api fail, retryNum={}, request={}", retryNum + 1, call.request());
                     return callWithRetry(call.clone(), retryNum + 1);
                 }

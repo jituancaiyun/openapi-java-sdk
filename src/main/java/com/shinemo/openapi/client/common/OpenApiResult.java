@@ -26,6 +26,7 @@ package com.shinemo.openapi.client.common;
  */
 public final class OpenApiResult<T> {
     private static final OpenApiResult<Void> FAIL = new OpenApiResult<Void>(400, "请求错误");
+    private static final OpenApiResult<Void> OK = new OpenApiResult<Void>(0, "请求成功");
 
     private int status;
 
@@ -70,6 +71,9 @@ public final class OpenApiResult<T> {
     }
 
     @SuppressWarnings("unchecked")
+    public static <T> OpenApiResult<T> success() {
+        return (OpenApiResult<T>) OK;
+    }
     public static <T> OpenApiResult<T> failure() {
         return (OpenApiResult<T>) FAIL;
     }

@@ -31,13 +31,32 @@ import javax.sql.DataSource;
  * @author ohun@live.cn (夜色)
  */
 public final class Apis {
+    private static int env = 0;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
-        configuration.setBaseUrl("http://10.0.10.49:8081/openapi/");
-        configuration.setAppId(94181123);
-        configuration.setAppSecret("6fe73d451cd37f8a");
-        configuration.setConnectTimeoutMillis(1000);
+        if (env == 0) {
+            configuration.setBaseUrl("http://127.0.0.1:8080/openapi/");
+            configuration.setAppId(94181123);
+            configuration.setAppSecret("6fe73d451cd37f8a");
+        } else if (env == 1) {
+            configuration.setBaseUrl("http://10.0.10.49:8081/openapi/");
+            configuration.setAppId(48906502);
+            configuration.setAppSecret("DF2D43CCAC737521");
+        } else if (env == 2) {
+            configuration.setBaseUrl("http://10.0.10.49:8081/platform/");
+            configuration.setAppId(20328985);
+            configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
+        } else if (env == 3) {
+            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/");
+            configuration.setAppId(27714980);
+            configuration.setAppSecret("S14'e*;9Zo_8TU\"U:_rzP8crwP<_hV8D");
+        } else {
+            configuration.setBaseUrl("https://api.open.jituancaiyun.com/openapi/");
+            configuration.setAppId(48906502);
+            configuration.setAppSecret("DF2D43CCAC737521");
+        }
+        configuration.setConnectTimeoutMillis(10000);
         configuration.setMaxRetry(1);
         return configuration;
     }

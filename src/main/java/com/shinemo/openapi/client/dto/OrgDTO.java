@@ -3,10 +3,10 @@ package com.shinemo.openapi.client.dto;
 
 import java.io.Serializable;
 
-public class OrgDTO  implements Serializable {
+public class OrgDTO implements Serializable {
 
     private String orgName;
-    private long orgId;
+    private String orgId;
 
     public String getOrgName() {
         return orgName;
@@ -16,11 +16,11 @@ public class OrgDTO  implements Serializable {
         this.orgName = orgName;
     }
 
-    public long getOrgId() {
+    public String getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(long orgId) {
+    public void setOrgId(String orgId) {
         this.orgId = orgId;
     }
 
@@ -28,7 +28,7 @@ public class OrgDTO  implements Serializable {
     public String toString() {
         return "OrgDTO{" +
                 "orgName='" + orgName + '\'' +
-                ", orgId=" + orgId +
+                ", orgId='" + orgId + '\'' +
                 '}';
     }
 }

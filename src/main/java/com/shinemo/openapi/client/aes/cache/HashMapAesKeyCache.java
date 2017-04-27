@@ -130,16 +130,16 @@ public final class HashMapAesKeyCache implements AesKeyCache {
         AesKeyEntity aesKeyEntity = new AesKeyEntity();
         aesKeyEntity.setOrgId(orgId);
         aesKeyEntity.setKey(OpenApiUtils.randomAesKey());
-        aesKeyEntity.setGmtCreate(new java.sql.Date(System.currentTimeMillis()));
+        aesKeyEntity.setGmtCreate(new Date().getTime());
         boolean success = aesKeyDao.insert(aesKeyEntity);
         return success ? aesKeyEntity : null;
     }
 
-    private boolean isNotToday(Date date) {
+    private boolean isNotToday(Long date) {
         if (date == null) return false;
         Calendar now = Calendar.getInstance();
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
+        cal.setTimeInMillis(date);
 
         return now.get(Calendar.YEAR) != cal.get(Calendar.YEAR)
                 || now.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR);

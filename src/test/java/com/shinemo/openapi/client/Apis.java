@@ -31,18 +31,18 @@ import javax.sql.DataSource;
  * @author ohun@live.cn (夜色)
  */
 public final class Apis {
-    private static int env = 0;
+    private static int env = 4;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
         if (env == 0) {
-            configuration.setBaseUrl("http://127.0.0.1:8080/openapi/");
+            configuration.setBaseUrl("http://127.0.0.1:8081/openapi/");
             configuration.setAppId(94181123);
             configuration.setAppSecret("6fe73d451cd37f8a");
         } else if (env == 1) {
             configuration.setBaseUrl("http://10.0.10.49:8081/openapi/");
-            configuration.setAppId(48906502);
-            configuration.setAppSecret("DF2D43CCAC737521");
+            configuration.setAppId(94181123);
+            configuration.setAppSecret("6fe73d451cd37f8a");
         } else if (env == 2) {
             configuration.setBaseUrl("http://10.0.10.49:8081/platform/");
             configuration.setAppId(20328985);

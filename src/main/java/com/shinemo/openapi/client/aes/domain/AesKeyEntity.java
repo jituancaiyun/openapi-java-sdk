@@ -21,8 +21,6 @@ package com.shinemo.openapi.client.aes.domain;
 
 import com.shinemo.openapi.client.aes.AesKey;
 
-import java.sql.Date;
-
 /**
  * Created by ohun on 2017/4/14.
  *
@@ -32,7 +30,7 @@ public final class AesKeyEntity implements AesKey {
     private Integer id;
     private String key;
     private transient String orgId; //组织id
-    private transient Date gmtCreate;  //创建时间
+    private transient Long gmtCreate;  //创建时间
 
     public void setId(Integer id) {
         this.id = id;
@@ -50,11 +48,11 @@ public final class AesKeyEntity implements AesKey {
         this.key = key;
     }
 
-    public Date getGmtCreate() {
+    public Long getGmtCreate() {
         return gmtCreate;
     }
 
-    public void setGmtCreate(Date gmtCreate) {
+    public void setGmtCreate(Long gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 

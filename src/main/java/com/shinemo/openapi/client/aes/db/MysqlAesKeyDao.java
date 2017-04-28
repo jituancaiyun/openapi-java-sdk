@@ -25,8 +25,7 @@ import com.shinemo.openapi.client.common.OpenApiUtils;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static com.shinemo.openapi.client.common.Const.LOG;
 
@@ -54,8 +53,9 @@ public final class MysqlAesKeyDao implements AesKeyDao {
             PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, aesKey.getOrgId());
             pstm.setString(2, aesKey.getKey());
-            pstm.setDate(3, aesKey.getGmtCreate());
-            pstm.setDate(4, aesKey.getGmtCreate());
+            Calendar cal = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+            pstm.setTimestamp(3, new Timestamp(aesKey.getGmtCreate()),cal);
+            pstm.setTimestamp(4, new Timestamp(aesKey.getGmtCreate()),cal);
             if (pstm.executeUpdate() > 0) {
                 ResultSet rs = pstm.getGeneratedKeys();
                 if (rs.next()) {
@@ -90,7 +90,7 @@ public final class MysqlAesKeyDao implements AesKeyDao {
                 AesKeyEntity aesKeyEntity = new AesKeyEntity();
                 aesKeyEntity.setId(resultSet.getInt("id"));
                 aesKeyEntity.setKey(resultSet.getString("aes_key"));
-                aesKeyEntity.setGmtCreate(resultSet.getDate("gmt_create"));
+                aesKeyEntity.setGmtCreate(resultSet.getTimestamp("gmt_create").getTime());
                 return aesKeyEntity;
             }
         } catch (SQLException e) {
@@ -119,7 +119,7 @@ public final class MysqlAesKeyDao implements AesKeyDao {
                 AesKeyEntity aesKeyEntity = new AesKeyEntity();
                 aesKeyEntity.setId(resultSet.getInt("id"));
                 aesKeyEntity.setKey(resultSet.getString("aes_key"));
-                aesKeyEntity.setGmtCreate(resultSet.getDate("gmt_create"));
+                aesKeyEntity.setGmtCreate(resultSet.getTimestamp("gmt_create").getTime());
                 list.add(aesKeyEntity);
             }
             return list;

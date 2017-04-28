@@ -43,8 +43,8 @@ public final class OpenApiUtils {
         return UUID.randomUUID().toString();
     }
 
-    public static String createTimestamp() {
-        return Long.toString(System.currentTimeMillis() / 1000);
+    public static long createTimestamp() {
+        return System.currentTimeMillis() / 1000;
     }
 
     public static String genJsapiSignature(String ticket, String nonce, long timestamp, String url) {

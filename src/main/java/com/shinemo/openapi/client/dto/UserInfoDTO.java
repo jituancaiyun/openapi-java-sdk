@@ -9,6 +9,7 @@ public class UserInfoDTO implements Serializable {
     private String mobile;
     private String avatar;
     private String name;
+    private String orgId;
     private List<OrgDTO> orgList;
 
     public String getUid() {
@@ -51,6 +52,14 @@ public class UserInfoDTO implements Serializable {
         this.orgList = orgList;
     }
 
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
     @Override
     public String toString() {
         return "UserInfoDTO{" +
@@ -58,6 +67,7 @@ public class UserInfoDTO implements Serializable {
                 ", mobile='" + mobile + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", name='" + name + '\'' +
+                ", orgId='" + orgId + '\'' +
                 ", orgList=" + orgList +
                 '}';
     }

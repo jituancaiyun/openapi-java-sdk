@@ -25,8 +25,7 @@ import com.shinemo.openapi.client.common.OpenApiUtils;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static com.shinemo.openapi.client.common.Const.LOG;
 
@@ -54,8 +53,9 @@ public final class MysqlAesKeyDao implements AesKeyDao {
             PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, aesKey.getOrgId());
             pstm.setString(2, aesKey.getKey());
-            pstm.setTimestamp(3, new Timestamp(aesKey.getGmtCreate()));
-            pstm.setTimestamp(4, new Timestamp(aesKey.getGmtCreate()));
+            Calendar cal = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+            pstm.setTimestamp(3, new Timestamp(aesKey.getGmtCreate()),cal);
+            pstm.setTimestamp(4, new Timestamp(aesKey.getGmtCreate()),cal);
             if (pstm.executeUpdate() > 0) {
                 ResultSet rs = pstm.getGeneratedKeys();
                 if (rs.next()) {

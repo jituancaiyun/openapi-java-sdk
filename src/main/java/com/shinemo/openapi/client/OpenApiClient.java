@@ -22,6 +22,7 @@ package com.shinemo.openapi.client;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.AccessTokenDTO;
 import com.shinemo.openapi.client.dto.UserInfoDTO;
+import com.shinemo.openapi.client.jssdk.JsapiSignature;
 
 /**
  * Created by ohun on 2017/3/24.
@@ -36,6 +37,14 @@ public interface OpenApiClient extends OpenApiServiceFactory {
      * @return AccessTokenDTO
      */
     OpenApiResult<AccessTokenDTO> getAccessToken();
+
+    /**
+     * 获取jsapi 要使用的签名
+     *
+     * @param url 要签名的url
+     * @return JsapiSignature
+     */
+    JsapiSignature getJsapiSignature(String url);
 
     /**
      * 创建OpenApiClient的配置项

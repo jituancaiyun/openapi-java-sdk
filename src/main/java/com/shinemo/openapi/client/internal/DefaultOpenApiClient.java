@@ -26,7 +26,9 @@ import com.shinemo.openapi.client.api.BaseApi;
 import com.shinemo.openapi.client.common.Jsons;
 import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.common.OpenApiUtils;
 import com.shinemo.openapi.client.dto.AccessTokenDTO;
+import com.shinemo.openapi.client.jssdk.JsapiSignature;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -116,6 +118,19 @@ import static com.shinemo.openapi.client.common.Const.LOG;
     @Override
     public OpenApiResult<AccessTokenDTO> getAccessToken() {
         return checkAccessToken();
+    }
+
+    @Override
+    public JsapiSignature getJsapiSignature(String url) {
+        OpenApiResult<AccessTokenDTO> result = getAccessToken();
+        if (result.isSuccess()) {
+            String ticket = result.getData().getJsapiTicket();
+            String none = OpenApiUtils.createNonce();
+            long timestamp = OpenApiUtils.createTimestamp();
+            String signature = OpenApiUtils.genJsapiSignature(ticket, none, timestamp, url);
+            return new JsapiSignature(signature, timestamp, none);
+        }
+        return null;
     }
 
     @Override

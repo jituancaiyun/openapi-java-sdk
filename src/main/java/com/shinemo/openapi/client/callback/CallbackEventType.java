@@ -25,11 +25,11 @@ package com.shinemo.openapi.client.callback;
  * @author ohun@live.cn (夜色)
  */
 public enum CallbackEventType {
-    OrgSubscribe("1");
+    OrgSubscribe(1);
 
-    CallbackEventType(String type) {
+    CallbackEventType(int type) {
         this.type = type;
     }
 
-    public final String type;
+    public final int type;
 }

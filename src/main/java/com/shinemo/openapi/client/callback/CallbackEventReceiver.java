@@ -48,8 +48,6 @@ public abstract class CallbackEventReceiver {
     @Resource
     private OpenApiClient openApiClient;
 
-    protected abstract int on(CallbackEvent event);
-
     public final void receiver(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (openApiClient == null) {
             throw new OpenApiException("please init OpenApiClient and set to this bean");
@@ -62,7 +60,7 @@ public abstract class CallbackEventReceiver {
         }
 
         CallbackEventBody event = Jsons.fromJson(eventData, CallbackEventBody.class);
-        if (event == null || event.getEventType() == null || event.getEncryptData() == null) {
+        if (event == null || event.getEventType() == 0 || event.getEncryptData() == null) {
             sendResult(response, 400, "event data is invalid");
             return;
         }
@@ -94,15 +92,15 @@ public abstract class CallbackEventReceiver {
         }
     }
 
-    protected abstract int onEvent(String eventType, String eventBody) throws Exception;
+    protected abstract int onEvent(int eventType, String eventBody) throws Exception;
 
     protected <T extends CallbackEvent> T parseEvent(String eventJson, Class<T> eventClass) {
         return openApiClient.config().getGson().fromJson(eventJson, eventClass);
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends CallbackEvent> T parseEvent(String eventType, String eventBody) {
-        if (OrgSubscribe.type.equals(eventType)) {
+    protected <T extends CallbackEvent> T parseEvent(int eventType, String eventBody) {
+        if (OrgSubscribe.type == eventType) {
             return (T) parseEvent(eventBody, OrgSubscribeEvent.class);
         }
         throw new OpenApiException("sdk unsupported event");

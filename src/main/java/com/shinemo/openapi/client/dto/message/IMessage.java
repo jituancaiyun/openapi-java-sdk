@@ -38,6 +38,7 @@ public abstract class IMessage<T extends IMessage> {
 
     public static final int FLAG_ENCRYPT = 1;//加密
     public static final int FLAG_SMS = 2;//必达
+    public static final int FLAG_UNREAD = 4;//未读标识
 
     /**
      * 是否需要加密消息

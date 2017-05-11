@@ -29,7 +29,7 @@ public final class CallbackEventBody {
     private String nonce;
     private long timestamp;
     private String encryptData;
-    private String eventType;
+    private int eventType;
 
     public String getSignature() {
         return signature;
@@ -63,11 +63,11 @@ public final class CallbackEventBody {
         this.encryptData = encryptData;
     }
 
-    public String getEventType() {
+    public int getEventType() {
         return eventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType(int eventType) {
         this.eventType = eventType;
     }
 

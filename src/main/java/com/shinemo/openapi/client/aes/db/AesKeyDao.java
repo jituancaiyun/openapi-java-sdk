@@ -35,8 +35,7 @@ public interface AesKeyDao {
      * 通过Id查询密钥
      *
      * @param id
-     * @return
-     * @
+     * @return AesKeyEntity
      */
     AesKeyEntity getById(int id);
 
@@ -44,8 +43,7 @@ public interface AesKeyDao {
      * 插入新密钥
      *
      * @param entity
-     * @return
-     * @
+     * @return true/false
      */
     boolean insert(AesKeyEntity entity);
 
@@ -54,8 +52,7 @@ public interface AesKeyDao {
      *
      * @param orgId 企业Id
      * @param limit 条数
-     * @return
-     * @
+     * @return AesKeyEntity list
      */
     List<AesKeyEntity> selectListByOrgId(String orgId, int limit);
 
@@ -63,8 +60,7 @@ public interface AesKeyDao {
      * 指定Id查询
      *
      * @param ids
-     * @return
-     * @
+     * @return AesKeyEntity list
      */
     List<AesKeyEntity> selectListByKeyIds(List<Integer> ids);
 

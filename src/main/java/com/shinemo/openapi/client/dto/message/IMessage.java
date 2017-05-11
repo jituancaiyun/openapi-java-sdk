@@ -71,7 +71,7 @@ public abstract class IMessage<T extends IMessage> {
      * 创建文本消息
      *
      * @param content 消息内容
-     * @return
+     * @return TextMessage
      */
     public static TextMessage createTextMessage(String content) {
         return new TextMessage(content);
@@ -81,7 +81,7 @@ public abstract class IMessage<T extends IMessage> {
      * 创建图片消息
      *
      * @param url 图片地址
-     * @return
+     * @return ImageMessage
      */
     public static ImageMessage createImageMessage(String url) {
         return new ImageMessage(url);
@@ -91,7 +91,7 @@ public abstract class IMessage<T extends IMessage> {
      * 创建语音消息
      *
      * @param url 语音消息下载地址
-     * @return
+     * @return VoiceMessage
      */
     public static VoiceMessage createVoiceMessage(String url) {
         return new VoiceMessage(url);
@@ -101,7 +101,7 @@ public abstract class IMessage<T extends IMessage> {
      * 创建应用通知消息
      *
      * @param title 消息标题, 会话列表展示
-     * @return
+     * @return AppMessage
      */
     public static AppMessage createAppMessage(String title) {
         return new AppMessage(title).setTitle(title);
@@ -111,7 +111,7 @@ public abstract class IMessage<T extends IMessage> {
      * 创建图文消息
      *
      * @param title 消息标题, 会话列表展示
-     * @return
+     * @return RichImageMessage
      */
     public static RichImageMessage createTextImageMessage(String title) {
         return new RichImageMessage(title);
@@ -121,7 +121,7 @@ public abstract class IMessage<T extends IMessage> {
      * 创建文本链接消息
      *
      * @param title 消息标题, 会话列表展示
-     * @return
+     * @return RichLinkMessage
      */
     public static RichLinkMessage createTextLinkMessage(String title) {
         return new RichLinkMessage(title);
@@ -130,8 +130,8 @@ public abstract class IMessage<T extends IMessage> {
     /**
      * 创建多图文消息
      *
-     * @param title
-     * @return
+     * @param title 消息标题, 会话列表展示
+     * @return ArticleMessage
      */
     public static ArticleMessage createArticleMessage(String title) {
         return new ArticleMessage(title);
@@ -140,8 +140,8 @@ public abstract class IMessage<T extends IMessage> {
     /**
      * 创建多图文消息
      *
-     * @param title
-     * @return
+     * @param title 消息标题, 会话列表展示
+     * @return SystemMessage
      */
     public static SystemMessage createSystemMessage(String title) {
         return new SystemMessage(title).setTitle(title);

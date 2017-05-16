@@ -74,6 +74,8 @@ public final class OpenApiResult<T> {
     public static <T> OpenApiResult<T> success() {
         return (OpenApiResult<T>) OK;
     }
+
+    @SuppressWarnings("unchecked")
     public static <T> OpenApiResult<T> failure() {
         return (OpenApiResult<T>) FAIL;
     }

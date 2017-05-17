@@ -31,7 +31,7 @@ import javax.sql.DataSource;
  * @author ohun@live.cn (夜色)
  */
 public final class Apis {
-    private static int env = 0;
+    private static int env = 1;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();

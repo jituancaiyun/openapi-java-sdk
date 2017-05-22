@@ -6,8 +6,8 @@
     <!--==============================================OpenApiClient配置=================================================-->
     <!--open api configuration-->
     <bean id="openApiConfiguration" class="com.shinemo.openapi.client.OpenApiConfiguration">
-        <property name="appId" value="94181123"/><!--应用ID-->
-        <property name="appSecret" value="6fe73d451cd37f8a"/><!--应用密钥-->
+        <property name="appId" value="18417860"/><!--应用ID-->
+        <property name="appSecret" value="73bbd83dc374077a3a952f71a7a4916f"/><!--应用密钥-->
         <property name="appToken" value=""/><!--应用token, 用于回调签名-->
         <property name="baseUrl" value="http://10.0.10.49:8081/openapi/"/><!--open api 接口地址 必须以"/"结尾-->
         <property name="connectTimeoutMillis" value="3000"/><!--建立http连接超时时间, 默认10s-->

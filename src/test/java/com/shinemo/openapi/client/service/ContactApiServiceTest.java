@@ -27,7 +27,19 @@ public class ContactApiServiceTest {
 
     @Test
     public void getDeptUsers() throws Exception {
-        OpenApiResult<ContactDTO> result = contactApiService.listUsers(ApiContext.ctx("57171554250"), 440402);
+        OpenApiResult<ContactDTO> result = contactApiService.listUsers(ApiContext.ctx("84057"), 0);
+        System.out.println(result);
+    }
+
+    @Test
+    public void getDeptUsersAll() throws Exception {
+        OpenApiResult<ContactDTO> result = contactApiService.listUsersAll(ApiContext.ctx("84057"), 0);
+        System.out.println(result);
+    }
+
+    @Test
+    public void detail() throws Exception {
+        OpenApiResult<ContactUserDTO> result = contactApiService.detail(ApiContext.ctx("84057"), 10101001212949L,11);
         System.out.println(result);
     }
 

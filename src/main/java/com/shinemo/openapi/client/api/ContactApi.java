@@ -44,6 +44,26 @@ public interface ContactApi {
     Call<OpenApiResult<ContactDTO>> listUsers(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
 
     /**
+     * 获取某个部门下的所有用户（包含子部门用户）
+     *
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param deptId 部门ID
+     * @return ContactDTO
+     */
+    @GET("user/list/all")
+    Call<OpenApiResult<ContactDTO>> listUsersAll(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
+
+    /**
+     * 获取某个部门下的所有用户（包含子部门用户）
+     *
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param deptId 部门ID
+     * @return ContactDTO
+     */
+    @GET("user/detail")
+    Call<OpenApiResult<ContactUserDTO>> detail(@HeaderMap Map<String, String> headers, @Query("uid") long uid, @Query("deptId") long deptId);
+
+    /**
      * 创建用户
      *
      * @param headers 基础header参数, accessToken, orgId, uid

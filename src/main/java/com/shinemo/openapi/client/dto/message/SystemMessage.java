@@ -19,6 +19,8 @@
 
 package com.shinemo.openapi.client.dto.message;
 
+import java.util.Arrays;
+
 /**
  * Created by ohun on 2017/4/11.
  *
@@ -94,5 +96,16 @@ public final class SystemMessage extends IMessage<SystemMessage> {
     @Override
     public byte type() {
         return 25;
+    }
+
+    @Override
+    public String toString() {
+        return "SystemMessage{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", desc=" + Arrays.toString(desc) +
+                ", action='" + action + '\'' +
+                ", color='" + color + '\'' +
+                '}';
     }
 }

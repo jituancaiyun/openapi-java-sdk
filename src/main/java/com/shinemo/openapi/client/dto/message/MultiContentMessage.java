@@ -19,6 +19,8 @@
 
 package com.shinemo.openapi.client.dto.message;
 
+import java.util.Arrays;
+
 /**
  * Created by ohun on 2017/4/11.
  *
@@ -115,5 +117,18 @@ public final class MultiContentMessage extends IMessage<MultiContentMessage> {
     @Override
     public byte type() {
         return 22;
+    }
+
+    @Override
+    public String toString() {
+        return "MultiContentMessage{" +
+                "bizName='" + bizName + '\'' +
+                ", title='" + title + '\'' +
+                ", content=" + Arrays.toString(content) +
+                ", name='" + name + '\'' +
+                ", time=" + time +
+                ", action='" + action + '\'' +
+                ", color='" + color + '\'' +
+                '}';
     }
 }

@@ -95,4 +95,15 @@ public final class FileMessage extends IMessage<FileMessage> {
     public byte type() {
         return 5;
     }
+
+    @Override
+    public String toString() {
+        return "FileMessage{" +
+                "fileId='" + fileId + '\'' +
+                ", fileSize=" + fileSize +
+                ", userId='" + userId + '\'' +
+                ", downloadUrl='" + downloadUrl + '\'' +
+                ", orgId='" + orgId + '\'' +
+                '}';
+    }
 }

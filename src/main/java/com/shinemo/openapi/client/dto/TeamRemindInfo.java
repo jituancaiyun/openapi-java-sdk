@@ -46,19 +46,8 @@ public class TeamRemindInfo{
         private ArrayList<MemberUser> members;
         private ArrayList<Integer> voiceWave;
         private boolean isPushMail;
-        private boolean isVoiceRemind;
 
-        @Override
-        public String toString() {
-            return "TeamRemindDetail{" +
-                    "content='" + content + '\'' +
-                    ", remindTime=" + remindTime +
-                    ", createTime=" + createTime +
-                    ", remindType=" + remindType +
-                    ", type=" + type +
-                    ", isVoiceRemind=" + isVoiceRemind +
-                    '}';
-        }
+        private boolean isVoiceRemind;
 
         public String getContent() {
             return content;
@@ -163,87 +152,25 @@ public class TeamRemindInfo{
         public void setIsVoiceRemind(boolean isVoiceRemind) {
             this.isVoiceRemind = isVoiceRemind;
         }
-    }
-
-    public class MemberUser{
-        private String uid;
-        private String name;
-        private int status;
-        private boolean isRemind = true;
-        private String reply = "";
-        private String gmtReply = "";
-        private boolean isDelete = false;
-        private boolean isBindingMail = false;
 
         @Override
         public String toString() {
-            return "MemberUser{" +
-                    "uid='" + uid + '\'' +
+            return "TeamRemindDetail{" +
+                    "content='" + content + '\'' +
+                    ", voiceUrl='" + voiceUrl + '\'' +
+                    ", voiceLength=" + voiceLength +
+                    ", remindTime=" + remindTime +
+                    ", createTime=" + createTime +
+                    ", remindType=" + remindType +
+                    ", type=" + type +
+                    ", fromSource=" + fromSource +
+                    ", extra='" + extra + '\'' +
+                    ", members=" + members +
+                    ", voiceWave=" + voiceWave +
+                    ", isPushMail=" + isPushMail +
+                    ", isVoiceRemind=" + isVoiceRemind +
                     '}';
         }
-
-        public String getUid() {
-            return uid;
-        }
-
-        public void setUid(String uid) {
-            this.uid = uid;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
-        public boolean getIsRemind() {
-            return isRemind;
-        }
-
-        public void setIsRemind(boolean isRemind) {
-            this.isRemind = isRemind;
-        }
-
-        public String getReply() {
-            return reply;
-        }
-
-        public void setReply(String reply) {
-            this.reply = reply;
-        }
-
-        public String getGmtReply() {
-            return gmtReply;
-        }
-
-        public void setGmtReply(String gmtReply) {
-            this.gmtReply = gmtReply;
-        }
-
-        public boolean getIsDelete() {
-            return isDelete;
-        }
-
-        public void setIsDelete(boolean isDelete) {
-            this.isDelete = isDelete;
-        }
-
-        public boolean getIsBindingMail() {
-            return isBindingMail;
-        }
-
-        public void setIsBindingMail(boolean isBindingMail) {
-            this.isBindingMail = isBindingMail;
-        }
     }
+
 }

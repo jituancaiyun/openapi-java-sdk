@@ -22,10 +22,7 @@ package com.shinemo.openapi.client.api;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.TeamRemindInfo;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.HeaderMap;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 
 import java.util.Map;
 
@@ -59,17 +56,17 @@ public interface MatterNoticeApi {
     /**
      * 获取事项告知详情
      *
-     * @param headers          基础header参数, accessToken, orgId, uid
+     * @param headers  基础header参数, accessToken, orgId, uid
      * @param noticeId 事项告知id
      * @return
      */
-    @POST("notification/detail")
+    @GET("notification/detail")
     Call<OpenApiResult<TeamRemindInfo>> detail(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId);
 
     /**
      * 删除事项告知
      *
-     * @param headers          基础header参数, accessToken, orgId, uid
+     * @param headers  基础header参数, accessToken, orgId, uid
      * @param noticeId 事项告知id
      * @return
      */
@@ -79,7 +76,7 @@ public interface MatterNoticeApi {
     /**
      * 删除事项告知
      *
-     * @param headers          基础header参数, accessToken, orgId, uid
+     * @param headers  基础header参数, accessToken, orgId, uid
      * @param noticeId 事项告知id
      * @return
      */
@@ -89,7 +86,7 @@ public interface MatterNoticeApi {
     /**
      * 删除事项告知
      *
-     * @param headers          基础header参数, accessToken, orgId, uid
+     * @param headers  基础header参数, accessToken, orgId, uid
      * @param noticeId 事项告知id
      * @return
      */
@@ -99,7 +96,7 @@ public interface MatterNoticeApi {
     /**
      * 删除事项告知
      *
-     * @param headers          基础header参数, accessToken, orgId, uid
+     * @param headers  基础header参数, accessToken, orgId, uid
      * @param noticeId 事项告知id
      * @return
      */

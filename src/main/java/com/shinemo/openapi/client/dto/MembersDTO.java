@@ -42,4 +42,13 @@ public class MembersDTO {
         isRemind = remind;
     }
 
+    @Override
+    public String toString() {
+        return "MembersDTO{" +
+                "uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", msgStatus=" + msgStatus +
+                ", isRemind=" + isRemind +
+                '}';
+    }
 }

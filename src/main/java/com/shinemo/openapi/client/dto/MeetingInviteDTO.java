@@ -92,4 +92,19 @@ public class MeetingInviteDTO {
     public void setOrgType(Integer orgType) {
         this.orgType = orgType;
     }
+
+    @Override
+    public String toString() {
+        return "MeetingInviteDTO{" +
+                "requesterUid='" + requesterUid + '\'' +
+                ", requesterName='" + requesterName + '\'' +
+                ", orgId=" + orgId +
+                ", orgType=" + orgType +
+                ", createrId='" + createrId + '\'' +
+                ", createrName='" + createrName + '\'' +
+                ", meetingInviteId=" + meetingInviteId +
+                ", pushStatus=" + pushStatus +
+                ", detail=" + detail +
+                '}';
+    }
 }

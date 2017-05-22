@@ -96,4 +96,15 @@ public final class EmailMessage extends IMessage<EmailMessage> {
     public byte type() {
         return 16;
     }
+
+    @Override
+    public String toString() {
+        return "EmailMessage{" +
+                "mContent='" + mContent + '\'' +
+                ", mUrl='" + mUrl + '\'' +
+                ", isShare=" + isShare +
+                ", sendTime=" + sendTime +
+                ", sender='" + sender + '\'' +
+                '}';
+    }
 }

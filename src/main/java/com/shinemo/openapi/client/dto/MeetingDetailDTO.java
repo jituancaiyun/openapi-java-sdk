@@ -84,4 +84,18 @@ public class MeetingDetailDTO {
     public void setMembers(List<MembersDTO> members) {
         this.members = members;
     }
+
+    @Override
+    public String toString() {
+        return "MeetingDetailDTO{" +
+                "createTime=" + createTime +
+                ", content='" + content + '\'' +
+                ", address='" + address + '\'' +
+                ", beginTime=" + beginTime +
+                ", endTime=" + endTime +
+                ", remindMin=" + remindMin +
+                ", remindType=" + remindType +
+                ", members=" + members +
+                '}';
+    }
 }

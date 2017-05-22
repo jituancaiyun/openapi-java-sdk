@@ -97,4 +97,14 @@ public final class CalMessage extends IMessage<CalMessage> {
         return 17;
     }
 
+    @Override
+    public String toString() {
+        return "CalMessage{" +
+                "audioUrl='" + audioUrl + '\'' +
+                ", duration=" + duration +
+                ", uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", time=" + time +
+                '}';
+    }
 }

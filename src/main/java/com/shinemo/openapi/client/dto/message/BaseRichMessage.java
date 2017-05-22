@@ -83,4 +83,15 @@ public abstract class BaseRichMessage<T extends BaseRichMessage> extends IMessag
         this.fromIcon = fromIcon;
         return (T) this;
     }
+
+    @Override
+    public String toString() {
+        return "BaseRichMessage{" +
+                "content='" + content + '\'' +
+                ", url='" + url + '\'' +
+                ", image='" + image + '\'' +
+                ", from='" + from + '\'' +
+                ", fromIcon='" + fromIcon + '\'' +
+                '}';
+    }
 }

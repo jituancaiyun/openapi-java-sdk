@@ -118,4 +118,17 @@ public final class PushMessageDTO {
     public void setPushTips(String pushTips) {
         this.pushTips = pushTips;
     }
+
+    @Override
+    public String toString() {
+        return "PushMessageDTO{" +
+                "flags=" + flags +
+                ", msgType=" + msgType +
+                ", message='" + message + '\'' +
+                ", extraData='" + extraData + '\'' +
+                ", receivers=" + receivers +
+                ", keyId=" + keyId +
+                ", pushTips='" + pushTips + '\'' +
+                '}';
+    }
 }

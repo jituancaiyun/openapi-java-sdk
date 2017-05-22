@@ -129,5 +129,23 @@ public final class ArticleMessage extends IMessage<ArticleMessage> {
             this.url = url;
             return this;
         }
+
+        @Override
+        public String toString() {
+            return "Article{" +
+                    "title='" + title + '\'' +
+                    ", description='" + description + '\'' +
+                    ", picUrl='" + picUrl + '\'' +
+                    ", url='" + url + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "ArticleMessage{" +
+                "articleCount=" + articleCount +
+                ", articles=" + articles +
+                '}';
     }
 }

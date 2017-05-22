@@ -44,8 +44,8 @@ public class PersonalRemindApiServiceTest {
 
     private PersonalRemindApiService personalRemindApiService;
     private OpenApiClient client;
-    private String orgId = "85161";
-    private String uid = "101010012129489";
+    private String orgId = "85161";//"84057";
+    private String uid = "101010011894152";//"101010012129489";
     private String name = "yuanjian";
     private ApiContext context;
 
@@ -67,7 +67,7 @@ public class PersonalRemindApiServiceTest {
 
         SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
         long longDate = new Date().getTime() + 1000 * 60 * 10;
-//        personalRemind.setRemindTime(longDate);
+        personalRemind.setRemindTime(longDate);
         String remindTime = sdf.format(new Date(longDate));
 
         PersonalRemindDTO.RFrequency rFrequency = personalRemindDTO.new RFrequency();
@@ -108,10 +108,9 @@ public class PersonalRemindApiServiceTest {
 
     @Test
     public void getPersonalRemindDetail() {
-        long personalRemindId = 17303L;
+        long personalRemindId = 17312L;
         OpenApiResult<PersonalRemindDTO> result = personalRemindApiService.detail(context, personalRemindId);
-        System.out.println(result.getData().getPersonalRemind().getRfrequency());
-        System.out.println(result.getData().getPersonalRemind());
+        System.out.println(result);
     }
 
     public static void main(String[] args) throws ParseException {
@@ -120,7 +119,7 @@ public class PersonalRemindApiServiceTest {
 //        System.out.println(time.split(" ")[1].replaceAll(":",""));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //设置开始提醒的时间
-        System.out.println(sdf.parse("2016-05-03 16:23:32").getTime());
+        System.out.println(sdf.parse("2017-05-22 16:23:32").getTime());
     }
 
     @Test

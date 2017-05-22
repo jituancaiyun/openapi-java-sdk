@@ -34,4 +34,11 @@ public class MeetingIdDTO {
     public void setMeetingInviteId(String meetingInviteId) {
         this.meetingInviteId = meetingInviteId;
     }
+
+    @Override
+    public String toString() {
+        return "MeetingIdDTO{" +
+                "meetingInviteId='" + meetingInviteId + '\'' +
+                '}';
+    }
 }

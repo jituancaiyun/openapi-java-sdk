@@ -65,4 +65,12 @@ public final class VoteMessage extends IMessage<VoteMessage> {
     public byte type() {
         return 6;
     }
+
+    @Override
+    public String toString() {
+        return "VoteMessage{" +
+                "voteId='" + voteId + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }

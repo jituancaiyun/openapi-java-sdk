@@ -27,7 +27,7 @@ import java.util.ArrayList;
  *
  * @author ohun@live.cn (夜色)
  */
-public final class PersonalRemindDTO implements Serializable {
+public class PersonalRemindDTO implements Serializable {
 
     private CreateUser createUser;
     private PersonalRemind personalRemind;
@@ -230,6 +230,15 @@ public final class PersonalRemindDTO implements Serializable {
 
         public void setVoiceBand(ArrayList<Integer> voiceBand) {
             this.voiceBand = voiceBand;
+        }
+
+        @Override
+        public String toString() {
+            return "RAttachment{" +
+                    "duration=" + duration +
+                    ", url='" + url + '\'' +
+                    ", voiceBand=" + voiceBand +
+                    '}';
         }
     }
 

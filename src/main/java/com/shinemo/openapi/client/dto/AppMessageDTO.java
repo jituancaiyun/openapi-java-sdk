@@ -157,7 +157,40 @@ public class AppMessageDTO {
             public void setUrl(String url) {
                 this.url = url;
             }
+
+            @Override
+            public String toString() {
+                return "Article{" +
+                        "title='" + title + '\'' +
+                        ", description='" + description + '\'' +
+                        ", picUrl='" + picUrl + '\'' +
+                        ", url='" + url + '\'' +
+                        '}';
+            }
         }
+
+        @Override
+        public String toString() {
+            return "MsgBody{" +
+                    "content='" + content + '\'' +
+                    ", picUrl='" + picUrl + '\'' +
+                    ", mediaId='" + mediaId + '\'' +
+                    ", width=" + width +
+                    ", height=" + height +
+                    ", articleCount=" + articleCount +
+                    ", articles=" + articles +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "AppMessageDTO{" +
+                "appId='" + appId + '\'' +
+                ", msgType='" + msgType + '\'' +
+                ", msgBody=" + msgBody +
+                ", receivers=" + receivers +
+                '}';
     }
 
     public static class Receiver {

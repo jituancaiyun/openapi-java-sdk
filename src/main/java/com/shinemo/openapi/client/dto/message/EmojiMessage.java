@@ -64,4 +64,12 @@ public final class EmojiMessage extends IMessage<EmojiMessage> {
     public byte type() {
         return 12;
     }
+
+    @Override
+    public String toString() {
+        return "EmojiMessage{" +
+                "md5='" + md5 + '\'' +
+                ", gitMd5='" + gitMd5 + '\'' +
+                '}';
+    }
 }

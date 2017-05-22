@@ -72,4 +72,13 @@ public final class ImageMessage extends IMessage<ImageMessage> {
     public byte type() {
         return 2;
     }
+
+    @Override
+    public String toString() {
+        return "ImageMessage{" +
+                "width=" + width +
+                ", height=" + height +
+                ", isGif=" + isGif +
+                '}';
+    }
 }

@@ -23,6 +23,7 @@ import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.MemberUser;
 import com.shinemo.openapi.client.dto.TeamRemindInfo;
 import org.junit.Before;
 import org.junit.Test;
@@ -82,9 +83,9 @@ public class MatterNoticeApiServiceTest {
         teamRemindDetail.setRemindTime(new Date().getTime() + 1000*60*10);
         teamRemindDetail.setIsVoiceRemind(false);
         String[] receivers = {"101010012129489","101010011894152"};//
-        ArrayList<TeamRemindInfo.MemberUser> list = new ArrayList<TeamRemindInfo.MemberUser>();
+        ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i=0;i<receivers.length;i++){
-            TeamRemindInfo.MemberUser memberUser = teamRemindInfo.new MemberUser();
+            MemberUser memberUser = new MemberUser();
             memberUser.setUid(receivers[i]);
             memberUser.setName("yuanjian"+i);
             list.add(memberUser);
@@ -104,9 +105,9 @@ public class MatterNoticeApiServiceTest {
         teamRemindDetail.setRemindTime(new Date().getTime() + 1000*60*10);
         teamRemindDetail.setIsVoiceRemind(false);
         String[] receivers = {"101010011894152"};//"101010012129489",
-        ArrayList<TeamRemindInfo.MemberUser> list = new ArrayList<TeamRemindInfo.MemberUser>();
+        ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i=0;i<receivers.length;i++){
-            TeamRemindInfo.MemberUser memberUser = teamRemindInfo.new MemberUser();
+            MemberUser memberUser = new MemberUser();
             memberUser.setUid(receivers[i]);
             memberUser.setName("yuanjian"+i);
             list.add(memberUser);

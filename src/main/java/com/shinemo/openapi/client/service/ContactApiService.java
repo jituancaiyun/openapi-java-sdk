@@ -24,6 +24,12 @@ import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.api.ContactApi;
 import com.shinemo.openapi.client.dto.*;
 import com.shinemo.openapi.client.common.Api;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.Query;
+
+import java.util.Map;
 
 /**
  * Created by ohun on 2017/3/23.
@@ -41,6 +47,24 @@ public interface ContactApiService {
      * @return ContactDTO
      */
     OpenApiResult<ContactDTO> listUsers(ApiContext apiContext, long deptId);
+
+    /**
+     * 获取某个部门下的所有用户（包含子部门用户）
+     *
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param deptId     部门ID
+     * @return ContactDTO
+     */
+    OpenApiResult<ContactDTO> listUsersAll(ApiContext apiContext, long deptId);
+
+    /**
+     * 获取用户详细信息（包含子部门用户）
+     *
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param deptId  部门ID
+     * @return ContactDTO
+     */
+    OpenApiResult<ContactUserDTO> detail(ApiContext apiContext,long uid, long deptId);
 
     /**
      * 创建用户

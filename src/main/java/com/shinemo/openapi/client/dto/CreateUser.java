@@ -49,4 +49,15 @@ public class CreateUser {
     public void setBindingMail(boolean bindingMail) {
         isBindingMail = bindingMail;
     }
+
+    @Override
+    public String toString() {
+        return "CreateUser{" +
+                "uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                ", isRemind=" + isRemind +
+                ", isDelete=" + isDelete +
+                ", isBindingMail=" + isBindingMail +
+                '}';
+    }
 }

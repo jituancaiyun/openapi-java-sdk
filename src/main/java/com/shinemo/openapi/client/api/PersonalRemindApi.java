@@ -70,7 +70,7 @@ public interface PersonalRemindApi {
      * @param personalRemindId 个人提醒id
      * @return
      */
-    @POST("personalremind/detail")
+    @GET("personalremind/detail")
     Call<OpenApiResult<PersonalRemindDTO>> detail(@HeaderMap Map<String, String> headers, @Query("personalRemindId") long personalRemindId);
 
 }

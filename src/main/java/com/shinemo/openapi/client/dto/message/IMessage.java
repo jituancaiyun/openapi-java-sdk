@@ -219,6 +219,6 @@ public abstract class IMessage<T extends IMessage> {
     public abstract String validate();
 
     protected String extraData() {
-        return Jsons.toJson(message);
+        return Jsons.toJson(this);
     }
 }

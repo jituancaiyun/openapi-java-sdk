@@ -264,4 +264,18 @@ public final class AppMessage extends IMessage<AppMessage> {
             return json;
         }
     }
+
+    @Override
+    public String toString() {
+        return "AppMessage{" +
+                "content='" + content + '\'' +
+                ", from='" + from + '\'' +
+                ", fromIcon='" + fromIcon + '\'' +
+                ", isShare=" + isShare +
+                ", action='" + action + '\'' +
+                ", title='" + title + '\'' +
+                ", preTitle='" + preTitle + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }

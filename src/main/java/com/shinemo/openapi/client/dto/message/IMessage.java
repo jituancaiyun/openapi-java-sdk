@@ -56,6 +56,11 @@ public abstract class IMessage<T extends IMessage> {
     private transient String pushTips;
 
     /**
+     * 二级应用ID
+     */
+    private transient Integer subAppId;
+
+    /**
      * 消息内容
      */
     protected transient String message;
@@ -169,6 +174,7 @@ public abstract class IMessage<T extends IMessage> {
         messageDTO.setFlags(flags);
         messageDTO.setReceivers(receivers);
         messageDTO.setPushTips(pushTips);
+        messageDTO.setSubAppId(subAppId);
         return messageDTO;
     }
 
@@ -207,6 +213,12 @@ public abstract class IMessage<T extends IMessage> {
      */
     public T setPushTips(String pushTips) {
         this.pushTips = pushTips;
+        return (T) this;
+    }
+
+
+    public T setSubAppId(int subAppId) {
+        this.subAppId = subAppId;
         return (T) this;
     }
 

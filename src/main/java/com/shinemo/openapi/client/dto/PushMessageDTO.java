@@ -63,6 +63,11 @@ public final class PushMessageDTO {
      */
     private String pushTips;
 
+    /**
+     * 二级应用ID
+     */
+    private Integer subAppId;
+
     public int getFlags() {
         return flags;
     }
@@ -117,6 +122,14 @@ public final class PushMessageDTO {
 
     public void setPushTips(String pushTips) {
         this.pushTips = pushTips;
+    }
+
+    public Integer getSubAppId() {
+        return subAppId;
+    }
+
+    public void setSubAppId(Integer subAppId) {
+        this.subAppId = subAppId;
     }
 
     @Override

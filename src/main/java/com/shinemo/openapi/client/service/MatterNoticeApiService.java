@@ -23,7 +23,7 @@ import com.shinemo.openapi.client.api.MatterNoticeApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.TeamRemindInfo;
+import com.shinemo.openapi.client.dto.TeamRemindInfoDTO;
 
 import java.util.Map;
 
@@ -41,11 +41,11 @@ public interface MatterNoticeApiService {
      * @param apiContext       基础header参数, accessToken, orgId, uid
      * @param teamRemindDetail 个人提醒详情
      */
-    OpenApiResult<Map<String, Long>> create(ApiContext apiContext, TeamRemindInfo.TeamRemindDetail teamRemindDetail);
+    OpenApiResult<Map<String, Long>> create(ApiContext apiContext, TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail);
 
-    OpenApiResult<Long> update(ApiContext apiContext, long personalRemindId, TeamRemindInfo.TeamRemindDetail teamRemindDetail);
+    OpenApiResult<Long> update(ApiContext apiContext, long personalRemindId, TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail);
 
-    OpenApiResult<TeamRemindInfo> detail(ApiContext apiContext, long noticeId);
+    OpenApiResult<TeamRemindInfoDTO> detail(ApiContext apiContext, long noticeId);
 
     OpenApiResult<Long> cancel(ApiContext apiContext, long noticeId);
 

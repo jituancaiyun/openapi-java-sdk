@@ -27,36 +27,36 @@ import java.util.ArrayList;
  *
  * @author ohun@live.cn (夜色)
  */
-public class PersonalRemindDTO implements Serializable {
+public class PersonalRemindInfoDTO implements Serializable {
 
-    private CreateUser createUser;
-    private PersonalRemind personalRemind;
+    private CreateUserDTO createUser;
+    private PersonalRemindDTO personalRemind;
 
-    public CreateUser getCreateUser() {
+    public CreateUserDTO getCreateUser() {
         return createUser;
     }
 
-    public void setCreateUser(CreateUser createUser) {
+    public void setCreateUser(CreateUserDTO createUser) {
         this.createUser = createUser;
     }
 
-    public PersonalRemind getPersonalRemind() {
+    public PersonalRemindDTO getPersonalRemind() {
         return personalRemind;
     }
 
-    public void setPersonalRemind(PersonalRemind personalRemind) {
+    public void setPersonalRemind(PersonalRemindDTO personalRemind) {
         this.personalRemind = personalRemind;
     }
 
     @Override
     public String toString() {
-        return "PersonalRemindDTO{" +
+        return "PersonalRemindInfoDTO{" +
                 "createUser=" + createUser +
                 ", personalRemind=" + personalRemind +
                 '}';
     }
 
-    public class CreateUser{
+    public class CreateUserDTO{
         private String uid;
         private String name;
         private boolean isRemind = true;
@@ -115,7 +115,7 @@ public class PersonalRemindDTO implements Serializable {
         }
     }
 
-    public class PersonalRemind{
+    public class PersonalRemindDTO{
         private int remindType;
         private long remindTime;
         private String content;

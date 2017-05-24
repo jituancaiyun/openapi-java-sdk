@@ -5,9 +5,9 @@ import java.util.ArrayList;
 /**
  * Created by yuanjian on 5/15/17.
  */
-public class TeamRemindInfo{
-    private PersonalRemindDTO.CreateUser creator;
-    private TeamRemindDetail detail;
+public class TeamRemindInfoDTO{
+    private PersonalRemindInfoDTO.CreateUserDTO creator;
+    private TeamRemindDetailDTO detail;
 
     @Override
     public String toString() {
@@ -17,23 +17,23 @@ public class TeamRemindInfo{
                 '}';
     }
 
-    public PersonalRemindDTO.CreateUser getCreator() {
+    public PersonalRemindInfoDTO.CreateUserDTO getCreator() {
         return creator;
     }
 
-    public void setCreator(PersonalRemindDTO.CreateUser creator) {
+    public void setCreator(PersonalRemindInfoDTO.CreateUserDTO creator) {
         this.creator = creator;
     }
 
-    public TeamRemindDetail getDetail() {
+    public TeamRemindDetailDTO getDetail() {
         return detail;
     }
 
-    public void setDetail(TeamRemindDetail detail) {
+    public void setDetail(TeamRemindDetailDTO detail) {
         this.detail = detail;
     }
 
-    public class TeamRemindDetail {
+    public class TeamRemindDetailDTO {
         private String content;
         private String voiceUrl;
         private int voiceLength;

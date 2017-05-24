@@ -20,7 +20,7 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.TeamRemindInfo;
+import com.shinemo.openapi.client.dto.TeamRemindInfoDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -41,7 +41,7 @@ public interface MatterNoticeApi {
      */
 //    @FormUrlEncoded
     @POST("notification/create")
-    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body TeamRemindInfo.TeamRemindDetail body);
+    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body TeamRemindInfoDTO.TeamRemindDetailDTO body);
 
     /**
      * 更新事项告知
@@ -51,7 +51,7 @@ public interface MatterNoticeApi {
      * @return
      */
     @POST("notification/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId, @Body TeamRemindInfo.TeamRemindDetail body);
+    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId, @Body TeamRemindInfoDTO.TeamRemindDetailDTO body);
 
     /**
      * 获取事项告知详情
@@ -61,7 +61,7 @@ public interface MatterNoticeApi {
      * @return
      */
     @GET("notification/detail")
-    Call<OpenApiResult<TeamRemindInfo>> detail(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId);
+    Call<OpenApiResult<TeamRemindInfoDTO>> detail(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId);
 
     /**
      * 删除事项告知

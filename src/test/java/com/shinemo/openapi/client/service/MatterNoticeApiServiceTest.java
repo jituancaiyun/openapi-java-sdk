@@ -24,7 +24,7 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.MemberUser;
-import com.shinemo.openapi.client.dto.TeamRemindInfo;
+import com.shinemo.openapi.client.dto.TeamRemindInfoDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,12 +48,13 @@ public class MatterNoticeApiServiceTest {
     private String name = "yuanjian";
     private ApiContext context;
 
-    public enum RemindType{
-        APP_SEND(0,"app推送"), APPANDSMS_SEND(1,"APP+sms短信发送");
+    public enum RemindType {
+        APP_SEND(0, "app推送"), APPANDSMS_SEND(1, "APP+sms短信发送");
 
         private final int type;
         private final String desc;
-        RemindType(int type,String desc){
+
+        RemindType(int type, String desc) {
             this.type = type;
             this.desc = desc;
         }
@@ -76,80 +77,80 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void createMatterNotice() throws Exception {
-        TeamRemindInfo teamRemindInfo = new TeamRemindInfo();
-        TeamRemindInfo.TeamRemindDetail teamRemindDetail = teamRemindInfo.new TeamRemindDetail();
-        teamRemindDetail.setContent("测试事项告知，"+new Date());
+        TeamRemindInfoDTO teamRemindInfo = new TeamRemindInfoDTO();
+        TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail = teamRemindInfo.new TeamRemindDetailDTO();
+        teamRemindDetail.setContent("测试事项告知，" + new Date());
         teamRemindDetail.setRemindType(RemindType.APP_SEND.getType());
-        teamRemindDetail.setRemindTime(new Date().getTime() + 1000*60*10);
+        teamRemindDetail.setRemindTime(new Date().getTime() + 1000 * 60 * 10);
         teamRemindDetail.setIsVoiceRemind(false);
-        String[] receivers = {"101010012129489","101010011894152"};//
+        String[] receivers = {"101010012129489", "101010011894152"};//
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
-        for (int i=0;i<receivers.length;i++){
+        for (int i = 0; i < receivers.length; i++) {
             MemberUser memberUser = new MemberUser();
             memberUser.setUid(receivers[i]);
-            memberUser.setName("yuanjian"+i);
+            memberUser.setName("yuanjian" + i);
             list.add(memberUser);
         }
         teamRemindDetail.setMembers(list);
 
-        OpenApiResult<Map<String, Long>> result = matterNoticeApiService.create(context,teamRemindDetail);
+        OpenApiResult<Map<String, Long>> result = matterNoticeApiService.create(context, teamRemindDetail);
         System.out.println(result);
     }
 
     @Test
     public void updateMatterNotice() {
-        TeamRemindInfo teamRemindInfo = new TeamRemindInfo();
-        TeamRemindInfo.TeamRemindDetail teamRemindDetail = teamRemindInfo.new TeamRemindDetail();
-        teamRemindDetail.setContent("====测试更新事项告知===，"+new Date());
+        TeamRemindInfoDTO teamRemindInfo = new TeamRemindInfoDTO();
+        TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail = teamRemindInfo.new TeamRemindDetailDTO();
+        teamRemindDetail.setContent("====测试更新事项告知===，" + new Date());
         teamRemindDetail.setRemindType(RemindType.APP_SEND.getType());
-        teamRemindDetail.setRemindTime(new Date().getTime() + 1000*60*10);
+        teamRemindDetail.setRemindTime(new Date().getTime() + 1000 * 60 * 10);
         teamRemindDetail.setIsVoiceRemind(false);
         String[] receivers = {"101010011894152"};//"101010012129489",
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
-        for (int i=0;i<receivers.length;i++){
+        for (int i = 0; i < receivers.length; i++) {
             MemberUser memberUser = new MemberUser();
             memberUser.setUid(receivers[i]);
-            memberUser.setName("yuanjian"+i);
+            memberUser.setName("yuanjian" + i);
             list.add(memberUser);
         }
         teamRemindDetail.setMembers(list);
         long noticeId = 58292L;
-        OpenApiResult<Long> result = matterNoticeApiService.update(context,noticeId,teamRemindDetail);
+        OpenApiResult<Long> result = matterNoticeApiService.update(context, noticeId, teamRemindDetail);
         System.out.println(result);
     }
 
     @Test
     public void getMatterNoticeDetail() {
         long personalRemindId = 58291L;
-        OpenApiResult<TeamRemindInfo> result = matterNoticeApiService.detail(context,personalRemindId);
+        OpenApiResult<TeamRemindInfoDTO> result = matterNoticeApiService.detail(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void cancelMatterNotice() {
         long personalRemindId = 58291L;
-        OpenApiResult<Long> result = matterNoticeApiService.cancel(context,personalRemindId);
+        OpenApiResult<Long> result = matterNoticeApiService.cancel(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void deleteMatterNotice() {
         long personalRemindId = 58292L;
-        OpenApiResult<Long> result = matterNoticeApiService.delete(context,personalRemindId);
+        OpenApiResult<Long> result = matterNoticeApiService.delete(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void openMatterNotice() {
         long personalRemindId = 58291L;
-        OpenApiResult<Long> result = matterNoticeApiService.open(context,personalRemindId);
+        OpenApiResult<Long> result = matterNoticeApiService.open(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void closeMatterNotice() {
         long personalRemindId = 58291L;
-        OpenApiResult<Long> result = matterNoticeApiService.close(context,personalRemindId);
+        OpenApiResult<Long> result = matterNoticeApiService.close(context, personalRemindId);
         System.out.println(result);
     }
 

@@ -23,7 +23,7 @@ import com.shinemo.openapi.client.api.PersonalRemindApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.PersonalRemindDTO;
+import com.shinemo.openapi.client.dto.PersonalRemindInfoDTO;
 
 import java.util.Map;
 
@@ -41,12 +41,12 @@ public interface PersonalRemindApiService {
      * @param apiContext     基础header参数, accessToken, orgId, uid
      * @param personalRemind 个人提醒详情
      */
-    OpenApiResult<Map<String, Long>> create(ApiContext apiContext, PersonalRemindDTO.PersonalRemind personalRemind);
+    OpenApiResult<Map<String, Long>> create(ApiContext apiContext, PersonalRemindInfoDTO.PersonalRemindDTO personalRemind);
 
-    OpenApiResult<Long> update(ApiContext apiContext, long personalRemindId, PersonalRemindDTO.PersonalRemind personalRemind);
+    OpenApiResult<Long> update(ApiContext apiContext, long personalRemindId, PersonalRemindInfoDTO.PersonalRemindDTO personalRemind);
 
     OpenApiResult<Long> delete(ApiContext apiContext, long personalRemindId);
 
-    OpenApiResult<PersonalRemindDTO> detail(ApiContext apiContext, long personalRemindId);
+    OpenApiResult<PersonalRemindInfoDTO> detail(ApiContext apiContext, long personalRemindId);
 
 }

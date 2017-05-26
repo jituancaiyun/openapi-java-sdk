@@ -85,7 +85,7 @@ public interface MeetingApi {
      * @param body    业务数据
      * @return ContactDTO
      */
-    @GET("workbench/meetinginvite/detail")
-    Call<OpenApiResult<Long>> getMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
+    @POST("workbench/meetinginvite/detail")
+    Call<OpenApiResult<MeetingInviteDTO>> getMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
 
 }

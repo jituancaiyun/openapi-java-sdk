@@ -74,8 +74,8 @@ public interface MeetingApiService {
     /**
      * 修改会议邀请
      *
-     * @param orgId 要访问的企业ID
+     * @param meetingInviteDTO 会议信息，包含会议id
      * @return result code
      */
-    OpenApiResult<Long> getMeeting(String orgId);
+    OpenApiResult<MeetingInviteDTO> getMeeting(ApiContext apiContext, MeetingInviteDTO meetingInviteDTO);
 }

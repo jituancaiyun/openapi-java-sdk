@@ -13,14 +13,6 @@ public class MemberUser {
     private boolean isDelete = false;
     private boolean isBindingMail = false;
 
-    @Override
-    public String toString() {
-        return "MemberUser{" +
-                "uid='" + uid + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
     public String getUid() {
         return uid;
     }
@@ -83,5 +75,13 @@ public class MemberUser {
 
     public void setIsBindingMail(boolean isBindingMail) {
         this.isBindingMail = isBindingMail;
+    }
+
+    @Override
+    public String toString() {
+        return "MemberUser{" +
+                "uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

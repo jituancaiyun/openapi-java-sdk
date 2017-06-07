@@ -20,7 +20,8 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.TeamRemindInfoDTO;
+import com.shinemo.openapi.client.dto.teamremind.TeamRemindDetailDTO;
+import com.shinemo.openapi.client.dto.teamremind.TeamRemindInfoDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -41,27 +42,7 @@ public interface MatterNoticeApi {
      */
 //    @FormUrlEncoded
     @POST("notification/create")
-    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body TeamRemindInfoDTO.TeamRemindDetailDTO body);
-
-    /**
-     * 更新事项告知
-     *
-     * @param headers 基础header参数, accessToken, orgId, uid
-     * @param body    推送消息
-     * @return
-     */
-    @POST("notification/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId, @Body TeamRemindInfoDTO.TeamRemindDetailDTO body);
-
-    /**
-     * 获取事项告知详情
-     *
-     * @param headers  基础header参数, accessToken, orgId, uid
-     * @param noticeId 事项告知id
-     * @return
-     */
-    @GET("notification/detail")
-    Call<OpenApiResult<TeamRemindInfoDTO>> detail(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId);
+    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body TeamRemindDetailDTO body);
 
     /**
      * 删除事项告知
@@ -82,6 +63,26 @@ public interface MatterNoticeApi {
      */
     @POST("notification/delete")
     Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId);
+
+    /**
+     * 更新事项告知
+     *
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    推送消息
+     * @return
+     */
+    @POST("notification/update")
+    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId, @Body TeamRemindDetailDTO body);
+
+    /**
+     * 获取事项告知详情
+     *
+     * @param headers  基础header参数, accessToken, orgId, uid
+     * @param noticeId 事项告知id
+     * @return
+     */
+    @GET("notification/detail")
+    Call<OpenApiResult<TeamRemindInfoDTO>> detail(@HeaderMap Map<String, String> headers, @Query("noticeId") long noticeId);
 
     /**
      * 删除事项告知

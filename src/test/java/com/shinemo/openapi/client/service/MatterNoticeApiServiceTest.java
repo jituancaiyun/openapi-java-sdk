@@ -24,7 +24,8 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.MemberUser;
-import com.shinemo.openapi.client.dto.TeamRemindInfoDTO;
+import com.shinemo.openapi.client.dto.teamremind.TeamRemindDetailDTO;
+import com.shinemo.openapi.client.dto.teamremind.TeamRemindInfoDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -77,8 +78,7 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void createMatterNotice() throws Exception {
-        TeamRemindInfoDTO teamRemindInfo = new TeamRemindInfoDTO();
-        TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail = teamRemindInfo.new TeamRemindDetailDTO();
+        TeamRemindDetailDTO teamRemindDetail = new TeamRemindDetailDTO();
         teamRemindDetail.setContent("测试事项告知，" + new Date());
         teamRemindDetail.setRemindType(RemindType.APP_SEND.getType());
         teamRemindDetail.setRemindTime(new Date().getTime() + 1000 * 60 * 10);
@@ -99,8 +99,7 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void updateMatterNotice() {
-        TeamRemindInfoDTO teamRemindInfo = new TeamRemindInfoDTO();
-        TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail = teamRemindInfo.new TeamRemindDetailDTO();
+        TeamRemindDetailDTO teamRemindDetail = new TeamRemindDetailDTO();
         teamRemindDetail.setContent("====测试更新事项告知===，" + new Date());
         teamRemindDetail.setRemindType(RemindType.APP_SEND.getType());
         teamRemindDetail.setRemindTime(new Date().getTime() + 1000 * 60 * 10);
@@ -114,28 +113,28 @@ public class MatterNoticeApiServiceTest {
             list.add(memberUser);
         }
         teamRemindDetail.setMembers(list);
-        long noticeId = 58292L;
+        long noticeId = 58388L;
         OpenApiResult<Long> result = matterNoticeApiService.update(context, noticeId, teamRemindDetail);
         System.out.println(result);
     }
 
     @Test
     public void getMatterNoticeDetail() {
-        long personalRemindId = 58291L;
+        long personalRemindId = 58388L;
         OpenApiResult<TeamRemindInfoDTO> result = matterNoticeApiService.detail(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void cancelMatterNotice() {
-        long personalRemindId = 58291L;
+        long personalRemindId = 58374L;
         OpenApiResult<Long> result = matterNoticeApiService.cancel(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void deleteMatterNotice() {
-        long personalRemindId = 58292L;
+        long personalRemindId = 58374L;
         OpenApiResult<Long> result = matterNoticeApiService.delete(context, personalRemindId);
         System.out.println(result);
     }

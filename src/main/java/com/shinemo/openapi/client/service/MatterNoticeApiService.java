@@ -23,7 +23,8 @@ import com.shinemo.openapi.client.api.MatterNoticeApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.TeamRemindInfoDTO;
+import com.shinemo.openapi.client.dto.teamremind.TeamRemindDetailDTO;
+import com.shinemo.openapi.client.dto.teamremind.TeamRemindInfoDTO;
 
 import java.util.Map;
 
@@ -41,18 +42,18 @@ public interface MatterNoticeApiService {
      * @param apiContext       基础header参数, accessToken, orgId, uid
      * @param teamRemindDetail 个人提醒详情
      */
-    OpenApiResult<Map<String, Long>> create(ApiContext apiContext, TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail);
+    OpenApiResult<Map<String, Long>> create(ApiContext apiContext, TeamRemindDetailDTO teamRemindDetail);
 
-    OpenApiResult<Long> update(ApiContext apiContext, long personalRemindId, TeamRemindInfoDTO.TeamRemindDetailDTO teamRemindDetail);
+    OpenApiResult<Long> cancel(ApiContext apiContext, Long noticeId);
 
-    OpenApiResult<TeamRemindInfoDTO> detail(ApiContext apiContext, long noticeId);
+    OpenApiResult<Long> delete(ApiContext apiContext, Long noticeId);
 
-    OpenApiResult<Long> cancel(ApiContext apiContext, long noticeId);
+    OpenApiResult<Long> update(ApiContext apiContext, Long personalRemindId, TeamRemindDetailDTO teamRemindDetail);
 
-    OpenApiResult<Long> delete(ApiContext apiContext, long noticeId);
+    OpenApiResult<TeamRemindInfoDTO> detail(ApiContext apiContext, Long noticeId);
 
-    OpenApiResult<Long> open(ApiContext apiContext, long noticeId);
+    OpenApiResult<Long> open(ApiContext apiContext, Long noticeId);
 
-    OpenApiResult<Long> close(ApiContext apiContext, long noticeId);
+    OpenApiResult<Long> close(ApiContext apiContext, Long noticeId);
 
 }

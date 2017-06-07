@@ -40,8 +40,8 @@ public class PersonalRemindApiServiceTest {
 
     private PersonalRemindApiService personalRemindApiService;
     private OpenApiClient client;
-    private String orgId = "85161";//"84057";
-    private String uid = "101010011894152";//"101010012129489";
+    private String orgId = "84057";//"84057";
+    private String uid = "101010012129489";//"101010011894152";//"101010012129489";
     private String name = "yuanjian";
     private ApiContext context;
 
@@ -80,24 +80,22 @@ public class PersonalRemindApiServiceTest {
     public void updatePersonalRemind() {
         PersonalRemindInfoDTO personalRemindDTO = new PersonalRemindInfoDTO();
         PersonalRemindInfoDTO.PersonalRemindDTO personalRemind = personalRemindDTO.new PersonalRemindDTO();
-        personalRemind.setContent("测试更新个人提醒-content-提醒已更新=========");
+        personalRemind.setContent("测试每天提醒=====2-更新" + new Date());
         personalRemind.setRemindType(1);
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long longDate = new Date().getTime() + 1000 * 60 * 2;
-        personalRemind.setRemindTime(longDate);
-        String remindTime = sdf.format(new Date(longDate));*/
+        String remindTime = sdf.format(new Date(new Date().getTime() + 1000 * 60 * 2));*/
 
-        /*SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
-        long longDate = new Date().getTime() + 1000 * 60 * 2;
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
+        long longDate = new Date().getTime() + 1000 * 60 * 10;
         personalRemind.setRemindTime(longDate);
-        String remindTime = sdf.format(new Date(longDate));*/
-        String remindTime = "";
+        String remindTime = sdf.format(new Date(longDate));
+
         PersonalRemindInfoDTO.RFrequency rFrequency = personalRemindDTO.new RFrequency();
-        rFrequency.setType(1);
-        rFrequency.setRemindTime(remindTime);
+        rFrequency.setType(2);
+        rFrequency.setRemindTime("1-" + remindTime);
         personalRemind.setRfrequency(rFrequency);
         personalRemind.setIsVoiceRemind(false);
-        long personalRemindId = 17288;
+        long personalRemindId = 17333;
         OpenApiResult<?> result = personalRemindApiService.update(context, personalRemindId, personalRemind);
         System.out.println(result);
     }

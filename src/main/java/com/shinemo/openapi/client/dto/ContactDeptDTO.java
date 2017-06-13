@@ -74,6 +74,6 @@ public class ContactDeptDTO implements Serializable {
                 ", oldParentid=" + oldParentid +
                 ", orgId=" + orgId +
                 ", sequence=" + sequence +
-                '}';
+                "}\n";
     }
 }

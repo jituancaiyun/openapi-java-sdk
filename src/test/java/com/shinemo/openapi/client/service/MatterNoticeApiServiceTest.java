@@ -120,46 +120,37 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void getMatterNoticeDetail() {
-        long personalRemindId = 58388L;
+        long personalRemindId = 58399L;
         OpenApiResult<TeamRemindInfoDTO> result = matterNoticeApiService.detail(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void cancelMatterNotice() {
-        long personalRemindId = 58374L;
+        long personalRemindId = 58399L;
         OpenApiResult<Long> result = matterNoticeApiService.cancel(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void deleteMatterNotice() {
-        long personalRemindId = 58374L;
+        long personalRemindId = 58399L;
         OpenApiResult<Long> result = matterNoticeApiService.delete(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void openMatterNotice() {
-        long personalRemindId = 58291L;
+        long personalRemindId = 58399L;
         OpenApiResult<Long> result = matterNoticeApiService.open(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void closeMatterNotice() {
-        long personalRemindId = 58291L;
+        long personalRemindId = 58399L;
         OpenApiResult<Long> result = matterNoticeApiService.close(context, personalRemindId);
         System.out.println(result);
-    }
-
-    public static void main(String[] args) throws ParseException {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String time = sdf.format(new Date());
-//        System.out.println(time.split(" ")[1].replaceAll(":",""));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //设置开始提醒的时间
-        System.out.println(sdf.parse("2016-05-03 16:23:32").getTime());
     }
 
 }

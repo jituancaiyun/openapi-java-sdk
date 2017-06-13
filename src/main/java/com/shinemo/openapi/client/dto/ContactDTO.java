@@ -43,6 +43,6 @@ public class ContactDTO implements Serializable {
                 "departments=" + departments +
                 ", users=" + users +
                 ", hasMore=" + hasMore +
-                '}';
+                "}\n";
     }
 }

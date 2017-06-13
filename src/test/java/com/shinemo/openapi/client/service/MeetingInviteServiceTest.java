@@ -5,6 +5,7 @@ import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.MeetingInviteDTO;
 import com.shinemo.openapi.client.dto.MemberUser;
 import com.shinemo.openapi.client.dto.meeting.MeetingInviteDetailDTO;
 import com.shinemo.openapi.client.dto.meeting.MeetingInviteInfoDTO;
@@ -23,7 +24,7 @@ public class MeetingInviteServiceTest {
     private MeetingApiService meetingApiService;
     private OpenApiClient client;
     private String orgId = "84057";
-    private String uid = "101010011894152";//"101010012129489";//
+    private String uid = "101010012129489";//"101010011894152";//
     private String name = "yuanjian";
     private ApiContext context;
 
@@ -78,12 +79,54 @@ public class MeetingInviteServiceTest {
     }
 
     @Test
+    public void updateMeeting() {
+        MeetingInviteDetailDTO detail = new MeetingInviteDetailDTO();
+        detail.setAddress("小会议室");
+        detail.setBeginTime(new Date().getTime() + 30 * 60 * 1000);
+        detail.setEndTime(new Date().getTime() + 30 * 60 * 1000 + 30 * 60 * 1000);
+        detail.setRemindMin(10);
+        detail.setContent("会议内容-已更新2");
+        detail.setRemindType(RemindType.APPANDSMS_SEND.getType());
+        String[] uids = {"101010012129489", "101010011894152"};
+        String[] names = {"y1", "j2"};
+        ArrayList<MemberUser> list = new ArrayList<MemberUser>();
+        for (int i = 0; i < uids.length; i++) {
+            MemberUser memberUser = new MemberUser();
+            memberUser.setUid(uids[i]);
+            memberUser.setName(names[i]);
+            list.add(memberUser);
+        }
+        detail.setMembers(list);
+        OpenApiResult<Long> result = meetingApiService.update(context,12836L, detail);
+        System.out.println(result);
+    }
+
+    @Test
     public void detail() {
-        OpenApiResult<MeetingInviteInfoDTO> result = meetingApiService.detail(context, 12812L);
+        OpenApiResult<MeetingInviteInfoDTO> result = meetingApiService.detail(context, 12840L);
         System.out.println(result);
         System.out.println(result.getData());
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(result));
+    }
+
+    @Test
+    public void cancel() {
+        OpenApiResult<Long> result = meetingApiService.cancel(context, 12839L);
+        System.out.println(result);
+        System.out.println(result.getData());
+    }
+
+    /**
+     * 某用户删除，不影响其他用户
+     */
+    @Test
+    public void delete() {
+        MeetingInviteDTO meetingInviteDTO = new MeetingInviteDTO();
+        meetingInviteDTO.setMeetingInviteId(12840L);
+        meetingInviteDTO.setRequesterUid("101010011894152");
+//        OpenApiResult<Long> result = meetingApiService.deleteMeeting(context,meetingInviteDTO);
+        OpenApiResult<Long> result = meetingApiService.delete(context, 12839L);
+        System.out.println(result);
+//        System.out.println(result.getData());
     }
 
 }

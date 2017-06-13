@@ -70,11 +70,11 @@ public interface TeamRemindApi {
      *
      * @param headers      基础header参数, accessToken, orgId, uid
      * @param teamRemindId 团队提醒id
-     * @param detail       团队提醒实体信息
+     * @param body       团队提醒实体信息
      * @return
      */
     @POST("teamremind/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId, @Body MeetingInviteDetailDTO detail);
+    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId, @Body TeamRemindDetailDTO body);
 
     /**
      * 团队提醒详情新接口

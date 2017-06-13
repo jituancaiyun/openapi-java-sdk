@@ -90,6 +90,6 @@ public class ContactUserDTO implements Serializable {
                 ", deptId=" + deptId +
                 ", oldDeptId=" + oldDeptId +
                 ", orgId=" + orgId +
-                '}';
+                "}\n";
     }
 }

@@ -70,7 +70,7 @@ public interface TeamRemindApiService {
      * @param teamRemindId
      * @return
      */
-    OpenApiResult<Long> update(ApiContext apiContext, Long teamRemindId);
+    OpenApiResult<Long> update(ApiContext apiContext, Long teamRemindId, TeamRemindDetailDTO detail);
 
     /**
      * 获取团队提醒详情新接口

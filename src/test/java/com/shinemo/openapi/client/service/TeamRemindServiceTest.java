@@ -25,7 +25,7 @@ public class TeamRemindServiceTest {
     private TeamRemindApiService teamRemindApiService;
     private OpenApiClient client;
     private String orgId = "84057";
-    private String uid = "101010011768832";//"101010012129489";//
+    private String uid = "101010012129489";//"101010011768832";//
     private String name = "yuanjian";
     private ApiContext context;
 
@@ -66,8 +66,8 @@ public class TeamRemindServiceTest {
         detail.setContent("团队提醒内容。");
         detail.setRemindTime(new Date().getTime() + 1 * 60 * 1000);
         detail.setRemindType(MeetingInviteServiceTest.RemindType.APPANDSMS_SEND.getType());
-        String[] uids = {"101010011894152","101010011768832"};
-        String[] names = {"j2","y3"};
+        String[] uids = {"101010011894152", "101010012129489"};
+        String[] names = {"j2", "y3","y4"};
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i = 0; i < uids.length; i++) {
             MemberUser memberUser = new MemberUser();
@@ -81,10 +81,48 @@ public class TeamRemindServiceTest {
     }
 
     @Test
+    public void updateTeamRemind() {
+
+        TeamRemindDetailDTO detail = new TeamRemindDetailDTO();
+        detail.setContent("团队提醒内容-更新。");
+        detail.setRemindTime(new Date().getTime() + 1 * 60 * 1000);
+        detail.setRemindType(MeetingInviteServiceTest.RemindType.APPANDSMS_SEND.getType());
+        String[] uids = {"101010011894152", "101010011768832","101010012129489"};
+        String[] names = {"j2", "y3","y4"};
+        ArrayList<MemberUser> list = new ArrayList<MemberUser>();
+        for (int i = 0; i < uids.length; i++) {
+            MemberUser memberUser = new MemberUser();
+            memberUser.setUid(uids[i]);
+            memberUser.setName(names[i]);
+            list.add(memberUser);
+        }
+        detail.setMembers(list);
+        OpenApiResult<Long> result = teamRemindApiService.update(context, 58397L, detail);
+        System.out.println(result);
+    }
+
+    @Test
     public void detail() {
-        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 58393L);
+        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 58399L);
         System.out.println(result);
         System.out.println(result.getData().getDetail().getMembers());
+    }
+
+    @Test
+    public void cancel() {
+        OpenApiResult<Long> result = teamRemindApiService.cancel(context, 58402L);
+        System.out.println(result);
+        System.out.println(result.getData());
+    }
+
+    /**
+     * 某用户删除，不影响其他用户
+     */
+    @Test
+    public void delete() {
+        OpenApiResult<Long> result = teamRemindApiService.delete(context, 58403L);
+        System.out.println(result);
+        System.out.println(result.getData());
     }
 
 }

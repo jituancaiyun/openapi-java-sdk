@@ -123,7 +123,7 @@ public interface MeetingApiService {
      * @param meetingId
      * @return
      */
-    OpenApiResult<Long> update(ApiContext apiContext, Long meetingId);
+    OpenApiResult<Long> update(ApiContext apiContext, Long meetingId,MeetingInviteDetailDTO detail);
 
     /**
      * 获取会议详情新接口

@@ -31,12 +31,17 @@ import javax.sql.DataSource;
  * @author ohun@live.cn (夜色)
  */
 public final class Apis {
+    public static void setEnv(int env) {
+        Apis.env = env;
+    }
+
     private static int env = 0;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
         if (env == 0) {
             configuration.setBaseUrl("http://127.0.0.1:8081/openapi/");
+            /*appId为94181123的应用已绑定企业84057*/
             configuration.setAppId(94181123);
             configuration.setAppSecret("6fe73d451cd37f8a");
         } else if (env == 1) {
@@ -53,8 +58,9 @@ public final class Apis {
             configuration.setAppSecret("S14'e*;9Zo_8TU\"U:_rzP8crwP<_hV8D");
         } else {
             configuration.setBaseUrl("https://api.open.jituancaiyun.com/openapi/");
-            configuration.setAppId(48906502);
-            configuration.setAppSecret("DF2D43CCAC737521");
+            /*appId为80108056的应用已绑定企业83040*/
+            configuration.setAppId(80108056);//48906502
+            configuration.setAppSecret("f1f1802e3c804591601bc91f3a96bca3");//DF2D43CCAC737521
         }
         configuration.setConnectTimeoutMillis(10000);
         configuration.setMaxRetry(1);

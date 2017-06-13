@@ -157,11 +157,7 @@ public class MeetingInviteDetailDTO {
                 ", createTime=" + createTime +
                 ", remindType=" + remindType +
                 ", members=" + members +
-                ", voiceWave=" + voiceWave +
-                ", signMembers=" + signMembers +
-                ", isPushMail=" + isPushMail +
                 ", comments=" + comments +
-                ", signs=" + signs +
                 '}';
     }
 }

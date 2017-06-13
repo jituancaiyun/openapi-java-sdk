@@ -22,7 +22,7 @@ public class ContactApiServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(0);
+        Apis.setEnv(4);
         contactApiService = Apis.createApiService(ContactApiService.class);
     }
 
@@ -35,8 +35,8 @@ public class ContactApiServiceTest {
 
     @Test
     public void getDeptUsersAll() throws Exception {
-        OpenApiResult<ContactDTO> result = contactApiService.listUsersAll(ApiContext.ctx("84057"), 1);
-        System.out.println(result.getData().getUsers().size());
+        OpenApiResult<ContactDTO> result = contactApiService.listUsersAll(ApiContext.ctx("83040"), 0);
+        System.out.println(result);
 //        System.out.println(result);
     }
 
@@ -65,10 +65,10 @@ public class ContactApiServiceTest {
     public void updateUser() throws Exception {
         ContactUserDTO userDTO = new ContactUserDTO();
         userDTO.setName("xxxxx--update");
-        userDTO.setDeptId(1L);
-        userDTO.setMobile("13111111111");
+        userDTO.setDeptId(14L);
+        userDTO.setMobile("13234789870");
         userDTO.setSequence(1);
-        userDTO.setId(101010012129361L);
+        userDTO.setId(101010012671665L);
         OpenApiResult<UidDTO> result = contactApiService.updateUser(ApiContext.ctx("84057"),userDTO);
         System.out.println(result);
 

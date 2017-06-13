@@ -45,7 +45,7 @@ public interface UserApi {
     Call<OpenApiResult<Map<String, String>>> add(@HeaderMap Map<String, String> headers, @Body UserDTO body);
 
     @POST("employee/delete")
-    Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("employeeId") String employeeId);
+    Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("employeeId") String employeeId, @Query("deptId") Long deptId);
 
     @POST("employee/update")
     Call<OpenApiResult<Map<String, String>>> update(@HeaderMap Map<String, String> headers, @Body UserDTO body);

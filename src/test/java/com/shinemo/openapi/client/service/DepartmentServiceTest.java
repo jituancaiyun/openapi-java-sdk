@@ -55,17 +55,26 @@ public class DepartmentServiceTest {
     @Test
     public void createDept() {
         DeptInfoDTO infoDto = new DeptInfoDTO();
-        infoDto.setName("部门12-child");
-        infoDto.setParentId(12L);
+        infoDto.setName("部门13-child2");
+        infoDto.setParentId(13L);
 
         OpenApiResult<Map<String, Long>> result = departmentApiService.create(context, infoDto);
         System.out.println(result);
     }
 
     @Test
+    public void delete() {
+        OpenApiResult<Long> result = departmentApiService.delete(context, 16L);
+        System.out.println(result);
+        System.out.println(result.getData());
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(result));
+    }
+
+    @Test
     public void updateDept() {
         DeptInfoDTO infoDto = new DeptInfoDTO();
-        infoDto.setName("部门12-child-new");
+        infoDto.setName("部门13-new");
         infoDto.setDeptId(13L);
         infoDto.setParentId(12L);
 
@@ -74,17 +83,8 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    public void detail() {
-        OpenApiResult<DeptInfoDTO> result = departmentApiService.detail(context, 1L);
-        System.out.println(result);
-        System.out.println(result.getData());
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(result));
-    }
-
-    @Test
     public void deptList() {
-        OpenApiResult<List<DeptInfoDTO>> result = departmentApiService.deptList(context, 0L);
+        OpenApiResult<List<DeptInfoDTO>> result = departmentApiService.deptList(context, 12L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();
@@ -92,8 +92,8 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    public void delete() {
-        OpenApiResult<Long> result = departmentApiService.delete(context, 13L);
+    public void detail() {
+        OpenApiResult<DeptInfoDTO> result = departmentApiService.detail(context, 14L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();

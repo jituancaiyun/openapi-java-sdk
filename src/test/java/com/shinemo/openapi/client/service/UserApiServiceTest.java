@@ -31,50 +31,48 @@ public class UserApiServiceTest {
     }
 
     @Test
-    public void addUser() throws Exception {
-        UserDTO user = new UserDTO();
-        user.setDeptId(0L);
-        user.setMobile("13467820879");
-        user.setTitle("技术人员");
-        user.setUserName("小新");
-        OpenApiResult<Map<String, String>> result = userApiService.add(context, user);
+    public void add() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserName("yuanjian-add");
+//        userDTO.setTitle("测试");
+        userDTO.setMobile("13234789870");
+        userDTO.setDeptId(14L);
+        OpenApiResult<Map<String, String>> result = userApiService.add(context, userDTO);
         System.out.println(result);
+        System.out.println(result.getData());
     }
 
     @Test
     public void delete() {
-        OpenApiResult<Long> result = userApiService.delete(context, "");
-        System.out.println(result);
+        System.out.println(userApiService.delete(context, "101010012310944", 14L));
     }
 
     @Test
-    public void update() throws Exception {
-        UserDTO user = new UserDTO();
-        user.setDeptId(0L);
-        user.setMobile("13588200631");
-        user.setTitle("技术人员");
-        user.setUserName("小新-update");
-        user.setUid("101010012671641");
-        OpenApiResult<Map<String, String>> result = userApiService.update(context, user);
+    public void update() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUserName("yuanjian-addddd");
+        userDTO.setTitle("测试");
+        userDTO.setMobile("13234789871");
+        userDTO.setDeptId(14L);
+        userDTO.setOldDeptId(13L);
+        userDTO.setUid("101010012671665");
+        OpenApiResult<Map<String, String>> result = userApiService.update(context, userDTO);
         System.out.println(result);
+        System.out.println(result.getData());
     }
 
     @Test
     public void detail() {
-        OpenApiResult<UserInfoDTO> result = userApiService.detail(context, "101010012129489", 0L);
-        System.out.println(result);
+        System.out.println(userApiService.detail(context, "101010012671665", 14L));
     }
 
     @Test
-    public void userList() {
-        OpenApiResult<List<UserInfoDTO>> result = userApiService.list(context, 0L);
-        System.out.println(result);
+    public void list() {
+        System.out.println(userApiService.list(context, 14L));
     }
 
     @Test
-    public void userListAll() {
-        OpenApiResult<List<UserInfoDTO>> result = userApiService.listAll(context, 0L);
-        System.out.println(result);
+    public void listAll() {
+        System.out.println(userApiService.listAll(context, 13L));
     }
-
 }

@@ -45,7 +45,7 @@ public interface UserApiService {
      */
     OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserDTO userDTO);
 
-    OpenApiResult<Long> delete(ApiContext apiContext, String employeeId);
+    OpenApiResult<Long> delete(ApiContext apiContext, String employeeId, Long deptId);
 
     OpenApiResult<Map<String, String>> update(ApiContext apiContext, UserDTO userDTO);
 

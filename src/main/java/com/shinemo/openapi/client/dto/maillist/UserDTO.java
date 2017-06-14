@@ -17,6 +17,7 @@ public class UserDTO {
     private String workPhone;
     private String externalId = "";
     private String externalData = "";
+    private String privilege = "";
 
     public String getUid() {
         return uid;
@@ -120,5 +121,33 @@ public class UserDTO {
 
     public void setExternalData(String externalData) {
         this.externalData = externalData;
+    }
+
+    public String getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "uid='" + uid + '\'' +
+                ", userName='" + userName + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", id=" + id +
+                ", isAdmin=" + isAdmin +
+                ", deptId=" + deptId +
+                ", oldDeptId=" + oldDeptId +
+                ", title='" + title + '\'' +
+                ", orgId=" + orgId +
+                ", sequence=" + sequence +
+                ", workPhone='" + workPhone + '\'' +
+                ", externalId='" + externalId + '\'' +
+                ", externalData='" + externalData + '\'' +
+                ", privilege='" + privilege + '\'' +
+                '}';
     }
 }

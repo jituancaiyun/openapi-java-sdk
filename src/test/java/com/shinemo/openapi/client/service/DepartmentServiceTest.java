@@ -47,6 +47,7 @@ public class DepartmentServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        Apis.setEnv(1);
         client = Apis.createClient();
         context = ApiContext.ctx(orgId, uid, name);
         departmentApiService = client.createApiService(DepartmentApiService.class);
@@ -75,7 +76,7 @@ public class DepartmentServiceTest {
     public void updateDept() {
         DeptInfoDTO infoDto = new DeptInfoDTO();
         infoDto.setName("部门13-new");
-        infoDto.setDeptId(13L);
+        infoDto.setDeptId(1L);
         infoDto.setParentId(12L);
 
         OpenApiResult<Long> result = departmentApiService.update(context, infoDto);
@@ -84,7 +85,7 @@ public class DepartmentServiceTest {
 
     @Test
     public void deptList() {
-        OpenApiResult<List<DeptInfoDTO>> result = departmentApiService.deptList(context, 12L);
+        OpenApiResult<List<DeptInfoDTO>> result = departmentApiService.deptList(context, 0L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();

@@ -26,6 +26,7 @@ public class UserApiServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        Apis.setEnv(0);
         context = ApiContext.ctx(orgId, uid, name);
         userApiService = Apis.createApiService(UserApiService.class);
     }
@@ -33,10 +34,11 @@ public class UserApiServiceTest {
     @Test
     public void add() {
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserName("yuanjian-add");
+        userDTO.setUserName("测试个人权限priiii");
 //        userDTO.setTitle("测试");
-        userDTO.setMobile("13234789870");
+        userDTO.setMobile("12300000005");
         userDTO.setDeptId(14L);
+        userDTO.setPrivilege("mydeptonly");
         OpenApiResult<Map<String, String>> result = userApiService.add(context, userDTO);
         System.out.println(result);
         System.out.println(result.getData());
@@ -50,12 +52,13 @@ public class UserApiServiceTest {
     @Test
     public void update() {
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserName("yuanjian-addddd");
+        userDTO.setUserName("测试个人权限pri2");
         userDTO.setTitle("测试");
-        userDTO.setMobile("13234789871");
+        userDTO.setMobile("13600000002");
         userDTO.setDeptId(14L);
-        userDTO.setOldDeptId(13L);
-        userDTO.setUid("101010012671665");
+//        userDTO.setOldDeptId(13L);
+        userDTO.setUid("101010012310960");
+        userDTO.setPrivilege("mydeptonly");
         OpenApiResult<Map<String, String>> result = userApiService.update(context, userDTO);
         System.out.println(result);
         System.out.println(result.getData());
@@ -63,7 +66,7 @@ public class UserApiServiceTest {
 
     @Test
     public void detail() {
-        System.out.println(userApiService.detail(context, "101010012671665", 14L));
+        System.out.println(userApiService.detail(context, "101010012671673", 14L));
     }
 
     @Test

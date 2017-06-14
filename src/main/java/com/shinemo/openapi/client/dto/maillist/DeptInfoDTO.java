@@ -58,6 +58,6 @@ public class DeptInfoDTO {
                 ", order=" + order +
                 ", deptId=" + deptId +
                 ", orgId=" + orgId +
-                '}';
+                "}\n";
     }
 }

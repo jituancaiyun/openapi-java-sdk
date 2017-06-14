@@ -19,6 +19,7 @@ public class UserInfoDTO {
     private long deptId;
     private String externalId = "";
     private String externalData = "";
+    private String privilege;
 
     public long getId() {
         return id;
@@ -149,12 +150,13 @@ public class UserInfoDTO {
                 ", title='" + title + '\'' +
                 ", orgId=" + orgId +
                 ", sequence=" + sequence +
+                ", isAdmin=" + isAdmin +
                 ", workPhone='" + workPhone + '\'' +
-                ", shortNum='" + shortNum + '\'' +
                 ", email='" + email + '\'' +
                 ", deptId=" + deptId +
                 ", externalId='" + externalId + '\'' +
                 ", externalData='" + externalData + '\'' +
+                ", privilege='" + privilege + '\'' +
                 "}\n";
     }
 }

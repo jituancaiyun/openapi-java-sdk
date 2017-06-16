@@ -37,7 +37,7 @@ public class UserApiServiceTest {
         userDTO.setUserName("测试个人权限priiii");
 //        userDTO.setTitle("测试");
         userDTO.setMobile("12300000005");
-        userDTO.setDeptId(14L);
+        userDTO.setDeptId(12L);
         userDTO.setPrivilege("mydeptonly");
         OpenApiResult<Map<String, String>> result = userApiService.add(context, userDTO);
         System.out.println(result);
@@ -46,7 +46,7 @@ public class UserApiServiceTest {
 
     @Test
     public void delete() {
-        System.out.println(userApiService.delete(context, "101010012310944", 14L));
+        System.out.println(userApiService.delete(context, "101010012671673", 14L));
     }
 
     @Test
@@ -57,6 +57,7 @@ public class UserApiServiceTest {
         userDTO.setMobile("13600000002");
         userDTO.setDeptId(14L);
 //        userDTO.setOldDeptId(13L);
+//        userDTO.setSequence(-1);
         userDTO.setUid("101010012310960");
         userDTO.setPrivilege("mydeptonly");
         OpenApiResult<Map<String, String>> result = userApiService.update(context, userDTO);
@@ -66,7 +67,7 @@ public class UserApiServiceTest {
 
     @Test
     public void detail() {
-        System.out.println(userApiService.detail(context, "101010012671673", 14L));
+        System.out.println(userApiService.detail(context, "101010012310960", 14L));
     }
 
     @Test

@@ -45,11 +45,11 @@ public interface UserApiService {
      */
     OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserDTO userDTO);
 
-    OpenApiResult<Long> delete(ApiContext apiContext, String employeeId, Long deptId);
+    OpenApiResult<Long> delete(ApiContext apiContext, String uid, Long deptId);
 
     OpenApiResult<Map<String, String>> update(ApiContext apiContext, UserDTO userDTO);
 
-    OpenApiResult<UserInfoDTO> detail(ApiContext apiContext, String employeeId, Long deptId);
+    OpenApiResult<UserInfoDTO> detail(ApiContext apiContext, String uid, Long deptId);
 
     OpenApiResult<List<UserInfoDTO>> list(ApiContext apiContext, Long deptId);
 

@@ -4,28 +4,28 @@ package com.shinemo.openapi.client.dto.maillist;
  * Created by yuanjian on 6/12/17.
  */
 public class UserInfoDTO {
-    private long id;
+    private String id;
     private String name;
     private String mobile;
     private String title;
-    private long orgId;
-    private int sequence;
-    private int isAdmin;
+    private Long orgId;
+    private Integer sequence;
+    private Integer isAdmin;
     private String workPhone;
     private String virtualCode;
     private String shortNum;
     private String email;
     private String fax;
-    private long deptId;
+    private Long deptId;
     private String externalId = "";
     private String externalData = "";
     private String privilege;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -53,27 +53,27 @@ public class UserInfoDTO {
         this.title = title;
     }
 
-    public long getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(long orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
 
-    public int getSequence() {
+    public Integer getSequence() {
         return sequence;
     }
 
-    public void setSequence(int sequence) {
+    public void setSequence(Integer sequence) {
         this.sequence = sequence;
     }
 
-    public int getIsAdmin() {
+    public Integer getIsAdmin() {
         return isAdmin;
     }
 
-    public void setIsAdmin(int isAdmin) {
+    public void setIsAdmin(Integer isAdmin) {
         this.isAdmin = isAdmin;
     }
 
@@ -117,11 +117,11 @@ public class UserInfoDTO {
         this.fax = fax;
     }
 
-    public long getDeptId() {
+    public Long getDeptId() {
         return deptId;
     }
 
-    public void setDeptId(long deptId) {
+    public void setDeptId(Long deptId) {
         this.deptId = deptId;
     }
 
@@ -141,10 +141,18 @@ public class UserInfoDTO {
         this.externalData = externalData;
     }
 
+    public String getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege;
+    }
+
     @Override
     public String toString() {
         return "UserInfoDTO{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", title='" + title + '\'' +

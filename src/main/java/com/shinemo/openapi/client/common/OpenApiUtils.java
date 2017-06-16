@@ -26,6 +26,7 @@ import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Formatter;
 import java.util.UUID;
 
@@ -84,7 +85,7 @@ public final class OpenApiUtils {
     }
 
     public static String encryptCallbackEvent(String key, String eventData) {
-        byte[] data = AESUtils.encrypt(eventData.getBytes(UTF_8), AESUtils.getSecretKey(key.getBytes(ISO_8859_1)));
+        byte[] data = AESUtils.encrypt(eventData.getBytes(UTF_8), Arrays.copyOf(key.getBytes(ISO_8859_1), 16));
         if (data != null && data.length > 0) {
             return new String(data, ISO_8859_1);
         }
@@ -92,7 +93,7 @@ public final class OpenApiUtils {
     }
 
     public static String decryptCallbackEvent(String key, String encryptData) {
-        byte[] data = AESUtils.decrypt(encryptData.getBytes(ISO_8859_1), AESUtils.getSecretKey(key.getBytes(ISO_8859_1)));
+        byte[] data = AESUtils.decrypt(encryptData.getBytes(ISO_8859_1), Arrays.copyOf(key.getBytes(ISO_8859_1), 16));
         if (data != null && data.length > 0) {
             return new String(data, UTF_8);
         }

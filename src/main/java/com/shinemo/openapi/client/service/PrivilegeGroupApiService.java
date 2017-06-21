@@ -35,8 +35,21 @@ import java.util.Map;
 @Api(PrivilegeGroupApi.class)
 public interface PrivilegeGroupApiService {
 
+    /**
+     * 创建权限组
+     *
+     * @param context 基础header参数, accessToken, orgId, uid
+     * @param group   权限组信息
+     * @return
+     */
     OpenApiResult<Map<String, Long>> create(ApiContext context, PrivilegeGroupDTO group);
 
+    /**
+     * 删除权限去
+     * @param context 基础header参数, accessToken, orgId, uid
+     * @param groupId 权限组id
+     * @return
+     */
     OpenApiResult<Long> delete(ApiContext context, Long groupId);
 
 }

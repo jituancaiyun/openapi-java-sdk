@@ -102,7 +102,7 @@ public interface MeetingApiService {
      * 取消会议新接口
      *
      * @param apiContext 基础header参数, accessToken, orgId, uid
-     * @param meetingId
+     * @param meetingId 会议id
      * @return
      */
     OpenApiResult<Long> cancel(ApiContext apiContext, Long meetingId);
@@ -111,7 +111,7 @@ public interface MeetingApiService {
      * 删除会议新接口
      *
      * @param apiContext 基础header参数, accessToken, orgId, uid
-     * @param meetingId
+     * @param meetingId 会议id
      * @return
      */
     OpenApiResult<Long> delete(ApiContext apiContext, Long meetingId);
@@ -120,10 +120,10 @@ public interface MeetingApiService {
      * 更新会议邀请详情
      *
      * @param apiContext 基础header参数, accessToken, orgId, uid
-     * @param meetingId
+     * @param meetingId 会议id
      * @return
      */
-    OpenApiResult<Long> update(ApiContext apiContext, Long meetingId,MeetingInviteDetailDTO detail);
+    OpenApiResult<Long> update(ApiContext apiContext, Long meetingId, MeetingInviteDetailDTO detail);
 
     /**
      * 获取会议详情新接口

@@ -44,10 +44,32 @@ public interface PersonalRemindApiService {
      */
     OpenApiResult<Map<String, Long>> create(ApiContext apiContext, PersonalRemindDTO personalRemind);
 
+    /**
+     * 个人提醒更新
+     *
+     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param personalRemindId 个人提醒id
+     * @param personalRemind   个人提醒信息
+     * @return
+     */
     OpenApiResult<Long> update(ApiContext apiContext, long personalRemindId, PersonalRemindDTO personalRemind);
 
+    /**
+     * 删除
+     *
+     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param personalRemindId 个人提醒id
+     * @return
+     */
     OpenApiResult<Long> delete(ApiContext apiContext, long personalRemindId);
 
+    /**
+     * 获取详情
+     *
+     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param personalRemindId 个人提醒id
+     * @return
+     */
     OpenApiResult<PersonalRemindInfoDTO> detail(ApiContext apiContext, long personalRemindId);
 
 }

@@ -49,7 +49,7 @@ public interface TeamRemindApiService {
      * 取消团队提醒新接口
      *
      * @param apiContext   基础header参数, accessToken, orgId, uid
-     * @param teamRemindId
+     * @param teamRemindId 团队提醒id
      * @return
      */
     OpenApiResult<Long> cancel(ApiContext apiContext, Long teamRemindId);
@@ -58,7 +58,7 @@ public interface TeamRemindApiService {
      * 删除团队提醒新接口
      *
      * @param apiContext   基础header参数, accessToken, orgId, uid
-     * @param teamRemindId
+     * @param teamRemindId 团队提醒id
      * @return
      */
     OpenApiResult<Long> delete(ApiContext apiContext, Long teamRemindId);
@@ -67,7 +67,8 @@ public interface TeamRemindApiService {
      * 更新团队提醒详情
      *
      * @param apiContext   基础header参数, accessToken, orgId, uid
-     * @param teamRemindId
+     * @param teamRemindId 团队提醒id
+     * @param detail       提醒详情
      * @return
      */
     OpenApiResult<Long> update(ApiContext apiContext, Long teamRemindId, TeamRemindDetailDTO detail);

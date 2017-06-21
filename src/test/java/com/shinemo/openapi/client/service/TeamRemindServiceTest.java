@@ -51,6 +51,7 @@ public class TeamRemindServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        Apis.setEnv(0);
         client = Apis.createClient();
         context = ApiContext.ctx(orgId, uid, name);
         /*context = new ApiContext();
@@ -63,11 +64,12 @@ public class TeamRemindServiceTest {
     public void createTeamRemind() {
 
         TeamRemindDetailDTO detail = new TeamRemindDetailDTO();
+        detail.setIsVoiceRemind(true);
         detail.setContent("团队提醒内容。");
         detail.setRemindTime(new Date().getTime() + 1 * 60 * 1000);
         detail.setRemindType(MeetingInviteServiceTest.RemindType.APPANDSMS_SEND.getType());
         String[] uids = {"101010011894152", "101010012129489"};
-        String[] names = {"j2", "y3","y4"};
+        String[] names = {"j2", "y3", "y4"};
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i = 0; i < uids.length; i++) {
             MemberUser memberUser = new MemberUser();
@@ -85,10 +87,10 @@ public class TeamRemindServiceTest {
 
         TeamRemindDetailDTO detail = new TeamRemindDetailDTO();
         detail.setContent("团队提醒内容-更新。");
-        detail.setRemindTime(new Date().getTime() + 1 * 60 * 1000);
+        detail.setRemindTime(new Date().getTime() + 2 * 60 * 1000);
         detail.setRemindType(MeetingInviteServiceTest.RemindType.APPANDSMS_SEND.getType());
-        String[] uids = {"101010011894152", "101010011768832","101010012129489"};
-        String[] names = {"j2", "y3","y4"};
+        String[] uids = {"101010011894152", "101010011768832"};
+        String[] names = {"j2", "y3", "y4"};
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i = 0; i < uids.length; i++) {
             MemberUser memberUser = new MemberUser();
@@ -103,14 +105,16 @@ public class TeamRemindServiceTest {
 
     @Test
     public void detail() {
-        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 58399L);
+        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 58436L);
         System.out.println(result);
+        System.out.println(result.getData().getCreator().getIsDelete());
         System.out.println(result.getData().getDetail().getMembers());
+        System.out.println(result.getData().getDetail().getIsVoiceRemind());
     }
 
     @Test
     public void cancel() {
-        OpenApiResult<Long> result = teamRemindApiService.cancel(context, 58402L);
+        OpenApiResult<Long> result = teamRemindApiService.cancel(context, 58409L);
         System.out.println(result);
         System.out.println(result.getData());
     }

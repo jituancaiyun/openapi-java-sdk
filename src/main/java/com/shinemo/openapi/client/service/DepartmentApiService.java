@@ -42,17 +42,17 @@ public interface DepartmentApiService {
     /**
      * 创建部门
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
-     * @param deptInfoDto    要创建的部门
+     * @param apiContext  基础header参数, accessToken, orgId, uid
+     * @param deptInfoDto 要创建的部门
      * @return UidDTO
      */
-    OpenApiResult<Map<String,Long>> create(ApiContext apiContext, DeptInfoDTO deptInfoDto);
+    OpenApiResult<Map<String, Long>> create(ApiContext apiContext, DeptInfoDTO deptInfoDto);
 
     /**
      * 删除部门
      *
      * @param apiContext 基础header参数, accessToken, orgId, uid
-     * @param deptId    要删除的部门
+     * @param deptId     要删除的部门
      * @return 0表示操作成功
      */
     OpenApiResult<Long> delete(ApiContext apiContext, Long deptId);
@@ -60,19 +60,20 @@ public interface DepartmentApiService {
     /**
      * 修改部门
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
-     * @param deptInfoDTO    要修改的部门
+     * @param apiContext  基础header参数, accessToken, orgId, uid
+     * @param deptInfoDTO 要修改的部门
      * @return UidDTO
      */
     OpenApiResult<Long> update(ApiContext apiContext, DeptInfoDTO deptInfoDTO);
 
     /**
      * 获取部门详情
+     *
      * @param apiContext
      * @param deptId
      * @return
      */
-    OpenApiResult<DeptInfoDTO> detail(ApiContext apiContext, Long deptId);
+    OpenApiResult<Map<String, DeptInfoDTO>> detail(ApiContext apiContext, Long deptId);
 
     /**
      * 获取某个部门下的部门列表
@@ -81,6 +82,6 @@ public interface DepartmentApiService {
      * @param deptId     部门ID
      * @return ContactDTO
      */
-    OpenApiResult<List<DeptInfoDTO>> deptList(ApiContext apiContext, Long deptId);
+    OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, Long deptId);
 
 }

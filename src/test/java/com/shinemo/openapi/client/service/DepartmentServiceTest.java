@@ -85,7 +85,7 @@ public class DepartmentServiceTest {
 
     @Test
     public void deptList() {
-        OpenApiResult<List<DeptInfoDTO>> result = departmentApiService.deptList(context, 0L);
+        OpenApiResult<Map<String, List<DeptInfoDTO>>> result = departmentApiService.deptList(context, 0L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();
@@ -94,7 +94,7 @@ public class DepartmentServiceTest {
 
     @Test
     public void detail() {
-        OpenApiResult<DeptInfoDTO> result = departmentApiService.detail(context, 14L);
+        OpenApiResult<Map<String, DeptInfoDTO>> result = departmentApiService.detail(context, 14L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();

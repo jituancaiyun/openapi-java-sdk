@@ -22,7 +22,7 @@ public class ContactApiServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(4);
+        Apis.setEnv(1);
         contactApiService = Apis.createApiService(ContactApiService.class);
     }
 
@@ -42,7 +42,7 @@ public class ContactApiServiceTest {
 
     @Test
     public void detail() throws Exception {
-        OpenApiResult<ContactUserDTO> result = contactApiService.detail(ApiContext.ctx("84057"), 101010012129369L,1);
+        OpenApiResult<ContactUserDTO> result = contactApiService.detail(ApiContext.ctx("84057"), 101010012051017L,0);
         System.out.println(result);
     }
 

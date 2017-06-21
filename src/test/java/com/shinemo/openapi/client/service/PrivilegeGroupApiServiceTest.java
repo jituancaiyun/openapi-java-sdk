@@ -4,7 +4,7 @@ import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.maillist.PrivilegeGroup;
+import com.shinemo.openapi.client.dto.maillist.PrivilegeGroupDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class PrivilegeGroupApiServiceTest {
 
     @Test
     public void add() {
-        PrivilegeGroup group = new PrivilegeGroup();
+        PrivilegeGroupDTO group = new PrivilegeGroupDTO();
         group.setName("群组测试3");
         ArrayList<Long> list = new ArrayList<Long>();
         list.add(123123L);

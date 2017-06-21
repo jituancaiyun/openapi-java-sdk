@@ -97,10 +97,6 @@ public final class OpenApiResult<T> {
 
     @Override
     public String toString() {
-        return "OpenApiResult{" +
-                "status=" + status +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
+        return Jsons.toJson(this);
     }
 }

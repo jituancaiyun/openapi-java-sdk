@@ -23,8 +23,8 @@ public interface DepartmentApi {
     Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Body DeptInfoDTO deptInfoDTO);
 
     @GET("branch/detail")
-    Call<OpenApiResult<DeptInfoDTO>> detail(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String, DeptInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
     @GET("branch/deptList")
-    Call<OpenApiResult<List<DeptInfoDTO>>> deptList(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String, List<DeptInfoDTO>>>> deptList(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 }

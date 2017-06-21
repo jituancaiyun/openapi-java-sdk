@@ -1,7 +1,7 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.maillist.PrivilegeGroup;
+import com.shinemo.openapi.client.dto.maillist.PrivilegeGroupDTO;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.HeaderMap;
@@ -22,7 +22,7 @@ public interface PrivilegeGroupApi {
      * @return
      */
     @POST("privilegeGroup/create")
-    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body PrivilegeGroup body);
+    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body PrivilegeGroupDTO body);
 
     /**
      * 删除群组

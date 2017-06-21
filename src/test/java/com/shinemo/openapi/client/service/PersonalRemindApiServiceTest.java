@@ -23,13 +23,16 @@ import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.PersonalRemindInfoDTO;
+import com.shinemo.openapi.client.dto.personalremind.PersonalRemindDTO;
+import com.shinemo.openapi.client.dto.personalremind.PersonalRemindInfoDTO;
+import com.shinemo.openapi.client.dto.personalremind.RFrequency;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by ohun on 2017/4/11.
@@ -47,6 +50,7 @@ public class PersonalRemindApiServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        Apis.setEnv(0);
         client = Apis.createClient();
         context = ApiContext.ctx(orgId, uid, name);
         personalRemindApiService = client.createApiService(PersonalRemindApiService.class);
@@ -54,21 +58,21 @@ public class PersonalRemindApiServiceTest {
 
     @Test
     public void createPersonalRemind() throws Exception {
-        PersonalRemindInfoDTO personalRemindDTO = new PersonalRemindInfoDTO();
-        PersonalRemindInfoDTO.PersonalRemindDTO personalRemind = personalRemindDTO.new PersonalRemindDTO();
-        personalRemind.setContent("测试每天提醒=====2" + new Date());
+        PersonalRemindDTO personalRemind = new PersonalRemindDTO();
+        personalRemind.setContent("测试每年提醒=====2" + new Date());
         personalRemind.setRemindType(1);
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String remindTime = sdf.format(new Date(new Date().getTime() + 1000 * 60 * 2));*/
 
         SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
-        long longDate = new Date().getTime() + 1000 * 60 * 10;
+        long longDate = new Date().getTime() + 1000 * 60 * 30;
         personalRemind.setRemindTime(longDate);
         String remindTime = sdf.format(new Date(longDate));
 
-        PersonalRemindInfoDTO.RFrequency rFrequency = personalRemindDTO.new RFrequency();
-        rFrequency.setType(2);
-        rFrequency.setRemindTime("1-" + remindTime);
+        RFrequency rFrequency = new RFrequency();
+        rFrequency.setType(5);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        rFrequency.setRemindTime(sdf2.format(new Date(new Date().getTime() + 10 * 60 * 1000)));
         personalRemind.setRfrequency(rFrequency);
         personalRemind.setIsVoiceRemind(false);
 
@@ -78,8 +82,7 @@ public class PersonalRemindApiServiceTest {
 
     @Test
     public void updatePersonalRemind() {
-        PersonalRemindInfoDTO personalRemindDTO = new PersonalRemindInfoDTO();
-        PersonalRemindInfoDTO.PersonalRemindDTO personalRemind = personalRemindDTO.new PersonalRemindDTO();
+        PersonalRemindDTO personalRemind = new PersonalRemindDTO();
         personalRemind.setContent("测试每天提醒=====2-更新" + new Date());
         personalRemind.setRemindType(1);
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -90,7 +93,7 @@ public class PersonalRemindApiServiceTest {
         personalRemind.setRemindTime(longDate);
         String remindTime = sdf.format(new Date(longDate));
 
-        PersonalRemindInfoDTO.RFrequency rFrequency = personalRemindDTO.new RFrequency();
+        RFrequency rFrequency = new RFrequency();
         rFrequency.setType(2);
         rFrequency.setRemindTime("1-" + remindTime);
         personalRemind.setRfrequency(rFrequency);
@@ -102,7 +105,7 @@ public class PersonalRemindApiServiceTest {
 
     @Test
     public void getPersonalRemindDetail() {
-        long personalRemindId = 17312L;
+        long personalRemindId = 17350L;
         OpenApiResult<PersonalRemindInfoDTO> result = personalRemindApiService.detail(context, personalRemindId);
         System.out.println(result);
     }

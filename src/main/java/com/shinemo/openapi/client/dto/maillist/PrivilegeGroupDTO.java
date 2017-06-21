@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by yuanjian on 6/14/17.
  */
-public class PrivilegeGroup {
+public class PrivilegeGroupDTO {
     private Long id;
     private String name;
     private Integer isolation;

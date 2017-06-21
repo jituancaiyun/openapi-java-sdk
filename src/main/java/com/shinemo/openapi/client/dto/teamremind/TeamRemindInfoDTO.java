@@ -7,6 +7,7 @@ import com.shinemo.openapi.client.dto.CreateUserDTO;
  */
 public class TeamRemindInfoDTO {
     private CreateUserDTO creator = new CreateUserDTO();
+    private Integer status;
     private TeamRemindDetailDTO detail = new TeamRemindDetailDTO();
 
     public CreateUserDTO getCreator() {
@@ -25,10 +26,19 @@ public class TeamRemindInfoDTO {
         this.detail = detail;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
-        return "TeamRemindInfo{" +
+        return "TeamRemindInfoDTO{" +
                 "creator=" + creator +
+                ", status=" + status +
                 ", detail=" + detail +
                 '}';
     }

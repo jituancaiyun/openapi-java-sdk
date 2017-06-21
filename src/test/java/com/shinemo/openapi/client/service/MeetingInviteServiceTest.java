@@ -50,8 +50,9 @@ public class MeetingInviteServiceTest {
 
     @Before
     public void setUp() throws Exception {
+        Apis.setEnv(0);
         client = Apis.createClient();
-        context = ApiContext.ctx(orgId, uid, name);
+        context = ApiContext.ctx(orgId, uid, new String(name.getBytes(),"ISO8859-1"));
         meetingApiService = client.createApiService(MeetingApiService.class);
     }
 
@@ -61,9 +62,9 @@ public class MeetingInviteServiceTest {
         detail.setAddress("小会议室");
         detail.setBeginTime(new Date().getTime() + 30 * 60 * 1000);
         detail.setEndTime(new Date().getTime() + 30 * 60 * 1000 + 30 * 60 * 1000);
-        detail.setRemindMin(10);
+        detail.setRemindMin(29);
         detail.setContent("会议内容");
-        detail.setRemindType(RemindType.APPANDSMS_SEND.getType());
+//        detail.setRemindType(RemindType.APPANDSMS_SEND.getType());
         String[] uids = {"101010012129489", "101010011894152"};
         String[] names = {"y1", "j2"};
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
@@ -84,7 +85,7 @@ public class MeetingInviteServiceTest {
         detail.setAddress("小会议室");
         detail.setBeginTime(new Date().getTime() + 30 * 60 * 1000);
         detail.setEndTime(new Date().getTime() + 30 * 60 * 1000 + 30 * 60 * 1000);
-        detail.setRemindMin(10);
+        detail.setRemindMin(29);
         detail.setContent("会议内容-已更新2");
         detail.setRemindType(RemindType.APPANDSMS_SEND.getType());
         String[] uids = {"101010012129489", "101010011894152"};
@@ -103,14 +104,14 @@ public class MeetingInviteServiceTest {
 
     @Test
     public void detail() {
-        OpenApiResult<MeetingInviteInfoDTO> result = meetingApiService.detail(context, 12840L);
+        OpenApiResult<MeetingInviteInfoDTO> result = meetingApiService.detail(context, 12925L);
         System.out.println(result);
         System.out.println(result.getData());
     }
 
     @Test
     public void cancel() {
-        OpenApiResult<Long> result = meetingApiService.cancel(context, 12839L);
+        OpenApiResult<Long> result = meetingApiService.cancel(context, 12925L);
         System.out.println(result);
         System.out.println(result.getData());
     }
@@ -121,8 +122,8 @@ public class MeetingInviteServiceTest {
     @Test
     public void delete() {
         MeetingInviteDTO meetingInviteDTO = new MeetingInviteDTO();
-        meetingInviteDTO.setMeetingInviteId(12840L);
-        meetingInviteDTO.setRequesterUid("101010011894152");
+        meetingInviteDTO.setMeetingInviteId(12925L);
+        meetingInviteDTO.setRequesterUid("101010012129489");
 //        OpenApiResult<Long> result = meetingApiService.deleteMeeting(context,meetingInviteDTO);
         OpenApiResult<Long> result = meetingApiService.delete(context, 12839L);
         System.out.println(result);

@@ -20,7 +20,8 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.PersonalRemindInfoDTO;
+import com.shinemo.openapi.client.dto.personalremind.PersonalRemindDTO;
+import com.shinemo.openapi.client.dto.personalremind.PersonalRemindInfoDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -41,7 +42,7 @@ public interface PersonalRemindApi {
      */
 //    @FormUrlEncoded
     @POST("personalremind/create")
-    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body PersonalRemindInfoDTO.PersonalRemindDTO body);
+    Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body PersonalRemindDTO body);
 
     /**
      * 更新个人提醒
@@ -51,7 +52,7 @@ public interface PersonalRemindApi {
      * @return
      */
     @POST("personalremind/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("personalRemindId") long personalRemindId, @Body PersonalRemindInfoDTO.PersonalRemindDTO body);
+    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("personalRemindId") long personalRemindId, @Body PersonalRemindDTO body);
 
     /**
      * 删除个人提醒

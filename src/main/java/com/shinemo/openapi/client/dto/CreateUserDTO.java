@@ -3,9 +3,9 @@ package com.shinemo.openapi.client.dto;
 public class CreateUserDTO {
     private String uid;
     private String name;
-    private boolean isRemind = true;
-    private boolean isDelete = false;
-    private boolean isBindingMail = false;
+    private Boolean isRemind;
+    private Boolean isDelete;
+    private Boolean isBindingMail;
 
     public String getUid() {
         return uid;
@@ -23,28 +23,28 @@ public class CreateUserDTO {
         this.name = name;
     }
 
-    public boolean isRemind() {
+    public Boolean getIsRemind() {
         return isRemind;
     }
 
-    public void setRemind(boolean remind) {
-        isRemind = remind;
+    public void setISRemind(Boolean isRemind) {
+        this.isRemind = isRemind;
     }
 
-    public boolean isDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean delete) {
-        isDelete = delete;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
-    public boolean isBindingMail() {
+    public Boolean getIsBindingMail() {
         return isBindingMail;
     }
 
-    public void setBindingMail(boolean bindingMail) {
-        isBindingMail = bindingMail;
+    public void setIsBindingMail(Boolean isBindingMail) {
+        this.isBindingMail = isBindingMail;
     }
 
     @Override

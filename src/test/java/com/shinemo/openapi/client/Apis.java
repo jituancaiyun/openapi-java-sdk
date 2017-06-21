@@ -35,7 +35,7 @@ public final class Apis {
         Apis.env = env;
     }
 
-    private static int env = 0;
+    private static int env = 1;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();

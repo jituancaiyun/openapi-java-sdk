@@ -1,6 +1,7 @@
 package com.shinemo.openapi.client.dto.meeting;
 
 import com.shinemo.openapi.client.dto.MemberUser;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
 
@@ -12,17 +13,17 @@ public class MeetingInviteDetailDTO {
     private String voiceUrl;
     private int voiceLength;
     private String address;
-    private long beginTime;
-    private int remindMin;
-    private long endTime;
-    private long createTime;
-    private int remindType;
+    private Long beginTime;
+    private Integer remindMin;
+    private Long endTime;
+    private Long createTime;
+    private Integer remindType;
     private ArrayList<MemberUser> members;
     private ArrayList<Integer> voiceWave;
     private ArrayList<MeetingSignMember> signMembers;
-    private boolean isPushMail = false;
-    private int comments = 0;
-    private int signs = 0;
+    private Boolean isPushMail = false;
+    private Integer comments = 0;
+    private Integer signs = 0;
 
     public String getContent() {
         return content;
@@ -56,43 +57,43 @@ public class MeetingInviteDetailDTO {
         this.address = address;
     }
 
-    public long getBeginTime() {
+    public Long getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(long beginTime) {
+    public void setBeginTime(Long beginTime) {
         this.beginTime = beginTime;
     }
 
-    public int getRemindMin() {
+    public Integer getRemindMin() {
         return remindMin;
     }
 
-    public void setRemindMin(int remindMin) {
+    public void setRemindMin(Integer remindMin) {
         this.remindMin = remindMin;
     }
 
-    public long getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(long endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 
-    public long getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public int getRemindType() {
+    public Integer getRemindType() {
         return remindType;
     }
 
-    public void setRemindType(int remindType) {
+    public void setRemindType(Integer remindType) {
         this.remindType = remindType;
     }
 
@@ -120,27 +121,27 @@ public class MeetingInviteDetailDTO {
         this.signMembers = signMembers;
     }
 
-    public boolean isPushMail() {
+    public Boolean getIsPushMail() {
         return isPushMail;
     }
 
-    public void setPushMail(boolean pushMail) {
-        isPushMail = pushMail;
+    public void setIsPushMail(Boolean isPushMail) {
+        this.isPushMail = isPushMail;
     }
 
-    public int getComments() {
+    public Integer getComments() {
         return comments;
     }
 
-    public void setComments(int comments) {
+    public void setComments(Integer comments) {
         this.comments = comments;
     }
 
-    public int getSigns() {
+    public Integer getSigns() {
         return signs;
     }
 
-    public void setSigns(int signs) {
+    public void setSigns(Integer signs) {
         this.signs = signs;
     }
 

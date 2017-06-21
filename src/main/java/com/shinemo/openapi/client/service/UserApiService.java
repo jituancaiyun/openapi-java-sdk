@@ -49,11 +49,11 @@ public interface UserApiService {
 
     OpenApiResult<Map<String, String>> update(ApiContext apiContext, UserDTO userDTO);
 
-    OpenApiResult<UserInfoDTO> detail(ApiContext apiContext, String uid, Long deptId);
+    OpenApiResult<Map<String, UserInfoDTO>> detail(ApiContext apiContext, String uid, Long deptId);
 
-    OpenApiResult<List<UserInfoDTO>> list(ApiContext apiContext, Long deptId);
+    OpenApiResult<Map<String, List<UserInfoDTO>>> list(ApiContext apiContext, Long deptId);
 
-    OpenApiResult<List<UserInfoDTO>> listAll(ApiContext apiContext, Long deptId);
+    OpenApiResult<Map<String, List<UserInfoDTO>>> listAll(ApiContext apiContext, Long deptId);
 
 
 }

@@ -5,11 +5,11 @@ import com.shinemo.openapi.client.dto.CreateUserDTO;
 
 public class MeetingInviteInfoDTO {
     private CreateUserDTO creator = new CreateUserDTO();
-    private int status;
+    private Integer status;
     private MeetingInviteDetailDTO detail = new MeetingInviteDetailDTO();
-    private int signModel = 0;
-    private boolean isSign = false;
-    private long remindAgainTime = 0;
+    private Integer signModel = 0;
+    private Boolean isSign = false;
+    private Long remindAgainTime = 0L;
 
     public CreateUserDTO getCreator() {
         return creator;
@@ -19,11 +19,11 @@ public class MeetingInviteInfoDTO {
         this.creator = creator;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -35,27 +35,27 @@ public class MeetingInviteInfoDTO {
         this.detail = detail;
     }
 
-    public int getSignModel() {
+    public Integer getSignModel() {
         return signModel;
     }
 
-    public void setSignModel(int signModel) {
+    public void setSignModel(Integer signModel) {
         this.signModel = signModel;
     }
 
-    public boolean isSign() {
-        return isSign;
+    public Boolean getIsSign() {
+        return this.isSign;
     }
 
-    public void setSign(boolean sign) {
-        isSign = sign;
+    public void setSign(Boolean isSign) {
+        this.isSign = isSign;
     }
 
-    public long getRemindAgainTime() {
+    public Long getRemindAgainTime() {
         return remindAgainTime;
     }
 
-    public void setRemindAgainTime(long remindAgainTime) {
+    public void setRemindAgainTime(Long remindAgainTime) {
         this.remindAgainTime = remindAgainTime;
     }
 

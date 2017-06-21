@@ -30,7 +30,7 @@ public final class AccessTokenDTO implements Serializable {
 
     private String accessToken;
 
-    private long expireTime;
+    private Long expireTime;
 
     private String jsapiTicket;
 
@@ -50,11 +50,11 @@ public final class AccessTokenDTO implements Serializable {
         this.jsapiTicket = jsapiTicket;
     }
 
-    public long getExpireTime() {
+    public Long getExpireTime() {
         return expireTime;
     }
 
-    public void setExpireTime(long expireTime) {
+    public void setExpireTime(Long expireTime) {
         this.expireTime = expireTime;
     }
 

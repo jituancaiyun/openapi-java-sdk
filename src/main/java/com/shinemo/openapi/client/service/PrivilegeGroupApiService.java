@@ -19,12 +19,11 @@
 
 package com.shinemo.openapi.client.service;
 
-import com.shinemo.openapi.client.api.BlackListApi;
 import com.shinemo.openapi.client.api.PrivilegeGroupApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.maillist.PrivilegeGroup;
+import com.shinemo.openapi.client.dto.maillist.PrivilegeGroupDTO;
 
 import java.util.Map;
 
@@ -36,7 +35,7 @@ import java.util.Map;
 @Api(PrivilegeGroupApi.class)
 public interface PrivilegeGroupApiService {
 
-    OpenApiResult<Map<String, Long>> create(ApiContext context, PrivilegeGroup group);
+    OpenApiResult<Map<String, Long>> create(ApiContext context, PrivilegeGroupDTO group);
 
     OpenApiResult<Long> delete(ApiContext context, Long groupId);
 

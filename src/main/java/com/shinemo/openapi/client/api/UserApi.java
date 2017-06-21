@@ -51,12 +51,12 @@ public interface UserApi {
     Call<OpenApiResult<Map<String, String>>> update(@HeaderMap Map<String, String> headers, @Body UserDTO body);
 
     @GET("employee/list")
-    Call<OpenApiResult<List<UserInfoDTO>>> list(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String,List<UserInfoDTO>>>> list(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
     @GET("employee/listAll")
-    Call<OpenApiResult<List<UserInfoDTO>>> listAll(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String,List<UserInfoDTO>>>> listAll(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
     @GET("employee/detail")
-    Call<OpenApiResult<UserInfoDTO>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String,UserInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
 
 }

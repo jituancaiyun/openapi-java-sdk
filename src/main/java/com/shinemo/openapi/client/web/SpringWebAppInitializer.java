@@ -36,30 +36,30 @@ public final class SpringWebAppInitializer implements WebApplicationInitializer 
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        /*WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(servletContext);
         if (context == null) return;
 
         Map openApiAesKeyServlets = context.getBeansOfType(OpenApiAesKeyServlet.class);
-        if (openApiAesKeyServlets == null || openApiAesKeyServlets.isEmpty()) return;
-
-        OpenApiAesKeyServlet openApiAesKeyServlet = (OpenApiAesKeyServlet) openApiAesKeyServlets.values().iterator().next();
-        if (openApiAesKeyServlet == null) return;
-
-        ServletRegistration.Dynamic registration4aesKey = servletContext.addServlet("OpenApiAesKeyServlet", openApiAesKeyServlet);
-        registration4aesKey.addMapping("/queryKey");
-
+        if (openApiAesKeyServlets != null && !openApiAesKeyServlets.isEmpty()) {
+            OpenApiAesKeyServlet openApiAesKeyServlet = (OpenApiAesKeyServlet) openApiAesKeyServlets.values().iterator().next();
+            if (openApiAesKeyServlet != null) {
+                ServletRegistration.Dynamic registration4aesKey = servletContext.addServlet("OpenApiAesKeyServlet", openApiAesKeyServlet);
+                registration4aesKey.addMapping("/queryKey");
+            }
+        }
 
         Map openApiCallbackServlets = context.getBeansOfType(OpenApiCallbackServlet.class);
-        if (openApiCallbackServlets == null || openApiCallbackServlets.isEmpty()) return;
-
-        OpenApiCallbackServlet openApiCallbackServlet = (OpenApiCallbackServlet) openApiCallbackServlets.values().iterator().next();
-        if (openApiCallbackServlet == null) return;
-
-        ServletRegistration.Dynamic registration4callback = servletContext.addServlet("OpenApiCallbackServlet", openApiCallbackServlet);
-        registration4callback.addMapping("/callback");
+        if (openApiCallbackServlets != null && !openApiCallbackServlets.isEmpty()) {
+            OpenApiCallbackServlet openApiCallbackServlet = (OpenApiCallbackServlet) openApiCallbackServlets.values().iterator().next();
+            if (openApiCallbackServlet != null) {
+                ServletRegistration.Dynamic registration4callback = servletContext.addServlet("OpenApiCallbackServlet", openApiCallbackServlet);
+                registration4callback.addMapping("/callback");
+            }
+        }
 
         System.err.println("===================================================================");
         System.err.println("===================OPEN-API-SERVER START SUCCESS===================");
         System.err.println("===================================================================");
+        */
     }
 }

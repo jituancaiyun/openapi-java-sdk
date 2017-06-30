@@ -31,7 +31,7 @@ import javax.sql.DataSource;
  * @author ohun@live.cn (夜色)
  */
 public final class Apis {
-    private static int env = 0;
+    private static int env = 4;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
@@ -51,10 +51,14 @@ public final class Apis {
             configuration.setBaseUrl("https://openapi.e.uban360.com/platform/");
             configuration.setAppId(27714980);
             configuration.setAppSecret("S14'e*;9Zo_8TU\"U:_rzP8crwP<_hV8D");
+        } else if (env == 4) {
+            configuration.setBaseUrl("http://127.0.0.1:8082/platform/");
+            configuration.setAppId(20328985);
+            configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
         } else {
             configuration.setBaseUrl("https://api.open.jituancaiyun.com/openapi/");
-            configuration.setAppId(48906502);
-            configuration.setAppSecret("DF2D43CCAC737521");
+            configuration.setAppId(28326584);
+            configuration.setAppSecret("ab4d95bca922ead61cf186eef7fd994c");
         }
         configuration.setConnectTimeoutMillis(10000);
         configuration.setMaxRetry(1);

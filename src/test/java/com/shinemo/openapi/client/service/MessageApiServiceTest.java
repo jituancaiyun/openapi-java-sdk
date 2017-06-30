@@ -51,10 +51,10 @@ public class MessageApiServiceTest {
     public void sendTextMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
                 .createTextMessage("我是一条纯文本消息")
-                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .setReceivers(Arrays.asList("112093240"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("90568"), messageDTO);
         System.out.println(result);
     }
 
@@ -62,10 +62,10 @@ public class MessageApiServiceTest {
     public void sendImageMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
                 .createImageMessage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
-                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .setReceivers(Arrays.asList("112093240"))
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("90568"), messageDTO);
         System.out.println(result);
     }
 

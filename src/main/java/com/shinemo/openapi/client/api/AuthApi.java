@@ -42,7 +42,7 @@ public interface AuthApi {
      * @param authToken 客户端透传下来的授权token
      * @return UserInfoDTO
      */
-    @GET("auth/getUserInfoByToken")
+    @GET("auth/login")
     Call<OpenApiResult<UserInfoDTO>> login(@HeaderMap Map<String, String> headers, @Header("token") String authToken);
 
     /**

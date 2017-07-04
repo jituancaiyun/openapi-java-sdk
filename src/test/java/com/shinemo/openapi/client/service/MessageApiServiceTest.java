@@ -41,6 +41,13 @@ public class MessageApiServiceTest {
     private MessageApiService messageApiService;
     private OpenApiClient client;
 
+    //private ApiContext ctx = new ApiContext("96256");
+    //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
+
+    private ApiContext ctx = new ApiContext().setOrgId("57171554250");
+    private List<String> receivers = Arrays.asList("106176", "112093240", "80864", "105824");
+
+
     @Before
     public void setUp() throws Exception {
         client = Apis.createClient();
@@ -51,10 +58,10 @@ public class MessageApiServiceTest {
     public void sendTextMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
                 .createTextMessage("我是一条纯文本消息")
-                .setReceivers(Arrays.asList("112093240"))
+                .setReceivers(receivers)
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("90568"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
         System.out.println(result);
     }
 
@@ -62,10 +69,10 @@ public class MessageApiServiceTest {
     public void sendImageMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
                 .createImageMessage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
-                .setReceivers(Arrays.asList("112093240"))
+                .setReceivers(receivers)
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("90568"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
         System.out.println(result);
     }
 
@@ -75,11 +82,13 @@ public class MessageApiServiceTest {
                 .createAppMessage("我是一条应用消息")
                 .setContent("我是一条应用消息Content")
                 .setTitle("我是一条应用消息Title")
+                .setPreTitle("工会")
+                .setColor("green")
                 .setUrlAction(client.config().getAppId(), "https://jituancaiyun.com", "")
-                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .setReceivers(receivers)
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
         System.out.println(result);
     }
 
@@ -91,10 +100,10 @@ public class MessageApiServiceTest {
                 .setTitle("我是一条图文消息Title")
                 .setImage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
                 .setUrl("https://baidu.com")
-                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .setReceivers(receivers)
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
         System.out.println(result);
     }
 
@@ -106,10 +115,10 @@ public class MessageApiServiceTest {
                 .setTitle("我是一条链接消息Title")
                 .setImage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
                 .setUrl("https://jituancaiyun.com")
-                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .setReceivers(receivers)
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
         System.out.println(result);
     }
 
@@ -122,10 +131,10 @@ public class MessageApiServiceTest {
                 .setTitle("我是一条系统消息Title")
                 .setDesc("我是一条系统消息Desc1", "我是一条系统消息Desc2")
                 .setAction("https://jituancaiyun.com")
-                .setReceivers(Arrays.asList("101010012111025", "101010011746392"))
+                .setReceivers(receivers)
                 .build();
 
-        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ApiContext.ctx("57171554250"), messageDTO);
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
         System.out.println(result);
     }
 }

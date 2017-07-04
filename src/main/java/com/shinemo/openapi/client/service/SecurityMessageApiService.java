@@ -56,6 +56,7 @@ public final class SecurityMessageApiService implements MessageApiService {
                 throw new OpenApiException("请初始化AesKeyManager");
             }
 
+            //TODO 要处理掉orgId的问题
             AesKey aesKey = aesKeyService.getAesKeyBySDK(apiContext.getOrgId());
 
             if (aesKey == null || aesKey.getId() == null || aesKey.getKey() == null) {

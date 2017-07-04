@@ -19,11 +19,15 @@
 
 package com.shinemo.openapi.client;
 
+import com.shinemo.openapi.client.common.ApiContext;
+import com.shinemo.openapi.client.common.Base64;
 import com.shinemo.openapi.client.spring.OpenApiClientFactoryBean;
 import com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * Created by ohun on 2017/3/24.
@@ -31,7 +35,7 @@ import javax.sql.DataSource;
  * @author ohun@live.cn (夜色)
  */
 public final class Apis {
-    private static int env = 4;
+    private static int env = 5;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
@@ -57,8 +61,10 @@ public final class Apis {
             configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
         } else {
             configuration.setBaseUrl("https://api.open.jituancaiyun.com/openapi/");
-            configuration.setAppId(28326584);
-            configuration.setAppSecret("ab4d95bca922ead61cf186eef7fd994c");
+            configuration.setAppId(44878223);
+            configuration.setAppSecret("d6ad456a8ec6c298");// 彩云线上测试
+            //configuration.setAppId(88734928);
+            //configuration.setAppSecret("7a2cca422321cb9945eb39be384afd6f");
         }
         configuration.setConnectTimeoutMillis(10000);
         configuration.setMaxRetry(1);
@@ -88,5 +94,11 @@ public final class Apis {
         dataSource.setUsername("root");
         dataSource.setPassword("shinemo123");
         return dataSource;
+    }
+
+    public static ApiContext ctx(long orgId) {
+        return ApiContext.ctx(Base64.getUrlEncoder().encodeToString(
+                ByteBuffer.allocate(10).order(ByteOrder.LITTLE_ENDIAN).putShort((short) 1).putLong(orgId).array()
+        ));
     }
 }

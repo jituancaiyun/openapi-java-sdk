@@ -40,7 +40,6 @@ public interface PersonalRemindApi {
      * @param headers 基础header参数, accessToken, orgId, uid
      * @param body    推送消息
      */
-//    @FormUrlEncoded
     @POST("personalremind/create")
     Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body PersonalRemindDTO body);
 
@@ -52,7 +51,7 @@ public interface PersonalRemindApi {
      * @return
      */
     @POST("personalremind/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("personalRemindId") long personalRemindId, @Body PersonalRemindDTO body);
+    Call<OpenApiResult<Map<String, Long>>> update(@HeaderMap Map<String, String> headers, @Query("personalRemindId") long personalRemindId, @Body PersonalRemindDTO body);
 
     /**
      * 删除个人提醒

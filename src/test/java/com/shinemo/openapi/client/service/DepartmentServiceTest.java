@@ -6,7 +6,6 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
-import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,8 +55,9 @@ public class DepartmentServiceTest {
     @Test
     public void createDept() {
         DeptInfoDTO infoDto = new DeptInfoDTO();
-        infoDto.setName("部门13-child2");
-        infoDto.setParentId(13L);
+        infoDto.setName("不闷");
+        infoDto.setParentId(0L);
+        infoDto.setOrder(1);
 
         OpenApiResult<Map<String, Long>> result = departmentApiService.create(context, infoDto);
         System.out.println(result);
@@ -76,8 +76,9 @@ public class DepartmentServiceTest {
     public void updateDept() {
         DeptInfoDTO infoDto = new DeptInfoDTO();
         infoDto.setName("部门13-new");
-        infoDto.setDeptId(1L);
-        infoDto.setParentId(12L);
+//        infoDto.setDeptId(19L);
+//        infoDto.setParentId(14L);
+//        infoDto.setOrder(1);
 
         OpenApiResult<Long> result = departmentApiService.update(context, infoDto);
         System.out.println(result);
@@ -94,7 +95,7 @@ public class DepartmentServiceTest {
 
     @Test
     public void detail() {
-        OpenApiResult<Map<String, DeptInfoDTO>> result = departmentApiService.detail(context, 14L);
+        OpenApiResult<Map<String, DeptInfoDTO>> result = departmentApiService.detail(context, 0L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();

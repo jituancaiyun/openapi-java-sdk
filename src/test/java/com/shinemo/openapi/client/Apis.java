@@ -40,24 +40,20 @@ public final class Apis {
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
         if (env == 0) {
-            configuration.setBaseUrl("http://127.0.0.1:8081/openapi/");
+            configuration.setBaseUrl("http://127.0.0.1:8081/platform/api/");
             /*appId为94181123的应用已绑定企业84057*/
-            configuration.setAppId(94181123);
-            configuration.setAppSecret("6fe73d451cd37f8a");
+            configuration.setAppId(12599993);
+            configuration.setAppSecret("1f1ea62b71564340869b54e2f3036e55");
         } else if (env == 1) {
-            configuration.setBaseUrl("http://10.0.10.49:8081/openapi/");
-            configuration.setAppId(94181123);
-            configuration.setAppSecret("6fe73d451cd37f8a");
+            configuration.setBaseUrl("http://10.0.10.49:8081/platform/api/");
+            configuration.setAppId(36896933);
+            configuration.setAppSecret("5dc66488c5fb262028f3ae58b492dd64");
         } else if (env == 2) {
             configuration.setBaseUrl("http://10.0.10.49:8081/platform/");
             configuration.setAppId(20328985);
             configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
-        } else if (env == 3) {
-            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/");
-            configuration.setAppId(27714980);
-            configuration.setAppSecret("S14'e*;9Zo_8TU\"U:_rzP8crwP<_hV8D");
         } else {
-            configuration.setBaseUrl("https://api.open.jituancaiyun.com/openapi/");
+            configuration.setBaseUrl("https://api.open.jituancaiyun.com/platform/api/");
             /*appId为80108056的应用已绑定企业83040*/
             configuration.setAppId(80108056);//48906502
             configuration.setAppSecret("f1f1802e3c804591601bc91f3a96bca3");//DF2D43CCAC737521

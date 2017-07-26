@@ -23,7 +23,7 @@ public class MeetingInviteServiceTest {
 
     private MeetingApiService meetingApiService;
     private OpenApiClient client;
-    private String orgId = "84057";
+    private String orgId = "AQAOAQAAAAAAAFlIAQAAAAAA";
     private String uid = "101010012129489";//"101010011894152";//
     private String name = "yuanjian";
     private ApiContext context;
@@ -50,7 +50,7 @@ public class MeetingInviteServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(0);
+//        Apis.setEnv(0);
         client = Apis.createClient();
         context = ApiContext.ctx(orgId, uid, new String(name.getBytes(),"ISO8859-1"));
         meetingApiService = client.createApiService(MeetingApiService.class);

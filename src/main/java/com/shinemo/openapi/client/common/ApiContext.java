@@ -31,17 +31,17 @@ public class ApiContext extends HashMap<String, String> {
     public ApiContext() {
     }
 
-    public ApiContext(String orgId) {
-        this.setOrgId(orgId);
+    public ApiContext(String orgSecret) {
+        this.setOrgSecret(orgSecret);
     }
 
-    public ApiContext(String orgId, String uid) {
-        this.setOrgId(orgId);
+    public ApiContext(String orgSecret, String uid) {
+        this.setOrgSecret(orgSecret);
         this.setUid(uid);
     }
 
-    public ApiContext(String orgId, String uid, String name) {
-        this.setOrgId(orgId);
+    public ApiContext(String orgSecret, String uid, String name) {
+        this.setOrgSecret(orgSecret);
         this.setUid(uid);
         this.setName(name);
     }
@@ -51,8 +51,8 @@ public class ApiContext extends HashMap<String, String> {
         return this;
     }
 
-    public ApiContext setOrgId(String orgId) {
-        this.put("orgId", orgId);
+    public ApiContext setOrgSecret(String orgSecret) {
+        this.put("orgSecret", orgSecret);
         return this;
     }
 
@@ -71,23 +71,23 @@ public class ApiContext extends HashMap<String, String> {
         return this;
     }
 
-    public String getOrgId() {
-        return get("orgId");
+    public String getOrgSecret() {
+        return get("orgSecret");
     }
 
     public static ApiContext ctx() {
         return new ApiContext();
     }
 
-    public static ApiContext ctx(String orgId) {
-        return new ApiContext(orgId);
+    public static ApiContext ctx(String orgSecret) {
+        return new ApiContext(orgSecret);
     }
 
-    public static ApiContext ctx(String orgId, String uid) {
-        return new ApiContext(orgId, uid);
+    public static ApiContext ctx(String orgSecret, String uid) {
+        return new ApiContext(orgSecret, uid);
     }
 
-    public static ApiContext ctx(String orgId, String uid, String name) {
-        return new ApiContext(orgId, uid, name);
+    public static ApiContext ctx(String orgSecret, String uid, String name) {
+        return new ApiContext(orgSecret, uid, name);
     }
 }

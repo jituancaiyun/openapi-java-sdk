@@ -71,7 +71,7 @@ public class MatterNoticeApiServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(0);
+//        Apis.setEnv(0);
         client = Apis.createClient();
         context = ApiContext.ctx(orgId, uid, name);
         matterNoticeApiService = client.createApiService(MatterNoticeApiService.class);
@@ -105,7 +105,7 @@ public class MatterNoticeApiServiceTest {
         teamRemindDetail.setRemindType(RemindType.APP_SEND.getType());
         teamRemindDetail.setRemindTime(new Date().getTime() + 1000 * 60 * 10);
         teamRemindDetail.setIsVoiceRemind(false);
-        String[] receivers = {"101010011894152"};//"101010012129489",
+        String[] receivers = {"101010012129489"};//"101010012129489",
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i = 0; i < receivers.length; i++) {
             MemberUser memberUser = new MemberUser();
@@ -114,14 +114,14 @@ public class MatterNoticeApiServiceTest {
             list.add(memberUser);
         }
         teamRemindDetail.setMembers(list);
-        long noticeId = 58388L;
+        long noticeId = 58439000L;
         OpenApiResult<Long> result = matterNoticeApiService.update(context, noticeId, teamRemindDetail);
         System.out.println(result);
     }
 
     @Test
     public void getMatterNoticeDetail() {
-        long personalRemindId = 58439L;
+        long personalRemindId = 170432334L;
         OpenApiResult<TeamRemindInfoDTO> result = matterNoticeApiService.detail(context, personalRemindId);
         System.out.println(result);
         System.out.println(result.getData());
@@ -129,28 +129,28 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void cancelMatterNotice() {
-        long personalRemindId = 58439L;
+        long personalRemindId = 58439000L;
         OpenApiResult<Long> result = matterNoticeApiService.cancel(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void deleteMatterNotice() {
-        long personalRemindId = 58439L;
+        long personalRemindId = 58439000L;
         OpenApiResult<Long> result = matterNoticeApiService.delete(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void openMatterNotice() {
-        long personalRemindId = 58399L;
+        long personalRemindId = 58439000L;
         OpenApiResult<Long> result = matterNoticeApiService.open(context, personalRemindId);
         System.out.println(result);
     }
 
     @Test
     public void closeMatterNotice() {
-        long personalRemindId = 58399L;
+        long personalRemindId = 58439000L;
         OpenApiResult<Long> result = matterNoticeApiService.close(context, personalRemindId);
         System.out.println(result);
     }

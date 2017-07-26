@@ -52,7 +52,7 @@ public interface PersonalRemindApiService {
      * @param personalRemind   个人提醒信息
      * @return
      */
-    OpenApiResult<Long> update(ApiContext apiContext, long personalRemindId, PersonalRemindDTO personalRemind);
+    OpenApiResult<Map<String, Long>> update(ApiContext apiContext, long personalRemindId, PersonalRemindDTO personalRemind);
 
     /**
      * 删除

@@ -259,4 +259,8 @@ import static com.shinemo.openapi.client.common.Const.LOG;
         }
         return OpenApiResult.failure();
     }
+
+    public void test(String call, Integer retryNum) {
+        System.out.println("test");
+    }
 }

@@ -66,9 +66,18 @@ public class ApiContext extends HashMap<String, String> {
         return this;
     }
 
-    public ApiContext putHeader(String name, String value) {
+    public ApiContext addHeader(String name, String value) {
         this.put(name, value);
         return this;
+    }
+
+    public ApiContext setOrgId(String orgId) {
+        this.put("orgId", orgId);
+        return this;
+    }
+
+    public String getOrgId() {
+        return get("orgId");
     }
 
     public String getOrgSecret() {

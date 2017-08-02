@@ -19,11 +19,15 @@
 
 package com.shinemo.openapi.client;
 
+import com.shinemo.openapi.client.common.ApiContext;
+import com.shinemo.openapi.client.common.Base64;
 import com.shinemo.openapi.client.spring.OpenApiClientFactoryBean;
 import com.shinemo.openapi.client.spring.OpenApiServiceFactoryBean;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * Created by ohun on 2017/3/24.
@@ -35,7 +39,7 @@ public final class Apis {
         Apis.env = env;
     }
 
-    private static int env = 1;
+    private static int env = 5;
 
     public static OpenApiConfiguration createConfig() {
         OpenApiConfiguration configuration = new OpenApiConfiguration();
@@ -52,11 +56,21 @@ public final class Apis {
             configuration.setBaseUrl("http://10.0.10.49:8081/platform/");
             configuration.setAppId(20328985);
             configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
+        } else if (env == 3) {
+            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/");
+            configuration.setAppId(27714980);
+            configuration.setAppSecret("S14'e*;9Zo_8TU\"U:_rzP8crwP<_hV8D");
+        } else if (env == 4) {
+            configuration.setBaseUrl("http://127.0.0.1:8082/platform/");
+            configuration.setAppId(20328985);
+            configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
         } else {
-            configuration.setBaseUrl("https://api.open.jituancaiyun.com/platform/api/");
+            configuration.setBaseUrl("https://api.open.jituancaiyun.com/openapi/");
+            configuration.setAppId(44878223);
+            configuration.setAppSecret("d6ad456a8ec6c298");// 彩云线上测试
             /*appId为80108056的应用已绑定企业83040*/
-            configuration.setAppId(80108056);//48906502
-            configuration.setAppSecret("f1f1802e3c804591601bc91f3a96bca3");//DF2D43CCAC737521
+            //configuration.setAppId(88734928);
+            //configuration.setAppSecret("7a2cca422321cb9945eb39be384afd6f");
         }
         configuration.setConnectTimeoutMillis(10000);
         configuration.setMaxRetry(1);
@@ -86,5 +100,11 @@ public final class Apis {
         dataSource.setUsername("root");
         dataSource.setPassword("shinemo123");
         return dataSource;
+    }
+
+    public static ApiContext ctx(long orgId) {
+        return ApiContext.ctx(Base64.getUrlEncoder().encodeToString(
+                ByteBuffer.allocate(10).order(ByteOrder.LITTLE_ENDIAN).putShort((short) 1).putLong(orgId).array()
+        ));
     }
 }

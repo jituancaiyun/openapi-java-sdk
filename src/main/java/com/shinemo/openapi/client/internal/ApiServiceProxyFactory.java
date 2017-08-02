@@ -129,7 +129,7 @@ import java.util.Map;
         }
 
         apiContext.setAccessToken(accessToken);
-        apiContext.putHeader(Const.USER_AGENT_HEADER_NAME, Const.USER_AGENT_HEADER_VALUE);
+        apiContext.addHeader(Const.USER_AGENT_HEADER_NAME, Const.USER_AGENT_HEADER_VALUE);
         return args_1;
     }
 

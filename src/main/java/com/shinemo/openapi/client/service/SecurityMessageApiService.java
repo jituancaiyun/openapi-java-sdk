@@ -25,6 +25,7 @@ import com.shinemo.openapi.client.common.*;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.IMessage;
 
+import java.nio.ByteBuffer;
 import java.util.List;
 
 /**
@@ -56,8 +57,7 @@ public final class SecurityMessageApiService implements MessageApiService {
                 throw new OpenApiException("请初始化AesKeyManager");
             }
 
-            //TODO 要处理掉orgId的问题
-            AesKey aesKey = aesKeyService.getAesKeyBySDK(apiContext.getOrgId());
+            AesKey aesKey = aesKeyService.getAesKeyBySDK(getOrgId(apiContext));
 
             if (aesKey == null || aesKey.getId() == null || aesKey.getKey() == null) {
                 return OpenApiResult.failure("消息加密失败, 无法获取密钥");
@@ -88,5 +88,23 @@ public final class SecurityMessageApiService implements MessageApiService {
 
     public void setAesKeyService(AesKeyService aesKeyService) {
         this.aesKeyService = aesKeyService;
+    }
+
+
+    private String getOrgId(ApiContext apiContext) {
+        if (apiContext.getOrgId() != null) {
+            String orgId = apiContext.getOrgId();
+            if (OpenApiUtils.isDigit(orgId)) {
+                return orgId;
+            }
+            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(orgId), 2, 8);
+            return String.valueOf(buffer.getLong());
+        }
+
+        if (apiContext.getOrgSecret() != null) {
+            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(apiContext.getOrgSecret()), 10, 8);
+            return String.valueOf(buffer.getLong());
+        }
+        return "0";
     }
 }

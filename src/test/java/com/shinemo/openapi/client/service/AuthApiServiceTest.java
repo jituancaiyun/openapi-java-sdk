@@ -24,7 +24,7 @@ public class AuthApiServiceTest {
     @Test
     public void login() throws Exception {
         //String token = "MTAxMDEwMDEyMTI5NDg5fDQ0ZTk0ODE1YWIzZTM1ZTViMmI0NGRlMWFkMzlmNjFifDE0OTMzNzA3ODEwMDA=";
-        String token = "AQABAAAAAAAAAICx4DneWwAAFV8Q0lsBAAA4Njg0YWIyZWIwYWZiZjI3ZDg1M2RmZDBmYzA0ODg5Nw==";//token ub
+        String token = "eyJhcHBJZCI6NDQ5NzE4NjEsIm9yZ0lkIjo1NzE3MTU1NDI1MCwic2NvcGVJZCI6NSwic2lnbmF0dXJlIjoiNzY1NjEzZjc0ZDkxODY5YzRjMjYwMTk2ODg5OWE3NDgiLCJzaXRlSWQiOjEsInRpbWVzdGFtcCI6MTUwMTY1NzYwNDE2NSwidWlkIjoiMTA2MTc2In0=";//token ub
         OpenApiResult<UserInfoDTO> result = authApiService.login(token);
         System.out.println(result);
     }

@@ -149,4 +149,18 @@ public final class OpenApiUtils {
         return Base64.getUrlEncoder().encodeToString(SecureRandom.getSeed(16));
     }
 
+
+    public static boolean isDigit(CharSequence sequence) {
+        if (sequence == null || sequence.length() == 0) {
+            return false;
+        }
+
+        for (int i = 0, L = sequence.length(); i < L; i++) {
+            if (!Character.isDigit(sequence.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

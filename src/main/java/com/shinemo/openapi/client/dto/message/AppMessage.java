@@ -19,6 +19,8 @@
 
 package com.shinemo.openapi.client.dto.message;
 
+import com.shinemo.openapi.client.common.OpenApiUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -36,6 +38,9 @@ public final class AppMessage extends IMessage<AppMessage> {
     private String title;
     private String preTitle;
     private String color;
+    private Integer unreadCount;
+    private Integer appId;
+    private Long orgId;
 
     public AppMessage() {
     }
@@ -125,6 +130,33 @@ public final class AppMessage extends IMessage<AppMessage> {
 
     public AppMessage setColor(String color) {
         this.color = color;
+        return this;
+    }
+
+    public Integer getUnreadCount() {
+        return unreadCount;
+    }
+
+    public AppMessage setUnreadCount(Integer unreadCount) {
+        this.unreadCount = unreadCount;
+        return this;
+    }
+
+    public Integer getAppId() {
+        return appId;
+    }
+
+    public AppMessage setAppId(Integer appId) {
+        this.appId = appId;
+        return this;
+    }
+
+    public Long getOrgId() {
+        return orgId;
+    }
+
+    public AppMessage setOrgId(String orgId) {
+        this.orgId = OpenApiUtils.getOrgId(orgId);
         return this;
     }
 

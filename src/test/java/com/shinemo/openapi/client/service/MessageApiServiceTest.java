@@ -45,7 +45,7 @@ public class MessageApiServiceTest {
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
     private ApiContext ctx = new ApiContext().setOrgId("57171554250");
-    private List<String> receivers = Arrays.asList("106176", "112093240", "80864", "105824");
+    private List<String> receivers = Arrays.asList("106176"/*, "112093240", "80864", "105824"*/);
 
 
     @Before
@@ -84,6 +84,9 @@ public class MessageApiServiceTest {
                 .setTitle("我是一条应用消息Title")
                 .setPreTitle("工会")
                 .setColor("green")
+                .setUnreadCount(3)//未读消息数, 目前是显示红点
+                .setAppId(client.config().getAppId())//要显示红点的应用ID
+                .setOrgId(ctx.getOrgId())//要显示红点的应用所属企业
                 .setUrlAction(client.config().getAppId(), "https://jituancaiyun.com", "")
                 .setReceivers(receivers)
                 .build();

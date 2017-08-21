@@ -28,6 +28,8 @@ import com.shinemo.openapi.client.dto.message.IMessage;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+import static com.shinemo.openapi.client.common.OpenApiUtils.getOrgId;
+
 /**
  * Created by ohun on 2017/4/11.
  *
@@ -88,23 +90,5 @@ public final class SecurityMessageApiService implements MessageApiService {
 
     public void setAesKeyService(AesKeyService aesKeyService) {
         this.aesKeyService = aesKeyService;
-    }
-
-
-    private String getOrgId(ApiContext apiContext) {
-        if (apiContext.getOrgId() != null) {
-            String orgId = apiContext.getOrgId();
-            if (OpenApiUtils.isDigit(orgId)) {
-                return orgId;
-            }
-            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(orgId), 2, 8);
-            return String.valueOf(buffer.getLong());
-        }
-
-        if (apiContext.getOrgSecret() != null) {
-            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(apiContext.getOrgSecret()), 10, 8);
-            return String.valueOf(buffer.getLong());
-        }
-        return "0";
     }
 }

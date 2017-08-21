@@ -20,8 +20,11 @@
 package com.shinemo.openapi.client.common;
 
 
+import org.springframework.util.NumberUtils;
+
 import java.io.Closeable;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -161,6 +164,35 @@ public final class OpenApiUtils {
             }
         }
         return true;
+    }
+
+    public static String getOrgId(ApiContext apiContext) {
+        if (apiContext.getOrgId() != null) {
+            String orgId = apiContext.getOrgId();
+            if (OpenApiUtils.isDigit(orgId)) {
+                return orgId;
+            }
+            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(orgId), 2, 8);
+            return String.valueOf(buffer.getLong());
+        }
+
+        if (apiContext.getOrgSecret() != null) {
+            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(apiContext.getOrgSecret()), 10, 8);
+            return String.valueOf(buffer.getLong());
+        }
+        return "0";
+    }
+
+
+    public static long getOrgId(String orgId) {
+        if (orgId != null) {
+            if (OpenApiUtils.isDigit(orgId)) {
+                return Long.parseLong(orgId);
+            }
+            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(orgId), 2, 8);
+            return buffer.getLong();
+        }
+        return 0;
     }
 
 }

@@ -23,8 +23,12 @@ import com.shinemo.openapi.client.api.UserApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import com.shinemo.openapi.client.dto.maillist.UserDTO;
 import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
+import retrofit2.Call;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.Query;
 
 import java.util.List;
 import java.util.Map;
@@ -45,14 +49,47 @@ public interface UserApiService {
      */
     OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserDTO userDTO);
 
+    /**
+     * 删除用户
+     *
+     * @param apiContext
+     * @param uid
+     * @param deptId
+     * @return
+     */
     OpenApiResult<Long> delete(ApiContext apiContext, String uid, Long deptId);
 
+    /**
+     * 更新用户
+     *
+     * @param apiContext
+     * @param userDTO
+     * @return
+     */
     OpenApiResult<Map<String, String>> update(ApiContext apiContext, UserDTO userDTO);
 
+    /**
+     * 获取用户详情
+     *
+     * @param apiContext
+     * @param uid
+     * @param deptId
+     * @return
+     */
     OpenApiResult<Map<String, UserInfoDTO>> detail(ApiContext apiContext, String uid, Long deptId);
 
+    /**
+     * 获取用户所在部门列表
+     * @param apiContext
+     * @param deptId
+     * @return
+     */
+    OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, Long deptId);
+
+    @Deprecated
     OpenApiResult<Map<String, List<UserInfoDTO>>> list(ApiContext apiContext, Long deptId);
 
+    @Deprecated
     OpenApiResult<Map<String, List<UserInfoDTO>>> listAll(ApiContext apiContext, Long deptId);
 
 

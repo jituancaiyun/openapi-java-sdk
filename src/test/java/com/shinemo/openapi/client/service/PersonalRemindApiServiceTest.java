@@ -43,16 +43,16 @@ public class PersonalRemindApiServiceTest {
 
     private PersonalRemindApiService personalRemindApiService;
     private OpenApiClient client;
-    private String orgId = "84057";//"84057";
+    private String orgId = "AQDaAAAAAAAAAKlMAQAAAAAA";//"84057";
     private String uid = "101010012129489";//"101010011894152";//"101010012129489";
-    private String name = "yuanjian";
+//    private String name = "yuanjian";
     private ApiContext context;
 
     @Before
     public void setUp() throws Exception {
         Apis.setEnv(1);
         client = Apis.createClient();
-        context = ApiContext.ctx(orgId, uid, name);
+        context = ApiContext.ctx(orgId, uid);
         personalRemindApiService = client.createApiService(PersonalRemindApiService.class);
     }
 
@@ -72,7 +72,7 @@ public class PersonalRemindApiServiceTest {
         RFrequency rFrequency = new RFrequency();
         rFrequency.setType(1);
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        rFrequency.setRemindTime("1-"+sdf.format(new Date(new Date().getTime() + 10 * 60 * 1000)));
+        rFrequency.setRemindTime("0-"+sdf.format(new Date(new Date().getTime() + 10 * 60 * 1000)));
         personalRemind.setRfrequency(rFrequency);
         personalRemind.setIsVoiceRemind(false);
 

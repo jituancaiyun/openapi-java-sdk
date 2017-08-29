@@ -19,6 +19,8 @@
 
 package com.shinemo.openapi.client.common;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 
 /**
@@ -62,7 +64,11 @@ public class ApiContext extends HashMap<String, String> {
     }
 
     public ApiContext setName(String name) {
-        this.put("name", name);
+        try {
+            this.put("name", URLEncoder.encode(name, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return this;
     }
 

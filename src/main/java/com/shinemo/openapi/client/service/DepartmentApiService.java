@@ -23,10 +23,8 @@ import com.shinemo.openapi.client.api.DepartmentApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.ContactDTO;
-import com.shinemo.openapi.client.dto.ContactDeptDTO;
-import com.shinemo.openapi.client.dto.DeptIdDTO;
 import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
+import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -83,5 +81,24 @@ public interface DepartmentApiService {
      * @return ContactDTO
      */
     OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, Long deptId);
+
+    /**
+     * 获取部门下用户
+     *
+     * @param apiContext
+     * @param deptId
+     * @return
+     */
+    OpenApiResult<Map<String, List<UserInfoDTO>>> userList(ApiContext apiContext, Long deptId);
+
+    /**
+     * 获取当前部门和所有子部门下的用户
+     *
+     * @param apiContext
+     * @param deptId
+     * @return
+     */
+    OpenApiResult<Map<String, List<UserInfoDTO>>> userListAll(ApiContext apiContext, Long deptId);
+
 
 }

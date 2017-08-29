@@ -20,7 +20,7 @@
 package com.shinemo.openapi.client;
 
 import com.shinemo.openapi.client.common.ApiContext;
-import com.shinemo.openapi.client.service.ContactApiService;
+import com.shinemo.openapi.client.service.UserApiService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -48,8 +48,8 @@ public final class SpringTest {
 
     @Test
     public void getService() throws Exception {
-        ContactApiService contactApiService = (ContactApiService) context.getBean("contactApiService");
-        System.out.println(contactApiService.toString());
-        System.out.println(contactApiService.listUsers(ApiContext.ctx(), 1));
+        UserApiService userApiService = (UserApiService) context.getBean("userApiService");
+        System.out.println(userApiService.toString());
+        System.out.println(userApiService.list(ApiContext.ctx(), 1L));
     }
 }

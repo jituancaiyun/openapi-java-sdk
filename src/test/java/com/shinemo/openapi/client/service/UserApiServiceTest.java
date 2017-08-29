@@ -19,7 +19,7 @@ import java.util.Map;
 public class UserApiServiceTest {
 
     private UserApiService userApiService;
-    private String orgSecret = "AQAOAQAAAAAAAFlIAQAAAAAA";
+    private String orgSecret = "AQDaAAAAAAAAAKlMAQAAAAAA";
     private String uid = "101010011894152";//"101010012129489";//
     private String name = "yuanjian";
     private ApiContext context;
@@ -80,17 +80,4 @@ public class UserApiServiceTest {
         System.out.println(result.getData().get("user").getWorkPhone());
     }
 
-    @Test
-    public void list() {
-        OpenApiResult<Map<String, List<UserInfoDTO>>> result = userApiService.list(context, 0L);
-        System.out.println(result);
-//        result.getData().get("users").get(0).getWorkPhone();
-    }
-
-    @Test
-    public void listAll() {
-        OpenApiResult<Map<String, List<UserInfoDTO>>> result = userApiService.listAll(context, 14L);
-        System.out.println(result);
-        result.getData().get("users").get(0).getWorkPhone();
-    }
 }

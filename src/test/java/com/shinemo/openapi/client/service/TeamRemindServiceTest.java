@@ -24,7 +24,7 @@ public class TeamRemindServiceTest {
 
     private TeamRemindApiService teamRemindApiService;
     private OpenApiClient client;
-    private String orgId = "84057";
+    private String orgId = "AQDaAAAAAAAAAKlMAQAAAAAA";
     private String uid = "101010012129489";//"101010011768832";//
     private String name = "yuanjian";
     private ApiContext context;
@@ -51,7 +51,7 @@ public class TeamRemindServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(0);
+        Apis.setEnv(1);
         client = Apis.createClient();
         context = ApiContext.ctx(orgId, uid, name);
         /*context = new ApiContext();

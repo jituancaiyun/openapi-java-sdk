@@ -20,6 +20,7 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import com.shinemo.openapi.client.dto.maillist.UserDTO;
 import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
 import retrofit2.Call;
@@ -41,22 +42,25 @@ public interface UserApi {
      * @param headers 基础header参数, accessToken, orgId, uid
      * @return void
      */
-    @POST("employee/add")
+    @POST("user/add")
     Call<OpenApiResult<Map<String, String>>> add(@HeaderMap Map<String, String> headers, @Body UserDTO body);
 
-    @POST("employee/delete")
+    @POST("user/delete")
     Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
 
-    @POST("employee/update")
+    @POST("user/update")
     Call<OpenApiResult<Map<String, String>>> update(@HeaderMap Map<String, String> headers, @Body UserDTO body);
 
-    @GET("employee/list")
+    @GET("user/detail")
+    Call<OpenApiResult<Map<String,UserInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
+
+    @GET("user/deptList")
+    Call<OpenApiResult<Map<String, List<DeptInfoDTO>>>> deptList(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+
+    @GET("department/userList")
     Call<OpenApiResult<Map<String,List<UserInfoDTO>>>> list(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
-    @GET("employee/listAll")
+    @GET("department/userListAll")
     Call<OpenApiResult<Map<String,List<UserInfoDTO>>>> listAll(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
-
-    @GET("employee/detail")
-    Call<OpenApiResult<Map<String,UserInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
 
 }

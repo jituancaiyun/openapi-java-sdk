@@ -21,10 +21,6 @@ package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.api.BlackListApi;
 import com.shinemo.openapi.client.common.Api;
-import com.shinemo.openapi.client.common.ApiContext;
-import com.shinemo.openapi.client.common.OpenApiResult;
-
-import java.util.Map;
 
 /**
  * Created by ohun on 2017/4/14.

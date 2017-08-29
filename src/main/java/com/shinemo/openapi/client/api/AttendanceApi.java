@@ -17,29 +17,33 @@
  *     ohun@live.cn (夜色)
  */
 
-package com.shinemo.openapi.client.service;
+package com.shinemo.openapi.client.api;
 
-import com.shinemo.openapi.client.api.BaseApi;
-import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.AccessTokenDTO;
+import com.shinemo.openapi.client.dto.PushMessageDTO;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.POST;
+
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by ohun on 2017/4/14.
+ * Created by ohun on 2017/3/30.
  *
  * @author ohun@live.cn (夜色)
  */
-@Api(BaseApi.class)
-public interface BaseApiService {
+public interface AttendanceApi {
 
     /**
-     * 获取accesstoken
+     * 推送应用消息
      *
-     * @param appId
-     * @param appSecret
-     * @param flags
-     * @return
+     * @param headers 基础header参数, accessToken, orgId, uid
+     * @param body    推送消息
+     * @return illegalUsers非法用户列表
      */
-    OpenApiResult<AccessTokenDTO> getAccessToken(int appId, String appSecret, int flags);
+    @POST("attendance/add")
+    Call<OpenApiResult<List<String>>> addAttendance(@HeaderMap Map<String, String> headers, @Body PushMessageDTO body);
 
 }

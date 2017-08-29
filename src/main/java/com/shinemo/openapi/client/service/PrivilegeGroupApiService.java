@@ -46,6 +46,7 @@ public interface PrivilegeGroupApiService {
 
     /**
      * 删除权限去
+     *
      * @param context 基础header参数, accessToken, orgId, uid
      * @param groupId 权限组id
      * @return

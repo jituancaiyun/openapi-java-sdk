@@ -6,6 +6,7 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
+import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class DepartmentServiceTest {
 
     private DepartmentApiService departmentApiService;
     private OpenApiClient client;
-    private String orgId = "84057";
+    private String orgId = "AQDaAAAAAAAAAKlMAQAAAAAA";
     private String uid = "101010011894152";//"101010012129489";//
     private String name = "yuanjian";
     private ApiContext context;
@@ -100,6 +101,20 @@ public class DepartmentServiceTest {
         System.out.println(result.getData());
         Gson gson = new Gson();
         System.out.println(gson.toJson(result));
+    }
+
+    @Test
+    public void list() {
+        OpenApiResult<Map<String, List<UserInfoDTO>>> result = departmentApiService.userList(context, 0L);
+        System.out.println(result);
+//        result.getData().get("users").get(0).getWorkPhone();
+    }
+
+    @Test
+    public void listAll() {
+        OpenApiResult<Map<String, List<UserInfoDTO>>> result = departmentApiService.userListAll(context, 1L);
+        System.out.println(result);
+        result.getData().get("users").get(0).getWorkPhone();
     }
 
 }

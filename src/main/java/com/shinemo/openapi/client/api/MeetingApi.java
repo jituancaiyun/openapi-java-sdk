@@ -37,57 +37,6 @@ import java.util.Map;
 public interface MeetingApi {
 
     /**
-     * 发起会议邀请
-     *
-     * @param headers 基础header参数, accessToken, orgId, uid
-     * @param body    业务数据
-     * @return MeetingIdDTO 会议ID
-     */
-    @Deprecated
-    @POST("workbench/meetinginvite/create")
-    Call<OpenApiResult<MeetingIdDTO>> createMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
-
-    /**
-     * 取消会议邀请
-     *
-     * @param headers 基础header参数, accessToken, orgId, uid
-     * @param body    业务数据
-     * @return ContactDTO
-     */
-    @POST("workbench/meetinginvite/cancel")
-    Call<OpenApiResult<Long>> cancelMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
-
-    /**
-     * 删除会议邀请
-     *
-     * @param headers 基础header参数, accessToken, orgId, uid
-     * @param body    业务数据
-     * @return ContactDTO
-     */
-    @POST("workbench/meetinginvite/delete")
-    Call<OpenApiResult<Long>> deleteMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
-
-    /**
-     * 修改会议邀请
-     *
-     * @param headers 基础header参数, accessToken, orgId, uid
-     * @param body    业务数据
-     * @return ContactDTO
-     */
-    @POST("workbench/meetinginvite/update")
-    Call<OpenApiResult<Long>> updateMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
-
-    /**
-     * 会议邀请详情
-     *
-     * @param headers 基础header参数, accessToken, orgId, uid
-     * @param body    业务数据
-     * @return ContactDTO
-     */
-    @POST("workbench/meetinginvite/detail")
-    Call<OpenApiResult<MeetingInviteDTO>> getMeeting(@HeaderMap Map<String, String> headers, @Body MeetingInviteDTO body);
-
-    /**
      * 创建会议邀请新接口
      *
      * @param headers 基础header参数, accessToken, orgId, uid

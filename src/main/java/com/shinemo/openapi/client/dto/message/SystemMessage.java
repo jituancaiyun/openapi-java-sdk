@@ -52,6 +52,7 @@ public final class SystemMessage extends IMessage<SystemMessage> {
         return title;
     }
 
+    @Override
     public SystemMessage setTitle(String title) {
         this.title = title;
         return this;

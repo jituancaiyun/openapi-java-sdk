@@ -45,8 +45,8 @@ public class MessageApiServiceTest {
     //private ApiContext ctx = new ApiContext("96256");
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
-    private ApiContext ctx = new ApiContext().setOrgId("57171554250");
-    private List<String> receivers = Arrays.asList("106176", "112093240", "80864", "105824");
+    private ApiContext ctx = new ApiContext().setOrgSecret("AQDRAwEAAAAAALjZAgAAAAAA");
+    private List<String> receivers = Arrays.asList("126468488"/*, "112093240", "80864", "105824"*/);
 
 
     @Before

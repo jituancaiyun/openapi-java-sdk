@@ -39,7 +39,7 @@ public interface PersonalRemindApiService {
     /**
      * 创建个人提醒
      *
-     * @param apiContext     基础header参数, accessToken, orgId, uid
+     * @param apiContext     基础header参数, accessToken, orgSecret, uid
      * @param personalRemind 个人提醒详情
      */
     OpenApiResult<Map<String, Long>> create(ApiContext apiContext, PersonalRemindDTO personalRemind);
@@ -47,7 +47,7 @@ public interface PersonalRemindApiService {
     /**
      * 个人提醒更新
      *
-     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param personalRemindId 个人提醒id
      * @param personalRemind   个人提醒信息
      * @return
@@ -57,7 +57,7 @@ public interface PersonalRemindApiService {
     /**
      * 删除
      *
-     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param personalRemindId 个人提醒id
      * @return
      */
@@ -66,7 +66,7 @@ public interface PersonalRemindApiService {
     /**
      * 获取详情
      *
-     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param personalRemindId 个人提醒id
      * @return
      */

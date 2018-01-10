@@ -40,7 +40,7 @@ public interface DepartmentApiService {
     /**
      * 创建部门
      *
-     * @param apiContext  基础header参数, accessToken, orgId, uid
+     * @param apiContext  基础header参数, accessToken, orgSecret, uid
      * @param deptInfoDto 要创建的部门
      * @return UidDTO
      */
@@ -49,7 +49,7 @@ public interface DepartmentApiService {
     /**
      * 删除部门
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param deptId     要删除的部门
      * @return 0表示操作成功
      */
@@ -58,7 +58,7 @@ public interface DepartmentApiService {
     /**
      * 修改部门
      *
-     * @param apiContext  基础header参数, accessToken, orgId, uid
+     * @param apiContext  基础header参数, accessToken, orgSecret, uid
      * @param deptInfoDTO 要修改的部门
      * @return UidDTO
      */
@@ -76,7 +76,7 @@ public interface DepartmentApiService {
     /**
      * 获取某个部门下的部门列表
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param deptId     部门ID
      * @return ContactDTO
      */
@@ -85,7 +85,7 @@ public interface DepartmentApiService {
     /**
      * 获取部门下用户
      *
-     * @param apiContext
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param deptId
      * @return
      */
@@ -94,7 +94,7 @@ public interface DepartmentApiService {
     /**
      * 获取当前部门和所有子部门下的用户
      *
-     * @param apiContext
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param deptId
      * @return
      */

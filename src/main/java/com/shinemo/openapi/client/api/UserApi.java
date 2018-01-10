@@ -20,6 +20,7 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.UserMobile;
 import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import com.shinemo.openapi.client.dto.maillist.UserDTO;
 import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
@@ -52,15 +53,24 @@ public interface UserApi {
     Call<OpenApiResult<Map<String, String>>> update(@HeaderMap Map<String, String> headers, @Body UserDTO body);
 
     @GET("user/detail")
-    Call<OpenApiResult<Map<String,UserInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String, UserInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
+
+    @GET("user/getUserInfoByUid")
+    Call<OpenApiResult<Map<String, UserInfoDTO>>> getUserInfoByUid(@HeaderMap Map<String, String> headers, @Query("uids") String uids);
 
     @GET("user/deptList")
     Call<OpenApiResult<Map<String, List<DeptInfoDTO>>>> deptList(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
+    @GET("user/getUserInfoByMobile")
+    Call<OpenApiResult<UserDTO>> getUserInfoByMobile(@HeaderMap Map<String, String> headers, @Query("mobile") String mobile);
+
+    @GET("user/getUidByMobile")
+    Call<OpenApiResult<List<UserMobile>>> getUidByMobile(@HeaderMap Map<String, String> headers, @Query("mobile") String mobiles);
+
     @GET("department/userList")
-    Call<OpenApiResult<Map<String,List<UserInfoDTO>>>> list(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String, List<UserInfoDTO>>>> list(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
     @GET("department/userListAll")
-    Call<OpenApiResult<Map<String,List<UserInfoDTO>>>> listAll(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Map<String, List<UserInfoDTO>>>> listAll(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
 }

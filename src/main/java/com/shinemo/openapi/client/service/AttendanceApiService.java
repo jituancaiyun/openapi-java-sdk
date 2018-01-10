@@ -19,38 +19,46 @@
 
 package com.shinemo.openapi.client.service;
 
-import com.shinemo.openapi.client.api.PrivilegeGroupApi;
+import com.shinemo.openapi.client.api.AttendanceApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.maillist.PrivilegeGroupDTO;
+import com.shinemo.openapi.client.dto.attendance.ImportSignInfoDTO;
+import com.shinemo.openapi.client.dto.attendance.SignInfoDTO;
 
-import java.util.Map;
+import java.util.List;
 
 /**
- * Created by ohun on 2017/4/14.
+ * Created by ohun on 2017/3/30.
  *
  * @author ohun@live.cn (夜色)
  */
-@Api(PrivilegeGroupApi.class)
-public interface PrivilegeGroupApiService {
+@Api(AttendanceApi.class)
+public interface AttendanceApiService {
 
     /**
-     * 创建权限组
      *
-     * @param context 基础header参数, accessToken, orgSecret, uid
-     * @param group   权限组信息
+     * @param context http头信息，包括accessToken、orgSecret、uid等
+     * @param body
      * @return
      */
-    OpenApiResult<Map<String, Long>> create(ApiContext context, PrivilegeGroupDTO group);
+    OpenApiResult add(ApiContext context, ImportSignInfoDTO body);
 
     /**
-     * 删除权限去
      *
-     * @param context 基础header参数, accessToken, orgSecret, uid
-     * @param groupId 权限组id
+     * @param context http头信息，包括accessToken、orgSecret、uid等
+     * @param body
      * @return
      */
-    OpenApiResult<Long> delete(ApiContext context, Long groupId);
+    OpenApiResult importBatch(ApiContext context, List<ImportSignInfoDTO> body);
+
+    /**
+     *
+     * @param context http头信息，包括accessToken、orgSecret、uid等
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
+    OpenApiResult<List<SignInfoDTO>> query(ApiContext context, String beginTime, String endTime);
 
 }

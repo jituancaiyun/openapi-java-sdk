@@ -32,7 +32,8 @@ public class AuthApiServiceTest {
     @Test
     public void login() throws Exception {
         //String token = "MTAxMDEwMDEyMTI5NDg5fDQ0ZTk0ODE1YWIzZTM1ZTViMmI0NGRlMWFkMzlmNjFifDE0OTMzNzA3ODEwMDA=";
-        String token = "eyJhcHBJZCI6NDQ5NzE4NjEsIm9yZ0lkIjo1NzE3MTU1NDI1MCwic2NvcGVJZCI6NSwic2lnbmF0dXJlIjoiNzY1NjEzZjc0ZDkxODY5YzRjMjYwMTk2ODg5OWE3NDgiLCJzaXRlSWQiOjEsInRpbWVzdGFtcCI6MTUwMTY1NzYwNDE2NSwidWlkIjoiMTA2MTc2In0=";//token ub
+//        String token = "eyJhcHBJZCI6NDQ5NzE4NjEsIm9yZ0lkIjo1NzE3MTU1NDI1MCwic2NvcGVJZCI6NSwic2lnbmF0dXJlIjoiNzY1NjEzZjc0ZDkxODY5YzRjMjYwMTk2ODg5OWE3NDgiLCJzaXRlSWQiOjEsInRpbWVzdGFtcCI6MTUwMTY1NzYwNDE2NSwidWlkIjoiMTA2MTc2In0=";//token ub
+        String token = "eyJzaXRlSWQiOjEsInVpZCI6IjEwMTAxMDAxMTkzOTk5Mjg4Iiwic2lnbmF0dXJlIjoiZmM3YjlmYjhkOGI5MmZmZjUxNmYxNTdkOWFiNThjNDYiLCJvcmdJZCI6MTQ0OTUyLCJhcHBJZCI6IjI4OTg0NTU5Iiwic2NvcGVJZCI6NTMwMDMsInRpbWVzdGFtcCI6MTUxMzQ5NDA2ODAwMH0=";
         OpenApiResult<UserInfoDTO> result = authApiService.login(token);
         System.out.println(result);
     }

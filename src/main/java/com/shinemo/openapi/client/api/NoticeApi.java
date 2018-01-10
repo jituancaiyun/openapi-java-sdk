@@ -20,8 +20,7 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.attendance.ImportSignInfoDTO;
-import com.shinemo.openapi.client.dto.attendance.SignInfoDTO;
+import com.shinemo.openapi.client.dto.notice.NoticeDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -30,17 +29,17 @@ import java.util.Map;
 
 /**
  * @author yuanjian
+ * @date 2017/3/30
  */
-public interface AttendanceApi {
+public interface NoticeApi {
 
-    @POST("attendance/add")
-    Call<OpenApiResult> add(@HeaderMap Map<String, String> headers, @Body ImportSignInfoDTO body);
+    @POST("notice/publish")
+    Call<OpenApiResult> publish(@HeaderMap Map<String, String> headers, @Body NoticeDTO body);
 
-    @POST("attendance/importBatch")
-    Call<OpenApiResult> importBatch(@HeaderMap Map<String, String> headers, @Body List<ImportSignInfoDTO> body);
+    @POST("notice/delete")
+    Call<OpenApiResult> delete(@HeaderMap Map<String, String> headers, @Query("noticeId") int noticeId);
 
-    @GET("attendance/query")
-    Call<OpenApiResult<List<SignInfoDTO>>> query(@HeaderMap Map<String, String> headers, @Query("beginTime") String beginTime,
-                                                 @Query("endTime") String endTime);
+    @GET("notice/list")
+    Call<OpenApiResult<List<NoticeDTO>>> list(@HeaderMap Map<String, String> headers, @Query("startTime") long startTime);
 
 }

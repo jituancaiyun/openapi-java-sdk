@@ -41,7 +41,7 @@ public interface MeetingApiService {
     /**
      * 发起会议邀请
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingDTO 会议实体
      * @return MeetingIdDTO 会议ID
      */
@@ -51,7 +51,7 @@ public interface MeetingApiService {
     /**
      * 取消会议邀请
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingDTO 会议实体
      * @return result code
      */
@@ -62,7 +62,7 @@ public interface MeetingApiService {
     /**
      * 删除会议邀请
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingDTO 会议实体
      * @return result code
      */
@@ -72,7 +72,7 @@ public interface MeetingApiService {
     /**
      * 修改会议邀请
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingDTO 会议实体
      * @return result code
      */
@@ -82,7 +82,7 @@ public interface MeetingApiService {
     /**
      * 会议邀请详情
      *
-     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param meetingInviteDTO 会议信息，包含会议id
      * @return result code
      */
@@ -92,7 +92,7 @@ public interface MeetingApiService {
     /**
      * 创建会议新接口
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param detail     会议实体
      * @return
      */
@@ -101,7 +101,7 @@ public interface MeetingApiService {
     /**
      * 取消会议新接口
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId 会议id
      * @return
      */
@@ -110,7 +110,7 @@ public interface MeetingApiService {
     /**
      * 删除会议新接口
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId 会议id
      * @return
      */
@@ -119,7 +119,7 @@ public interface MeetingApiService {
     /**
      * 更新会议邀请详情
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId 会议id
      * @return
      */
@@ -128,7 +128,7 @@ public interface MeetingApiService {
     /**
      * 获取会议详情新接口
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId  会议id
      * @return
      */

@@ -39,7 +39,7 @@ public interface TeamRemindApiService {
     /**
      * 创建团队提醒新接口
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param detail     团队提醒实体
      * @return
      */
@@ -48,7 +48,7 @@ public interface TeamRemindApiService {
     /**
      * 取消团队提醒新接口
      *
-     * @param apiContext   基础header参数, accessToken, orgId, uid
+     * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
      * @return
      */
@@ -57,7 +57,7 @@ public interface TeamRemindApiService {
     /**
      * 删除团队提醒新接口
      *
-     * @param apiContext   基础header参数, accessToken, orgId, uid
+     * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
      * @return
      */
@@ -66,7 +66,7 @@ public interface TeamRemindApiService {
     /**
      * 更新团队提醒详情
      *
-     * @param apiContext   基础header参数, accessToken, orgId, uid
+     * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
      * @param detail       提醒详情
      * @return
@@ -76,7 +76,7 @@ public interface TeamRemindApiService {
     /**
      * 获取团队提醒详情新接口
      *
-     * @param apiContext   基础header参数, accessToken, orgId, uid
+     * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
      * @return
      */

@@ -38,7 +38,7 @@ public interface MessageApiService {
     /**
      * 推送应用消息
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param messageDTO 消息详情
      * @return illegalUsers非法用户列表
      */

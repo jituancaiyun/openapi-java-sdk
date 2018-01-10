@@ -39,27 +39,27 @@ public interface MatterNoticeApiService {
     /**
      * 创建个人提醒
      *
-     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param teamRemindDetail 个人提醒详情
      */
     OpenApiResult<Map<String, Long>> create(ApiContext apiContext, TeamRemindDetailDTO teamRemindDetail);
 
     /**
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   告知id
      * @return
      */
     OpenApiResult<Long> cancel(ApiContext apiContext, Long noticeId);
 
     /**
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
      * @return
      */
     OpenApiResult<Long> delete(ApiContext apiContext, Long noticeId);
 
     /**
-     * @param apiContext       基础header参数, accessToken, orgId, uid
+     * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param noticeId         事项告知id
      * @param teamRemindDetail 事项告知详情
      * @return
@@ -67,21 +67,21 @@ public interface MatterNoticeApiService {
     OpenApiResult<Long> update(ApiContext apiContext, Long noticeId, TeamRemindDetailDTO teamRemindDetail);
 
     /**
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
      * @return
      */
     OpenApiResult<TeamRemindInfoDTO> detail(ApiContext apiContext, Long noticeId);
 
     /**
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
      * @return
      */
     OpenApiResult<Long> open(ApiContext apiContext, Long noticeId);
 
     /**
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
      * @return
      */

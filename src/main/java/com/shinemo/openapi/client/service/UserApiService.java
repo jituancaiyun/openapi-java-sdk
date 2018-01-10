@@ -23,6 +23,7 @@ import com.shinemo.openapi.client.api.UserApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.UserMobile;
 import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import com.shinemo.openapi.client.dto.maillist.UserDTO;
 import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
@@ -44,7 +45,7 @@ public interface UserApiService {
     /**
      * 新增用户
      *
-     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @return void
      */
     OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserDTO userDTO);
@@ -79,12 +80,40 @@ public interface UserApiService {
     OpenApiResult<Map<String, UserInfoDTO>> detail(ApiContext apiContext, String uid, Long deptId);
 
     /**
+     * 根据uid查询用户信息
+     *
+     * @param apiContext
+     * @param uid
+     * @return
+     */
+    OpenApiResult<Map<String, UserInfoDTO>> getUserInfoByUid(ApiContext apiContext, String uids);
+
+    /**
      * 获取用户所在部门列表
+     *
      * @param apiContext
      * @param deptId
      * @return
      */
     OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, Long deptId);
+
+    /**
+     * 根据手机号获取用户信息
+     *
+     * @param apiContext
+     * @param mobile
+     * @return
+     */
+    OpenApiResult<UserDTO> getUserInfoByMobile(ApiContext apiContext, String mobile);
+
+    /**
+     * 根据手机号获取uid，支持批量
+     *
+     * @param apiContext
+     * @param mobiles，多个手机号 "," 分隔
+     * @return
+     */
+    OpenApiResult<List<UserMobile>> getUidByMobile(ApiContext apiContext, String mobiles);
 
     @Deprecated
     OpenApiResult<Map<String, List<UserInfoDTO>>> list(ApiContext apiContext, Long deptId);

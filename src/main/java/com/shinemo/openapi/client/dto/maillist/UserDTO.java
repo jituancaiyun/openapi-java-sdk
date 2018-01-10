@@ -5,6 +5,7 @@ package com.shinemo.openapi.client.dto.maillist;
  */
 public class UserDTO {
     private String uid;
+    private String name;
     private String userName;
     private String mobile;
     private Long id;
@@ -25,6 +26,14 @@ public class UserDTO {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUserName() {

@@ -19,14 +19,14 @@ import java.util.Map;
 public class UserApiServiceTest {
 
     private UserApiService userApiService;
-    private String orgSecret = "AQDaAAAAAAAAAKlMAQAAAAAA";
+    private String orgSecret = "AQAOAQAAAAAAAFlIAQAAAAAA";
     private String uid = "101010011894152";//"101010012129489";//
     private String name = "yuanjian";
     private ApiContext context;
 
     @Before
     public void setUp() throws Exception {
-//        Apis.setEnv(4);
+        Apis.setEnv(1);
         context = ApiContext.ctx(orgSecret, uid, name);
         userApiService = Apis.createApiService(UserApiService.class);
     }
@@ -78,6 +78,24 @@ public class UserApiServiceTest {
         OpenApiResult<Map<String, UserInfoDTO>> result = userApiService.detail(context, "185010176", 0L);
         System.out.println(result);
         System.out.println(result.getData().get("user").getWorkPhone());
+    }
+
+    @Test
+    public void getUserInfoByMobile(){
+        OpenApiResult result = userApiService.getUserInfoByMobile(context, "13588200631");
+        System.out.println(result);
+    }
+
+    @Test
+    public void getUserInfoByUid() {
+        OpenApiResult result = userApiService.getUserInfoByUid(context, "101010012129489");
+        System.out.println(result);
+    }
+
+    @Test
+    public void getUidByMobile(){
+        OpenApiResult result = userApiService.getUidByMobile(context, "13588200631");
+        System.out.println(result);
     }
 
 }

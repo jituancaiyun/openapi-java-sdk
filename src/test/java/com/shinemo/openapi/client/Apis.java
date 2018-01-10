@@ -57,7 +57,7 @@ public final class Apis {
             configuration.setAppId(20328985);
             configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
         } else if (env == 3) {
-            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/");
+            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/api/");
             configuration.setAppId(27714980);
             configuration.setAppSecret("S14'e*;9Zo_8TU\"U:_rzP8crwP<_hV8D");
         } else if (env == 4) {

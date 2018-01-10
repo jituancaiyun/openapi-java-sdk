@@ -23,14 +23,9 @@ import com.shinemo.openapi.client.api.MessageApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
-import retrofit2.Call;
-import retrofit2.http.*;
 
 import java.util.List;
-
-import static com.shinemo.openapi.client.common.Const.USER_AGENT_HEADER;
 
 /**
  * Created by ohun on 2017/3/30.

@@ -1,11 +1,19 @@
 package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.Apis;
+import com.shinemo.openapi.client.OpenApiClient;
+import com.shinemo.openapi.client.OpenApiConfiguration;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.UserInfoDTO;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * Created by ohun on 2017/4/16.

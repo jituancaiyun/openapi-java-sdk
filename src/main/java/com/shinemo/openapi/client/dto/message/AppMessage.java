@@ -19,6 +19,7 @@
 
 package com.shinemo.openapi.client.dto.message;
 
+import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiUtils;
 
 import java.io.UnsupportedEncodingException;
@@ -29,7 +30,7 @@ import java.net.URLEncoder;
  *
  * @author ohun@live.cn (夜色)
  */
-public final class AppMessage extends IMessage<AppMessage> {
+public class AppMessage extends IMessage<AppMessage> {
     private String content;
     private String from;
     private String fromIcon;
@@ -101,8 +102,16 @@ public final class AppMessage extends IMessage<AppMessage> {
         return this;
     }
 
-    public AppMessage setUrlAction(int appId, String url, String param) {
-        ActionData actionData = new OpenUrlActionData(url, param, appId);
+    public AppMessage setUrlAction(String url) {
+        return setUrlAction(url, null);
+    }
+
+    public AppMessage setUrlAction(String url, String param) {
+        if (appId == null) throw new OpenApiException("AppMessage.appId 不能为空");
+        if (orgId == null) throw new OpenApiException("AppMessage.orgId 不能为空");
+        if (url == null) throw new OpenApiException("url 不能为空");
+
+        ActionData actionData = new OpenUrlActionData(url, param);
         return this.setAction(new Action("native", "openurl", actionData));
     }
 
@@ -110,6 +119,7 @@ public final class AppMessage extends IMessage<AppMessage> {
         return title;
     }
 
+    @Override
     public AppMessage setTitle(String title) {
         this.title = title;
         return this;
@@ -215,21 +225,19 @@ public final class AppMessage extends IMessage<AppMessage> {
         public abstract String toJson();
     }
 
-    public static class OpenUrlActionData extends ActionData {
+    public class OpenUrlActionData extends ActionData {
         private String url;
         private String param;
-        private int appid;
         private int token = 1;
-        private int cookie = 1;
+        private int cookie = 0;
         private int noDefaultMenu = 0;
 
         public OpenUrlActionData() {
         }
 
-        public OpenUrlActionData(String url, String param, int appid) {
+        public OpenUrlActionData(String url, String param) {
             this.url = url;
             this.param = param;
-            this.appid = appid;
         }
 
         public String getUrl() {
@@ -246,14 +254,6 @@ public final class AppMessage extends IMessage<AppMessage> {
 
         public void setParam(String param) {
             this.param = param;
-        }
-
-        public int getAppid() {
-            return appid;
-        }
-
-        public void setAppid(int appid) {
-            this.appid = appid;
         }
 
         public int getToken() {
@@ -283,8 +283,8 @@ public final class AppMessage extends IMessage<AppMessage> {
         @Override
         public String toJson() {
             String json = "{\"url\":\"" + url
-                    + "\",\"param\":\"" + param
-                    + "\",\"appid\":" + appid
+                    + "\",\"param\":\"" + (param == null || param.isEmpty() ? ("orgid=" + orgId) : (param + "&orgid=" + orgId))
+                    + "\",\"appid\":" + appId
                     + ",\"token\":" + token
                     + ",\"cookie\":" + cookie
                     + ",\"noDefaultMenu\":" + noDefaultMenu

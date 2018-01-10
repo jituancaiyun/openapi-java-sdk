@@ -64,6 +64,7 @@ public final class MultiContentMessage extends IMessage<MultiContentMessage> {
         return title;
     }
 
+    @Override
     public MultiContentMessage setTitle(String title) {
         this.title = title;
         return this;

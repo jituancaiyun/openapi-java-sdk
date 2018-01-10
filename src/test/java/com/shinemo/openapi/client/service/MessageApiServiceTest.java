@@ -24,6 +24,7 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
+import com.shinemo.openapi.client.dto.message.EmailMessage;
 import com.shinemo.openapi.client.dto.message.IMessage;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,13 +46,27 @@ public class MessageApiServiceTest {
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
     private ApiContext ctx = new ApiContext().setOrgId("57171554250");
-    private List<String> receivers = Arrays.asList("106176"/*, "112093240", "80864", "105824"*/);
+    private List<String> receivers = Arrays.asList("106176", "112093240", "80864", "105824");
 
 
     @Before
     public void setUp() throws Exception {
         client = Apis.createClient();
         messageApiService = client.createApiService(MessageApiService.class);
+    }
+
+    @Test
+    public void sendMailMessage() throws Exception {
+        PushMessageDTO messageDTO = new EmailMessage("我是一条邮件消息")
+                .setSender("106176")
+                .setmContent("我是一条邮件消息的内容")
+                .setmUrl("https://jituancaiyun.com")
+                .setSendTime(System.currentTimeMillis())
+                .setReceivers(receivers)
+                .build();
+
+        OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
+        System.out.println(result);
     }
 
     @Test
@@ -87,7 +102,7 @@ public class MessageApiServiceTest {
                 .setUnreadCount(3)//未读消息数, 目前是显示红点
                 .setAppId(client.config().getAppId())//要显示红点的应用ID
                 .setOrgId(ctx.getOrgId())//要显示红点的应用所属企业
-                .setUrlAction(client.config().getAppId(), "https://jituancaiyun.com", "")
+                .setUrlAction("https://jituancaiyun.com")
                 .setReceivers(receivers)
                 .build();
 

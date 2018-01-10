@@ -20,8 +20,6 @@
 package com.shinemo.openapi.client.common;
 
 
-import org.springframework.util.NumberUtils;
-
 import java.io.Closeable;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -189,8 +187,14 @@ public final class OpenApiUtils {
             if (OpenApiUtils.isDigit(orgId)) {
                 return Long.parseLong(orgId);
             }
-            ByteBuffer buffer = ByteBuffer.wrap(Base64.getUrlDecoder().decode(orgId), 2, 8);
-            return buffer.getLong();
+            byte[] data = Base64.getUrlDecoder().decode(orgId);
+            if (data.length == 10) {
+                ByteBuffer buffer = ByteBuffer.wrap(data, 2, 8);
+                return buffer.getLong();
+            } else if (data.length == 18) {
+                ByteBuffer buffer = ByteBuffer.wrap(data, 10, 8);
+                return buffer.getLong();
+            }
         }
         return 0;
     }

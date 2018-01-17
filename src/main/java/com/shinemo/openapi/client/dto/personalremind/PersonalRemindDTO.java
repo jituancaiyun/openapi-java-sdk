@@ -1,9 +1,11 @@
 package com.shinemo.openapi.client.dto.personalremind;
 
+import java.io.Serializable;
+
 /**
  * Created by yuanjian on 6/20/17.
  */
-public class PersonalRemindDTO{
+public class PersonalRemindDTO implements Serializable {
     private int remindType;
     private long remindTime;
     private String content;

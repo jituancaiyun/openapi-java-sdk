@@ -83,7 +83,7 @@ public interface UserApiService {
      * 根据uid查询用户信息
      *
      * @param apiContext
-     * @param uid
+     * @param uids
      * @return
      */
     OpenApiResult<Map<String, UserInfoDTO>> getUserInfoByUid(ApiContext apiContext, String uids);

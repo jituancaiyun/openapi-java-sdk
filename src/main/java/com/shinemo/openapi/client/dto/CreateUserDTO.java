@@ -1,6 +1,8 @@
 package com.shinemo.openapi.client.dto;
 
-public class CreateUserDTO {
+import java.io.Serializable;
+
+public class CreateUserDTO implements Serializable {
     private String uid;
     private String name;
     private Boolean isRemind;

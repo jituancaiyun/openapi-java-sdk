@@ -13,10 +13,9 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by yuanjian on 6/5/17.
- */
-public class DepartmentServiceTest {
+import static org.junit.Assert.*;
+
+public class DepartmentApiServiceTest {
 
     private DepartmentApiService departmentApiService;
     private OpenApiClient client;
@@ -54,7 +53,7 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    public void createDept() {
+    public void create() {
         DeptInfoDTO infoDto = new DeptInfoDTO();
         infoDto.setName("不闷");
         infoDto.setParentId(0L);
@@ -74,7 +73,7 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    public void updateDept() {
+    public void update() {
         DeptInfoDTO infoDto = new DeptInfoDTO();
         infoDto.setName("部门13-new");
 //        infoDto.setDeptId(19L);
@@ -104,14 +103,14 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    public void list() {
+    public void userList() {
         OpenApiResult<Map<String, List<UserInfoDTO>>> result = departmentApiService.userList(context, 0L);
         System.out.println(result);
 //        result.getData().get("users").get(0).getWorkPhone();
     }
 
     @Test
-    public void listAll() {
+    public void userListAll() {
         OpenApiResult<Map<String, List<UserInfoDTO>>> result = departmentApiService.userListAll(context, 1L);
         System.out.println(result);
         result.getData().get("users").get(0).getWorkPhone();

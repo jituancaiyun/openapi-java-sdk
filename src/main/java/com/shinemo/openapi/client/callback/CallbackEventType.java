@@ -25,7 +25,9 @@ package com.shinemo.openapi.client.callback;
  * @author ohun@live.cn (夜色)
  */
 public enum CallbackEventType {
-    OrgSubscribe(1);
+    OrgSubscribe(1),
+    ContactUserChange(2),
+    WorkerLeave(4);
 
     CallbackEventType(int type) {
         this.type = type;

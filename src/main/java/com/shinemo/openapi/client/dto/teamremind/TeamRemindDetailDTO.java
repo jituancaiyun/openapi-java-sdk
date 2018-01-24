@@ -21,6 +21,8 @@ public class TeamRemindDetailDTO {
     private ArrayList< Integer > voiceWave;
     private Boolean isPushMail = false;
     private Boolean isVoiceRemind = false;
+    protected boolean isTimingSend = true;
+    protected long sendTime = 0L;
 
     public String getContent() {
         return content;
@@ -126,16 +128,56 @@ public class TeamRemindDetailDTO {
         this.isVoiceRemind = isVoiceRemind;
     }
 
+    public Boolean getPushMail() {
+        return isPushMail;
+    }
+
+    public void setPushMail(Boolean pushMail) {
+        isPushMail = pushMail;
+    }
+
+    public Boolean getVoiceRemind() {
+        return isVoiceRemind;
+    }
+
+    public void setVoiceRemind(Boolean voiceRemind) {
+        isVoiceRemind = voiceRemind;
+    }
+
+    public boolean isTimingSend() {
+        return isTimingSend;
+    }
+
+    public void setTimingSend(boolean timingSend) {
+        isTimingSend = timingSend;
+    }
+
+    public long getSendTime() {
+        return sendTime;
+    }
+
+    public void setSendTime(long sendTime) {
+        this.sendTime = sendTime;
+    }
+
     @Override
     public String toString() {
         return "TeamRemindDetailDTO{" +
                 "content='" + content + '\'' +
+                ", voiceUrl='" + voiceUrl + '\'' +
+                ", voiceLength=" + voiceLength +
                 ", remindTime=" + remindTime +
                 ", createTime=" + createTime +
                 ", remindType=" + remindType +
                 ", type=" + type +
+                ", fromSource=" + fromSource +
+                ", extra='" + extra + '\'' +
                 ", members=" + members +
+                ", voiceWave=" + voiceWave +
+                ", isPushMail=" + isPushMail +
                 ", isVoiceRemind=" + isVoiceRemind +
+                ", isTimingSend=" + isTimingSend +
+                ", sendTime=" + sendTime +
                 '}';
     }
 }

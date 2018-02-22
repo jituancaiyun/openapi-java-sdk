@@ -49,6 +49,21 @@ public final class PushMessageDTO {
     private String extraData;
 
     /**
+     * 发送者ID
+     */
+    private transient String fromId;
+
+    /**
+     * 发送者名称
+     */
+    private transient String fromName;
+
+    /**
+     * 群ID
+     */
+    private transient Long groupId;
+
+    /**
      * 接收人Uid列表
      */
     private Collection<String> receivers;
@@ -98,6 +113,30 @@ public final class PushMessageDTO {
 
     public void setExtraData(String extraData) {
         this.extraData = extraData;
+    }
+
+    public String getFromId() {
+        return fromId;
+    }
+
+    public void setFromId(String fromId) {
+        this.fromId = fromId;
+    }
+
+    public String getFromName() {
+        return fromName;
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     public Collection<String> getReceivers() {

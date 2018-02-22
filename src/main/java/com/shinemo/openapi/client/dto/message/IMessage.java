@@ -46,6 +46,21 @@ public abstract class IMessage<T extends IMessage> {
     private transient int flags;
 
     /**
+     * 发送者ID
+     */
+    private transient String fromId;
+
+    /**
+     * 发送者名称
+     */
+    private transient String fromName;
+
+    /**
+     * 群ID
+     */
+    private transient Long groupId;
+
+    /**
      * 接收人Uid列表
      */
     private transient Collection<String> receivers;
@@ -167,11 +182,22 @@ public abstract class IMessage<T extends IMessage> {
             throw new OpenApiException("只有文本消息支持必达特性");
         }
 
+        if (groupId != null && receivers != null) {
+            throw new OpenApiException("groupId和receivers不能同时存在");
+        }
+
+        if (groupId == null && receivers == null) {
+            throw new OpenApiException("groupId和receivers不能同时为空");
+        }
+
         PushMessageDTO messageDTO = new PushMessageDTO();
         messageDTO.setMessage(message());
         messageDTO.setExtraData(extraData());
         messageDTO.setMsgType(type());
         messageDTO.setFlags(flags);
+        messageDTO.setFromId(fromId);
+        messageDTO.setFromName(fromName);
+        messageDTO.setGroupId(groupId);
         messageDTO.setReceivers(receivers);
         messageDTO.setPushTips(pushTips);
         messageDTO.setSubAppId(subAppId);
@@ -191,6 +217,39 @@ public abstract class IMessage<T extends IMessage> {
      */
     public T addFlag(int flag) {
         this.flags |= flag;
+        return (T) this;
+    }
+
+    /**
+     * 设置消息发送者ID
+     *
+     * @param fromId 发送者ID
+     * @return
+     */
+    public T setFromId(String fromId) {
+        this.fromId = fromId;
+        return (T) this;
+    }
+
+    /**
+     * 设置消息发送者名称
+     *
+     * @param fromName 发送者名称
+     * @return
+     */
+    public T setFromName(String fromName) {
+        this.fromName = fromName;
+        return (T) this;
+    }
+
+    /**
+     * 设置接收消息的群ID
+     *
+     * @param groupId 群ID
+     * @return
+     */
+    public T setGroupId(long groupId) {
+        this.groupId = groupId;
         return (T) this;
     }
 

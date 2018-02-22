@@ -24,9 +24,9 @@ public class TeamRemindServiceTest {
 
     private TeamRemindApiService teamRemindApiService;
     private OpenApiClient client;
-    private String orgId = "AQDaAAAAAAAAAKlMAQAAAAAA";
-    private String uid = "101010012129489";//"101010011768832";//
-    private String name = "yuanjian";
+    private String orgSecret = "AQDWGAEAAAAAABD_AgAAAAAA";
+    private String uid = "126468488";//"101010011768832";//
+    private String name = "刘远剑";
     private ApiContext context;
 
     public enum RemindType {
@@ -51,9 +51,9 @@ public class TeamRemindServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(1);
+        Apis.setEnv(3);
         client = Apis.createClient();
-        context = ApiContext.ctx(orgId, uid, name);
+        context = ApiContext.ctx(orgSecret, uid, name);
         /*context = new ApiContext();
         context.setName(name);
         context.setUid(uid);*/
@@ -64,12 +64,12 @@ public class TeamRemindServiceTest {
     public void createTeamRemind() {
 
         TeamRemindDetailDTO detail = new TeamRemindDetailDTO();
-        detail.setIsVoiceRemind(true);
+//        detail.setIsVoiceRemind(true);
         detail.setContent("团队提醒内容。");
-        detail.setRemindTime(new Date().getTime() + 1 * 60 * 1000);
+//        detail.setRemindTime(System.currentTimeMillis() + 100 * 60 * 1000);
         detail.setRemindType(MeetingInviteServiceTest.RemindType.APPANDSMS_SEND.getType());
-        String[] uids = {"101010011894152", "101010012129489"};
-        String[] names = {"j2", "y3", "y4"};
+        String[] uids = {"126468488"};
+        String[] names = {"j2"};
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i = 0; i < uids.length; i++) {
             MemberUser memberUser = new MemberUser();
@@ -78,6 +78,7 @@ public class TeamRemindServiceTest {
             list.add(memberUser);
         }
         detail.setMembers(list);
+        detail.setTimingSend(false);
         OpenApiResult<Map<String, Long>> result = teamRemindApiService.create(context, detail);
         System.out.println(result);
     }

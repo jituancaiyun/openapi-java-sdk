@@ -92,10 +92,10 @@ public interface UserApiService {
      * 获取用户所在部门列表
      *
      * @param apiContext
-     * @param deptId
+     * @param uid
      * @return
      */
-    OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, Long deptId);
+    OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, String uid);
 
     /**
      * 根据手机号获取用户信息

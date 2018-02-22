@@ -83,6 +83,11 @@ public final class PushMessageDTO {
      */
     private Integer subAppId;
 
+    /**
+     * 群id
+     */
+    private Long groupId;
+
     public int getFlags() {
         return flags;
     }
@@ -171,6 +176,14 @@ public final class PushMessageDTO {
         this.subAppId = subAppId;
     }
 
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
     @Override
     public String toString() {
         return "PushMessageDTO{" +
@@ -181,6 +194,8 @@ public final class PushMessageDTO {
                 ", receivers=" + receivers +
                 ", keyId=" + keyId +
                 ", pushTips='" + pushTips + '\'' +
+                ", subAppId=" + subAppId +
+                ", groupId=" + groupId +
                 '}';
     }
 }

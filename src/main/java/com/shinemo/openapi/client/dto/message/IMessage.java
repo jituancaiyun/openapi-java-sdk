@@ -80,6 +80,11 @@ public abstract class IMessage<T extends IMessage> {
      */
     protected transient String message;
 
+    /**
+     * 群id
+     */
+    private transient Long groupId;
+
     public IMessage() {
     }
 
@@ -199,6 +204,7 @@ public abstract class IMessage<T extends IMessage> {
         messageDTO.setFromName(fromName);
         messageDTO.setGroupId(groupId);
         messageDTO.setReceivers(receivers);
+        messageDTO.setGroupId(groupId);
         messageDTO.setPushTips(pushTips);
         messageDTO.setSubAppId(subAppId);
         return messageDTO;
@@ -261,6 +267,17 @@ public abstract class IMessage<T extends IMessage> {
      */
     public T setReceivers(Collection<String> receivers) {
         this.receivers = receivers;
+        return (T) this;
+    }
+
+    /**
+     * 设置群id
+     *
+     * @param groupId
+     * @return
+     */
+    public T setGroupId(Long groupId) {
+        this.groupId = groupId;
         return (T) this;
     }
 

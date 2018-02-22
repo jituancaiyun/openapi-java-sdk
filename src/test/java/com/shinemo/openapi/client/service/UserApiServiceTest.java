@@ -19,15 +19,14 @@ import java.util.Map;
 public class UserApiServiceTest {
 
     private UserApiService userApiService;
-    private String orgSecret = "AQAOAQAAAAAAAFlIAQAAAAAA";
-    private String uid = "101010011894152";//"101010012129489";//
-    private String name = "yuanjian";
+    private String orgSecret = "AQDWGAEAAAAAABD_AgAAAAAA";
     private ApiContext context;
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(1);
-        context = ApiContext.ctx(orgSecret, uid, name);
+        Apis.setEnv(3);
+        context = ApiContext.ctx(orgSecret);
+        // context = ApiContext.ctx(orgSecret, uid, name);
         userApiService = Apis.createApiService(UserApiService.class);
     }
 
@@ -95,6 +94,14 @@ public class UserApiServiceTest {
     @Test
     public void getUidByMobile(){
         OpenApiResult result = userApiService.getUidByMobile(context, "13588200631");
+        System.out.println(result);
+    }
+
+    @Test
+    public void deptList(){
+        ApiContext context = ApiContext.ctx(orgSecret);
+        // context = ApiContext.ctx(orgSecret, uid, name);
+        OpenApiResult result = userApiService.deptList(context, "126468488");
         System.out.println(result);
     }
 

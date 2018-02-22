@@ -24,6 +24,7 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
+import com.shinemo.openapi.client.dto.message.AppMessage;
 import com.shinemo.openapi.client.dto.message.EmailMessage;
 import com.shinemo.openapi.client.dto.message.IMessage;
 import org.junit.Before;
@@ -45,14 +46,66 @@ public class MessageApiServiceTest {
     //private ApiContext ctx = new ApiContext("96256");
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
-    private ApiContext ctx = new ApiContext().setOrgSecret("AQDRAwEAAAAAALjZAgAAAAAA");
-    private List<String> receivers = Arrays.asList("126468488"/*, "112093240", "80864", "105824"*/);
+    private ApiContext ctx = new ApiContext().setOrgSecret("AQB1AQAAAAAAAFlIAQAAAAAA");
+    private List<String> receivers = Arrays.asList("101010012129489"/*, "112093240", "80864", "105824"*/);
 
 
     @Before
     public void setUp() throws Exception {
+        Apis.setEnv(1);
         client = Apis.createClient();
         messageApiService = client.createApiService(MessageApiService.class);
+    }
+
+    @Test
+    public void sendAppMessageEasy() throws Exception {
+        PushMessageDTO messageDTO = IMessage
+                .createAppMessage("我是一条应用消息")
+                .setContent("我是一条应用消息Content")
+                .setTitle("我是一条应用消息Title")
+                .setPreTitle("工会")
+                .setColor("green")
+                .setAppId(client.config().getAppId())//要显示红点的应用ID
+                .setOrgId("85161")//要显示红点的应用所属企业
+                .setUrlAction("https://jituancaiyun.com")
+                .setReceivers(receivers)
+                .build();
+        System.out.println(messageApiService.sendAppMessage(ctx, messageDTO));
+    }
+
+    @Test
+    public void sendGroupMessage() throws Exception {
+        PushMessageDTO messageDTO = IMessage
+                .createTextMessage("我是一条纯文本消息")
+                .setGroupId(125680L)
+                .build();
+        // 图片消息
+        /*PushMessageDTO messageDTO = IMessage
+                .createImageMessage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
+                .setGroupId(125680L)
+                .setHeight(300)
+                .setWidth(300)
+                .setGif(false)
+                .build();*/
+        // 邮件消息
+        /*PushMessageDTO messageDTO = new EmailMessage("我是一条邮件消息")
+                .setSender("106176")
+                .setmContent("我是一条邮件消息的内容")
+                .setmUrl("https://jituancaiyun.com")
+                .setSendTime(System.currentTimeMillis())
+                .setGroupId(125680L)
+                .build();*/
+        // 图文消息
+        /*PushMessageDTO messageDTO = IMessage
+                .createTextImageMessage("我是一条图文消息")
+                .setContent("我是一条图文消息Content")
+                .setTitle("我是一条图文消息Title")
+                .setImage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
+                .setUrl("https://baidu.com")
+                .setGroupId(125680L)
+                .build();*/
+        System.out.println(messageApiService.sendPushMessage(ctx, messageDTO));
+
     }
 
     @Test
@@ -99,9 +152,9 @@ public class MessageApiServiceTest {
                 .setTitle("我是一条应用消息Title")
                 .setPreTitle("工会")
                 .setColor("green")
-                .setUnreadCount(3)//未读消息数, 目前是显示红点
-                .setAppId(client.config().getAppId())//要显示红点的应用ID
-                .setOrgId(ctx.getOrgId())//要显示红点的应用所属企业
+                .setUnreadCount(3)// 未读消息数, 目前是显示红点
+                .setAppId(client.config().getAppId())// 要显示红点的应用ID
+                .setOrgId(ctx.getOrgId())// 要显示红点的应用所属企业
                 .setUrlAction("https://jituancaiyun.com")
                 .setReceivers(receivers)
                 .build();

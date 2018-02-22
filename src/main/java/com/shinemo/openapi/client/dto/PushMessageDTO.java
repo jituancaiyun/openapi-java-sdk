@@ -56,12 +56,12 @@ public final class PushMessageDTO {
     /**
      * 发送者名称
      */
-    private transient String fromName;
+    private String fromName;
 
     /**
      * 群ID
      */
-    private transient Long groupId;
+    private Long groupId;
 
     /**
      * 接收人Uid列表

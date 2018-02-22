@@ -24,7 +24,6 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
-import com.shinemo.openapi.client.dto.message.AppMessage;
 import com.shinemo.openapi.client.dto.message.EmailMessage;
 import com.shinemo.openapi.client.dto.message.IMessage;
 import org.junit.Before;
@@ -78,6 +77,7 @@ public class MessageApiServiceTest {
         PushMessageDTO messageDTO = IMessage
                 .createTextMessage("我是一条纯文本消息")
                 .setGroupId(125680L)
+//                .setFromName("应用消息ee")
                 .build();
         // 图片消息
         /*PushMessageDTO messageDTO = IMessage

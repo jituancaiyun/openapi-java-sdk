@@ -11,17 +11,8 @@ import java.util.List;
  */
 public class ContactDTO {
 
-    private Long orgId;
     private List<Dept> deptList;
     private List<User> userList;
-
-    public Long getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(Long orgId) {
-        this.orgId = orgId;
-    }
 
     public List<Dept> getDeptList() {
         return deptList;
@@ -42,8 +33,7 @@ public class ContactDTO {
     @Override
     public String toString() {
         return "ContactDTO{" +
-                "orgId=" + orgId +
-                ", deptList=" + deptList +
+                "deptList=" + deptList +
                 ", userList=" + userList +
                 '}';
     }

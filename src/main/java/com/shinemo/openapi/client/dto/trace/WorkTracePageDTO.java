@@ -7,7 +7,7 @@ import java.util.List;
  * @date 2/1/18
  * @email liuyj@shinemo.com
  */
-public class WorkTraceInfoList {
+public class WorkTracePageDTO {
     private int pageIndex;
     private int pageSize;
     private int totalCount;
@@ -47,7 +47,7 @@ public class WorkTraceInfoList {
 
     @Override
     public String toString() {
-        return "WorkTraceInfoList{" +
+        return "WorkTracePageDTO{" +
                 "pageIndex=" + pageIndex +
                 ", pageSize=" + pageSize +
                 ", totalCount=" + totalCount +

@@ -9,7 +9,7 @@ import java.util.List;
  * @date 1/22/18
  * @email liuyj@shinemo.com
  */
-public class Org {
+public class ContactDTO {
 
     private Long orgId;
     private List<Dept> deptList;
@@ -41,7 +41,7 @@ public class Org {
 
     @Override
     public String toString() {
-        return "Org{" +
+        return "ContactDTO{" +
                 "orgId=" + orgId +
                 ", deptList=" + deptList +
                 ", userList=" + userList +

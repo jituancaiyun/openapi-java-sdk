@@ -80,10 +80,6 @@ public abstract class IMessage<T extends IMessage> {
      */
     protected transient String message;
 
-    /**
-     * 群id
-     */
-    private transient Long groupId;
 
     public IMessage() {
     }
@@ -187,12 +183,12 @@ public abstract class IMessage<T extends IMessage> {
             throw new OpenApiException("只有文本消息支持必达特性");
         }
 
-        if (groupId != null && receivers != null) {
-            throw new OpenApiException("groupId和receivers不能同时存在");
-        }
-
         if (groupId == null && receivers == null) {
             throw new OpenApiException("groupId和receivers不能同时为空");
+        }
+
+        if (groupId != null && receivers != null) {
+            throw new OpenApiException("groupId和receivers不能同时存在");
         }
 
         PushMessageDTO messageDTO = new PushMessageDTO();

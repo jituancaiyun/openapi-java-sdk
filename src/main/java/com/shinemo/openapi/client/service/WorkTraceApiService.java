@@ -4,7 +4,7 @@ import com.shinemo.openapi.client.api.WorkTraceApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.trace.WorkTraceInfoList;
+import com.shinemo.openapi.client.dto.trace.WorkTracePageDTO;
 
 /**
  * 轨迹
@@ -26,11 +26,11 @@ public interface WorkTraceApiService {
      * @param pageSize  每页显示数量
      * @return
      */
-    OpenApiResult<WorkTraceInfoList> trackList(ApiContext context,
-                                                  long startTime,
-                                                  long endTime,
-                                                  int pageIndex,
-                                                  int pageSize);
+    OpenApiResult<WorkTracePageDTO> trackList(ApiContext context,
+                                              long startTime,
+                                              long endTime,
+                                              int pageIndex,
+                                              int pageSize);
 
     /**
      * 根据用户id查询用户轨迹信息
@@ -43,12 +43,12 @@ public interface WorkTraceApiService {
      * @param pageSize  每页显示数量
      * @return
      */
-    OpenApiResult<WorkTraceInfoList> queryByMobile(ApiContext context,
-                                                String mobile,
-                                                long startTime,
-                                                long endTime,
-                                                int pageIndex,
-                                                int pageSize);
+    OpenApiResult<WorkTracePageDTO> queryByMobile(ApiContext context,
+                                                  String mobile,
+                                                  long startTime,
+                                                  long endTime,
+                                                  int pageIndex,
+                                                  int pageSize);
 
     /**
      * 根据用户id查询用户正在进行的轨迹
@@ -57,6 +57,6 @@ public interface WorkTraceApiService {
      * @param mobile  用户id
      * @return
      */
-    OpenApiResult<WorkTraceInfoList> queryIngByMobile(ApiContext context, String mobile);
+    OpenApiResult<WorkTracePageDTO> queryIngByMobile(ApiContext context, String mobile);
 
 }

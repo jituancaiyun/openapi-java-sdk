@@ -5,7 +5,7 @@ import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.*;
 import com.shinemo.openapi.client.dto.contact.Dept;
-import com.shinemo.openapi.client.dto.contact.Org;
+import com.shinemo.openapi.client.dto.contact.ContactDTO;
 import com.shinemo.openapi.client.dto.contact.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,14 +37,14 @@ public class ContactApiServiceTest {
 
     @Test
     public void getDeptUsers() throws Exception {
-        OpenApiResult<ContactDTO> result = contactApiService.listUsers(context, 0);
+        OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> result = contactApiService.listUsers(context, 0);
         System.out.println(result);
         System.out.println(result.getData().getUsers().size());
     }
 
     @Test
     public void getDeptUsersAll() throws Exception {
-        OpenApiResult<ContactDTO> result = contactApiService.listUsersAll(context, 0);
+        OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> result = contactApiService.listUsersAll(context, 0);
         System.out.println(result);
 //        System.out.println(result);
     }
@@ -60,7 +60,7 @@ public class ContactApiServiceTest {
         OpenApiResult<UidDTO> result = contactApiService.createUser(context, userDTO);
         System.out.println(result);
 
-        OpenApiResult<ContactDTO> list = contactApiService.listUsers(context, 0L);
+        OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> list = contactApiService.listUsers(context, 0L);
         System.out.println(list);
     }
 
@@ -94,7 +94,7 @@ public class ContactApiServiceTest {
 
     @Test
     public void listDepts() {
-        OpenApiResult<ContactDTO> result = contactApiService.listDepts(context, 1L);
+        OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> result = contactApiService.listDepts(context, 1L);
 //        System.out.println(result);
     }
 
@@ -144,7 +144,7 @@ public class ContactApiServiceTest {
 
     @Test
     public void contactImport() throws Exception {
-        Org org = new Org();
+        ContactDTO org = new ContactDTO();
         List<Dept> deptList = new ArrayList<>();
         Dept dept = new Dept();
         dept.setDeptId("d1");

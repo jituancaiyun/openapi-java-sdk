@@ -24,7 +24,7 @@ import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.*;
-import com.shinemo.openapi.client.dto.contact.Org;
+import com.shinemo.openapi.client.dto.contact.ContactDTO;
 
 /**
  * Created by ohun on 2017/3/23.
@@ -43,7 +43,7 @@ public interface ContactApiService {
      * @return ContactDTO
      */
     @Deprecated
-    OpenApiResult<ContactDTO> listUsers(ApiContext apiContext, long deptId);
+    OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> listUsers(ApiContext apiContext, long deptId);
 
     /**
      * 获取某个部门下的所有用户（包含子部门用户）
@@ -54,7 +54,7 @@ public interface ContactApiService {
      * @return ContactDTO
      */
     @Deprecated
-    OpenApiResult<ContactDTO> listUsersAll(ApiContext apiContext, long deptId);
+    OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> listUsersAll(ApiContext apiContext, long deptId);
 
     /**
      * 获取用户详细信息（包含子部门用户）
@@ -108,7 +108,7 @@ public interface ContactApiService {
      * @return ContactDTO
      */
     @Deprecated
-    OpenApiResult<ContactDTO> listDepts(ApiContext apiContext, long deptId);
+    OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> listDepts(ApiContext apiContext, long deptId);
 
     /**
      * 创建部门
@@ -150,7 +150,7 @@ public interface ContactApiService {
      * @param org
      * @return
      */
-    OpenApiResult<Void> contactImport(ApiContext apiContext, Org org);
+    OpenApiResult<Void> contactImport(ApiContext apiContext, ContactDTO org);
 
     /**
      * 通讯录导出
@@ -158,6 +158,6 @@ public interface ContactApiService {
      * @param apiContext
      * @return
      */
-    OpenApiResult<Org> contactExport(ApiContext apiContext);
+    OpenApiResult<ContactDTO> contactExport(ApiContext apiContext);
 
 }

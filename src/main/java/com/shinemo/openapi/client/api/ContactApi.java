@@ -21,7 +21,7 @@ package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.*;
-import com.shinemo.openapi.client.dto.contact.Org;
+import com.shinemo.openapi.client.dto.contact.ContactDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -42,7 +42,7 @@ public interface ContactApi {
      * @return ContactDTO
      */
     @GET("user/list")
-    Call<OpenApiResult<ContactDTO>> listUsers(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
+    Call<OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO>> listUsers(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
 
     /**
      * 获取某个部门下的所有用户（包含子部门用户）
@@ -52,7 +52,7 @@ public interface ContactApi {
      * @return ContactDTO
      */
     @GET("user/list/all")
-    Call<OpenApiResult<ContactDTO>> listUsersAll(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
+    Call<OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO>> listUsersAll(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
 
     /**
      * 获取某个部门下的所有用户（包含子部门用户）
@@ -103,7 +103,7 @@ public interface ContactApi {
      * @return ContactDTO
      */
     @GET("department/list")
-    Call<OpenApiResult<ContactDTO>> listDepts(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
+    Call<OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO>> listDepts(@HeaderMap Map<String, String> headers, @Query("deptId") long deptId);
 
     /**
      * 创建用户
@@ -136,9 +136,9 @@ public interface ContactApi {
     Call<OpenApiResult<Long>> deleteDept(@HeaderMap Map<String, String> headers, @Body ContactDeptDTO deptDTO);
 
     @POST("contact/import")
-    Call<OpenApiResult<Void>> contactImport(@HeaderMap Map<String, String> headers, @Body Org org);
+    Call<OpenApiResult<Void>> contactImport(@HeaderMap Map<String, String> headers, @Body ContactDTO org);
 
     @GET("contact/export")
-    Call<OpenApiResult<Org>> contactExport(@HeaderMap Map<String, String> headers);
+    Call<OpenApiResult<ContactDTO>> contactExport(@HeaderMap Map<String, String> headers);
 
 }

@@ -48,7 +48,7 @@ public abstract class IMessage<T extends IMessage> {
     /**
      * 发送者ID
      */
-    private String fromId;
+    private transient String fromId;
 
     /**
      * 发送者名称

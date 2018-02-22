@@ -51,7 +51,7 @@ public final class PushMessageDTO {
     /**
      * 发送者ID
      */
-    private transient String fromId;
+    private String fromId;
 
     /**
      * 发送者名称

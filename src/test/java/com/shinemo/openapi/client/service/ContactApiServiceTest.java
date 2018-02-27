@@ -24,13 +24,13 @@ public class ContactApiServiceTest {
 
     private ContactApiService contactApiService;
 
-    private String orgSecret = "AQDWGAEAAAAAABD_AgAAAAAA";
+    private String orgSecret = "AQB1AQAAAAAAAFlIAQAAAAAA";
 
     private ApiContext context;
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(3);
+        Apis.setEnv(1);
         contactApiService = Apis.createApiService(ContactApiService.class);
         context = ApiContext.ctx(orgSecret);
     }

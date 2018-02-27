@@ -50,16 +50,16 @@ public final class Apis {
             configuration.setAppSecret("1f1ea62b71564340869b54e2f3036e55");
         } else if (env == 1) {
             configuration.setBaseUrl("http://10.0.10.49:8081/platform/api/");
-            configuration.setAppId(36896933);
-            configuration.setAppSecret("5dc66488c5fb262028f3ae58b492dd64");
+            configuration.setAppId(81125975);
+            configuration.setAppSecret("6b63fd58e54b4726402a54dbd5429f56");
         } else if (env == 2) {
             configuration.setBaseUrl("http://10.0.10.49:8081/platform/");
             configuration.setAppId(20328985);
             configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
         } else if (env == 3) {
             configuration.setBaseUrl("https://openapi.e.uban360.com/platform/api/");
-            configuration.setAppId(27106121);
-            configuration.setAppSecret("daf568fe7c7a343d6267ce2ccfb21170");
+            configuration.setAppId(88078963);
+            configuration.setAppSecret("36cb14b6c9316596c4f0f7195b96500f");
         } else if (env == 4) {
             configuration.setBaseUrl("http://127.0.0.1:8082/platform/");
             configuration.setAppId(20328985);

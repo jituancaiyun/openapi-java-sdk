@@ -22,8 +22,8 @@ package com.shinemo.openapi.client.service;
 import com.shinemo.openapi.client.aes.AesKey;
 import com.shinemo.openapi.client.aes.AesKeyService;
 import com.shinemo.openapi.client.common.*;
+import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
-import com.shinemo.openapi.client.dto.message.AppMessage;
 import com.shinemo.openapi.client.dto.message.IMessage;
 
 import java.util.List;
@@ -85,7 +85,7 @@ public final class SecurityMessageApiService implements MessageApiService {
     }
 
     @Override
-    public OpenApiResult<Void> sendAppMessage(ApiContext apiContext, PushMessageDTO appMessage) {
+    public OpenApiResult<Void> sendAppMessage(ApiContext apiContext, AppMessageDTO appMessage) {
         throw new OpenApiException("不支持消息加密。");
     }
 

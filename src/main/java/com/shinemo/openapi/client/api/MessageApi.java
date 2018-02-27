@@ -20,8 +20,8 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
-import com.shinemo.openapi.client.dto.message.AppMessage;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.HeaderMap;
@@ -48,6 +48,6 @@ public interface MessageApi {
     Call<OpenApiResult<List<String>>> sendPushMessage(@HeaderMap Map<String, String> headers, @Body PushMessageDTO body);
 
     @POST("message/push/app")
-    Call<OpenApiResult<List<String>>> sendAppMessage(@HeaderMap Map<String, String> headers, @Body PushMessageDTO body);
+    Call<OpenApiResult<List<String>>> sendAppMessage(@HeaderMap Map<String, String> headers, @Body AppMessageDTO body);
 
 }

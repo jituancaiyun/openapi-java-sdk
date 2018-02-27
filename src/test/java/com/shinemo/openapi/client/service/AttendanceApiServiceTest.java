@@ -66,7 +66,7 @@ public class AttendanceApiServiceTest {
     @Test
     public void query() {
 
-        OpenApiResult result = attendanceApiService.query(context, "2018-01-01", "2018-01-09");
+        OpenApiResult result = attendanceApiService.query(context, "2018-01-01", "2018-03-09");
         System.out.println(result);
 
     }

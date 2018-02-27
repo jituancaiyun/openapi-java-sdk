@@ -23,6 +23,7 @@ import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.EmailMessage;
 import com.shinemo.openapi.client.dto.message.IMessage;
@@ -45,7 +46,7 @@ public class MessageApiServiceTest {
     //private ApiContext ctx = new ApiContext("96256");
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
-    private ApiContext ctx = new ApiContext().setOrgSecret("AQB1AQAAAAAAAFlIAQAAAAAA");
+    private ApiContext ctx = new ApiContext().setOrgSecret("AQB3AQAAAAAAAKlMAQAAAAAA");
     private List<String> receivers = Arrays.asList("101010012129489"/*, "112093240", "80864", "105824"*/);
 
 
@@ -58,26 +59,26 @@ public class MessageApiServiceTest {
 
     @Test
     public void sendAppMessageEasy() throws Exception {
-        PushMessageDTO messageDTO = IMessage
-                .createAppMessage("我是一条应用消息")
-                .setContent("我是一条应用消息Content")
-                .setTitle("我是一条应用消息Title")
-                .setPreTitle("工会")
-                .setColor("green")
-                .setAppId(client.config().getAppId())//要显示红点的应用ID
-                .setOrgId("85161")//要显示红点的应用所属企业
-                .setUrlAction("https://jituancaiyun.com")
-                .setReceivers(receivers)
-                .build();
-        System.out.println(messageApiService.sendAppMessage(ctx, messageDTO));
+        AppMessageDTO appMessageDTO = new AppMessageDTO();
+        appMessageDTO.setContent("简单应用消息");
+        appMessageDTO.setAction("http://shinemo.com");
+        appMessageDTO.setReceivers(receivers);
+        appMessageDTO.setUnreadCount(1);
+        appMessageDTO.setTitle("titile");
+        System.out.println(messageApiService.sendAppMessage(ctx, appMessageDTO));
     }
 
     @Test
     public void sendGroupMessage() throws Exception {
         PushMessageDTO messageDTO = IMessage
-                .createTextMessage("我是一条纯文本消息")
-                .setGroupId(125680L)
-//                .setFromName("应用消息ee")
+                .createAppMessage("我是一条纯文本消息")
+                .setContent("hello")
+                .setReceivers(receivers)
+                .setAppId(92985533)
+                .setOrgId("85161")
+                .setUrlAction("http://www.baidu.com")
+                .setUnreadCount(1)
+                .setTitle("title")
                 .build();
         // 图片消息
         /*PushMessageDTO messageDTO = IMessage

@@ -23,6 +23,7 @@ import com.shinemo.openapi.client.api.MessageApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.AppMessage;
 
@@ -48,9 +49,9 @@ public interface MessageApiService {
     /**
      * 发送应用消息-简单
      * @param apiContext
-     * @param messageDTO
+     * @param appMessageDTO
      * @return
      */
-    OpenApiResult<Void> sendAppMessage(ApiContext apiContext, PushMessageDTO messageDTO);
+    OpenApiResult<Void> sendAppMessage(ApiContext apiContext, AppMessageDTO appMessageDTO);
 
 }

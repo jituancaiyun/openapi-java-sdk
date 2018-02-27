@@ -24,8 +24,8 @@ public class TeamRemindServiceTest {
 
     private TeamRemindApiService teamRemindApiService;
     private OpenApiClient client;
-    private String orgSecret = "AQDWGAEAAAAAABD_AgAAAAAA";
-    private String uid = "126468488";//"101010011768832";//
+    private String orgSecret = "AQB3AQAAAAAAAKlMAQAAAAAA";
+    private String uid = "101010012129489";//"101010011768832";//
     private String name = "刘远剑";
     private ApiContext context;
 
@@ -51,7 +51,7 @@ public class TeamRemindServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(3);
+        Apis.setEnv(1);
         client = Apis.createClient();
         context = ApiContext.ctx(orgSecret, uid, name);
         /*context = new ApiContext();
@@ -68,8 +68,8 @@ public class TeamRemindServiceTest {
         detail.setContent("团队提醒内容。");
 //        detail.setRemindTime(System.currentTimeMillis() + 100 * 60 * 1000);
         detail.setRemindType(MeetingInviteServiceTest.RemindType.APPANDSMS_SEND.getType());
-        String[] uids = {"126468488"};
-        String[] names = {"j2"};
+        String[] uids = {"101010012129489","271000"};
+        String[] names = {"j2","j3"};
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i = 0; i < uids.length; i++) {
             MemberUser memberUser = new MemberUser();
@@ -106,7 +106,7 @@ public class TeamRemindServiceTest {
 
     @Test
     public void detail() {
-        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 58436L);
+        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 60468L);
         System.out.println(result);
         System.out.println(result.getData().getCreator().getIsDelete());
         System.out.println(result.getData().getDetail().getMembers());

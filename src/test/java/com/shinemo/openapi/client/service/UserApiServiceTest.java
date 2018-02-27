@@ -19,12 +19,12 @@ import java.util.Map;
 public class UserApiServiceTest {
 
     private UserApiService userApiService;
-    private String orgSecret = "AQDWGAEAAAAAABD_AgAAAAAA";
+    private String orgSecret = "AQB3AQAAAAAAAKlMAQAAAAAA";
     private ApiContext context;
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(3);
+        Apis.setEnv(1);
         context = ApiContext.ctx(orgSecret);
         // context = ApiContext.ctx(orgSecret, uid, name);
         userApiService = Apis.createApiService(UserApiService.class);
@@ -35,7 +35,7 @@ public class UserApiServiceTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setUserName("测试个人权限priiii好久好久好久环境");
 //        userDTO.setTitle("测试");
-        userDTO.setMobile("12600000028");
+        userDTO.setMobile("13588200631");
         userDTO.setSequence(1);
         userDTO.setDeptId(0L);
         userDTO.setTitle("部门名称");

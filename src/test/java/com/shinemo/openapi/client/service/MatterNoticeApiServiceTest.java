@@ -44,7 +44,7 @@ public class MatterNoticeApiServiceTest {
 
     private MatterNoticeApiService matterNoticeApiService;
     private OpenApiClient client;
-    private String orgId = "84057";
+    private String orgSecret = "AQB3AQAAAAAAAKlMAQAAAAAA";
     private String uid = "101010012129489";
     private String name = "yuanjian";
     private ApiContext context;
@@ -71,9 +71,9 @@ public class MatterNoticeApiServiceTest {
 
     @Before
     public void setUp() throws Exception {
-//        Apis.setEnv(0);
+        Apis.setEnv(1);
         client = Apis.createClient();
-        context = ApiContext.ctx(orgId, uid, name);
+        context = ApiContext.ctx(orgSecret, uid, name);
         matterNoticeApiService = client.createApiService(MatterNoticeApiService.class);
     }
 
@@ -81,7 +81,7 @@ public class MatterNoticeApiServiceTest {
     public void createMatterNotice() throws Exception {
         TeamRemindDetailDTO teamRemindDetail = new TeamRemindDetailDTO();
         teamRemindDetail.setContent("测试事项告知，" + new Date());
-        teamRemindDetail.setRemindType(RemindType.APP_SEND.getType());
+        teamRemindDetail.setRemindType(RemindType.APPANDSMS_SEND.getType());
         teamRemindDetail.setRemindTime(new Date().getTime() + 1000 * 60 * 1);
         teamRemindDetail.setIsVoiceRemind(false);
         String[] receivers = {"101010012129489", "101010011894152"};//

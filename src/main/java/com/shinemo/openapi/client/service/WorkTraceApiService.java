@@ -24,7 +24,7 @@ public interface WorkTraceApiService {
      * @param endTime   结束时间
      * @param pageIndex 分页索引
      * @param pageSize  每页显示数量
-     * @return
+     * @return WorkTracePageDTO
      */
     OpenApiResult<WorkTracePageDTO> trackList(ApiContext context,
                                               long startTime,
@@ -41,7 +41,7 @@ public interface WorkTraceApiService {
      * @param endTime   结束时间
      * @param pageIndex 分页索引
      * @param pageSize  每页显示数量
-     * @return
+     * @return WorkTracePageDTO
      */
     OpenApiResult<WorkTracePageDTO> queryByMobile(ApiContext context,
                                                   String mobile,
@@ -55,7 +55,7 @@ public interface WorkTraceApiService {
      *
      * @param context http头信息，包括accessToken、orgSecret、uid等
      * @param mobile  用户id
-     * @return
+     * @return WorkTracePageDTO
      */
     OpenApiResult<WorkTracePageDTO> queryIngByMobile(ApiContext context, String mobile);
 

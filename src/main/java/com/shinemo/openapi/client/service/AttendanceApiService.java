@@ -37,24 +37,27 @@ import java.util.List;
 public interface AttendanceApiService {
 
     /**
+     * 新增考勤数据
      *
      * @param context http头信息，包括accessToken、orgSecret、uid等
      * @param body
-     * @return
+     * @return result code
      */
-    OpenApiResult add(ApiContext context, ImportSignInfoDTO body);
+    OpenApiResult<Void> add(ApiContext context, ImportSignInfoDTO body);
 
     /**
+     * 批量新增考勤数据
      *
      * @param context http头信息，包括accessToken、orgSecret、uid等
      * @param body
-     * @return
+     * @return result code
      */
-    OpenApiResult importBatch(ApiContext context, List<ImportSignInfoDTO> body);
+    OpenApiResult<Void> importBatch(ApiContext context, List<ImportSignInfoDTO> body);
 
     /**
+     * 查询考勤数据
      *
-     * @param context http头信息，包括accessToken、orgSecret、uid等
+     * @param context   http头信息，包括accessToken、orgSecret、uid等
      * @param beginTime
      * @param endTime
      * @return

@@ -41,7 +41,7 @@ public interface TeamRemindApiService {
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param detail     团队提醒实体
-     * @return
+     * @return result code
      */
     OpenApiResult<Map<String, Long>> create(ApiContext apiContext, TeamRemindDetailDTO detail);
 
@@ -50,18 +50,18 @@ public interface TeamRemindApiService {
      *
      * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> cancel(ApiContext apiContext, Long teamRemindId);
+    OpenApiResult<Void> cancel(ApiContext apiContext, Long teamRemindId);
 
     /**
      * 删除团队提醒新接口
      *
      * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> delete(ApiContext apiContext, Long teamRemindId);
+    OpenApiResult<Void> delete(ApiContext apiContext, Long teamRemindId);
 
     /**
      * 更新团队提醒详情
@@ -69,16 +69,16 @@ public interface TeamRemindApiService {
      * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
      * @param detail       提醒详情
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> update(ApiContext apiContext, Long teamRemindId, TeamRemindDetailDTO detail);
+    OpenApiResult<Void> update(ApiContext apiContext, Long teamRemindId, TeamRemindDetailDTO detail);
 
     /**
      * 获取团队提醒详情新接口
      *
      * @param apiContext   基础header参数, accessToken, orgSecret, uid
      * @param teamRemindId 团队提醒id
-     * @return
+     * @return teamRemindDTO
      */
     OpenApiResult<TeamRemindInfoDTO> detail(ApiContext apiContext, Long teamRemindId);
 }

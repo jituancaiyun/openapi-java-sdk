@@ -92,7 +92,7 @@ public interface ContactApi {
      * @return 0表示操作成功
      */
     @POST("user/delete")
-    Call<OpenApiResult<Long>> deleteUser(@HeaderMap Map<String, String> headers, @Body ContactUserDTO userDTO);
+    Call<OpenApiResult<Void>> deleteUser(@HeaderMap Map<String, String> headers, @Body ContactUserDTO userDTO);
 
 
     /**
@@ -133,7 +133,7 @@ public interface ContactApi {
      * @return 0表示操作成功
      */
     @POST("department/delete")
-    Call<OpenApiResult<Long>> deleteDept(@HeaderMap Map<String, String> headers, @Body ContactDeptDTO deptDTO);
+    Call<OpenApiResult<Void>> deleteDept(@HeaderMap Map<String, String> headers, @Body ContactDeptDTO deptDTO);
 
     @POST("contact/import")
     Call<OpenApiResult<Void>> contactImport(@HeaderMap Map<String, String> headers, @Body ContactDTO org);

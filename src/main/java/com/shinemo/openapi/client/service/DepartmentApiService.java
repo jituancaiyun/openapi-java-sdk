@@ -53,7 +53,7 @@ public interface DepartmentApiService {
      * @param deptId     要删除的部门
      * @return 0表示操作成功
      */
-    OpenApiResult<Long> delete(ApiContext apiContext, Long deptId);
+    OpenApiResult<Void> delete(ApiContext apiContext, Long deptId);
 
     /**
      * 修改部门
@@ -62,7 +62,7 @@ public interface DepartmentApiService {
      * @param deptInfoDTO 要修改的部门
      * @return UidDTO
      */
-    OpenApiResult<Long> update(ApiContext apiContext, DeptInfoDTO deptInfoDTO);
+    OpenApiResult<Void> update(ApiContext apiContext, DeptInfoDTO deptInfoDTO);
 
     /**
      * 获取部门详情
@@ -87,7 +87,7 @@ public interface DepartmentApiService {
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param deptId
-     * @return
+     * @return 用户列表
      */
     OpenApiResult<Map<String, List<UserInfoDTO>>> userList(ApiContext apiContext, Long deptId);
 
@@ -96,7 +96,7 @@ public interface DepartmentApiService {
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param deptId
-     * @return
+     * @return 用户列表
      */
     OpenApiResult<Map<String, List<UserInfoDTO>>> userListAll(ApiContext apiContext, Long deptId);
 

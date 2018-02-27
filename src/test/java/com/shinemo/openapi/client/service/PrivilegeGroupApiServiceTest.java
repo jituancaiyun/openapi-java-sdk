@@ -44,7 +44,7 @@ public class PrivilegeGroupApiServiceTest {
 
     @Test
     public void delete() {//25723
-        OpenApiResult<Long> result = privilegeGroupApiService.delete(context, 25724L);
+        OpenApiResult<Void> result = privilegeGroupApiService.delete(context, 25724L);
         System.out.println(result);
     }
 

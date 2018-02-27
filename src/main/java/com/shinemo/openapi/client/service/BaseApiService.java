@@ -38,7 +38,7 @@ public interface BaseApiService {
      * @param appId
      * @param appSecret
      * @param flags
-     * @return
+     * @return AccessToken
      */
     OpenApiResult<AccessTokenDTO> getAccessToken(int appId, String appSecret, int flags);
 

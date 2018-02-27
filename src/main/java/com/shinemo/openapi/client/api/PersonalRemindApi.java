@@ -61,7 +61,7 @@ public interface PersonalRemindApi {
      * @return
      */
     @POST("personalremind/delete")
-    Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("personalRemindId") long personalRemindId);
+    Call<OpenApiResult<Void>> delete(@HeaderMap Map<String, String> headers, @Query("personalRemindId") long personalRemindId);
 
     /**
      * 获取个人提醒详情

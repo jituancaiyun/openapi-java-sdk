@@ -1,6 +1,7 @@
 package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.Apis;
+import com.shinemo.openapi.client.Constants;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.attendance.ImportSignInfoDTO;
@@ -19,7 +20,7 @@ import java.util.List;
 public class AttendanceApiServiceTest {
 
     private AttendanceApiService attendanceApiService;
-    private String orgSecret = "AQAOAQAAAAAAAFlIAQAAAAAA";
+    private String orgSecret = Constants.OrgSecret.DAILY_SECRET.orgSecret;
     private String uid = "101010011894152";//"101010012129489";//
     private String name = "yuanjian";
     private ApiContext context;
@@ -51,7 +52,7 @@ public class AttendanceApiServiceTest {
         for (int i = 0; i < 10; i++) {
             ImportSignInfoDTO signInfoDTO = new ImportSignInfoDTO();
             signInfoDTO.setUid("1111111111");
-            signInfoDTO.setSignTime("2017-09-03 09:00:00");
+            signInfoDTO.setSignTime("2018-01-11 09:00:00");
             signInfoDTO.setSignType(2);
             SignDeviceDTO deviceDTO = new SignDeviceDTO();
             deviceDTO.setDeviceId("123321");

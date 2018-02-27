@@ -99,14 +99,14 @@ public class PersonalRemindApiServiceTest {
         rFrequency.setRemindTime(sdf2.format(new Date(new Date().getTime() + 10 * 60 * 1000)));
         personalRemind.setRfrequency(rFrequency);
         personalRemind.setIsVoiceRemind(false);
-        long personalRemindId = 17478L;
+        long personalRemindId = 18166L;
         OpenApiResult<Map<String, Long>> result = personalRemindApiService.update(context, personalRemindId, personalRemind);
         System.out.println(result);
     }
 
     @Test
     public void detail() {
-        long personalRemindId = 17478;
+        long personalRemindId = 18166;
         OpenApiResult<PersonalRemindInfoDTO> result = personalRemindApiService.detail(context, personalRemindId);
         System.out.println(result);
     }
@@ -122,7 +122,7 @@ public class PersonalRemindApiServiceTest {
 
     @Test
     public void deletePersonalRemind() {
-        long personalRemindId = 17297L;
+        long personalRemindId = 18166L;
         OpenApiResult<?> result = personalRemindApiService.delete(context, personalRemindId);
         System.out.println(result);
     }

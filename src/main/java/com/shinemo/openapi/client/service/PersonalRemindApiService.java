@@ -41,6 +41,7 @@ public interface PersonalRemindApiService {
      *
      * @param apiContext     基础header参数, accessToken, orgSecret, uid
      * @param personalRemind 个人提醒详情
+     * @return result code
      */
     OpenApiResult<Map<String, Long>> create(ApiContext apiContext, PersonalRemindDTO personalRemind);
 
@@ -50,7 +51,7 @@ public interface PersonalRemindApiService {
      * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param personalRemindId 个人提醒id
      * @param personalRemind   个人提醒信息
-     * @return
+     * @return result code
      */
     OpenApiResult<Map<String, Long>> update(ApiContext apiContext, long personalRemindId, PersonalRemindDTO personalRemind);
 
@@ -59,16 +60,16 @@ public interface PersonalRemindApiService {
      *
      * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param personalRemindId 个人提醒id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> delete(ApiContext apiContext, long personalRemindId);
+    OpenApiResult<Void> delete(ApiContext apiContext, long personalRemindId);
 
     /**
      * 获取详情
      *
      * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param personalRemindId 个人提醒id
-     * @return
+     * @return result code
      */
     OpenApiResult<PersonalRemindInfoDTO> detail(ApiContext apiContext, long personalRemindId);
 

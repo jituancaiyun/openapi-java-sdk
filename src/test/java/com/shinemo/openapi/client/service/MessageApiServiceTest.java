@@ -20,10 +20,10 @@
 package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.Apis;
+import com.shinemo.openapi.client.Constants;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.AppMessageDTO;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.EmailMessage;
 import com.shinemo.openapi.client.dto.message.IMessage;
@@ -46,7 +46,7 @@ public class MessageApiServiceTest {
     //private ApiContext ctx = new ApiContext("96256");
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
-    private ApiContext ctx = new ApiContext().setOrgSecret("AQB3AQAAAAAAAKlMAQAAAAAA");
+    private ApiContext ctx = new ApiContext().setOrgSecret(Constants.OrgSecret.DAILY_SECRET.orgSecret);
     private List<String> receivers = Arrays.asList("101010012129489"/*, "112093240", "80864", "105824"*/);
 
 
@@ -55,17 +55,6 @@ public class MessageApiServiceTest {
         Apis.setEnv(1);
         client = Apis.createClient();
         messageApiService = client.createApiService(MessageApiService.class);
-    }
-
-    @Test
-    public void sendAppMessageEasy() throws Exception {
-        AppMessageDTO appMessageDTO = new AppMessageDTO();
-        appMessageDTO.setContent("简单应用消息");
-        appMessageDTO.setAction("http://shinemo.com");
-        appMessageDTO.setReceivers(receivers);
-        appMessageDTO.setUnreadCount(1);
-        appMessageDTO.setTitle("titile");
-        System.out.println(messageApiService.sendAppMessage(ctx, appMessageDTO));
     }
 
     @Test

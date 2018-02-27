@@ -13,8 +13,6 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 public class DepartmentApiServiceTest {
 
     private DepartmentApiService departmentApiService;
@@ -65,7 +63,7 @@ public class DepartmentApiServiceTest {
 
     @Test
     public void delete() {
-        OpenApiResult<Long> result = departmentApiService.delete(context, 16L);
+        OpenApiResult<Void> result = departmentApiService.delete(context, 21L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();
@@ -80,7 +78,7 @@ public class DepartmentApiServiceTest {
 //        infoDto.setParentId(14L);
 //        infoDto.setOrder(1);
 
-        OpenApiResult<Long> result = departmentApiService.update(context, infoDto);
+        OpenApiResult<Void> result = departmentApiService.update(context, infoDto);
         System.out.println(result);
     }
 
@@ -95,7 +93,7 @@ public class DepartmentApiServiceTest {
 
     @Test
     public void detail() {
-        OpenApiResult<Map<String, DeptInfoDTO>> result = departmentApiService.detail(context, 0L);
+        OpenApiResult<Map<String, DeptInfoDTO>> result = departmentApiService.detail(context, 21L);
         System.out.println(result);
         System.out.println(result.getData());
         Gson gson = new Gson();
@@ -111,7 +109,7 @@ public class DepartmentApiServiceTest {
 
     @Test
     public void userListAll() {
-        OpenApiResult<Map<String, List<UserInfoDTO>>> result = departmentApiService.userListAll(context, 1L);
+        OpenApiResult<Map<String, List<UserInfoDTO>>> result = departmentApiService.userListAll(context, 0L);
         System.out.println(result);
         result.getData().get("users").get(0).getWorkPhone();
     }

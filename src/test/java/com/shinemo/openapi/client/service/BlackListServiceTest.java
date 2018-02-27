@@ -5,9 +5,6 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Map;
 
 /**
  * Created by yuanjian on 6/13/17.

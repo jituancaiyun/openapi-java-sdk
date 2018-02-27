@@ -56,7 +56,7 @@ public interface UserApi {
     Call<OpenApiResult<Map<String, UserInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
 
     @GET("user/getUserInfoByUid")
-    Call<OpenApiResult<Map<String, UserInfoDTO>>> getUserInfoByUid(@HeaderMap Map<String, String> headers, @Query("uids") String uids);
+    Call<OpenApiResult<Map<String, UserDTO>>> getUserInfoByUid(@HeaderMap Map<String, String> headers, @Query("uids") String uids);
 
     @GET("user/deptList")
     Call<OpenApiResult<Map<String, List<DeptInfoDTO>>>> deptList(@HeaderMap Map<String, String> headers, @Query("uid") String uid);

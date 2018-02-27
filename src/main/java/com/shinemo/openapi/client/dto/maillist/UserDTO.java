@@ -11,6 +11,7 @@ public class UserDTO {
     private Long id;
     private Integer isAdmin;
     private Long deptId;
+    private String deptName;
     private Long oldDeptId;
     private String title;
     private Long orgId;
@@ -19,6 +20,8 @@ public class UserDTO {
     private String externalId = "";
     private String externalData = "";
     private String privilege = "";
+    private String email;
+    private Boolean isallowlogin;
 
     public String getUid() {
         return uid;
@@ -74,6 +77,14 @@ public class UserDTO {
 
     public void setDeptId(Long deptId) {
         this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public Long getOldDeptId() {
@@ -140,15 +151,33 @@ public class UserDTO {
         this.privilege = privilege;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getIsallowlogin() {
+        return isallowlogin;
+    }
+
+    public void setIsallowlogin(Boolean isallowlogin) {
+        this.isallowlogin = isallowlogin;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
                 "uid='" + uid + '\'' +
+                ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", id=" + id +
                 ", isAdmin=" + isAdmin +
                 ", deptId=" + deptId +
+                ", deptName='" + deptName + '\'' +
                 ", oldDeptId=" + oldDeptId +
                 ", title='" + title + '\'' +
                 ", orgId=" + orgId +
@@ -157,6 +186,8 @@ public class UserDTO {
                 ", externalId='" + externalId + '\'' +
                 ", externalData='" + externalData + '\'' +
                 ", privilege='" + privilege + '\'' +
+                ", email='" + email + '\'' +
+                ", isallowlogin=" + isallowlogin +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.Apis;
+import com.shinemo.openapi.client.Constants;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.*;
@@ -24,7 +25,7 @@ public class ContactApiServiceTest {
 
     private ContactApiService contactApiService;
 
-    private String orgSecret = "AQB1AQAAAAAAAFlIAQAAAAAA";
+    private String orgSecret = Constants.OrgSecret.DAILY_SECRET.orgSecret;
 
     private ApiContext context;
 
@@ -53,7 +54,7 @@ public class ContactApiServiceTest {
     public void createUser() throws Exception {
         ContactUserDTO userDTO = new ContactUserDTO();
         userDTO.setName("xxxxx");
-        userDTO.setDeptId(1L);
+        userDTO.setDeptId(0L);
         userDTO.setMobile("13600530626");
         userDTO.setSequence(1);
 
@@ -69,7 +70,7 @@ public class ContactApiServiceTest {
         ContactUserDTO userDTO = new ContactUserDTO();
         userDTO.setDeptId(1L);
         userDTO.setId(101010012129369L);
-        OpenApiResult<Long> result = contactApiService.deleteUser(context, userDTO);
+        OpenApiResult<Void> result = contactApiService.deleteUser(context, userDTO);
         System.out.println(result);
     }
 
@@ -88,14 +89,14 @@ public class ContactApiServiceTest {
 
     @Test
     public void detail() throws Exception {
-        OpenApiResult<ContactUserDTO> result = contactApiService.detail(context, 101010012051017L, 0);
+        OpenApiResult<ContactUserDTO> result = contactApiService.detail(context, 101010012671649L, 0);
         System.out.println(result);
     }
 
     @Test
     public void listDepts() {
-        OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> result = contactApiService.listDepts(context, 1L);
-//        System.out.println(result);
+        OpenApiResult<com.shinemo.openapi.client.dto.ContactDTO> result = contactApiService.listDepts(context, 0L);
+        System.out.println(result);
     }
 
     @Test
@@ -138,7 +139,7 @@ public class ContactApiServiceTest {
         deptDTO.setName("update新部门-" + format.format(new Date()));
         deptDTO.setParentid(1L);
         deptDTO.setId(14L);
-        OpenApiResult<Long> result = contactApiService.deleteDept(context, deptDTO);
+        OpenApiResult<Void> result = contactApiService.deleteDept(context, deptDTO);
         System.out.println(result);
     }
 

@@ -34,10 +34,10 @@ import java.util.Map;
 public interface AttendanceApi {
 
     @POST("attendance/add")
-    Call<OpenApiResult> add(@HeaderMap Map<String, String> headers, @Body ImportSignInfoDTO body);
+    Call<OpenApiResult<Void>> add(@HeaderMap Map<String, String> headers, @Body ImportSignInfoDTO body);
 
     @POST("attendance/importBatch")
-    Call<OpenApiResult> importBatch(@HeaderMap Map<String, String> headers, @Body List<ImportSignInfoDTO> body);
+    Call<OpenApiResult<Void>> importBatch(@HeaderMap Map<String, String> headers, @Body List<ImportSignInfoDTO> body);
 
     @GET("attendance/query")
     Call<OpenApiResult<List<SignInfoDTO>>> query(@HeaderMap Map<String, String> headers, @Query("beginTime") String beginTime,

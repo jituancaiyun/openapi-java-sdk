@@ -53,7 +53,7 @@ public interface TeamRemindApi {
      * @return
      */
     @POST("teamremind/cancel")
-    Call<OpenApiResult<Long>> cancel(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId);
+    Call<OpenApiResult<Void>> cancel(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId);
 
     /**
      * 删除团队提醒新接口
@@ -63,7 +63,7 @@ public interface TeamRemindApi {
      * @return
      */
     @POST("teamremind/delete")
-    Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId);
+    Call<OpenApiResult<Void>> delete(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId);
 
     /**
      * 修改团队提醒新接口
@@ -74,7 +74,7 @@ public interface TeamRemindApi {
      * @return
      */
     @POST("teamremind/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId, @Body TeamRemindDetailDTO body);
+    Call<OpenApiResult<Void>> update(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId, @Body TeamRemindDetailDTO body);
 
     /**
      * 团队提醒详情新接口

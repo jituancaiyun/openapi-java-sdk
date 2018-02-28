@@ -20,8 +20,6 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.MeetingIdDTO;
-import com.shinemo.openapi.client.dto.MeetingInviteDTO;
 import com.shinemo.openapi.client.dto.meeting.MeetingInviteDetailDTO;
 import com.shinemo.openapi.client.dto.meeting.MeetingInviteInfoDTO;
 import retrofit2.Call;
@@ -36,54 +34,18 @@ import java.util.Map;
  */
 public interface MeetingApi {
 
-    /**
-     * 创建会议邀请新接口
-     *
-     * @param headers 基础header参数, accessToken, orgId, uid
-     * @param body    业务数据
-     * @return
-     */
     @POST("meeting/create")
     Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body MeetingInviteDetailDTO body);
 
-    /**
-     * 取消会议新接口
-     *
-     * @param headers   基础header参数, accessToken, orgId, uid
-     * @param meetingId 会议id
-     * @return
-     */
     @POST("meeting/cancel")
-    Call<OpenApiResult<Long>> cancel(@HeaderMap Map<String, String> headers, @Query("meetingId") Long meetingId);
+    Call<OpenApiResult<Void>> cancel(@HeaderMap Map<String, String> headers, @Query("meetingId") Long meetingId);
 
-    /**
-     * 删除会议新接口
-     *
-     * @param headers   基础header参数, accessToken, orgId, uid
-     * @param meetingId 会议id
-     * @return
-     */
     @POST("meeting/delete")
-    Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("meetingId") Long meetingId);
+    Call<OpenApiResult<Void>> delete(@HeaderMap Map<String, String> headers, @Query("meetingId") Long meetingId);
 
-    /**
-     * 修改会议新接口
-     *
-     * @param headers   基础header参数, accessToken, orgId, uid
-     * @param meetingId 会议id
-     * @param detail    会议实体信息
-     * @return
-     */
     @POST("meeting/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Query("meetingId") Long meetingId, @Body MeetingInviteDetailDTO detail);
+    Call<OpenApiResult<Void>> update(@HeaderMap Map<String, String> headers, @Query("meetingId") Long meetingId, @Body MeetingInviteDetailDTO detail);
 
-    /**
-     * 会议邀请详情新接口
-     *
-     * @param headers   基础header参数, accessToken, orgId, uid
-     * @param meetingId 会议id
-     * @return
-     */
     @GET("meeting/detail")
     Call<OpenApiResult<MeetingInviteInfoDTO>> detail(@HeaderMap Map<String, String> headers, @Query("meetingId") Long meetingId);
 

@@ -34,10 +34,10 @@ import java.util.Map;
 public interface NoticeApi {
 
     @POST("notice/publish")
-    Call<OpenApiResult> publish(@HeaderMap Map<String, String> headers, @Body NoticeDTO body);
+    Call<OpenApiResult<Void>> publish(@HeaderMap Map<String, String> headers, @Body NoticeDTO body);
 
     @POST("notice/delete")
-    Call<OpenApiResult> delete(@HeaderMap Map<String, String> headers, @Query("noticeId") int noticeId);
+    Call<OpenApiResult<Void>> delete(@HeaderMap Map<String, String> headers, @Query("noticeId") int noticeId);
 
     @GET("notice/list")
     Call<OpenApiResult<List<NoticeDTO>>> list(@HeaderMap Map<String, String> headers, @Query("startTime") long startTime);

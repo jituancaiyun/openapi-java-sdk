@@ -4,6 +4,10 @@ import com.shinemo.openapi.client.api.RoleApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
+import com.shinemo.openapi.client.dto.role.OrgRole;
+import com.shinemo.openapi.client.dto.role.UserRole;
+
+import java.util.List;
 
 /**
  * 角色
@@ -20,16 +24,16 @@ public interface RoleApiService {
      *
      * @param context  http头信息，包括accessToken、orgSecret、uid等
      * @param noticeId
-     * @return
+     * @return 用户权限
      */
-    OpenApiResult queryById(ApiContext context, int noticeId);
+    OpenApiResult<List<UserRole>> queryById(ApiContext context, int noticeId);
 
     /**
      * 查询角色列表
      *
      * @param context http头信息，包括accessToken、orgSecret、uid等
-     * @return
+     * @return 企业权限列表
      */
-    OpenApiResult list(ApiContext context);
+    OpenApiResult<List<OrgRole>> list(ApiContext context);
 
 }

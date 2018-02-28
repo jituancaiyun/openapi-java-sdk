@@ -18,10 +18,10 @@ public interface DepartmentApi {
     Call<OpenApiResult<Map<String, Long>>> create(@HeaderMap Map<String, String> headers, @Body DeptInfoDTO body);
 
     @POST("department/delete")
-    Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
+    Call<OpenApiResult<Void>> delete(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);
 
     @POST("department/update")
-    Call<OpenApiResult<Long>> update(@HeaderMap Map<String, String> headers, @Body DeptInfoDTO deptInfoDTO);
+    Call<OpenApiResult<Void>> update(@HeaderMap Map<String, String> headers, @Body DeptInfoDTO deptInfoDTO);
 
     @GET("department/detail")
     Call<OpenApiResult<Map<String, DeptInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);

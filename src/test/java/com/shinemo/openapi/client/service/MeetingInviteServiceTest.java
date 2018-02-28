@@ -1,6 +1,5 @@
 package com.shinemo.openapi.client.service;
 
-import com.google.gson.Gson;
 import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
@@ -98,7 +97,7 @@ public class MeetingInviteServiceTest {
             list.add(memberUser);
         }
         detail.setMembers(list);
-        OpenApiResult<Long> result = meetingApiService.update(context,12836L, detail);
+        OpenApiResult<Void> result = meetingApiService.update(context,12836L, detail);
         System.out.println(result);
     }
 
@@ -113,7 +112,7 @@ public class MeetingInviteServiceTest {
 
     @Test
     public void cancel() {
-        OpenApiResult<Long> result = meetingApiService.cancel(context, 12925L);
+        OpenApiResult<Void> result = meetingApiService.cancel(context, 12925L);
         System.out.println(result);
         System.out.println(result.getData());
     }
@@ -127,7 +126,7 @@ public class MeetingInviteServiceTest {
         meetingInviteDTO.setMeetingInviteId(12925L);
         meetingInviteDTO.setRequesterUid("101010012129489");
 //        OpenApiResult<Long> result = meetingApiService.deleteMeeting(context,meetingInviteDTO);
-        OpenApiResult<Long> result = meetingApiService.delete(context, 12839L);
+        OpenApiResult<Void> result = meetingApiService.delete(context, 12839L);
         System.out.println(result);
 //        System.out.println(result.getData());
     }

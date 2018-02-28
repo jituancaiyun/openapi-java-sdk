@@ -39,62 +39,11 @@ import java.util.Map;
 public interface MeetingApiService {
 
     /**
-     * 发起会议邀请
-     *
-     * @param apiContext 基础header参数, accessToken, orgSecret, uid
-     * @param meetingDTO 会议实体
-     * @return MeetingIdDTO 会议ID
-     */
-    @Deprecated
-    OpenApiResult<MeetingIdDTO> createMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
-
-    /**
-     * 取消会议邀请
-     *
-     * @param apiContext 基础header参数, accessToken, orgSecret, uid
-     * @param meetingDTO 会议实体
-     * @return result code
-     */
-    @Deprecated
-    OpenApiResult<Long> cancelMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
-
-
-    /**
-     * 删除会议邀请
-     *
-     * @param apiContext 基础header参数, accessToken, orgSecret, uid
-     * @param meetingDTO 会议实体
-     * @return result code
-     */
-    @Deprecated
-    OpenApiResult<Long> deleteMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
-
-    /**
-     * 修改会议邀请
-     *
-     * @param apiContext 基础header参数, accessToken, orgSecret, uid
-     * @param meetingDTO 会议实体
-     * @return result code
-     */
-    @Deprecated
-    OpenApiResult<Long> updateMeeting(ApiContext apiContext, MeetingInviteDTO meetingDTO);
-
-    /**
-     * 会议邀请详情
-     *
-     * @param apiContext       基础header参数, accessToken, orgSecret, uid
-     * @param meetingInviteDTO 会议信息，包含会议id
-     * @return result code
-     */
-    @Deprecated
-    OpenApiResult<MeetingInviteDTO> getMeeting(ApiContext apiContext, MeetingInviteDTO meetingInviteDTO);
-
-    /**
      * 创建会议新接口
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param detail     会议实体
-     * @return
+     * @return result code
      */
     OpenApiResult<Map<String, Long>> create(ApiContext apiContext, MeetingInviteDetailDTO detail);
 
@@ -103,34 +52,34 @@ public interface MeetingApiService {
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId 会议id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> cancel(ApiContext apiContext, Long meetingId);
+    OpenApiResult<Void> cancel(ApiContext apiContext, Long meetingId);
 
     /**
      * 删除会议新接口
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId 会议id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> delete(ApiContext apiContext, Long meetingId);
+    OpenApiResult<Void> delete(ApiContext apiContext, Long meetingId);
 
     /**
      * 更新会议邀请详情
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId 会议id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> update(ApiContext apiContext, Long meetingId, MeetingInviteDetailDTO detail);
+    OpenApiResult<Void> update(ApiContext apiContext, Long meetingId, MeetingInviteDetailDTO detail);
 
     /**
      * 获取会议详情新接口
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param meetingId  会议id
-     * @return
+     * @return result code
      */
     OpenApiResult<MeetingInviteInfoDTO> detail(ApiContext apiContext, Long meetingId);
 }

@@ -31,6 +31,6 @@ public interface PrivilegeGroupApi {
      * @return
      */
     @POST("privilegeGroup/delete")
-    Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("groupId") Long groupId);
+    Call<OpenApiResult<Void>> delete(@HeaderMap Map<String, String> headers, @Query("groupId") Long groupId);
 
 }

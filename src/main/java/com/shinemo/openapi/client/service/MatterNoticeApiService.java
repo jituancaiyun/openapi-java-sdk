@@ -41,50 +41,51 @@ public interface MatterNoticeApiService {
      *
      * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param teamRemindDetail 个人提醒详情
+     * @return noticeId
      */
     OpenApiResult<Map<String, Long>> create(ApiContext apiContext, TeamRemindDetailDTO teamRemindDetail);
 
     /**
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   告知id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> cancel(ApiContext apiContext, Long noticeId);
+    OpenApiResult<Void> cancel(ApiContext apiContext, Long noticeId);
 
     /**
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> delete(ApiContext apiContext, Long noticeId);
+    OpenApiResult<Void> delete(ApiContext apiContext, Long noticeId);
 
     /**
      * @param apiContext       基础header参数, accessToken, orgSecret, uid
      * @param noticeId         事项告知id
      * @param teamRemindDetail 事项告知详情
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> update(ApiContext apiContext, Long noticeId, TeamRemindDetailDTO teamRemindDetail);
+    OpenApiResult<Void> update(ApiContext apiContext, Long noticeId, TeamRemindDetailDTO teamRemindDetail);
 
     /**
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
-     * @return
+     * @return result code
      */
     OpenApiResult<TeamRemindInfoDTO> detail(ApiContext apiContext, Long noticeId);
 
     /**
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> open(ApiContext apiContext, Long noticeId);
+    OpenApiResult<Void> open(ApiContext apiContext, Long noticeId);
 
     /**
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
      * @param noticeId   事项告知id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> close(ApiContext apiContext, Long noticeId);
+    OpenApiResult<Void> close(ApiContext apiContext, Long noticeId);
 
 }

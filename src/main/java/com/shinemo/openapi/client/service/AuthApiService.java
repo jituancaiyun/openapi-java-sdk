@@ -47,7 +47,7 @@ public interface AuthApiService {
      * @param apiContext 基础header参数, accessToken, orgId, uid
      * @param httpToken  用户身份token由客户端生成
      * @param timestamp  时间戳由客户端生成
-     * @return void
+     * @return result code
      */
     OpenApiResult<Void> checkHttpToken(ApiContext apiContext, String httpToken, long timestamp);
 

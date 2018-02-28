@@ -1,13 +1,10 @@
 package com.shinemo.openapi.client.service;
 
-import com.google.gson.Gson;
 import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.MemberUser;
-import com.shinemo.openapi.client.dto.meeting.MeetingInviteDetailDTO;
-import com.shinemo.openapi.client.dto.meeting.MeetingInviteInfoDTO;
 import com.shinemo.openapi.client.dto.teamremind.TeamRemindDetailDTO;
 import com.shinemo.openapi.client.dto.teamremind.TeamRemindInfoDTO;
 import org.junit.Before;
@@ -100,13 +97,13 @@ public class TeamRemindServiceTest {
             list.add(memberUser);
         }
         detail.setMembers(list);
-        OpenApiResult<Long> result = teamRemindApiService.update(context, 58397L, detail);
+        OpenApiResult<Void> result = teamRemindApiService.update(context, 60471L, detail);
         System.out.println(result);
     }
 
     @Test
     public void detail() {
-        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 60468L);
+        OpenApiResult<TeamRemindInfoDTO> result = teamRemindApiService.detail(context, 60471L);
         System.out.println(result);
         System.out.println(result.getData().getCreator().getIsDelete());
         System.out.println(result.getData().getDetail().getMembers());
@@ -115,7 +112,7 @@ public class TeamRemindServiceTest {
 
     @Test
     public void cancel() {
-        OpenApiResult<Long> result = teamRemindApiService.cancel(context, 58409L);
+        OpenApiResult<Void> result = teamRemindApiService.cancel(context, 60471L);
         System.out.println(result);
         System.out.println(result.getData());
     }
@@ -125,7 +122,7 @@ public class TeamRemindServiceTest {
      */
     @Test
     public void delete() {
-        OpenApiResult<Long> result = teamRemindApiService.delete(context, 58403L);
+        OpenApiResult<Void> result = teamRemindApiService.delete(context, 60471L);
         System.out.println(result);
         System.out.println(result.getData());
     }

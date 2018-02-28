@@ -40,7 +40,7 @@ public interface PrivilegeGroupApiService {
      *
      * @param context 基础header参数, accessToken, orgSecret, uid
      * @param group   权限组信息
-     * @return
+     * @return result code
      */
     OpenApiResult<Map<String, Long>> create(ApiContext context, PrivilegeGroupDTO group);
 
@@ -49,8 +49,8 @@ public interface PrivilegeGroupApiService {
      *
      * @param context 基础header参数, accessToken, orgSecret, uid
      * @param groupId 权限组id
-     * @return
+     * @return result code
      */
-    OpenApiResult<Long> delete(ApiContext context, Long groupId);
+    OpenApiResult<Void> delete(ApiContext context, Long groupId);
 
 }

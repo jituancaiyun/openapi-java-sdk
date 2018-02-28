@@ -1,20 +1,21 @@
 package com.shinemo.openapi.client.service;
 
 import com.shinemo.openapi.client.Apis;
+import com.shinemo.openapi.client.Constants;
 import com.shinemo.openapi.client.common.ApiContext;
 import org.junit.Before;
 import org.junit.Test;
 
 public class WorkTraceApiServiceTest {
     private WorkTraceApiService workTraceApiService;
-    private String orgSecret = "AQApAAAAAAAAAChKAQAAAAAA";//"AQB3AQAAAAAAAKlMAQAAAAAA";
+    private String orgSecret = Constants.OrgSecret.DAILY_SECRET.orgSecret;//"AQB3AQAAAAAAAKlMAQAAAAAA";
 //    private String orgSecret = "AQB3AQAAAAAAAKlMAQAAAAAA";//"AQB3AQAAAAAAAKlMAQAAAAAA";
     private ApiContext context;
 
     @Before
     public void setUp() throws Exception {
 //        Apis.setEnv(1);
-        Apis.setEnv(3);
+        Apis.setEnv(1);
         context = ApiContext.ctx(orgSecret);
         // context = ApiContext.ctx(orgSecret, uid, name);
         workTraceApiService = Apis.createApiService(WorkTraceApiService.class);

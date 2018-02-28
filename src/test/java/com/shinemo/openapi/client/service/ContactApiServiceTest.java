@@ -146,7 +146,7 @@ public class ContactApiServiceTest {
     @Test
     public void contactImport() throws Exception {
         ContactDTO org = new ContactDTO();
-        List<Dept> deptList = new ArrayList<>();
+        List<Dept> deptList = new ArrayList<Dept>();
         Dept dept = new Dept();
         dept.setDeptId("d1");
         dept.setName("新部门");
@@ -156,7 +156,7 @@ public class ContactApiServiceTest {
         user.setMobile("13588200631");
         user.setName("刘远剑");
         user.setSequence(1);
-        List<User> userList = new ArrayList<>();
+        List<User> userList = new ArrayList<User>();
         userList.add(user);
         org.setDeptList(deptList);
         org.setUserList(userList);

@@ -215,7 +215,7 @@ public abstract class IMessage<T extends IMessage> {
      * 设置消息特性, 是否必答消息, 是否需要加密
      *
      * @param flag 是否必答消息, 是否需要加密
-     * @return
+     * @return this
      */
     public T addFlag(int flag) {
         this.flags |= flag;
@@ -226,7 +226,7 @@ public abstract class IMessage<T extends IMessage> {
      * 设置消息发送者ID
      *
      * @param fromId 发送者ID
-     * @return
+     * @return this
      */
     public T setFromId(String fromId) {
         this.fromId = fromId;
@@ -237,7 +237,7 @@ public abstract class IMessage<T extends IMessage> {
      * 设置消息发送者名称
      *
      * @param fromName 发送者名称
-     * @return
+     * @return this
      */
     public T setFromName(String fromName) {
         this.fromName = fromName;
@@ -248,7 +248,7 @@ public abstract class IMessage<T extends IMessage> {
      * 设置接收消息的群ID
      *
      * @param groupId 群ID
-     * @return
+     * @return this
      */
     public T setGroupId(long groupId) {
         this.groupId = groupId;
@@ -258,8 +258,8 @@ public abstract class IMessage<T extends IMessage> {
     /**
      * 消息接收人列表
      *
-     * @param receivers
-     * @return
+     * @param receivers 消息接收人列表
+     * @return this
      */
     public T setReceivers(Collection<String> receivers) {
         this.receivers = receivers;
@@ -269,8 +269,8 @@ public abstract class IMessage<T extends IMessage> {
     /**
      * 设置群id
      *
-     * @param groupId
-     * @return
+     * @param groupId 消息接收人列表
+     * @return this
      */
     public T setGroupId(Long groupId) {
         this.groupId = groupId;
@@ -281,7 +281,7 @@ public abstract class IMessage<T extends IMessage> {
      * 加密消息, 推送提醒内容
      *
      * @param pushTips 可选字段
-     * @return
+     * @return this
      */
     public T setPushTips(String pushTips) {
         this.pushTips = pushTips;

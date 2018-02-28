@@ -33,11 +33,11 @@ import com.shinemo.openapi.client.dto.AccessTokenDTO;
 public interface BaseApiService {
 
     /**
-     * 获取accesstoken
+     * 获取accessToken
      *
-     * @param appId
-     * @param appSecret
-     * @param flags
+     * @param appId     appId
+     * @param appSecret appSecret
+     * @param flags     flags
      * @return AccessToken
      */
     OpenApiResult<AccessTokenDTO> getAccessToken(int appId, String appSecret, int flags);

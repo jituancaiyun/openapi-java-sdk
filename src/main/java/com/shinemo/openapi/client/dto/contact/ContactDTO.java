@@ -6,8 +6,8 @@ import java.util.List;
  * 通讯录导入-企业
  *
  * @author yuanjian
- * @date 1/22/18
- * @email liuyj@shinemo.com
+ * date 1/22/18
+ * email liuyj@shinemo.com
  */
 public class ContactDTO {
 

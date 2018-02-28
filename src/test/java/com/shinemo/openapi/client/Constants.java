@@ -2,8 +2,8 @@ package com.shinemo.openapi.client;
 
 /**
  * @author yuanjian
- * @date 2/27/18
- * @email liuyj@shinemo.com
+ * date 2/27/18
+ * email liuyj@shinemo.com
  */
 public interface Constants {
 

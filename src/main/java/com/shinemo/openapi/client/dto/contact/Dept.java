@@ -4,8 +4,8 @@ package com.shinemo.openapi.client.dto.contact;
  * 导入通讯录-部门
  *
  * @author yuanjian
- * @date 1/22/18
- * @email liuyj@shinemo.com
+ * date 1/22/18
+ * email liuyj@shinemo.com
  */
 public class Dept {
 

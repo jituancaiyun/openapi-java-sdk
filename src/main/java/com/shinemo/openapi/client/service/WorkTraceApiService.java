@@ -10,8 +10,8 @@ import com.shinemo.openapi.client.dto.trace.WorkTracePageDTO;
  * 轨迹
  *
  * @author yuanjian
- * @date 2/1/18
- * @email liuyj@shinemo.com
+ * date 2/1/18
+ * email liuyj@shinemo.com
  */
 @Api(WorkTraceApi.class)
 public interface WorkTraceApiService {

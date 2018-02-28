@@ -150,16 +150,16 @@ public interface ContactApiService {
     /**
      * 通讯录导入
      *
-     * @param apiContext
-     * @param org
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param contactDTO contactDTO
      * @return result code
      */
-    OpenApiResult<Void> contactImport(ApiContext apiContext, ContactDTO org);
+    OpenApiResult<Void> contactImport(ApiContext apiContext, ContactDTO contactDTO);
 
     /**
      * 通讯录导出
      *
-     * @param apiContext
+     * @param apiContext 基础header参数, accessToken, orgId, uid
      * @return 通讯录数据
      */
     OpenApiResult<ContactDTO> contactExport(ApiContext apiContext);

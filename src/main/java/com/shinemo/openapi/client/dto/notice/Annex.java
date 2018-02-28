@@ -4,8 +4,8 @@ package com.shinemo.openapi.client.dto.notice;
  * 公告附件
  *
  * @author yuanjian
- * @date 1/8/18
- * @email liuyj@shinemo.com
+ * date 1/8/18
+ * email liuyj@shinemo.com
  */
 public class Annex {
     private String fileName;

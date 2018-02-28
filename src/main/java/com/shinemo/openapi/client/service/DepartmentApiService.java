@@ -67,9 +67,9 @@ public interface DepartmentApiService {
     /**
      * 获取部门详情
      *
-     * @param apiContext
-     * @param deptId
-     * @return
+     * @param apiContext 基础header参数, accessToken, orgSecret, uid
+     * @param deptId deptId
+     * @return /
      */
     OpenApiResult<Map<String, DeptInfoDTO>> detail(ApiContext apiContext, Long deptId);
 
@@ -86,7 +86,7 @@ public interface DepartmentApiService {
      * 获取部门下用户
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
-     * @param deptId
+     * @param deptId deptId
      * @return 用户列表
      */
     OpenApiResult<Map<String, List<UserInfoDTO>>> userList(ApiContext apiContext, Long deptId);
@@ -95,7 +95,7 @@ public interface DepartmentApiService {
      * 获取当前部门和所有子部门下的用户
      *
      * @param apiContext 基础header参数, accessToken, orgSecret, uid
-     * @param deptId
+     * @param deptId deptId
      * @return 用户列表
      */
     OpenApiResult<Map<String, List<UserInfoDTO>>> userListAll(ApiContext apiContext, Long deptId);

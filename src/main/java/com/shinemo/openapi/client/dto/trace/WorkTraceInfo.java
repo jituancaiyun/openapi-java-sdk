@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 /**
  * @author yuanjian
- * @date 2/1/18
- * @email liuyj@shinemo.com
+ * date 2/1/18
+ * email liuyj@shinemo.com
  */
 public class WorkTraceInfo {
     private long contrailId;

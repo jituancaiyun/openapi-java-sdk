@@ -144,7 +144,7 @@ public final class OpenApiUtils {
     /**
      * 生成一个秘钥并返回
      *
-     * @return
+     * @return AesKey
      */
     public static String randomAesKey() {
         return Base64.getUrlEncoder().encodeToString(SecureRandom.getSeed(16));

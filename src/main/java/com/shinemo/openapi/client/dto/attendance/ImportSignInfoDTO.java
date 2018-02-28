@@ -1,9 +1,10 @@
 package com.shinemo.openapi.client.dto.attendance;
 
 /**
- * @auther yuanjian
- * @create 8/29/17
- * @email liuyj@shinemo.com
+ * @author yuanjian
+ *
+ * create 8/29/17
+ * email liuyj@shinemo.com
  */
 public class ImportSignInfoDTO {
     private int signType;

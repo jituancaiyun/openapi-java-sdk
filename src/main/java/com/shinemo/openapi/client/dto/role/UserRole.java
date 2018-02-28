@@ -7,8 +7,8 @@ import java.util.List;
  * 用户权限
  *
  * @author yuanjian
- * @date 2/27/18
- * @email liuyj@shinemo.com
+ * date 2/27/18
+ * email liuyj@shinemo.com
  */
 public class UserRole {
     private String mobile;

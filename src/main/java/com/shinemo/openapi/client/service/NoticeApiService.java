@@ -13,8 +13,8 @@ import java.util.List;
  * 公告
  *
  * @author yuanjian
- * @date 1/8/18
- * @email liuyj@shinemo.com
+ * date 1/8/18
+ * email liuyj@shinemo.com
  */
 @Api(NoticeApi.class)
 public interface NoticeApiService {

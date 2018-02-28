@@ -4,8 +4,8 @@ package com.shinemo.openapi.client.dto.role;
  * 企业权限列表
  *
  * @author yuanjian
- * @date 2/27/18
- * @email liuyj@shinemo.com
+ * date 2/27/18
+ * email liuyj@shinemo.com
  */
 public class OrgRole {
     private int roleId;

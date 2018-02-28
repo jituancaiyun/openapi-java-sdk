@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * @author yuanjian
- * @date 2017/3/30
+ * date 2017/3/30
  */
 public interface NoticeApi {
 

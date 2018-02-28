@@ -13,8 +13,8 @@ import java.util.Map;
  * 工作轨迹
  *
  * @author yuanjian
- * @date 2/1/18
- * @email liuyj@shinemo.com
+ * date 2/1/18
+ * email liuyj@shinemo.com
  */
 public interface WorkTraceApi {
 

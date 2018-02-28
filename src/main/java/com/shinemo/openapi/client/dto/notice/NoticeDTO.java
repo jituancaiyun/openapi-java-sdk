@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * 公告
  *
  * @author yuanjian
- * @date 1/8/18
- * @email liuyj@shinemo.com
+ * date 1/8/18
+ * email liuyj@shinemo.com
  */
 public class NoticeDTO {
     private long orgId;

@@ -12,9 +12,8 @@ import java.util.List;
 /**
  * 角色
  *
- * @author yuanjian
- * @date 1/10/18
- * @email liuyj@shinemo.com
+ * @author liuyj@shinemo.com
+ * date 1/10/18
  */
 @Api(RoleApi.class)
 public interface RoleApiService {
@@ -23,7 +22,7 @@ public interface RoleApiService {
      * 根据id查询角色信息
      *
      * @param context  http头信息，包括accessToken、orgSecret、uid等
-     * @param noticeId
+     * @param noticeId noticeId
      * @return 用户权限
      */
     OpenApiResult<List<UserRole>> queryById(ApiContext context, int noticeId);

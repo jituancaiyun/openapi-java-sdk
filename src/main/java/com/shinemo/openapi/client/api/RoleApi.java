@@ -15,8 +15,8 @@ import java.util.Map;
  * 角色接口
  *
  * @author yuanjian
- * @date 1/10/18
- * @email liuyj@shinemo.com
+ * date 1/10/18
+ * email liuyj@shinemo.com
  */
 public interface RoleApi {
 

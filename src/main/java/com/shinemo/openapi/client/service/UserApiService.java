@@ -42,36 +42,37 @@ public interface UserApiService {
     /**
      * 新增用户
      *
-     * @param apiContext 基础header参数, accessToken, orgSecret, uid
-     * @return uid
+     * @param apiContext apiContext
+     * @param userDTO userDTO
+     * @return /
      */
     OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserDTO userDTO);
 
     /**
      * 删除用户
      *
-     * @param apiContext
-     * @param uid
-     * @param deptId
-     * @return
+     * @param apiContext apiContext
+     * @param uid        uid
+     * @param deptId     deptId
+     * @return void
      */
     OpenApiResult<Void> delete(ApiContext apiContext, String uid, Long deptId);
 
     /**
      * 更新用户
      *
-     * @param apiContext
-     * @param userDTO
-     * @return uid
+     * @param apiContext apiContext
+     * @param userDTO    userDTO
+     * @return uid uid
      */
     OpenApiResult<Map<String, String>> update(ApiContext apiContext, UserDTO userDTO);
 
     /**
      * 获取用户详情
      *
-     * @param apiContext
-     * @param uid
-     * @param deptId
+     * @param apiContext apiContext
+     * @param uid        uid
+     * @param deptId     deptId
      * @return 用户信息
      */
     OpenApiResult<Map<String, UserInfoDTO>> detail(ApiContext apiContext, String uid, Long deptId);
@@ -79,8 +80,8 @@ public interface UserApiService {
     /**
      * 根据uid查询用户信息
      *
-     * @param apiContext
-     * @param uids
+     * @param apiContext apiContext
+     * @param uids       uids
      * @return 用户信息
      */
     OpenApiResult<Map<String, UserDTO>> getUserInfoByUid(ApiContext apiContext, String uids);
@@ -88,8 +89,8 @@ public interface UserApiService {
     /**
      * 获取用户所在部门列表
      *
-     * @param apiContext
-     * @param uid
+     * @param apiContext apiContext
+     * @param uid        uid
      * @return 部门信息
      */
     OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, String uid);
@@ -97,8 +98,8 @@ public interface UserApiService {
     /**
      * 根据手机号获取用户信息
      *
-     * @param apiContext
-     * @param mobile
+     * @param apiContext apiContext
+     * @param mobile     mobile
      * @return 用户信息
      */
     OpenApiResult<UserDTO> getUserInfoByMobile(ApiContext apiContext, String mobile);
@@ -106,7 +107,7 @@ public interface UserApiService {
     /**
      * 根据手机号获取uid，支持批量
      *
-     * @param apiContext
+     * @param apiContext    apiContext
      * @param mobiles，多个手机号 "," 分隔
      * @return UserMobile列表
      */

@@ -6,8 +6,8 @@ import java.util.Map;
 
 /**
  * @author yuanjian
- * @date 1/24/18
- * @email liuyj@shinemo.com
+ * date 1/24/18
+ * email liuyj@shinemo.com
  */
 public class ContactUserChangeEvent implements CallbackEvent {
 

@@ -2,8 +2,8 @@ package com.shinemo.openapi.client.dto;
 
 /**
  * @author yuanjian
- * @date 1/10/18
- * @email liuyj@shinemo.com
+ * date 1/10/18
+ * email liuyj@shinemo.com
  */
 public class UserMobile {
 

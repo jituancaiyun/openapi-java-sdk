@@ -39,28 +39,28 @@ public interface AttendanceApiService {
     /**
      * 新增考勤数据
      *
-     * @param context http头信息，包括accessToken、orgSecret、uid等
-     * @param body
+     * @param context     http头信息，包括accessToken、orgSecret、uid等
+     * @param signInfoDTO 考勤数据
      * @return result code
      */
-    OpenApiResult<Void> add(ApiContext context, ImportSignInfoDTO body);
+    OpenApiResult<Void> add(ApiContext context, ImportSignInfoDTO signInfoDTO);
 
     /**
      * 批量新增考勤数据
      *
-     * @param context http头信息，包括accessToken、orgSecret、uid等
-     * @param body
+     * @param context      http头信息，包括accessToken、orgSecret、uid等
+     * @param signInfoDTOS 考勤数据
      * @return result code
      */
-    OpenApiResult<Void> importBatch(ApiContext context, List<ImportSignInfoDTO> body);
+    OpenApiResult<Void> importBatch(ApiContext context, List<ImportSignInfoDTO> signInfoDTOS);
 
     /**
      * 查询考勤数据
      *
      * @param context   http头信息，包括accessToken、orgSecret、uid等
-     * @param beginTime
-     * @param endTime
-     * @return
+     * @param beginTime beginTime
+     * @param endTime   endTime
+     * @return 考勤结果
      */
     OpenApiResult<List<SignInfoDTO>> query(ApiContext context, String beginTime, String endTime);
 

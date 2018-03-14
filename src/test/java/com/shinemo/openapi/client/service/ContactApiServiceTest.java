@@ -164,8 +164,32 @@ public class ContactApiServiceTest {
     }
 
     @Test
+    public void contactImportV2() throws Exception {
+        ContactDTO org = new ContactDTO();
+        List<Dept> deptList = new ArrayList<>();
+        Dept dept = new Dept();
+        dept.setDeptId("d1");
+        dept.setName("新部门");
+        dept.setStatus(0);
+        dept.setParentId("0");
+        deptList.add(dept);
+        User user = new User();
+        user.setDeptId("d1");
+        user.setMobile("13588200631");
+        user.setLoginId("13588200631");
+        user.setName("刘远剑");
+        user.setSequence(8);
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        org.setDeptList(deptList);
+        org.setUserList(userList);
+        System.out.println(contactApiService.contactImportV2(context, 8, org));
+    }
+
+    @Test
     public void contactExport() throws Exception {
         System.out.println(contactApiService.contactExport(context));
+        //{"status":0,"data":{"deptList":[{"name":"部门全量1-0312","parentId":"0","deptId":"33","sequence":1},{"name":"部门增量1-0312","parentId":"0","deptId":"34","sequence":2},{"name":"部门增量2-0312","parentId":"0","deptId":"35","sequence":3},{"name":"部门全量2-0312","parentId":"0","deptId":"36","sequence":4}],"userList":[{"name":"刘远剑-全量0312","mobile":"13588200631","email":"bjjtest@126.com","deptId":"33","userId":"101010012129489","sequence":1},{"name":"6665-全量0312","mobile":"14000006665","email":"bjjtest@126.com","deptId":"33","userId":"101010012129953","sequence":2}]}}
     }
 
 }

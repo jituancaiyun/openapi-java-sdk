@@ -48,6 +48,7 @@ public class MessageApiServiceTest {
 
     private ApiContext ctx = new ApiContext().setOrgSecret(Constants.OrgSecret.DAILY_SECRET.orgSecret);
     private List<String> receivers = Arrays.asList("101010012129489"/*, "112093240", "80864", "105824"*/);
+    private List<String> mobileReceivers = Arrays.asList("loginId1"/*, "112093240", "80864", "105824"*/);
 
 
     @Before
@@ -62,11 +63,14 @@ public class MessageApiServiceTest {
         PushMessageDTO messageDTO = IMessage
                 .createAppMessage("我是一条纯文本消息")
                 .setContent("hello")
-                .setReceivers(receivers)
-                .setAppId(92985533)
-                .setOrgId("85161")
+//                .setReceivers(receivers)
+//                .setLoginIdReceivers(mobileReceivers)
+                .setUserIdReceivers(Arrays.asList("userId1"))
+//                .setGroupId(8595312L)
+                .setAppId(81125975)
+                .setOrgId("186808")
                 .setUrlAction("http://www.baidu.com")
-                .setUnreadCount(1)
+//                .setUnreadCount(1)
                 .setTitle("title")
                 .build();
         // 图片消息

@@ -18,7 +18,7 @@ public class TeamRemindDetailDTO {
     private Integer fromSource = 0;
     private String extra = "";
     private ArrayList<MemberUser> members;
-    private ArrayList< Integer > voiceWave;
+    private ArrayList<Integer> voiceWave;
     private Boolean isPushMail = false;
     private Boolean isVoiceRemind = false;
     protected boolean isTimingSend = true;

@@ -18,11 +18,13 @@ public class User {
     private String virtualCode;
     private String virtualCellPhone;
     private String fax;
-    private String deptId;
-    private String userId;
-    private String externalData;
+    private String deptId = "";
+    private String userId = "";
+    private String externalData = "";
     private int sequence;
-    private String jobCode;
+    private String jobCode = "";
+    private int status = 0;
+    private String loginId = "";
 
     public String getName() {
         return name;
@@ -136,6 +138,22 @@ public class User {
         this.jobCode = jobCode;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -151,8 +169,11 @@ public class User {
                 ", deptId='" + deptId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", externalData='" + externalData + '\'' +
-                ", sequence_=" + sequence +
+                ", sequence=" + sequence +
                 ", jobCode='" + jobCode + '\'' +
+                ", status=" + status +
+                ", loginId='" + loginId + '\'' +
                 '}';
     }
+
 }

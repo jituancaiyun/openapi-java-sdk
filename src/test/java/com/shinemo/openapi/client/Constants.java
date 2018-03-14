@@ -10,7 +10,7 @@ public interface Constants {
     enum OrgSecret {
 
         DAILY_SECRET("AQB3AQAAAAAAAKlMAQAAAAAA"),
-        ONLINE_SECRET("");
+        ONLINE_SECRET("AQDRAwEAAAAAALjZAgAAAAAA");
 
         public final String orgSecret;
 

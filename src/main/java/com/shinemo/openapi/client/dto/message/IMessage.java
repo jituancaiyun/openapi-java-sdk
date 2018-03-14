@@ -40,6 +40,11 @@ public abstract class IMessage<T extends IMessage> {
     public static final int FLAG_SMS = 2;//必达
     public static final int FLAG_UNREAD = 4;//未读标识
 
+    public static final int FLAG_RECEIVER_LOGIN_ID = 8;//通过登录id发送消息，一般为手机号
+
+    public static final int FLAG_RECEIVER_USER_ID = 16;//开发者所在业务系统用户id
+
+
     /**
      * 是否需要加密消息
      */
@@ -263,6 +268,18 @@ public abstract class IMessage<T extends IMessage> {
      */
     public T setReceivers(Collection<String> receivers) {
         this.receivers = receivers;
+        return (T) this;
+    }
+
+    public T setLoginIdReceivers(Collection<String> receivers) {
+        this.receivers = receivers;
+        this.flags = this.flags | FLAG_RECEIVER_LOGIN_ID;
+        return (T) this;
+    }
+
+    public T setUserIdReceivers(Collection<String> receivers) {
+        this.receivers = receivers;
+        this.flags = this.flags | FLAG_RECEIVER_USER_ID;
         return (T) this;
     }
 

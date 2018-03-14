@@ -20,7 +20,10 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.*;
+import com.shinemo.openapi.client.dto.ContactDeptDTO;
+import com.shinemo.openapi.client.dto.ContactUserDTO;
+import com.shinemo.openapi.client.dto.DeptIdDTO;
+import com.shinemo.openapi.client.dto.UidDTO;
 import com.shinemo.openapi.client.dto.contact.ContactDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -137,6 +140,9 @@ public interface ContactApi {
 
     @POST("contact/import")
     Call<OpenApiResult<Void>> contactImport(@HeaderMap Map<String, String> headers, @Body ContactDTO org);
+
+    @POST("contact/import")
+    Call<OpenApiResult<Void>> contactImportV2(@HeaderMap Map<String, String> headers, @Query("flags") int flags, @Body ContactDTO org);
 
     @GET("contact/export")
     Call<OpenApiResult<ContactDTO>> contactExport(@HeaderMap Map<String, String> headers);

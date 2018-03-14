@@ -43,7 +43,7 @@ public interface UserApiService {
      * 新增用户
      *
      * @param apiContext apiContext
-     * @param userDTO userDTO
+     * @param userDTO    userDTO
      * @return /
      */
     OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserDTO userDTO);
@@ -76,6 +76,15 @@ public interface UserApiService {
      * @return 用户信息
      */
     OpenApiResult<Map<String, UserInfoDTO>> detail(ApiContext apiContext, String uid, Long deptId);
+
+    /**
+     * 查询用户信息，uid、loginId、userId必须传一个
+     *
+     * @param context apiContext
+     * @param param   动态参数，uid(彩云用户uid)、loginId(用户登录id，一般为手机号)、userId(开发者所在系统内用户id)中的一个
+     * @return 用户信息
+     */
+    OpenApiResult<UserDTO> getUserInfo(ApiContext context, Map<String, String> param);
 
     /**
      * 根据uid查询用户信息

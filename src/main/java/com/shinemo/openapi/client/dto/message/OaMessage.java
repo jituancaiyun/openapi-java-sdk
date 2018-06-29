@@ -164,13 +164,11 @@ public class OaMessage extends IMessage<OaMessage> {
     }
 
     public OaMessage setUrlAction(String url, String param) {
-        if (config == null) throw new OpenApiException("OaMessage.config 不能为空");
-        if (config.appId == null) throw new OpenApiException("config.appId 不能为空");
-        if (config.orgId == null) throw new OpenApiException("config.orgId 不能为空");
-        if (url == null) throw new OpenApiException("url 不能为空");
-
-        Action.ActionData actionData = new Action.OpenUrlActionData(url, param,config.appId,config.orgId);
-        return this.setAction(new Action("native", "openurl", actionData).toAction());
+        if (url != null && url != "") {
+            Action.ActionData actionData = new Action.OpenUrlActionData(url, param,config.appId,config.orgId);
+            return this.setAction(new Action("native", "openurl", actionData).toAction());
+        }
+        return null;
     }
 
     @Override

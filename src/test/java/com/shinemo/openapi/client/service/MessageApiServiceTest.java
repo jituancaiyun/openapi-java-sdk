@@ -27,9 +27,11 @@ import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.PushMessageDTO;
 import com.shinemo.openapi.client.dto.message.EmailMessage;
 import com.shinemo.openapi.client.dto.message.IMessage;
+import com.shinemo.openapi.client.dto.message.OaMessage;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,7 +49,8 @@ public class MessageApiServiceTest {
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
     private ApiContext ctx = new ApiContext().setOrgSecret(Constants.OrgSecret.DAILY_SECRET.orgSecret);
-    private List<String> receivers = Arrays.asList("101010012129489"/*, "112093240", "80864", "105824"*/);
+    private List<String> receivers = Arrays.asList("101010014093913"/*, "112093240", "80864", "105824"*/);
+
 
 
     @Before
@@ -63,12 +66,13 @@ public class MessageApiServiceTest {
                 .createAppMessage("我是一条纯文本消息")
                 .setContent("hello")
                 .setReceivers(receivers)
-                .setAppId(92985533)
+                .setAppId(84716415)
                 .setOrgId("85161")
                 .setUrlAction("http://www.baidu.com")
                 .setUnreadCount(1)
                 .setTitle("title")
                 .build();
+
         // 图片消息
         /*PushMessageDTO messageDTO = IMessage
                 .createImageMessage("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3664202321,2483816645&fm=11&gp=0.jpg")
@@ -198,4 +202,33 @@ public class MessageApiServiceTest {
         OpenApiResult<List<String>> result = messageApiService.sendPushMessage(ctx, messageDTO);
         System.out.println(result);
     }
+
+
+    @Test
+    public void sendOaMessage()throws Exception{
+        List<OaMessage.OaProperties> list = new ArrayList<>();
+        OaMessage.OaProperties oaProperties = new OaMessage.OaProperties();
+        oaProperties.setKey("姓名");
+        oaProperties.setValue("张三");
+        list.add(oaProperties);
+        OaMessage.Config config = new OaMessage.Config();
+        config.setAppId(84716415);
+        config.setOrgId(85161L);
+        config.setUnreadCount(1);
+        PushMessageDTO messageDTO = IMessage
+                .createOaMessage("我是一条纯文本消息")
+                .setIcon("hello")
+                .setTitle("请假")
+                .setSubject("主题")
+                .setSummary("摘要")
+                .setImage("主图片")
+                .setProperties(list)
+                .setAttachment("附件")
+                .setAction("http://")
+                .setConfig(config)
+                .setReceivers(receivers)
+                .build();
+        System.out.println(messageApiService.sendPushMessage(ctx, messageDTO));
+    }
+
 }

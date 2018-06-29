@@ -129,6 +129,15 @@ public abstract class IMessage<T extends IMessage> {
     }
 
     /**
+     * 创建OA消息
+     * @param title
+     * @return
+     */
+    public static OaMessage createOaMessage(String title) {
+        return new OaMessage(title).setTitle(title);
+    }
+
+    /**
      * 创建图文消息
      *
      * @param title 消息标题, 会话列表展示

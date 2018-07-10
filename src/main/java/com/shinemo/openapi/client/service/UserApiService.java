@@ -23,7 +23,7 @@ import com.shinemo.openapi.client.api.UserApi;
 import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.UserMobile;
+import com.shinemo.openapi.client.dto.UserMobileDTO;
 import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import com.shinemo.openapi.client.dto.maillist.UserDTO;
 import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
@@ -111,7 +111,7 @@ public interface UserApiService {
      * @param mobiles，多个手机号 "," 分隔
      * @return UserMobile列表
      */
-    OpenApiResult<List<UserMobile>> getUidByMobile(ApiContext apiContext, String mobiles);
+    OpenApiResult<List<UserMobileDTO>> getUidByMobile(ApiContext apiContext, String mobiles);
 
     @Deprecated
     OpenApiResult<Map<String, List<UserInfoDTO>>> list(ApiContext apiContext, Long deptId);

@@ -10,6 +10,7 @@ package com.shinemo.openapi.client.dto.contact;
 public class User {
 
     private String name;
+    private String loginId;
     private String mobile;
     private String title;
     private String email;
@@ -30,6 +31,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 
     public String getMobile() {

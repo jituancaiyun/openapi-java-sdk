@@ -1,8 +1,5 @@
 package com.shinemo.openapi.client.dto.message;
 
-import com.shinemo.openapi.client.common.OpenApiException;
-import com.shinemo.openapi.client.dto.action.Action;
-
 import java.util.List;
 
 
@@ -164,11 +161,10 @@ public class OaMessage extends IMessage<OaMessage> {
     }
 
     public OaMessage setUrlAction(String url, String param) {
-        if (url != null && url != "") {
-            Action.ActionData actionData = new Action.OpenUrlActionData(url, param,config.appId,config.orgId);
-            return this.setAction(new Action("native", "openurl", actionData).toAction());
+        if (url != null && !url.isEmpty()) {
+            this.setAction(Action.buildOpenUrlAction(url, param, config.appId, config.orgId));
         }
-        return null;
+        return this;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.shinemo.openapi.client.dto.action;
+package com.shinemo.openapi.client.dto.message;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -51,6 +51,11 @@ public class Action {
 
     public String toAction() {
         return scheme + "://" + action + "?data=" + data.toJson();
+    }
+
+    public static String buildOpenUrlAction(String url, String param, int appId, long orgId) {
+        Action.ActionData actionData = new Action.OpenUrlActionData(url, param, appId, orgId);
+        return new Action("native", "openurl", actionData).toAction();
     }
 
 

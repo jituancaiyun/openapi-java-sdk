@@ -3,18 +3,22 @@ package com.shinemo.openapi.client.service;
 import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.Constants;
 import com.shinemo.openapi.client.common.ApiContext;
+import com.shinemo.openapi.client.common.Jsons;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.*;
-import com.shinemo.openapi.client.dto.contact.Dept;
+import com.shinemo.openapi.client.dto.ContactDeptDTO;
+import com.shinemo.openapi.client.dto.ContactUserDTO;
+import com.shinemo.openapi.client.dto.DeptIdDTO;
+import com.shinemo.openapi.client.dto.UidDTO;
 import com.shinemo.openapi.client.dto.contact.ContactDTO;
+import com.shinemo.openapi.client.dto.contact.Dept;
 import com.shinemo.openapi.client.dto.contact.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by ohun on 2017/3/23.
@@ -25,13 +29,13 @@ public class ContactApiServiceTest {
 
     private ContactApiService contactApiService;
 
-    private String orgSecret = Constants.OrgSecret.DAILY_SECRET.orgSecret;
+    private String orgSecret = Constants.OrgSecret.ZHFL_SECRET.orgSecret;
 
     private ApiContext context;
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(1);
+        Apis.setEnv(5);
         contactApiService = Apis.createApiService(ContactApiService.class);
         context = ApiContext.ctx(orgSecret);
     }
@@ -145,9 +149,10 @@ public class ContactApiServiceTest {
 
     @Test
     public void contactImport() throws Exception {
-        ContactDTO org = new ContactDTO();
+        /*ContactDTO org = new ContactDTO();
         List<Dept> deptList = new ArrayList<Dept>();
         Dept dept = new Dept();
+        dept.setParentId("0");
         dept.setDeptId("d1");
         dept.setName("新部门");
         deptList.add(dept);
@@ -159,14 +164,56 @@ public class ContactApiServiceTest {
         List<User> userList = new ArrayList<User>();
         userList.add(user);
         org.setDeptList(deptList);
-        org.setUserList(userList);
+        org.setUserList(userList);*/
+        FileReader fileReader = new FileReader("/Users/apple/Desktop/json.txt");
+        BufferedReader reader = new BufferedReader(fileReader);
+        String line = reader.readLine();
+        ContactDTO org = Jsons.fromJson(line, ContactDTO.class);
+        /*for (User user : org.getUserList()) {
+            if(user.getName() == null){
+                System.out.println(Jsons.toJson(user));
+            }
+            if(user.getMobile() == null || "".equals(user.getMobile())){
+                System.out.println(Jsons.toJson(user));
+            }
+        }*/
+        Map<String, Dept> deptMap = new HashMap<String, Dept>();
+        for (Dept dept : org.getDeptList()) {
+            deptMap.put(dept.getDeptId(), dept);
+        }
+        for (String s : deptMap.keySet()) {
+            if ("0".equals(s)) {
+                System.out.println(Jsons.toJson(deptMap.get(s)));
+                return;
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append(s).append('-');
+            Dept dept1 = deptMap.get(s);
+            while (deptMap.containsKey(s)) {
+                s = dept1.getParentId();
+                Dept dept = deptMap.get(s);
+                if (dept == null) {
+                    break;
+                }
+                if (sb.toString().contains(dept.getDeptId())) {
+                    System.out.println(Jsons.toJson(dept));
+                    break;
+                } else {
+                    s = dept.getDeptId();
+                    dept1 = deptMap.get(s);
+                    sb.append(s).append('-');
+                }
+            }
+        }
         System.out.println(contactApiService.contactImport(context, org));
+
+
     }
 
     @Test
     public void contactImportV2() throws Exception {
         ContactDTO org = new ContactDTO();
-        List<Dept> deptList = new ArrayList<>();
+        List<Dept> deptList = new ArrayList<Dept>();
         Dept dept = new Dept();
         dept.setDeptId("d1");
         dept.setName("新部门");
@@ -179,7 +226,7 @@ public class ContactApiServiceTest {
         user.setLoginId("13588200631");
         user.setName("刘远剑");
         user.setSequence(8);
-        List<User> userList = new ArrayList<>();
+        List<User> userList = new ArrayList<User>();
         userList.add(user);
         org.setDeptList(deptList);
         org.setUserList(userList);
@@ -191,5 +238,6 @@ public class ContactApiServiceTest {
         System.out.println(contactApiService.contactExport(context));
         //{"status":0,"data":{"deptList":[{"name":"部门全量1-0312","parentId":"0","deptId":"33","sequence":1},{"name":"部门增量1-0312","parentId":"0","deptId":"34","sequence":2},{"name":"部门增量2-0312","parentId":"0","deptId":"35","sequence":3},{"name":"部门全量2-0312","parentId":"0","deptId":"36","sequence":4}],"userList":[{"name":"刘远剑-全量0312","mobile":"13588200631","email":"bjjtest@126.com","deptId":"33","userId":"101010012129489","sequence":1},{"name":"6665-全量0312","mobile":"14000006665","email":"bjjtest@126.com","deptId":"33","userId":"101010012129953","sequence":2}]}}
     }
+
 
 }

@@ -17,7 +17,7 @@ public class DepartmentApiServiceTest {
 
     private DepartmentApiService departmentApiService;
     private OpenApiClient client;
-    private String orgId = "AQDaAAAAAAAAAKlMAQAAAAAA";
+    private String orgId = "83040";
     private String uid = "101010011894152";//"101010012129489";//
     private String name = "yuanjian";
     private ApiContext context;
@@ -44,7 +44,7 @@ public class DepartmentApiServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(1);
+        Apis.setEnv(5);
         client = Apis.createClient();
         context = ApiContext.ctx(orgId, uid, name);
         departmentApiService = client.createApiService(DepartmentApiService.class);

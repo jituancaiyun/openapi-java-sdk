@@ -46,14 +46,14 @@ public class MessageApiServiceTest {
     //private ApiContext ctx = new ApiContext("96256");
     //private List<String> receivers = Arrays.asList("181705176", "106176", "80864", "105824", "112093240");
 
-    private ApiContext ctx = new ApiContext().setOrgSecret(Constants.OrgSecret.DAILY_SECRET.orgSecret);
-    private List<String> receivers = Arrays.asList("101010012129489"/*, "112093240", "80864", "105824"*/);
-    private List<String> mobileReceivers = Arrays.asList("loginId1"/*, "112093240", "80864", "105824"*/);
+    private ApiContext ctx = new ApiContext().setOrgSecret("BgAlzQAAAAAAAMIBxbMBAAAA"/*Constants.OrgSecret.DUANMATONG_SECRET.orgSecret*/);
+    private List<String> receivers = Arrays.asList("1030600132083680");//"126468488"); //"1030600181016"/*, "112093240", "80864", "105824"*/);
+//    private List<String> mobileReceivers = Arrays.asList("loginId1"/*, "112093240", "80864", "105824"*/);
 
 
     @Before
     public void setUp() throws Exception {
-        Apis.setEnv(1);
+        Apis.setEnv(7);
         client = Apis.createClient();
         messageApiService = client.createApiService(MessageApiService.class);
     }
@@ -65,8 +65,8 @@ public class MessageApiServiceTest {
                 .setContent("hello")
 //                .setReceivers(receivers)
 //                .setLoginIdReceivers(mobileReceivers)
-                .setUserIdReceivers(Arrays.asList("userId1"))
-//                .setGroupId(8595312L)
+//                .setUserIdReceivers(Arrays.asList("userId1"))
+                .setGroupId(8595312L)
                 .setAppId(81125975)
                 .setOrgId("186808")
                 .setUrlAction("http://www.baidu.com")

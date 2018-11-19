@@ -64,10 +64,23 @@ public final class Apis {
             configuration.setBaseUrl("http://127.0.0.1:8082/platform/");
             configuration.setAppId(20328985);
             configuration.setAppSecret("$e'yVi2_7i_wU_k_jjPX$_Op_ya\\AUKL");
+        } else if (env == 5) {
+            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/api/");
+            configuration.setAppId(3637976);
+            configuration.setAppSecret("2e6bfb5ffb05049b700febbc795a2739");
+        }else if (env == 6) {
+            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/api/");
+            configuration.setAppId(82735395);
+            configuration.setAppSecret("ea9126c4f1650421f4e1c83703f2ea49");
+        }else if (env == 7) {
+            // 达威公车
+            configuration.setBaseUrl("https://openapi.e.uban360.com/platform/api/");
+            configuration.setAppId(72280195);
+            configuration.setAppSecret("991a397d8cc43c6516665af1828360ce");
         } else {
             configuration.setBaseUrl("https://api.open.jituancaiyun.com/openapi/");
-            configuration.setAppId(44878223);
-            configuration.setAppSecret("d6ad456a8ec6c298");// 彩云线上测试
+            configuration.setAppId(92707367);
+            configuration.setAppSecret("e73411429d25257e893b373052130dd2");// 短码通线上
             /*appId为80108056的应用已绑定企业83040*/
             //configuration.setAppId(88734928);
             //configuration.setAppSecret("7a2cca422321cb9945eb39be384afd6f");

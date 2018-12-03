@@ -157,6 +157,16 @@ public interface ContactApiService {
     OpenApiResult<Void> contactImport(ApiContext apiContext, ContactDTO contactDTO);
 
     /**
+     * 通讯录导入
+     *
+     * @param apiContext 基础header参数, accessToken, orgId, uid
+     * @param flags      1部门全量覆盖导入, 2人员全量覆盖导入, 3部门和人员全量覆盖导入, 4部门增量导入, 8人员增量导入, 12部门和人员增量导入
+     * @param contactDTO contactDTO
+     * @return result code
+     */
+    OpenApiResult<Void> contactImportV2(ApiContext apiContext, int flags, ContactDTO contactDTO);
+
+    /**
      * 通讯录导出
      *
      * @param apiContext 基础header参数, accessToken, orgId, uid

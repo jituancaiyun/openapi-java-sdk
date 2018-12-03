@@ -13,6 +13,7 @@ public class Dept {
     private String parentId;
     private String deptId;
     private int sequence;
+    private int status = 0;
 
     public String getName() {
         return name;
@@ -46,6 +47,14 @@ public class Dept {
         this.sequence = sequence;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Dept{" +
@@ -53,6 +62,7 @@ public class Dept {
                 ", parentId='" + parentId + '\'' +
                 ", deptId='" + deptId + '\'' +
                 ", sequence=" + sequence +
+                ", status=" + status +
                 '}';
     }
 }

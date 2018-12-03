@@ -10,6 +10,7 @@ import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +80,14 @@ public class UserApiServiceTest {
         OpenApiResult<Map<String, UserInfoDTO>> result = userApiService.detail(context, "101010012254689", 0L);
         System.out.println(result);
         System.out.println(result.getData().get("user").getWorkPhone());
+    }
+
+    @Test
+    public void getUserInfo() throws Exception {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("userId", "userId1");
+        OpenApiResult<UserDTO> result = userApiService.getUserInfo(context, map);
+        System.out.println(result);
     }
 
     @Test

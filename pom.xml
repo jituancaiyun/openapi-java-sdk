@@ -11,7 +11,7 @@
 
     <groupId>com.jituancaiyun.openapi</groupId>
     <artifactId>openapi-client</artifactId>
-    <version>1.5.2-SNAPSHOT</version>
+    <version>1.5.3-SNAPSHOT</version>
     <name>openapi-java-sdk</name>
     <description>讯盟开放平台java sdk</description>
     <url>http://shinemo.com</url>

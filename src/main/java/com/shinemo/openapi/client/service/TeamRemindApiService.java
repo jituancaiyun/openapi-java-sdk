@@ -55,6 +55,15 @@ public interface TeamRemindApiService {
     OpenApiResult<Void> cancel(ApiContext apiContext, Long teamRemindId);
 
     /**
+     * 撤回团队提醒新接口
+     *
+     * @param apiContext   基础header参数, accessToken, orgSecret, uid
+     * @param teamRemindId 团队提醒id
+     * @return result code
+     */
+    OpenApiResult<Void> revoke(ApiContext apiContext, Long teamRemindId);
+
+    /**
      * 删除团队提醒新接口
      *
      * @param apiContext   基础header参数, accessToken, orgSecret, uid

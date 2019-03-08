@@ -1,6 +1,7 @@
 package com.shinemo.openapi.client.dto.teamremind;
 
 import com.shinemo.openapi.client.dto.MemberUser;
+import com.shinemo.openapi.client.dto.personalremind.RFrequency;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class TeamRemindDetailDTO {
     private String extra = "";
     private ArrayList<MemberUser> members;
     private ArrayList<Integer> voiceWave;
+    protected RFrequency rfrequency;
     private Boolean isPushMail = false;
     private Boolean isVoiceRemind = false;
     protected boolean isTimingSend = true;
@@ -158,6 +160,14 @@ public class TeamRemindDetailDTO {
 
     public void setSendTime(long sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public RFrequency getRfrequency() {
+        return rfrequency;
+    }
+
+    public void setRfrequency(RFrequency rfrequency) {
+        this.rfrequency = rfrequency;
     }
 
     @Override

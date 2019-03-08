@@ -45,7 +45,7 @@ public class PersonalRemindApiServiceTest {
     private OpenApiClient client;
     private String orgId = "AQDaAAAAAAAAAKlMAQAAAAAA";//"84057";
     private String uid = "101010012129489";//"101010011894152";//"101010012129489";
-//    private String name = "yuanjian";
+    //    private String name = "yuanjian";
     private ApiContext context;
 
     @Before
@@ -59,7 +59,7 @@ public class PersonalRemindApiServiceTest {
     @Test
     public void create() throws Exception {
         PersonalRemindDTO personalRemind = new PersonalRemindDTO();
-        personalRemind.setContent("测试每天提醒***" + new Date());
+        personalRemind.setContent("的点点滴滴" + new Date());
         personalRemind.setRemindType(1);
         /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String remindTime = sdf.format(new Date(new Date().getTime() + 1000 * 60 * 2));*/
@@ -72,12 +72,13 @@ public class PersonalRemindApiServiceTest {
         RFrequency rFrequency = new RFrequency();
         rFrequency.setType(1);
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        rFrequency.setRemindTime("0-"+sdf.format(new Date(new Date().getTime() + 10 * 60 * 1000)));
+        rFrequency.setRemindTime("0-" + sdf.format(new Date(new Date().getTime() + 10 * 60 * 1000)));
         personalRemind.setRfrequency(rFrequency);
         personalRemind.setIsVoiceRemind(false);
-
+        context.put("flags", "1");
+        context.put("uid", "13588200631");
         OpenApiResult<Map<String, Long>> result = personalRemindApiService.create(context, personalRemind);
-        System.out.println(result);
+        System.out.println(result);//18190
     }
 
     @Test
@@ -106,7 +107,9 @@ public class PersonalRemindApiServiceTest {
 
     @Test
     public void detail() {
-        long personalRemindId = 18166;
+        long personalRemindId = 18197;
+        context.put("flags", "1");
+        context.put("uid", "13588200631");
         OpenApiResult<PersonalRemindInfoDTO> result = personalRemindApiService.detail(context, personalRemindId);
         System.out.println(result);
     }
@@ -122,7 +125,9 @@ public class PersonalRemindApiServiceTest {
 
     @Test
     public void deletePersonalRemind() {
-        long personalRemindId = 18166L;
+        long personalRemindId = 18198;
+        context.put("flags", "1");
+        context.put("uid", "13588200631");
         OpenApiResult<?> result = personalRemindApiService.delete(context, personalRemindId);
         System.out.println(result);
     }

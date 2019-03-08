@@ -29,7 +29,7 @@ public class ContactApiServiceTest {
 
     private ContactApiService contactApiService;
 
-    private String orgSecret = Constants.OrgSecret.ZHFL_SECRET.orgSecret;
+    private String orgSecret = Constants.OrgSecret.ONLINE_SECRET.orgSecret;
 
     private ApiContext context;
 
@@ -151,12 +151,14 @@ public class ContactApiServiceTest {
     public void contactImport() throws Exception {
         /*ContactDTO org = new ContactDTO();
         List<Dept> deptList = new ArrayList<Dept>();
+        context.put("flags", "12");
         Dept dept = new Dept();
         dept.setParentId("0");
         dept.setDeptId("d1");
         dept.setName("新部门");
         deptList.add(dept);
         User user = new User();
+        user.setUserId("11111");
         user.setDeptId("d1");
         user.setMobile("13588200631");
         user.setName("刘远剑");

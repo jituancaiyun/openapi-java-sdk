@@ -2,7 +2,7 @@ package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.approve.ApprovePageDTO;
-import com.shinemo.openapi.client.dto.approve.OrgTemplateInfos;
+import com.shinemo.openapi.client.dto.approve.ApproveTemplateDTO;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
@@ -18,7 +18,7 @@ import java.util.Map;
 public interface ApproveApi {
 
     @GET("approve/getTemplateIds")
-    Call<OpenApiResult<OrgTemplateInfos>> getTemplateIds(@HeaderMap Map<String, String> headers, @Query("businessType") int businessType);
+    Call<OpenApiResult<ApproveTemplateDTO>> getTemplateIds(@HeaderMap Map<String, String> headers, @Query("businessType") int businessType);
 
     @GET("approve/query")
     Call<OpenApiResult<ApprovePageDTO>> query(@HeaderMap Map<String, String> headers,

@@ -8,14 +8,14 @@ import java.util.List;
  *
  * @author liuyj@shinemo.com
  */
-public class OrgTemplateInfos {
-    private List<OrgTemplateInfo> otbInfos;
+public class ApproveTemplateDTO {
+    private List<ApproveTemplateInfo> otbInfos;
 
-    public List<OrgTemplateInfo> getOtbInfos() {
+    public List<ApproveTemplateInfo> getOtbInfos() {
         return otbInfos;
     }
 
-    public void setOtbInfos(List<OrgTemplateInfo> otbInfos) {
+    public void setOtbInfos(List<ApproveTemplateInfo> otbInfos) {
         this.otbInfos = otbInfos;
     }
 }

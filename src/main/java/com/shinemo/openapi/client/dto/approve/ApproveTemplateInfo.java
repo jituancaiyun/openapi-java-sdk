@@ -6,7 +6,7 @@ package com.shinemo.openapi.client.dto.approve;
  *
  * @author liuyj@shinemo.com
  */
-public class OrgTemplateInfo {
+public class ApproveTemplateInfo {
     private Long templateId;
     private String templateName;
     private Integer businessType;

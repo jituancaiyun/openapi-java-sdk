@@ -5,7 +5,7 @@ import com.shinemo.openapi.client.Constants;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.approve.ApprovePageDTO;
-import com.shinemo.openapi.client.dto.approve.OrgTemplateInfos;
+import com.shinemo.openapi.client.dto.approve.ApproveTemplateDTO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class ApproveApiServiceTest {
 
     @Test
     public void getTemplateIds() {
-        OpenApiResult<OrgTemplateInfos> templateIds = approveApiService.getTemplateIds(context, 0);
+        OpenApiResult<ApproveTemplateDTO> templateIds = approveApiService.getTemplateIds(context, 0);
         System.out.println(templateIds);
     }
 

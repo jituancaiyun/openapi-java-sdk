@@ -5,7 +5,7 @@ import com.shinemo.openapi.client.common.Api;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.approve.ApprovePageDTO;
-import com.shinemo.openapi.client.dto.approve.OrgTemplateInfos;
+import com.shinemo.openapi.client.dto.approve.ApproveTemplateDTO;
 
 /**
  * Created by yuanjian on 3/8/19
@@ -21,7 +21,7 @@ public interface ApproveApiService {
      * @param businessType 业务类型, 0查询所有
      * @return
      */
-    OpenApiResult<OrgTemplateInfos> getTemplateIds(ApiContext context, int businessType);
+    OpenApiResult<ApproveTemplateDTO> getTemplateIds(ApiContext context, int businessType);
 
     /**
      * 分页查询审批列表

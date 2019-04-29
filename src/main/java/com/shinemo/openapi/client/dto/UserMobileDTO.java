@@ -5,7 +5,7 @@ package com.shinemo.openapi.client.dto;
  * date 1/10/18
  * email liuyj@shinemo.com
  */
-public class UserMobile {
+public class UserMobileDTO {
 
     private long uid;
     private String mobile;

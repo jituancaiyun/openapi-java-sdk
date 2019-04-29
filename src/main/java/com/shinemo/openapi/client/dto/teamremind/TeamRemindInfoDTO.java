@@ -7,6 +7,9 @@ import com.shinemo.openapi.client.dto.CreateUserDTO;
  */
 public class TeamRemindInfoDTO {
     private CreateUserDTO creator = new CreateUserDTO();
+    /**
+     * 0:未推送, 1.已推送, 2.已取消, 4.团队通知撤回
+     */
     private Integer status;
     private TeamRemindDetailDTO detail = new TeamRemindDetailDTO();
 

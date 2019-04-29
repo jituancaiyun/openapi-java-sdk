@@ -20,7 +20,7 @@
 package com.shinemo.openapi.client.api;
 
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.UserMobile;
+import com.shinemo.openapi.client.dto.UserMobileDTO;
 import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import com.shinemo.openapi.client.dto.maillist.UserDTO;
 import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
@@ -68,7 +68,7 @@ public interface UserApi {
     Call<OpenApiResult<UserDTO>> getUserInfoByMobile(@HeaderMap Map<String, String> headers, @Query("mobile") String mobile);
 
     @GET("user/getUidByMobile")
-    Call<OpenApiResult<List<UserMobile>>> getUidByMobile(@HeaderMap Map<String, String> headers, @Query("mobile") String mobiles);
+    Call<OpenApiResult<List<UserMobileDTO>>> getUidByMobile(@HeaderMap Map<String, String> headers, @Query("mobile") String mobiles);
 
     @GET("department/userList")
     Call<OpenApiResult<Map<String, List<UserInfoDTO>>>> list(@HeaderMap Map<String, String> headers, @Query("deptId") Long deptId);

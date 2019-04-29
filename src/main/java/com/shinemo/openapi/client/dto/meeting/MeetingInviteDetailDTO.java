@@ -1,7 +1,6 @@
 package com.shinemo.openapi.client.dto.meeting;
 
 import com.shinemo.openapi.client.dto.MemberUser;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 public class MeetingInviteDetailDTO {
     private String content;
     private String voiceUrl;
-    private int voiceLength;
+    private Integer voiceLength;
     private String address;
     private Long beginTime;
     private Integer remindMin;
@@ -21,9 +20,21 @@ public class MeetingInviteDetailDTO {
     private ArrayList<MemberUser> members;
     private ArrayList<Integer> voiceWave;
     private ArrayList<MeetingSignMember> signMembers;
-    private Boolean isPushMail = false;
-    private Integer comments = 0;
-    private Integer signs = 0;
+    private boolean isPushMail;
+    private Integer comments;
+    private Integer signs;
+    private boolean isVoiceRemind;
+    private Long meetingRoomId;
+    private Long roomOrgId;
+    private Long roomAddrId;
+    private String roomName;
+    private Integer meetRoomApproveStatus;
+    private String approveId;
+    private ArrayList<MemberUser> meetrecoeders;
+    private boolean bmeetneed;
+    private boolean bleaveopen;
+    private Long orgId;
+    private Integer isPermitOtherSign;
 
     public String getContent() {
         return content;
@@ -41,11 +52,11 @@ public class MeetingInviteDetailDTO {
         this.voiceUrl = voiceUrl;
     }
 
-    public int getVoiceLength() {
+    public Integer getVoiceLength() {
         return voiceLength;
     }
 
-    public void setVoiceLength(int voiceLength) {
+    public void setVoiceLength(Integer voiceLength) {
         this.voiceLength = voiceLength;
     }
 
@@ -121,12 +132,12 @@ public class MeetingInviteDetailDTO {
         this.signMembers = signMembers;
     }
 
-    public Boolean getIsPushMail() {
+    public boolean isPushMail() {
         return isPushMail;
     }
 
-    public void setIsPushMail(Boolean isPushMail) {
-        this.isPushMail = isPushMail;
+    public void setPushMail(boolean pushMail) {
+        isPushMail = pushMail;
     }
 
     public Integer getComments() {
@@ -145,20 +156,160 @@ public class MeetingInviteDetailDTO {
         this.signs = signs;
     }
 
+    public boolean isVoiceRemind() {
+        return isVoiceRemind;
+    }
+
+    public void setVoiceRemind(boolean voiceRemind) {
+        isVoiceRemind = voiceRemind;
+    }
+
+    public Long getMeetingRoomId() {
+        return meetingRoomId;
+    }
+
+    public void setMeetingRoomId(Long meetingRoomId) {
+        this.meetingRoomId = meetingRoomId;
+    }
+
+    public Long getRoomOrgId() {
+        return roomOrgId;
+    }
+
+    public void setRoomOrgId(Long roomOrgId) {
+        this.roomOrgId = roomOrgId;
+    }
+
+    public Long getRoomAddrId() {
+        return roomAddrId;
+    }
+
+    public void setRoomAddrId(Long roomAddrId) {
+        this.roomAddrId = roomAddrId;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public Integer getMeetRoomApproveStatus() {
+        return meetRoomApproveStatus;
+    }
+
+    public void setMeetRoomApproveStatus(Integer meetRoomApproveStatus) {
+        this.meetRoomApproveStatus = meetRoomApproveStatus;
+    }
+
+    public String getApproveId() {
+        return approveId;
+    }
+
+    public void setApproveId(String approveId) {
+        this.approveId = approveId;
+    }
+
+    public ArrayList<MemberUser> getMeetrecoeders() {
+        return meetrecoeders;
+    }
+
+    public void setMeetrecoeders(ArrayList<MemberUser> meetrecoeders) {
+        this.meetrecoeders = meetrecoeders;
+    }
+
+    public boolean isBmeetneed() {
+        return bmeetneed;
+    }
+
+    public void setBmeetneed(boolean bmeetneed) {
+        this.bmeetneed = bmeetneed;
+    }
+
+    public boolean isBleaveopen() {
+        return bleaveopen;
+    }
+
+    public void setBleaveopen(boolean bleaveopen) {
+        this.bleaveopen = bleaveopen;
+    }
+
+    public Long getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
+    }
+
+    public Integer getIsPermitOtherSign() {
+        return isPermitOtherSign;
+    }
+
+    public void setIsPermitOtherSign(Integer isPermitOtherSign) {
+        this.isPermitOtherSign = isPermitOtherSign;
+    }
+
     @Override
     public String toString() {
-        return "MeetingInviteDetail{" +
-                "content='" + content + '\'' +
-                ", voiceUrl='" + voiceUrl + '\'' +
-                ", voiceLength=" + voiceLength +
-                ", address='" + address + '\'' +
-                ", beginTime=" + beginTime +
-                ", remindMin=" + remindMin +
-                ", endTime=" + endTime +
-                ", createTime=" + createTime +
-                ", remindType=" + remindType +
-                ", members=" + members +
-                ", comments=" + comments +
-                '}';
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"content\":\"")
+                .append(content).append('\"');
+        sb.append(",\"voiceUrl\":\"")
+                .append(voiceUrl).append('\"');
+        sb.append(",\"voiceLength\":")
+                .append(voiceLength);
+        sb.append(",\"address\":\"")
+                .append(address).append('\"');
+        sb.append(",\"beginTime\":")
+                .append(beginTime);
+        sb.append(",\"remindMin\":")
+                .append(remindMin);
+        sb.append(",\"endTime\":")
+                .append(endTime);
+        sb.append(",\"createTime\":")
+                .append(createTime);
+        sb.append(",\"remindType\":")
+                .append(remindType);
+        sb.append(",\"members\":")
+                .append(members);
+        sb.append(",\"voiceWave\":")
+                .append(voiceWave);
+        sb.append(",\"signMembers\":")
+                .append(signMembers);
+        sb.append(",\"isPushMail\":")
+                .append(isPushMail);
+        sb.append(",\"comments\":")
+                .append(comments);
+        sb.append(",\"signs\":")
+                .append(signs);
+        sb.append(",\"isVoiceRemind\":")
+                .append(isVoiceRemind);
+        sb.append(",\"meetingRoomId\":")
+                .append(meetingRoomId);
+        sb.append(",\"roomOrgId\":")
+                .append(roomOrgId);
+        sb.append(",\"roomAddrId\":")
+                .append(roomAddrId);
+        sb.append(",\"roomName\":\"")
+                .append(roomName).append('\"');
+        sb.append(",\"meetRoomApproveStatus\":")
+                .append(meetRoomApproveStatus);
+        sb.append(",\"approveId\":\"")
+                .append(approveId).append('\"');
+        sb.append(",\"meetrecoeders\":")
+                .append(meetrecoeders);
+        sb.append(",\"bmeetneed\":")
+                .append(bmeetneed);
+        sb.append(",\"bleaveopen\":")
+                .append(bleaveopen);
+        sb.append(",\"orgId\":")
+                .append(orgId);
+        sb.append(",\"isPermitOtherSign\":")
+                .append(isPermitOtherSign);
+        sb.append('}');
+        return sb.toString();
     }
 }

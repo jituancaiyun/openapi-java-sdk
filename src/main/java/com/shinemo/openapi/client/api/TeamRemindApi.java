@@ -56,6 +56,16 @@ public interface TeamRemindApi {
     Call<OpenApiResult<Void>> cancel(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId);
 
     /**
+     * 撤回团队提醒新接口
+     *
+     * @param headers      基础header参数, accessToken, orgId, uid
+     * @param teamRemindId 团队提醒id
+     * @return
+     */
+    @POST("teamremind/revoke")
+    Call<OpenApiResult<Void>> revoke(@HeaderMap Map<String, String> headers, @Query("teamRemindId") Long teamRemindId);
+
+    /**
      * 删除团队提醒新接口
      *
      * @param headers      基础header参数, accessToken, orgId, uid

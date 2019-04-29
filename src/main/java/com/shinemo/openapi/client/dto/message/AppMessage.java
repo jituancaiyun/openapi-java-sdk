@@ -22,9 +22,6 @@ package com.shinemo.openapi.client.dto.message;
 import com.shinemo.openapi.client.common.OpenApiException;
 import com.shinemo.openapi.client.common.OpenApiUtils;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 /**
  * Created by ohun on 2017/4/11.
  *
@@ -97,8 +94,8 @@ public class AppMessage extends IMessage<AppMessage> {
         return action;
     }
 
-    public AppMessage setAction(Action action) {
-        this.action = action.toAction();
+    public AppMessage setAction(String action) {
+        this.action = action;
         return this;
     }
 
@@ -111,8 +108,7 @@ public class AppMessage extends IMessage<AppMessage> {
         if (orgId == null) throw new OpenApiException("AppMessage.orgId 不能为空");
         if (url == null) throw new OpenApiException("url 不能为空");
 
-        ActionData actionData = new OpenUrlActionData(url, param);
-        return this.setAction(new Action("native", "openurl", actionData));
+        return this.setAction(Action.buildOpenUrlAction(url, param, appId, orgId));
     }
 
     public String getTitle() {
@@ -173,128 +169,6 @@ public class AppMessage extends IMessage<AppMessage> {
     @Override
     public byte type() {
         return 18;
-    }
-
-
-    public static class Action {
-        private String scheme;
-        private String action;
-        private ActionData data;
-
-        public Action() {
-        }
-
-        public Action(String scheme, String action, ActionData data) {
-            this.scheme = scheme;
-            this.action = action;
-            this.data = data;
-        }
-
-
-        public String getScheme() {
-            return scheme;
-        }
-
-        public void setScheme(String scheme) {
-            this.scheme = scheme;
-        }
-
-        public String getAction() {
-            return action;
-        }
-
-        public void setAction(String action) {
-            this.action = action;
-        }
-
-        public ActionData getData() {
-            return data;
-        }
-
-        public void setData(ActionData data) {
-            this.data = data;
-        }
-
-
-        public String toAction() {
-            return scheme + "://" + action + "?data=" + data.toJson();
-        }
-    }
-
-    public static abstract class ActionData {
-        public abstract String toJson();
-    }
-
-    public class OpenUrlActionData extends ActionData {
-        private String url;
-        private String param;
-        private int token = 1;
-        private int cookie = 0;
-        private int noDefaultMenu = 0;
-
-        public OpenUrlActionData() {
-        }
-
-        public OpenUrlActionData(String url, String param) {
-            this.url = url;
-            this.param = param;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public String getParam() {
-            return param;
-        }
-
-        public void setParam(String param) {
-            this.param = param;
-        }
-
-        public int getToken() {
-            return token;
-        }
-
-        public void setToken(int token) {
-            this.token = token;
-        }
-
-        public int getCookie() {
-            return cookie;
-        }
-
-        public void setCookie(int cookie) {
-            this.cookie = cookie;
-        }
-
-        public int getNoDefaultMenu() {
-            return noDefaultMenu;
-        }
-
-        public void setNoDefaultMenu(int noDefaultMenu) {
-            this.noDefaultMenu = noDefaultMenu;
-        }
-
-        @Override
-        public String toJson() {
-            String json = "{\"url\":\"" + url
-                    + "\",\"param\":\"" + (param == null || param.isEmpty() ? ("orgid=" + orgId) : (param + "&orgid=" + orgId))
-                    + "\",\"appid\":" + appId
-                    + ",\"token\":" + token
-                    + ",\"cookie\":" + cookie
-                    + ",\"noDefaultMenu\":" + noDefaultMenu
-                    + "}";
-            try {
-                return URLEncoder.encode(json, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-            }
-            return json;
-        }
     }
 
     @Override

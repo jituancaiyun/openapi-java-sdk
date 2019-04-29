@@ -25,6 +25,7 @@ import com.shinemo.openapi.client.OpenApiClient;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.MemberUser;
+import com.shinemo.openapi.client.dto.personalremind.RFrequency;
 import com.shinemo.openapi.client.dto.teamremind.TeamRemindDetailDTO;
 import com.shinemo.openapi.client.dto.teamremind.TeamRemindInfoDTO;
 import org.junit.Before;
@@ -43,8 +44,8 @@ public class MatterNoticeApiServiceTest {
 
     private MatterNoticeApiService matterNoticeApiService;
     private OpenApiClient client;
-    private String orgSecret = Constants.OrgSecret.DAILY_SECRET.orgSecret;
-    private String uid = "101010012129489";
+    private String orgSecret = "AQB3AQAAAAAAAKlMAQAAAAAA";//Constants.OrgSecret.DAILY_SECRET.orgSecret;
+    private String uid = "13645720521";
     private String name = "yuanjian";
     private ApiContext context;
 
@@ -78,12 +79,17 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void createMatterNotice() throws Exception {
+        context.put("flags", "1");
         TeamRemindDetailDTO teamRemindDetail = new TeamRemindDetailDTO();
-        teamRemindDetail.setContent("测试事项告知，" + new Date());
+        teamRemindDetail.setContent("哈哈，" + new Date());
         teamRemindDetail.setRemindType(RemindType.APPANDSMS_SEND.getType());
         teamRemindDetail.setRemindTime(new Date().getTime() + 1000 * 60 * 1);
         teamRemindDetail.setIsVoiceRemind(false);
-        String[] receivers = {"101010012129489", "101010011894152"};//
+        RFrequency rFrequency = new RFrequency();
+        rFrequency.setType(1);
+        rFrequency.setRemindTime("0-120000");
+        teamRemindDetail.setRfrequency(rFrequency);
+        String[] receivers = {"13588200631","13645720521"};//
         ArrayList<MemberUser> list = new ArrayList<MemberUser>();
         for (int i = 0; i < receivers.length; i++) {
             MemberUser memberUser = new MemberUser();
@@ -120,7 +126,7 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void getMatterNoticeDetail() {
-        long personalRemindId = 60470L;
+        long personalRemindId = 61323;
         OpenApiResult<TeamRemindInfoDTO> result = matterNoticeApiService.detail(context, personalRemindId);
         System.out.println(result);
         System.out.println(result.getData());
@@ -135,7 +141,7 @@ public class MatterNoticeApiServiceTest {
 
     @Test
     public void deleteMatterNotice() {
-        long personalRemindId = 60470L;
+        long personalRemindId = 61291L;
         OpenApiResult<Void> result = matterNoticeApiService.delete(context, personalRemindId);
         System.out.println(result);
     }

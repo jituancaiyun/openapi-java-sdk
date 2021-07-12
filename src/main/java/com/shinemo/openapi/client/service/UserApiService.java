@@ -43,10 +43,10 @@ public interface UserApiService {
      * 新增用户
      *
      * @param apiContext apiContext
-     * @param userDTO    userDTO
+     * @param user       userDTO
      * @return /
      */
-    OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserDTO userDTO);
+    OpenApiResult<Map<String, String>> add(ApiContext apiContext, UserInfoDTO user);
 
     /**
      * 删除用户
@@ -65,7 +65,7 @@ public interface UserApiService {
      * @param userDTO    userDTO
      * @return uid uid
      */
-    OpenApiResult<Map<String, String>> update(ApiContext apiContext, UserDTO userDTO);
+    OpenApiResult<Map<String, String>> update(ApiContext apiContext, UserInfoDTO userDTO);
 
     /**
      * 获取用户详情
@@ -102,7 +102,7 @@ public interface UserApiService {
      * @param uid        uid
      * @return 部门信息
      */
-    OpenApiResult<Map<String, List<DeptInfoDTO>>> deptList(ApiContext apiContext, String uid);
+    OpenApiResult<List<DeptInfoDTO>> deptList(ApiContext apiContext, String uid);
 
     /**
      * 根据手机号获取用户信息

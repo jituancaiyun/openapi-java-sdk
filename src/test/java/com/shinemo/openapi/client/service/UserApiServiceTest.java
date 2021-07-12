@@ -35,7 +35,7 @@ public class UserApiServiceTest {
 
     @Test
     public void add() {
-        UserDTO userDTO = new UserDTO();
+        UserInfoDTO userDTO = new UserInfoDTO();
         userDTO.setUserName("测试个人权限priiii好久好久好久环境");
 //        userDTO.setTitle("测试");
         userDTO.setMobile("13588200632");
@@ -61,7 +61,7 @@ public class UserApiServiceTest {
 
     @Test
     public void update() {
-        UserDTO userDTO = new UserDTO();
+        UserInfoDTO userDTO = new UserInfoDTO();
         userDTO.setUserName("测试个人权限pri2");
 //        userDTO.setTitle("测试");
 //        userDTO.setMobile("13600000002");

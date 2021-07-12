@@ -1,11 +1,15 @@
 package com.shinemo.openapi.client.dto.maillist;
 
+import java.util.ArrayList;
+
 /**
  * Created by yuanjian on 6/12/17.
  */
 public class UserInfoDTO {
     private String id;
+    private String uid;
     private String name;
+    private String userName;
     private String mobile;
     private String title;
     private Long orgId;
@@ -17,9 +21,29 @@ public class UserInfoDTO {
     private String email;
     private String fax;
     private Long deptId;
-    private String externalId = "";
-    private String externalData = "";
+    private String externalId;
+    private String externalData;
     private String privilege;
+    private String jobCode;
+    private String loginId;
+    private String deptName;
+    private ArrayList<Long> allDeptIds;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getId() {
         return id;
@@ -149,22 +173,63 @@ public class UserInfoDTO {
         this.privilege = privilege;
     }
 
+    public String getJobCode() {
+        return jobCode;
+    }
+
+    public void setJobCode(String jobCode) {
+        this.jobCode = jobCode;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public ArrayList<Long> getAllDeptIds() {
+        return allDeptIds;
+    }
+
+    public void setAllDeptIds(ArrayList<Long> allDeptIds) {
+        this.allDeptIds = allDeptIds;
+    }
+
     @Override
     public String toString() {
         return "UserInfoDTO{" +
                 "id='" + id + '\'' +
+                ", uid='" + uid + '\'' +
                 ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", title='" + title + '\'' +
                 ", orgId=" + orgId +
                 ", sequence=" + sequence +
                 ", isAdmin=" + isAdmin +
                 ", workPhone='" + workPhone + '\'' +
+                ", virtualCode='" + virtualCode + '\'' +
+                ", shortNum='" + shortNum + '\'' +
                 ", email='" + email + '\'' +
+                ", fax='" + fax + '\'' +
                 ", deptId=" + deptId +
                 ", externalId='" + externalId + '\'' +
                 ", externalData='" + externalData + '\'' +
                 ", privilege='" + privilege + '\'' +
-                "}\n";
+                ", jobCode='" + jobCode + '\'' +
+                ", loginId='" + loginId + '\'' +
+                ", deptName='" + deptName + '\'' +
+                ", allDeptIds=" + allDeptIds +
+                '}';
     }
 }

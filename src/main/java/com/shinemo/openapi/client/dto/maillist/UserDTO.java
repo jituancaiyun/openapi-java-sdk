@@ -4,47 +4,17 @@ package com.shinemo.openapi.client.dto.maillist;
  * Created by yuanjian on 6/12/17.
  */
 public class UserDTO {
-    private String uid;
-    private String name;
-    private String userName;
+    private long uid;
     private String mobile;
-    private Long id;
-    private Integer isAdmin;
-    private Long deptId;
-    private String deptName;
-    private Long oldDeptId;
-    private String title;
-    private Long orgId;
-    private Integer sequence;
-    private String workPhone;
-    private String externalId = "";
-    private String externalData = "";
-    private String privilege = "";
-    private String email;
-    private Boolean isallowlogin;
+    private String name;
+    private JobGrade jobGrade;
 
-    public String getUid() {
+    public long getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid(long uid) {
         this.uid = uid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getMobile() {
@@ -55,139 +25,68 @@ public class UserDTO {
         this.mobile = mobile;
     }
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getIsAdmin() {
-        return isAdmin;
+    public JobGrade getJobGrade() {
+        return jobGrade;
     }
 
-    public void setIsAdmin(Integer isAdmin) {
-        this.isAdmin = isAdmin;
-    }
-
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
-    public Long getOldDeptId() {
-        return oldDeptId;
-    }
-
-    public void setOldDeptId(Long oldDeptId) {
-        this.oldDeptId = oldDeptId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getOrgId() {
-        return orgId;
-    }
-
-    public void setOrgId(Long orgId) {
-        this.orgId = orgId;
-    }
-
-    public Integer getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(Integer sequence) {
-        this.sequence = sequence;
-    }
-
-    public String getWorkPhone() {
-        return workPhone;
-    }
-
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
-    }
-
-    public String getExternalId() {
-        return externalId;
-    }
-
-    public void setExternalId(String externalId) {
-        this.externalId = externalId;
-    }
-
-    public String getExternalData() {
-        return externalData;
-    }
-
-    public void setExternalData(String externalData) {
-        this.externalData = externalData;
-    }
-
-    public String getPrivilege() {
-        return privilege;
-    }
-
-    public void setPrivilege(String privilege) {
-        this.privilege = privilege;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Boolean getIsallowlogin() {
-        return isallowlogin;
-    }
-
-    public void setIsallowlogin(Boolean isallowlogin) {
-        this.isallowlogin = isallowlogin;
+    public void setJobGrade(JobGrade jobGrade) {
+        this.jobGrade = jobGrade;
     }
 
     @Override
     public String toString() {
         return "UserDTO{" +
-                "uid='" + uid + '\'' +
-                ", name='" + name + '\'' +
-                ", userName='" + userName + '\'' +
+                "uid=" + uid +
                 ", mobile='" + mobile + '\'' +
-                ", id=" + id +
-                ", isAdmin=" + isAdmin +
-                ", deptId=" + deptId +
-                ", deptName='" + deptName + '\'' +
-                ", oldDeptId=" + oldDeptId +
-                ", title='" + title + '\'' +
-                ", orgId=" + orgId +
-                ", sequence=" + sequence +
-                ", workPhone='" + workPhone + '\'' +
-                ", externalId='" + externalId + '\'' +
-                ", externalData='" + externalData + '\'' +
-                ", privilege='" + privilege + '\'' +
-                ", email='" + email + '\'' +
-                ", isallowlogin=" + isallowlogin +
+                ", name='" + name + '\'' +
+                ", jobGrade=" + jobGrade +
                 '}';
+    }
+
+    public static class JobGrade {
+        private long id;
+        private String name;
+        private int level;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getLevel() {
+            return level;
+        }
+
+        public void setLevel(int level) {
+            this.level = level;
+        }
+
+        @Override
+        public String toString() {
+            return "JobGrade{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", level=" + level +
+                    '}';
+        }
     }
 }

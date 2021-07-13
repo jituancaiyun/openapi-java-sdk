@@ -21,7 +21,7 @@ public interface ApproveApi {
     Call<OpenApiResult<ApproveTemplateDTO>> getTemplateIds(@HeaderMap Map<String, String> headers, @Query("businessType") int businessType);
 
     @GET("approve/query")
-    Call<OpenApiResult<ApprovePageDTO>> query(@HeaderMap Map<String, String> headers,
+    Call<OpenApiResult<Map<String, Object>>> query(@HeaderMap Map<String, String> headers,
                                               @Query("templateIds") String templateIds,
                                               @Query("status") int status,
                                               @Query("beginTime") long beginTime,

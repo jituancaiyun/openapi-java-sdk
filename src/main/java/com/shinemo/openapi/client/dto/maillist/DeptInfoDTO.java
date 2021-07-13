@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * Created by yuanjian on 6/7/17.
  */
 public class DeptInfoDTO {
-    private Long id;
     private Long parentId;
     private String name;
     private int order;
@@ -82,14 +81,6 @@ public class DeptInfoDTO {
         this.parentIds = parentIds;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Long getParentId() {
         return parentId;
     }
@@ -109,7 +100,6 @@ public class DeptInfoDTO {
     @Override
     public String toString() {
         return "DeptInfoDTO{" +
-                "id=" + id +
                 ", parentId=" + parentId +
                 ", name='" + name + '\'' +
                 ", order=" + order +

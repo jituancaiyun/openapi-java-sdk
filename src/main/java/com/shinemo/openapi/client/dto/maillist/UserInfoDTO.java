@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class UserInfoDTO {
     private String id;
     private String uid;
-    private String name;
     private String userName;
     private String mobile;
     private String title;
@@ -51,14 +50,6 @@ public class UserInfoDTO {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getMobile() {
@@ -210,7 +201,6 @@ public class UserInfoDTO {
         return "UserInfoDTO{" +
                 "id='" + id + '\'' +
                 ", uid='" + uid + '\'' +
-                ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", title='" + title + '\'' +

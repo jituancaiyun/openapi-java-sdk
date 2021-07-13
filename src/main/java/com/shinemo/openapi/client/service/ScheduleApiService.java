@@ -33,6 +33,7 @@ import java.util.Map;
  *
  * @author ohun@live.cn (夜色)
  */
+@Deprecated
 @Api(ScheduleApi.class)
 public interface ScheduleApiService {
 

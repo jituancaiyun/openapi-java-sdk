@@ -7,6 +7,8 @@ import com.shinemo.openapi.client.common.OpenApiResult;
 import com.shinemo.openapi.client.dto.approve.ApprovePageDTO;
 import com.shinemo.openapi.client.dto.approve.ApproveTemplateDTO;
 
+import java.util.Map;
+
 /**
  * Created by yuanjian on 3/8/19
  *
@@ -34,12 +36,12 @@ public interface ApproveApiService {
      * @param pageCount   每页显示数量，默认20，最大500
      * @return
      */
-    OpenApiResult<ApprovePageDTO> query(ApiContext context,
-                                        String templateIds,
-                                        int status,
-                                        long beginTime,
-                                        long endTime,
-                                        int pageId,
-                                        int pageCount);
+    OpenApiResult<Map<String, Object>> query(ApiContext context,
+                                             String templateIds,
+                                             int status,
+                                             long beginTime,
+                                             long endTime,
+                                             int pageId,
+                                             int pageCount);
 
 }

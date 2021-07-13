@@ -28,6 +28,7 @@ import com.shinemo.openapi.client.dto.maillist.DeptInfoDTO;
 import com.shinemo.openapi.client.dto.maillist.UserDTO;
 import com.shinemo.openapi.client.dto.maillist.UserInfoDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -84,7 +85,7 @@ public interface UserApiService {
      * @param param   动态参数，uid(彩云用户uid)、loginId(用户登录id，一般为手机号)、userId(开发者所在系统内用户id)中的一个
      * @return 用户信息
      */
-    OpenApiResult<UserDTO> getUserInfo(ApiContext context, Map<String, String> param);
+    OpenApiResult<UserInfoDTO> getUserInfo(ApiContext context, Map<String, String> param);
 
     /**
      * 根据uid查询用户信息
@@ -93,7 +94,7 @@ public interface UserApiService {
      * @param uids       uids
      * @return 用户信息
      */
-    OpenApiResult<Map<String, UserDTO>> getUserInfoByUid(ApiContext apiContext, String uids);
+    OpenApiResult<Map<String, UserInfoDTO>> getUserInfoByUid(ApiContext apiContext, String uids);
 
     /**
      * 获取用户所在部门列表

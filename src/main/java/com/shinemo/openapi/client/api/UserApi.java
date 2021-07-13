@@ -44,25 +44,25 @@ public interface UserApi {
      * @return void
      */
     @POST("user/add")
-    Call<OpenApiResult<Map<String, String>>> add(@HeaderMap Map<String, String> headers, @Body UserDTO body);
+    Call<OpenApiResult<Map<String, String>>> add(@HeaderMap Map<String, String> headers, @Body UserInfoDTO body);
 
     @POST("user/delete")
     Call<OpenApiResult<Long>> delete(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
 
     @POST("user/update")
-    Call<OpenApiResult<Map<String, String>>> update(@HeaderMap Map<String, String> headers, @Body UserDTO body);
+    Call<OpenApiResult<Map<String, String>>> update(@HeaderMap Map<String, String> headers, @Body UserInfoDTO body);
 
     @GET("user/detail")
     Call<OpenApiResult<Map<String, UserInfoDTO>>> detail(@HeaderMap Map<String, String> headers, @Query("uid") String uid, @Query("deptId") Long deptId);
 
     @GET("user/getUserInfo")
-    Call<OpenApiResult<UserDTO>> getUserInfo(@HeaderMap Map<String, String> headers,@QueryMap Map<String, String> param);
+    Call<OpenApiResult<UserInfoDTO>> getUserInfo(@HeaderMap Map<String, String> headers,@QueryMap Map<String, String> param);
 
     @GET("user/getUserInfoByUid")
-    Call<OpenApiResult<Map<String, UserDTO>>> getUserInfoByUid(@HeaderMap Map<String, String> headers, @Query("uids") String uids);
+    Call<OpenApiResult<Map<String, UserInfoDTO>>> getUserInfoByUid(@HeaderMap Map<String, String> headers, @Query("uids") String uids);
 
     @GET("user/deptList")
-    Call<OpenApiResult<Map<String, List<DeptInfoDTO>>>> deptList(@HeaderMap Map<String, String> headers, @Query("uid") String uid);
+    Call<OpenApiResult<List<DeptInfoDTO>>> deptList(@HeaderMap Map<String, String> headers, @Query("uid") String uid);
 
     @GET("user/getUserInfoByMobile")
     Call<OpenApiResult<UserDTO>> getUserInfoByMobile(@HeaderMap Map<String, String> headers, @Query("mobile") String mobile);

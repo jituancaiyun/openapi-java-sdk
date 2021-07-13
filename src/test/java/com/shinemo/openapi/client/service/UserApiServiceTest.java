@@ -86,7 +86,7 @@ public class UserApiServiceTest {
     public void getUserInfo() throws Exception {
         Map<String, String> map = new HashMap<String, String>();
         map.put("userId", "userId1");
-        OpenApiResult<UserDTO> result = userApiService.getUserInfo(context, map);
+        OpenApiResult<UserInfoDTO> result = userApiService.getUserInfo(context, map);
         System.out.println(result);
     }
 

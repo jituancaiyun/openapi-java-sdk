@@ -55,7 +55,6 @@ public class DepartmentApiServiceTest {
         DeptInfoDTO infoDto = new DeptInfoDTO();
         infoDto.setName("不闷");
         infoDto.setParentId(0L);
-        infoDto.setOrder(1);
 
         OpenApiResult<Map<String, Long>> result = departmentApiService.create(context, infoDto);
         System.out.println(result);

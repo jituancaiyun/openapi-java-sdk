@@ -4,10 +4,11 @@ import com.shinemo.openapi.client.Apis;
 import com.shinemo.openapi.client.Constants;
 import com.shinemo.openapi.client.common.ApiContext;
 import com.shinemo.openapi.client.common.OpenApiResult;
-import com.shinemo.openapi.client.dto.approve.ApprovePageDTO;
 import com.shinemo.openapi.client.dto.approve.ApproveTemplateDTO;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Map;
 
 public class ApproveApiServiceTest {
 
@@ -32,7 +33,7 @@ public class ApproveApiServiceTest {
 
     @Test
     public void query() {
-        OpenApiResult<ApprovePageDTO> query = approveApiService.query(context, "1,2,3,4,5,6,7", 1, 1551038146730L, 1553038146730L, 1, 100);
+        OpenApiResult<Map<String, Object>> query = approveApiService.query(context, "1,2,3,4,5,6,7", 1, 1551038146730L, 1553038146730L, 1, 100);
         System.out.println(query);
     }
 }

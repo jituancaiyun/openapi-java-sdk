@@ -10,6 +10,11 @@
 </dependency>
 ```
 
+```
+sdk 通讯录接口有更新，如果没有使用到通讯录接口，可使用原1.5.1依赖
+https://github.com/jituancaiyun/openapi-java-sdk/releases/tag/1.5.5-SNAPSHOT
+```
+
 ### 2.手动创建,以免登接口为例
 ```java
 public class AuthApiServiceTest {
@@ -44,7 +49,7 @@ public class AuthApiServiceTest {
     }
 }
 ```
-### 3.spring 配置 ```open-api-spring.xml```
+### 一.spring 配置 ```open-api-spring.xml```
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -134,4 +139,39 @@ public class AuthApiServiceTest {
         <property name="callbackEventReceiver" ref="com.xxx.MyCallbackEventReceiver"/>
     </bean>
 </beans>
+```
+
+### 二.springboot 初始化bean
+```java
+@Configuration
+public class BeanConfiguration {
+
+    @Bean(name = "openApiClient")
+    @ConditionalOnMissingBean(OpenApiClient.class)
+    public OpenApiClient openApiClient() {
+        OpenApiConfiguration configuration = new OpenApiConfiguration();
+        //开放平台接口基础地址,以"/"结尾
+        configuration.setBaseUrl("https://openapi.e.uban360.com/platform/");
+        //应用ID
+        configuration.setAppId(xxxxx);
+        //应用密钥
+        configuration.setAppSecret("xxxxxxxxxx");
+        //建立http连接超时时间, 默认10s
+        configuration.setConnectTimeoutMillis(10 * 1000);
+        //http写超时时间
+        configuration.setWriteTimeoutMillis(10 * 1000);
+        //http读超时时间
+        configuration.setReadTimeoutMillis(10 * 1000);
+        //最大失败重试次数, 默认不重试
+        configuration.setMaxRetry(1);
+        return configuration.create();
+    }
+
+    @Bean(name = "messageApiService")
+    @ConditionalOnBean(OpenApiClient.class)
+    @ConditionalOnMissingBean(MessageApiService.class)
+    public MessageApiService messageApiService(final OpenApiClient openApiClient) {
+        return openApiClient.createApiService(MessageApiService.class);
+    }
+}
 ```
